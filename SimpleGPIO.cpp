@@ -42,10 +42,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <poll.h>
+#include <iostream>
 
 
-#define v;
-#define vv;
+//#define v;
+//#define vv;
 /****************************************************************
  * gpio_export
  ****************************************************************/
