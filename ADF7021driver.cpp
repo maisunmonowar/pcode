@@ -130,6 +130,13 @@ int main(){
 	system("config-pin p8.10 gpio_pd");
 	system("config-pin p8.10 out");
 	system("config-pin -q p8.10");
+
+	gpio_export(CE);
+	gpio_export(SLE);
+	gpio_export(SDATA);
+	gpio_export(SREAD);
+	gpio_export(SCLK);
+	
 	readSiliconRevision();
 	powerDown();
 	return 0;
