@@ -4,7 +4,6 @@
 #include <unistd>
 #include <stdlib.h>
 
-<<<<<<< HEAD
 #include "SimpleGPIO.h"
 
 using namespace std;
@@ -24,10 +23,7 @@ int main(int argc, char *argv[]){
 		cout << "Setting the LED off" << endl;
         gpio_set_value(LEDGPIO, LOW);
 		sleep(500);         // off for 500ms
+
 	}
-=======
-int main(){
-	//comment
->>>>>>> 07d62b48f70fa60a0ba576ab84d444c664f75210
-	return 0;
+return 0;
 }
