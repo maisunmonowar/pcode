@@ -120,5 +120,6 @@ int main(){
 	system("config-pin p8.10 gpio_pd");
 	system("config-pin p8.10 out");
 	readSiliconRevision();
+	powerDown();
 	return 0;
 }
