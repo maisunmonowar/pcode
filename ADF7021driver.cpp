@@ -1,29 +1,32 @@
 #include <iostream>
- #include <stdio.h>
- #include <unistd.h>
- using namespace std;
+#include <stdio.h>
+#include <unistd.h>
+
+#include "SimpleGPIO.h"
+
+using namespace std;
 
 //definition 
 
-CE = P9_15
-SLE
-SDATA
-SREAD
-SCLK
+unsigned int CE		= 48;//P9_15
+unsigned int SLE 	= 69;
+unsigned int SDATA 	= 44;
+unsigned int SREAD 	= 66;
+unsigned int SCLK 	= 68;
 
 //variables
-boolean isOn;
-boolean txMode;
-array db; //32 element long
+bool isOn;
+bool txMode;
+unsigned int db[32]; //32 element long
 //set
-byte T = 24; //time period of register clock in ms
+unsigned int T = 24000; //time period of register clock in us
 
 //-------------------
 //Algorithm
 
 powerUp(){
 	CE = 1;
-	wait(100); // in mS. 
+	uwait(100000); // in mS. 
 	isOn = true;
 }
 
@@ -34,17 +37,17 @@ powerDown(){
 Initialize(){
 	//turn on the ADF7021
 	if(!isOn){
-		pwerUp();
+		powerUp();
 	}
 
 	//necessary reg operation
 }
 
 regClock(){
-	SCLK = 0;
-	wait(T/2); //generate low half of the clk
-	SCLK = 1; //generate high part of clk
-	wait(T/4); //but not in full
+	gpio_set_value(SCLK, LOW);
+	uwait(T/2); //generate low half of the clk
+	gpio_set_value(SCLK, HIGH); //generate high part of clk
+	uwait(T/4); //but not in full
 
 }
 clearDB(){
@@ -54,10 +57,10 @@ clearDB(){
 }
 readReg(){
 	clearDB();
-	SLE = 1;
+	gpio_set_value(SLE, HIGH);
 	for(i = 17; i>=0; i--){//not sure how many bits are supposed to come in
 		regClock();
-		db[i] = SREAD;
+		gpio_get_value(SREAD, &db[i]);
 	}
 	SLE = 0;
 }
@@ -80,23 +83,42 @@ readSiliconRevision(){
 	//ask for Revision code
 	SLE = 0;
 	for(i = 8; i>=0; i--){
-		SDATA = db[i];
+		gpio_set_value(SDATA, db[i]);
 		regClock();
 	}
-	wait(40); //in mS
+	uwait(40000); //in mS
 	//read the Revision code
 	readReg();
 	
 	//calculate the value
-	revisionCode = ((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1])
-	productCode = 	(100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) +
+	unsigned int revisionCode = ((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1])
+	unsigned int productCode = 	(100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) +
+	
+
+
 					(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[09]))) +
 					(1*		(((2^3)*db[08])+((2^2)*db[07])+((2^1)*db[06])+((2^0)*db[05])))
 	//show the user the value
-	print revisionCode
-	print productCode				
+	cout <<"Revision code: "<< std::hex << revisionCode
+	cout <<"Product code : "<< std::hex << productCode				
 }
 
 int main(){
+	//pin direction and initial GPIO level
+	//CE
+	system("config-pin p9.15 gpio_pd");
+	system("config-pin p9.15 out");
+	//SLE
+	system("config-pin p8.09 gpio_pd");
+	system("config-pin p8.09 out");
+	//SDATA
+	system("config-pin p8.12 gpio_pd");
+	system("config-pin p8.12 out");
+	//SREAD
+	system("config-pin p8.07 gpio_pd");
+	system("config-pin p8.07 in");
+	//SCLK
+	system("config-pin p8.10 gpio_pd");
+	system("config-pin p8.10 out");
 	readSiliconRevision();
 }
