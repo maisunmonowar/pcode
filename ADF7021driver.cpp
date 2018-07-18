@@ -21,13 +21,14 @@ bool txMode;
 unsigned int db[32]; //32 element long
 //set
 unsigned int T = 24000; //time period of register clock in us
+int i;
 
 //-------------------
 //Algorithm
 
 void powerUp(){
 	CE = 1;
-	uwait(100000); // in mS. 
+	usleep(100000); // in mS. 
 	isOn = true;
 }
 
@@ -46,9 +47,9 @@ void Initialize(){
 
 void regClock(){
 	gpio_set_value(SCLK, LOW);
-	uwait(T/2); //generate low half of the clk
+	usleep(T/2); //generate low half of the clk
 	gpio_set_value(SCLK, HIGH); //generate high part of clk
-	uwait(T/4); //but not in full
+	usleep(T/4); //but not in full
 
 }
 void clearDB(){
@@ -87,18 +88,15 @@ void readSiliconRevision(){
 		gpio_set_value(SDATA, db[i]);
 		regClock();
 	}
-	uwait(40000); //in mS
+	usleep(40000); //in mS
 	//read the Revision code
 	readReg();
 	
 	//calculate the value
-	unsigned int revisionCode = ((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1])
-	unsigned int productCode = 	(100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) +
-	
-
-
-					(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) +
-					(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5])))
+	unsigned int revisionCode = (((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1]))				;
+	unsigned int productCode = 	((100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) 	+
+								(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) 	+
+								(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5]))))		;
 	//show the user the value
 	cout <<"Revision code: "<< std::hex << revisionCode << endl;
 	cout <<"Product code : "<< std::hex << productCode << endl;
