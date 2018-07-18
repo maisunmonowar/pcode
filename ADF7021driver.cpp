@@ -30,16 +30,19 @@ void powerUp(){
 	CE = 1;
 	usleep(100000); // in mS. 
 	isOn = true;
+	cout <<"on";
 }
 
 void powerDown(){
 	CE = 0;
 	isOn = false;
+	cout << "off";
 }
 void Initialize(){
 	//turn on the ADF7021
 	if(!isOn){
 		powerUp();
+		
 	}
 
 	//necessary reg operation
@@ -53,11 +56,13 @@ void regClock(){
 
 }
 void clearDB(){
+	cout << "clear db" <<endl;
 	for(i = 0; i<32; i++){
 		db[i] = 0;
 	}
 }
 void readReg(){
+	cout << "read reg" << endl;
 	clearDB();
 	gpio_set_value(SLE, HIGH);
 	for(i = 17; i>=0; i--){//not sure how many bits are supposed to come in
@@ -67,6 +72,7 @@ void readReg(){
 	SLE = 0;
 }
 void readSiliconRevision(){
+	cout << "readSiliconRevision" << endl;
 	//make sure everything is on
 	if(!isOn){
 		powerUp();
@@ -107,18 +113,23 @@ int main(){
 	//CE
 	system("config-pin p9.15 gpio_pd");
 	system("config-pin p9.15 out");
+	system("config-pin -q p9.15");
 	//SLE
 	system("config-pin p8.09 gpio_pd");
 	system("config-pin p8.09 out");
+	system("config-pin -q p8.09");
 	//SDATA
 	system("config-pin p8.12 gpio_pd");
 	system("config-pin p8.12 out");
+	system("config-pin -q p8.12");
 	//SREAD
 	system("config-pin p8.07 gpio_pd");
 	system("config-pin p8.07 in");
+	system("config-pin -q p8.07");
 	//SCLK
 	system("config-pin p8.10 gpio_pd");
 	system("config-pin p8.10 out");
+	system("config-pin -q p8.10");
 	readSiliconRevision();
 	powerDown();
 	return 0;
