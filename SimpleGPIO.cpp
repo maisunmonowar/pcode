@@ -134,6 +134,28 @@ int gpio_set_value(unsigned int gpio, PIN_VALUE value)
 	return 0;
 }
 
+int gpio_set_value(unsigned int gpio, unsigned int value)
+{
+	int fd;
+	char buf[MAX_BUF];
+
+	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/gpio%d/value", gpio);
+
+	fd = open(buf, O_WRONLY);
+	if (fd < 0) {
+		perror("gpio/set-value");
+		return fd;
+	}
+
+	if (value==0)
+		write(fd, "0", 2);
+	else
+		write(fd, "1", 2);
+
+	close(fd);
+	return 0;
+}
+
 /****************************************************************
  * gpio_get_value
  ****************************************************************/
