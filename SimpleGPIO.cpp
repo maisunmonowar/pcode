@@ -118,7 +118,7 @@ int gpio_set_dir(unsigned int gpio, PIN_DIRECTION out_flag)
  ****************************************************************/
 int gpio_set_value(unsigned int gpio, PIN_VALUE value)
 {
-	cout <<"set value " << gpio << endl;
+	//cout <<"set value " << gpio << endl;
 
 	int fd;
 	char buf[MAX_BUF];
@@ -141,8 +141,8 @@ int gpio_set_value(unsigned int gpio, PIN_VALUE value)
 }
 
 int gpio_set_value(unsigned int gpio, unsigned int value)
-{
-	cout <<"get value " << gpio << endl;
+{//
+	//cout <<"get value " << gpio << endl;
 
 	int fd;
 	char buf[MAX_BUF];
@@ -169,7 +169,7 @@ int gpio_set_value(unsigned int gpio, unsigned int value)
  ****************************************************************/
 int gpio_get_value(unsigned int gpio, unsigned int *value)
 {
-	cout <<"set value int " << gpio << endl;
+	//cout <<"set value int " << gpio << endl;
 	int fd;
 	char buf[MAX_BUF];
 	char ch;
@@ -223,7 +223,7 @@ int gpio_set_edge(unsigned int gpio, char *edge)
 
 int gpio_fd_open(unsigned int gpio)
 {
-	cout <<"fd open " << gpio << endl;
+	//cout <<"fd open " << gpio << endl;
 	int fd;
 	char buf[MAX_BUF];
 
