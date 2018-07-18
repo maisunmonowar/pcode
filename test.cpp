@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include <unistd>
 #include <stdlib.h>
+#include <unistd.h>\
 
 #include "SimpleGPIO.h"
 
@@ -19,10 +19,10 @@ int main(int argc, char *argv[]){
 	for(int i=0; i<10; i++){
 		cout << "Setting the LED on" << endl;
         gpio_set_value(LEDGPIO, HIGH);
-		sleep(500);         // on for 500ms
+		usleep(500000);         // on for 500ms
 		cout << "Setting the LED off" << endl;
         gpio_set_value(LEDGPIO, LOW);
-		sleep(500);         // off for 500ms
+		usleep(500000);         // off for 500ms
 
 	}
 return 0;
