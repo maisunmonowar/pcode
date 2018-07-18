@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "SimpleGPIO.h"
 
@@ -24,17 +25,17 @@ unsigned int T = 24000; //time period of register clock in us
 //-------------------
 //Algorithm
 
-powerUp(){
+void powerUp(){
 	CE = 1;
 	uwait(100000); // in mS. 
 	isOn = true;
 }
 
-powerDown(){
+void powerDown(){
 	CE = 0;
 	isOn = false;
 }
-Initialize(){
+void Initialize(){
 	//turn on the ADF7021
 	if(!isOn){
 		powerUp();
@@ -43,19 +44,19 @@ Initialize(){
 	//necessary reg operation
 }
 
-regClock(){
+void regClock(){
 	gpio_set_value(SCLK, LOW);
 	uwait(T/2); //generate low half of the clk
 	gpio_set_value(SCLK, HIGH); //generate high part of clk
 	uwait(T/4); //but not in full
 
 }
-clearDB(){
+void clearDB(){
 	for(i = 0; i<32; i++){
 		db[i] = 0;
 	}
 }
-readReg(){
+void readReg(){
 	clearDB();
 	gpio_set_value(SLE, HIGH);
 	for(i = 17; i>=0; i--){//not sure how many bits are supposed to come in
@@ -64,7 +65,7 @@ readReg(){
 	}
 	SLE = 0;
 }
-readSiliconRevision(){
+void readSiliconRevision(){
 	//make sure everything is on
 	if(!isOn){
 		powerUp();
@@ -96,11 +97,11 @@ readSiliconRevision(){
 	
 
 
-					(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[09]))) +
-					(1*		(((2^3)*db[08])+((2^2)*db[07])+((2^1)*db[06])+((2^0)*db[05])))
+					(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) +
+					(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5])))
 	//show the user the value
-	cout <<"Revision code: "<< std::hex << revisionCode
-	cout <<"Product code : "<< std::hex << productCode				
+	cout <<"Revision code: "<< std::hex << revisionCode << endl;
+	cout <<"Product code : "<< std::hex << productCode << endl;
 }
 
 int main(){
@@ -121,4 +122,5 @@ int main(){
 	system("config-pin p8.10 gpio_pd");
 	system("config-pin p8.10 out");
 	readSiliconRevision();
+	return 0;
 }
