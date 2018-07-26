@@ -140,11 +140,11 @@ int gpio_set_value(unsigned int gpio, PIN_VALUE value)
 	return 0;
 }
 
-int gpio_set_value(unsigned int gpio, unsigned int value)
+int gpio_set_value_2(unsigned int gpio, unsigned int value)
 {//
-	//cout <<"get value " << gpio << endl;
+	//cout <<"set value 2" << gpio << endl;
 
-	int fd;
+	/*int fd;
 	char buf[MAX_BUF];
 
 	snprintf(buf, sizeof(buf), SYSFS_GPIO_DIR "/gpio%d/value", gpio);
@@ -160,7 +160,17 @@ int gpio_set_value(unsigned int gpio, unsigned int value)
 	else
 		write(fd, "1", 2);
 
-	close(fd);
+	close(fd);*/
+
+	//Next one is a stupid idea
+	if (value == 0)
+	{
+		gpio_set_value(gpio, LOW);
+	}
+	else
+	{
+		gpio_set_value(gpio, HIGH);
+	}
 	return 0;
 }
 

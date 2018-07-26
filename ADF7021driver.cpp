@@ -91,7 +91,7 @@ void readSiliconRevision(){
 	//ask for Revision code
 	SLE = 0;
 	for(i = 8; i>=0; i--){
-		gpio_set_value(SDATA, db[i]);
+		gpio_set_value_2(SDATA, db[i]);
 		regClock();
 	}
 	usleep(40000); //in mS

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Building the Simple GPIO Example - See derekmolloy.ie"
+echo "Building the ADF7021driver"
 
-g++ -O2 -Wall ADF7021driver.cpp SimpleGPIO.cpp -o driverBeta0 
+g++ -O2 -Wall ADF7021driver.cpp SimpleGPIO.cpp -o ADF7021driver
