@@ -8,15 +8,15 @@
 
 using namespace std;
 
-unsigned int LEDGPIO = 48;   // GPIO0_0 = (1x32) + 28 = 48
+unsigned int LEDGPIO = 44;   // GPIO0_0 = (1x32) + 28 = 48
 
 
 int main(int argc, char *argv[]){
 	cout << "Test" << endl;
-	system("config-pin p9.15 gpio_pd");
-	system("config-pin p9.15 out");
+	system("config-pin p8.12 gpio_pd");
+	system("config-pin p8.12 out");
 	// Flash the LED 5 times
-	for(int i=0; i<10; i++){
+	for(int i=0; i<30; i++){
 		cout << "Setting the LED on" << endl;
         gpio_set_value(LEDGPIO, HIGH);
 		usleep(500000);         // on for 500ms
