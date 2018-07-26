@@ -27,14 +27,14 @@ int i;
 //Algorithm
 
 void powerUp(){
-	CE = 1;
+	gpio_set_value(CE, HIGH);//CE = 1
 	usleep(100000); // in mS. 
 	isOn = true;
 	cout <<"on";
 }
 
 void powerDown(){
-	CE = 0;
+	gpio_set_value(CE, LOW);//CE = 0
 	isOn = false;
 	cout << "off";
 }
@@ -69,7 +69,8 @@ void readReg(){
 		regClock();
 		gpio_get_value(SREAD, &db[i]);
 	}
-	SLE = 0;
+	//SLE = 0;
+	gpio_set_value(SLE, LOW);
 }
 void readSiliconRevision(){
 	cout << "readSiliconRevision" << endl;
@@ -89,7 +90,7 @@ void readSiliconRevision(){
 	db[1] = 1;
 	db[0] = 1;
 	//ask for Revision code
-	SLE = 0;
+	gpio_set_value(SLE, LOW);//SLE = 0;
 	for(i = 8; i>=0; i--){
 		gpio_set_value_2(SDATA, db[i]);
 		regClock();
@@ -137,10 +138,11 @@ int main(){
 	gpio_export(SREAD);
 	gpio_export(SCLK);
 	
-		gpio_set_dir(CE, OUTPUT_PIN);gpio_set_dir(SLE, OUTPUT_PIN); 
-		gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
-		gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
-		gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
+	gpio_set_dir(CE, OUTPUT_PIN);
+	gpio_set_dir(SLE, OUTPUT_PIN); 
+	gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
+	gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
+	gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
 	powerDown();
 	return 0;
 }
