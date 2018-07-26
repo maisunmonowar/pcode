@@ -47,22 +47,22 @@ int main(int argc, char *argv[]){
 		cout << "Setting the LED on" << endl;
         gpio_set_value(CE, HIGH);
         gpio_set_value(SLE, HIGH);
-        gpio_set_value(SDATAE, HIGH);
-        gpio_set_value(SREADE, HIGH);
+        gpio_set_value(SDATA, HIGH);
+        gpio_set_value(SREAD, HIGH);
         gpio_set_value(SCLK, HIGH);
 		usleep(2000000);         // on for 2s
 		cout << "Setting the LED off" << endl;
         gpio_set_value(CE, LOW);
         gpio_set_value(SLE, LOW);
-        gpio_set_value(SDATAE, LOW);
-        gpio_set_value(SREADE, LOW);
+        gpio_set_value(SDATA, LOW);
+        gpio_set_value(SREAD, LOW);
         gpio_set_value(SCLK, LOW);
 		usleep(2000000);         // off for 2s
 
 	}
 	gpio_unexport(CE);     // unexport the LED
-	gpio_unexport(SDATAE);
-	gpio_unexport(SREADE);
+	gpio_unexport(SDATA);
+	gpio_unexport(SREAD);
 	gpio_unexport(SLE);
 	gpio_unexport(SCLK);
 	cout << "Finished Testing the GPIO Pins" << endl;
