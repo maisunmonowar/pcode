@@ -65,6 +65,8 @@ int gpio_export(unsigned int gpio)
 	write(fd, buf, len);
 	close(fd);
 
+	//I don't exactly know how long you should wait
+	usleep(250000); //250 mS
 	return 0;
 }
 
@@ -85,6 +87,8 @@ int gpio_unexport(unsigned int gpio)
 	len = snprintf(buf, sizeof(buf), "%d", gpio);
 	write(fd, buf, len);
 	close(fd);
+	//I don't exactly know how long you should wait
+	usleep(250000); //250 mS
 	return 0;
 }
 
@@ -110,6 +114,8 @@ int gpio_set_dir(unsigned int gpio, PIN_DIRECTION out_flag)
 		write(fd, "in", 3);
 
 	close(fd);
+	//I don't exactly know how long you should wait
+	usleep(250000); //250 mS
 	return 0;
 }
 
@@ -137,6 +143,9 @@ int gpio_set_value(unsigned int gpio, PIN_VALUE value)
 		write(fd, "1", 2);
 
 	close(fd);
+
+	//I don't exactly know how long you should wait
+	usleep(1000); //1 mS
 	return 0;
 }
 
@@ -201,6 +210,8 @@ int gpio_get_value(unsigned int gpio, unsigned int *value)
 	}
 
 	close(fd);
+	//I don't exactly know how long you should wait
+	usleep(1000); //1 mS
 	return 0;
 }
 
