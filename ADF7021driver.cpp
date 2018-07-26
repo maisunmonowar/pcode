@@ -94,7 +94,7 @@ void readSiliconRevision(){
 		gpio_set_value_2(SDATA, db[i]);
 		regClock();
 	}
-	usleep(40000); //in mS
+	usleep(40000); //40 mS
 	//read the Revision code
 	readReg();
 	
@@ -110,7 +110,7 @@ void readSiliconRevision(){
 
 int main(){
 	//pin direction and initial GPIO level
-	//CE
+/*	//CE
 	system("config-pin p9.15 gpio_pd");
 	system("config-pin p9.15 out");
 	system("config-pin -q p9.15");
@@ -130,14 +130,17 @@ int main(){
 	system("config-pin p8.10 gpio_pd");
 	system("config-pin p8.10 out");
 	system("config-pin -q p8.10");
-
+*/
 	gpio_export(CE);
 	gpio_export(SLE);
 	gpio_export(SDATA);
 	gpio_export(SREAD);
 	gpio_export(SCLK);
 	
-	readSiliconRevision();
+		gpio_set_dir(CE, OUTPUT_PIN);gpio_set_dir(SLE, OUTPUT_PIN); 
+		gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
+		gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
+		gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
 	powerDown();
 	return 0;
 }
