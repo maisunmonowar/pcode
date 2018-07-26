@@ -43,14 +43,14 @@ int main(int argc, char *argv[]){
         gpio_set_dir(LEDGPIO, OUTPUT_PIN);   // The LED is an output
 	
 	
-	// Flash the LED 5 times
-	for(int i=0; i<5; i++){
+	// Flash the LED 20 times
+	for(int i=0; i<20; i++){
 		cout << "Setting the LED on" << endl;
                 gpio_set_value(LEDGPIO, HIGH);
-		usleep(200000);         // on for 200ms
+		usleep(2000000);         // on for 2s
 		cout << "Setting the LED off" << endl;
                 gpio_set_value(LEDGPIO, LOW);
-		usleep(200000);         // off for 200ms
+		usleep(2000000);         // off for 2s
 	}
 
 	cout << "Finished Testing the GPIO Pins" << endl;
