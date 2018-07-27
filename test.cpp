@@ -43,6 +43,7 @@ int main(int argc, char *argv[]){
 	usleep(250000);         // off for 250ms
 	// Flash the LED 10 times
 	for(int i=0; i<10; i++){
+
 		cout << "Setting the LED on" << endl;
         gpio_set_value(CE, HIGH);
         gpio_set_value(SLE, HIGH);
