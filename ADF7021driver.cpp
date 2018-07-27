@@ -8,6 +8,8 @@
 using namespace std;
 
 //definition 
+//define full verbose 
+#define vv
 
 unsigned int CE		= 48;//P9_15
 unsigned int SLE 	= 69;
@@ -46,6 +48,7 @@ void Initialize(){
 	}
 
 	//necessary reg operation
+	//activate Rx mode
 }
 
 void regClock(){
@@ -143,6 +146,19 @@ int main(){
 	gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
+	//do something
+	readSiliconRevision();
+	//power down
 	powerDown();
+	//unexport pins
+	gpio_unexport(CE);     // unexport the LED
+	gpio_unexport(SDATA);
+	gpio_unexport(SREAD);
+	gpio_unexport(SLE);
+	gpio_unexport(SCLK);
+
+	cout << "All done" << endl;
+	
+	//return
 	return 0;
 }
