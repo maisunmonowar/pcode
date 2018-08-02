@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
 	gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
 	usleep(250000);         // off for 250ms
 	// Flash the LED 10 times
-	for(int i=0; i<10; i++){
+	for(i=0; i<10; i++){
 
 		cout << "Setting the LED on" << endl;
         gpio_set_value(CE, HIGH);
