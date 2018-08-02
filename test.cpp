@@ -77,11 +77,11 @@ int main(int argc, char *argv[]){
 	db[16] = 1;
 	db[12] = 1;
 	db[7] = 1;
-	revisionCode = (((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1]))				;
-	productCode = 	((100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) 	+
-								(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) 	+
-								(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5]))))		;
-	cout <<"Revision code: "<< std::hex << revisionCode << endl;
-	cout <<"Product code : "<< std::hex << productCode << endl;
+	revisionCode = 				8*db[4]+	4*db[3]+	2*db[2]+	db[1]		;
+	productCode = 	(100*(		8*db[16]+	4*db[15]+	2*db[14]+	db[13])) 	+
+					(10*(		8*db[12]+	4*db[11]+	2*db[10]+	db[9])) 	+
+					(1*	(		8*db[8]+	4*db[7]+	2*db[6]+	db[5]))		;
+	cout <<"Revision code: "<< std::hex << "0x" << revisionCode << "     " << std::dec << revisionCode << endl;
+	cout <<"Product code : "<< std::hex << "0x" << productCode  << "   " << std::dec << productCode << endl;
 	return 0;
 }
