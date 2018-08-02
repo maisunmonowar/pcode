@@ -13,6 +13,10 @@ unsigned int SLE 	= 69;
 unsigned int SDATA 	= 44;
 unsigned int SREAD 	= 66;
 unsigned int SCLK 	= 68;
+unsigned int revisionCode;
+unsigned int productCode;
+unsigned int db[32]; //32 element long
+int i;
 
 int main(int argc, char *argv[]){
 	cout << "Test" << endl;
@@ -66,6 +70,18 @@ int main(int argc, char *argv[]){
 	gpio_unexport(SLE);
 	gpio_unexport(SCLK);
 	cout << "Finished Testing the GPIO Pins" << endl;
-	
-return 0;
+	for(i = 0; i<32; i++){
+		db[i] = 0;
+	}
+	db[2] = 1;
+	db[16] = 1;
+	db[12] = 1;
+	db[7] = 1;
+	revisionCode = (((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1]))				;
+	productCode = 	((100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) 	+
+								(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) 	+
+								(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5]))))		;
+	cout <<"Revision code: "<< std::hex << revisionCode << endl;
+	cout <<"Product code : "<< std::hex << productCode << endl;
+	return 0;
 }

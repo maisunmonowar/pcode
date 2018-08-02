@@ -21,6 +21,8 @@ unsigned int SCLK 	= 68;
 bool isOn;
 bool txMode;
 unsigned int db[32]; //32 element long
+unsigned int revisionCode;
+unsigned int productCode;
 //set
 unsigned int T = 24000; //time period of register clock in us
 int i;
@@ -32,13 +34,13 @@ void powerUp(){
 	gpio_set_value(CE, HIGH);//CE = 1
 	usleep(100000); // in mS. 
 	isOn = true;
-	cout <<"on";
+	cout <<"on"<< endl;
 }
 
 void powerDown(){
 	gpio_set_value(CE, LOW);//CE = 0
 	isOn = false;
-	cout << "off";
+	cout << "off"<< endl;
 }
 void Initialize(){
 	//turn on the ADF7021
@@ -72,6 +74,7 @@ void readReg(){
 		regClock();
 		gpio_get_value(SREAD, &db[i]);
 	}
+	usleep(T/4);
 	//SLE = 0;
 	gpio_set_value(SLE, LOW);
 }
@@ -103,8 +106,8 @@ void readSiliconRevision(){
 	readReg();
 	
 	//calculate the value
-	unsigned int revisionCode = (((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1]))				;
-	unsigned int productCode = 	((100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) 	+
+	revisionCode = (((2^3)*db[4])+((2^2)*db[3])+((2^1)*db[2])+((2^0)*db[1]))				;
+	productCode = 	((100*	(((2^3)*db[16])+((2^2)*db[15])+((2^1)*db[14])+((2^0)*db[13]))) 	+
 								(10*	(((2^3)*db[12])+((2^2)*db[11])+((2^1)*db[10])+((2^0)*db[9]))) 	+
 								(1*		(((2^3)*db[8])+((2^2)*db[7])+((2^1)*db[6])+((2^0)*db[5]))))		;
 	//show the user the value
