@@ -88,6 +88,7 @@ void readReg(){
 	usleep(T/4);
 	//SLE = 0;
 	gpio_set_value(SLE, LOW);
+	cout << "read Reg finsih" << endl;
 }
 void sendReg()
 {
@@ -108,6 +109,7 @@ void sendReg()
 		regClock();
 	}
 	usleep(40000); //40 mS
+	cout << "Send Reg finish" << endl;
 }
 void readSiliconRevision(){
 	cout << "readSiliconRevision" << endl;
@@ -158,11 +160,13 @@ void setReg(unsigned long word)
 	for (i=0; word> 0; i++)
     {
         db[i] = word % 2;
+        cout << "asdf  " << i << "  "<<db[i] << endl;
         word = word / 2;
     }
 	//set value
 	sendReg();
 	usleep(1000); //1 mS
+	cout << "Set Reg finish" << endl;
 }
 
 void setReg0()
@@ -170,28 +174,33 @@ void setReg0()
 	cout << "Set reg 0" << endl;
 	setReg(0x82C1B200);
 	usleep(100); //100 uS
+	cout << "Set Reg 0 finsih" << endl;
 }
 void setReg1()
 {
 	cout << "Set reg 1" << endl;
-	setReg(0x479021);
+	setReg(0x00479021);
 	usleep(1000); //1 mS
+	cout << "Set Reg 1 finish" << endl;
 }
 void setReg2()
 {
 	cout << "Set reg 2" << endl;
 	setReg(0x22081B02);
 	usleep(1000000); //1 S
+	cout << "Set Reg 2 finish" << endl;
 }
 void setReg3()
 {
 	cout << "Set reg 3" << endl;
 	setReg(0x33133663);
+	cout << "Set Reg 3 finish" << endl;
 }
 void setReg7()
 {
 	cout << "Set reg 7" << endl;
 	setReg(0x1F7);
+	cout << "Set Reg 7 finishi" << endl;
 }
 void gpio_init()
 {
@@ -209,6 +218,8 @@ void gpio_init()
 	gpio_set_dir(SCLK, OUTPUT_PIN);   
 	gpio_set_dir(SREAD, INPUT_PIN);   
 	//gpio_set_dir(MUXOUT, INPUT_PIN);
+
+	cout << "GPIO INIT finish" << endl;
 }
 
 void gpio_release()
@@ -221,6 +232,7 @@ void gpio_release()
 	gpio_unexport(SLE);
 	gpio_unexport(SCLK);
 	//gpio_unexport(MUXOUT);
+	cout << "GPIO Release finish" << endl;
 }
 
 void rx_mode()
