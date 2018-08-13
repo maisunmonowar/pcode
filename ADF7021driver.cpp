@@ -29,7 +29,7 @@ unsigned char iterationTime;
 
 //set
 unsigned int T = 24000; //time period of register clock in us
-unsigned int i;
+signed int i;
 
 //-------------------
 //Algorithm
@@ -104,10 +104,12 @@ void sendReg()
 	//}
 	//Programming can now begin
 	gpio_set_value(SLE, LOW);//SLE = 0;
+	usleep(400000); //400 mS
 	for(i = 31; i>=0; i--){
 		gpio_set_value_2(SDATA, db[i]);
 		regClock();
 	}
+	//while(i>=0)
 	usleep(40000); //40 mS
 	cout << "Send Reg finish" << endl;
 }
