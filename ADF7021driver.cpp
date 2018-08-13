@@ -16,6 +16,7 @@ unsigned int SLE 	= 69;
 unsigned int SDATA 	= 44;
 unsigned int SREAD 	= 66;
 unsigned int SCLK 	= 68;
+//unsigned int MUXOUT = 13;
 
 //variables
 bool isOn;
@@ -23,16 +24,19 @@ bool txMode;
 unsigned int db[32]; //32 element long
 unsigned int revisionCode;
 unsigned int productCode;
+unsigned long controlWord;
+unsigned char iterationTime;
+
 //set
 unsigned int T = 24000; //time period of register clock in us
-int i;
+unsigned int i;
 
 //-------------------
 //Algorithm
 
 void powerUp(){
 	gpio_set_value(CE, HIGH);//CE = 1
-	usleep(100000); // in mS. 
+	usleep(100000); // 100 mS. 
 	isOn = true;
 	cout <<"on"<< endl;
 }
@@ -68,17 +72,38 @@ void clearDB(){
 	//Alternate code
 	//memset(db, 0, sizeof(db));
 }
+
 void readReg(){
 	cout << "read reg" << endl;
 	clearDB();
 	gpio_set_value(SLE, HIGH);
-	for(i = 17; i>=0; i--){//not sure how many bits are supposed to come in
+	for(i = 17; i>=0; i--)
+	{
 		regClock();
 		gpio_get_value(SREAD, &db[i]);
 	}
 	usleep(T/4);
 	//SLE = 0;
 	gpio_set_value(SLE, LOW);
+}
+void sendReg()
+{
+	//make sure everything is on
+	if(!isOn){
+		powerUp();
+	}
+	//MUXOUT must be HIGH for Programming to begin
+	//while(gpio_get_value(MUXOUT) == LOW))
+	//{
+		//wait
+	//}
+	//Programming can now begin
+	gpio_set_value(SLE, LOW);//SLE = 0;
+	for(i = 31; i>=0; i--){
+		gpio_set_value_2(SDATA, db[i]);
+		regClock();
+	}
+	usleep(40000); //40 mS
 }
 void readSiliconRevision(){
 	cout << "readSiliconRevision" << endl;
@@ -116,7 +141,93 @@ void readSiliconRevision(){
 	cout <<"Revision code: "<< std::hex << "0x" << revisionCode << "     " << std::dec << revisionCode << endl;
 	cout <<"Product code : "<< std::hex << "0x" << productCode  << "   " << std::dec << productCode << endl;
 }
+void setReg(unsigned long word)
+{
+	//make sure everything is on
+	if(!isOn){
+		powerUp();
+	}
+	//make sure no residual value
+	clearDB();
+	//load value 
+	for (i=0; word> 0; i++)
+    {
+        db[i] = word % 2;
+        word = word / 2;
+    }
+	//set value
+	sendReg();
+	usleep(1000); //1 mS
+}
 
+void setReg0()
+{
+	setReg(0x82C1B200);
+	usleep(100); //100 uS
+}
+void setReg1()
+{
+	setReg(0x479021);
+	usleep(1000); //1 mS
+}
+void setReg2()
+{
+	setReg(0x22081B02);
+	usleep(1000000); //1 S
+}
+void setReg3()
+{
+	setReg(0x33133663);
+}
+void setReg7()
+{
+	setReg(0x1F7);
+}
+void gpio_init()
+{
+	gpio_export(CE);
+	gpio_export(SLE);
+	gpio_export(SDATA);
+	gpio_export(SREAD);
+	gpio_export(SCLK);
+	//gpio_export(MUXOUT);
+	
+	gpio_set_dir(CE, OUTPUT_PIN);
+	gpio_set_dir(SLE, OUTPUT_PIN); 
+	gpio_set_dir(SDATA, OUTPUT_PIN);  
+	gpio_set_dir(SCLK, OUTPUT_PIN);   
+	gpio_set_dir(SREAD, INPUT_PIN);   
+	//gpio_set_dir(MUXOUT, INPUT_PIN);
+}
+
+void gpio_release()
+{
+	//unexport pins
+	gpio_unexport(CE);     // unexport the LED
+	gpio_unexport(SDATA);
+	gpio_unexport(SREAD);
+	gpio_unexport(SLE);
+	gpio_unexport(SCLK);
+	//gpio_unexport(MUXOUT);
+}
+
+void rx_mode()
+{
+	// 1 3 6? 5 11? 12? 0 4 10?
+	
+	//0
+	setReg(0x8AC1B200);
+}
+
+void tx_mode() 
+{
+	//1 3 0 2
+	setReg1();
+	setReg3();
+	setReg0();
+	setReg2();
+
+}
 int main(){
 	//pin direction and initial GPIO level
 /*	//CE
@@ -145,13 +256,22 @@ int main(){
 	gpio_export(SDATA);
 	gpio_export(SREAD);
 	gpio_export(SCLK);
+	//gpio_export(MUXOUT);
 	
 	gpio_set_dir(CE, OUTPUT_PIN);
 	gpio_set_dir(SLE, OUTPUT_PIN); 
 	gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
+	//gpio_set_dir(MUXOUT, INPUT_PIN);
+	//or
+	//gpio_init();
+
 	//do something
+	setReg1();
+	setReg3();
+	setReg0();
+	setReg2();
 	readSiliconRevision();
 	//power down
 	powerDown();
@@ -161,6 +281,9 @@ int main(){
 	gpio_unexport(SREAD);
 	gpio_unexport(SLE);
 	gpio_unexport(SCLK);
+	//gpio_unexport(MUXOUT);
+	//or
+	//gpio_release();
 
 	cout << "All done" << endl;
 	
