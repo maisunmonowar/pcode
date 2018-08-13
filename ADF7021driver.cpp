@@ -35,6 +35,7 @@ unsigned int i;
 //Algorithm
 
 void powerUp(){
+
 	gpio_set_value(CE, HIGH);//CE = 1
 	usleep(100000); // 100 mS. 
 	isOn = true;
@@ -42,11 +43,13 @@ void powerUp(){
 }
 
 void powerDown(){
+	cout << "Powering down" << endl;
 	gpio_set_value(CE, LOW);//CE = 0
 	isOn = false;
 	cout << "off"<< endl;
 }
 void Initialize(){
+	cout << "Initializing" << endl;
 	//turn on the ADF7021
 	if(!isOn){
 		powerUp();
@@ -88,6 +91,7 @@ void readReg(){
 }
 void sendReg()
 {
+	cout << "Send reg" << endl;
 	//make sure everything is on
 	if(!isOn){
 		powerUp();
@@ -143,6 +147,7 @@ void readSiliconRevision(){
 }
 void setReg(unsigned long word)
 {
+	cout << "Set Reg" << endl;
 	//make sure everything is on
 	if(!isOn){
 		powerUp();
@@ -162,29 +167,35 @@ void setReg(unsigned long word)
 
 void setReg0()
 {
+	cout << "Set reg 0" << endl;
 	setReg(0x82C1B200);
 	usleep(100); //100 uS
 }
 void setReg1()
 {
+	cout << "Set reg 1" << endl;
 	setReg(0x479021);
 	usleep(1000); //1 mS
 }
 void setReg2()
 {
+	cout << "Set reg 2" << endl;
 	setReg(0x22081B02);
 	usleep(1000000); //1 S
 }
 void setReg3()
 {
+	cout << "Set reg 3" << endl;
 	setReg(0x33133663);
 }
 void setReg7()
 {
+	cout << "Set reg 7" << endl;
 	setReg(0x1F7);
 }
 void gpio_init()
 {
+	cout << "GPIO INIT" << endl;
 	gpio_export(CE);
 	gpio_export(SLE);
 	gpio_export(SDATA);
@@ -202,6 +213,7 @@ void gpio_init()
 
 void gpio_release()
 {
+	cout << "GPIO release " << endl;
 	//unexport pins
 	gpio_unexport(CE);     // unexport the LED
 	gpio_unexport(SDATA);
@@ -213,6 +225,7 @@ void gpio_release()
 
 void rx_mode()
 {
+	cout << "RX MODE" << endl;
 	// 1 3 6? 5 11? 12? 0 4 10?
 	
 	//0
@@ -221,6 +234,7 @@ void rx_mode()
 
 void tx_mode() 
 {
+	cout << "TX MODE" << endl;
 	//1 3 0 2
 	setReg1();
 	setReg3();
@@ -229,6 +243,7 @@ void tx_mode()
 
 }
 int main(){
+	cout << "Main" << endl;
 	//pin direction and initial GPIO level
 /*	//CE
 	system("config-pin p9.15 gpio_pd");
@@ -268,10 +283,7 @@ int main(){
 	//gpio_init();
 
 	//do something
-	setReg1();
-	setReg3();
-	setReg0();
-	setReg2();
+	tx_mode();
 	readSiliconRevision();
 	//power down
 	powerDown();
