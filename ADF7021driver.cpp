@@ -10,6 +10,7 @@ using namespace std;
 //definition 
 //define full verbose 
 #define vv
+#define dotLength 200000
 
 unsigned int CE		= 48;//P9_15
 unsigned int SLE 	= 69;
@@ -88,7 +89,7 @@ void readReg(){
 	usleep(T/4);
 	//SLE = 0;
 	gpio_set_value(SLE, LOW);
-	cout << "read Reg finsih" << endl;
+	cout << "read Reg finish" << endl;
 }
 void sendReg()
 {
@@ -107,6 +108,7 @@ void sendReg()
 	usleep(400000); //400 mS
 	for(i = 31; i>=0; i--){
 		gpio_set_value_2(SDATA, db[i]);
+		cout << "asdf sending " << i << "  "<<db[i] << endl;
 		regClock();
 	}
 	//while(i>=0)
@@ -162,7 +164,7 @@ void setReg(unsigned long word)
 	for (i=0; word> 0; i++)
     {
         db[i] = word % 2;
-        cout << "asdf  " << i << "  "<<db[i] << endl;
+        cout << "asdf  loading" << i << "  "<<db[i] << endl;
         word = word / 2;
     }
 	//set value
@@ -176,7 +178,7 @@ void setReg0()
 	cout << "Set reg 0" << endl;
 	setReg(0x82C1B200);
 	usleep(100); //100 uS
-	cout << "Set Reg 0 finsih" << endl;
+	cout << "Set Reg 0 finish" << endl;
 }
 void setReg1()
 {
@@ -256,6 +258,50 @@ void tx_mode()
 	setReg2();
 
 }
+void dot()
+{
+	gpio_set_value(CE, HIGH);
+	usleep(dotLength);
+	gpio_set_value(CE, LOW);
+	usleep(dotLength);
+}
+
+void dash()
+{
+	gpio_set_value(CE, HIGH);
+	usleep(3*dotLength);
+	gpio_set_value(CE, LOW);
+	usleep(dotLength);//400 mS
+}
+void space()
+{
+	gpio_set_value(CE, LOW);
+	usleep(3*dotLength);//400 mS
+}
+void J()
+{
+	dot();	dash();	dash();	dash();
+}
+void G()
+{
+	dash();	dash();	dot();
+}
+void M()
+{
+	dash();	dash();
+}
+void N()
+{
+	dash();	dot();
+}
+void B()
+{
+	dash();	dot();	dot();	dot();
+}
+void callSign()
+{
+	J();	G();	M();	N();	B();
+}
 int main(){
 	cout << "Main" << endl;
 	//pin direction and initial GPIO level
@@ -298,7 +344,11 @@ int main(){
 
 	//do something
 	tx_mode();
+	//hold for testing
 	readSiliconRevision();
+	usleep(10000000);
+	//try call sign
+	space(); 	callSign(); 	space();	callSign();	space(); callSign();
 	//power down
 	powerDown();
 	//unexport pins
