@@ -38,7 +38,7 @@ signed int i;
 void powerUp(){
 
 	gpio_set_value(CE, HIGH);//CE = 1
-	usleep(100000); // 100 mS. 
+	usleep(5000); // 5 mS. 
 	isOn = true;
 	cout <<"on"<< endl;
 }
@@ -177,14 +177,14 @@ void setReg0()
 {
 	cout << "Set reg 0" << endl;
 	setReg(0x82C1B200);
-	usleep(100); //100 uS
+	usleep(500); //500 uS
 	cout << "Set Reg 0 finish" << endl;
 }
 void setReg1()
 {
 	cout << "Set reg 1" << endl;
 	setReg(0x00479021);
-	usleep(1000); //1 mS
+	usleep(5000); //5 mS
 	cout << "Set Reg 1 finish" << endl;
 }
 void setReg2()
@@ -198,13 +198,14 @@ void setReg3()
 {
 	cout << "Set reg 3" << endl;
 	setReg(0x33133663);
+	usleep(5000); //5 mS
 	cout << "Set Reg 3 finish" << endl;
 }
 void setReg7()
 {
 	cout << "Set reg 7" << endl;
 	setReg(0x1F7);
-	cout << "Set Reg 7 finishi" << endl;
+	cout << "Set Reg 7 finish" << endl;
 }
 void gpio_init()
 {
@@ -315,6 +316,11 @@ void readSiliconRevisionV2(){
 	cout <<"Product code : "<< std::hex << "0x" << productCode  << "   " << std::dec << productCode << endl;
 
 }
+void testToneOnly()
+{
+	setReg(0x10F);
+	cout <<"Transmiting Tone only"<< endl;
+}
 int main(){
 	cout << "Main" << endl;
 	//pin direction and initial GPIO level
@@ -360,6 +366,8 @@ int main(){
 	//hold for testing
 	readSiliconRevision();
 	readSiliconRevisionV2();
+	testToneOnly();
+	//varify channel is on
 	usleep(10000000);
 	//try call sign
 	space(); 	callSign(); 	space();	callSign();	space(); callSign();
