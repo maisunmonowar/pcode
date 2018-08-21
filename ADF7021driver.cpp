@@ -31,6 +31,7 @@ unsigned char iterationTime;
 //set
 unsigned int T = 24000; //time period of register clock in us
 signed int i;
+int verboseLevel = 2; // 0 being quiet, 2 being full verbose
 
 //-------------------
 //Algorithm
@@ -153,7 +154,7 @@ void readSiliconRevision(){
 }
 void setReg(unsigned long word)
 {
-	cout << "Set Reg" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg" << endl;}
 	//make sure everything is on
 	if(!isOn){
 		powerUp();
@@ -164,48 +165,48 @@ void setReg(unsigned long word)
 	for (i=0; word> 0; i++)
     {
         db[i] = word % 2;
-        cout << "asdf  loading" << i << "  "<<db[i] << endl;
+        if(verboseLevel > 1) {cout << "asdf  loading" << i << "  "<<db[i] << endl;}
         word = word / 2;
     }
 	//set value
 	sendReg();
 	usleep(1000); //1 mS
-	cout << "Set Reg finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg finish" << endl;}
 }
 
 void setReg0()
 {
-	cout << "Set reg 0" << endl;
-	setReg(0x82C1B200);
+	if(verboseLevel > 0) {cout << "Set reg 0" << endl;}
+	setReg(0x8160D860);
 	usleep(500); //500 uS
-	cout << "Set Reg 0 finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg 0 finish" << endl;}
 }
 void setReg1()
 {
-	cout << "Set reg 1" << endl;
-	setReg(0x00479021);
+	if(verboseLevel > 0) {cout << "Set reg 1" << endl;}
+	setReg(0x00461011);
 	usleep(5000); //5 mS
-	cout << "Set Reg 1 finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg 1 finish" << endl;}
 }
 void setReg2()
 {
-	cout << "Set reg 2" << endl;
-	setReg(0x22081B02);
+	if(verboseLevel > 0) {cout << "Set reg 2" << endl;}
+	setReg(0x08023882);
 	usleep(1000000); //1 S
-	cout << "Set Reg 2 finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg 2 finish" << endl;}
 }
 void setReg3()
 {
-	cout << "Set reg 3" << endl;
-	setReg(0x33133663);
+	if(verboseLevel > 0) {cout << "Set reg 3" << endl;}
+	setReg(0x2B13AA63);
 	usleep(5000); //5 mS
-	cout << "Set Reg 3 finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg 3 finish" << endl;}
 }
 void setReg7()
 {
-	cout << "Set reg 7" << endl;
+	if(verboseLevel > 0) {cout << "Set reg 7" << endl;}
 	setReg(0x1F7);
-	cout << "Set Reg 7 finish" << endl;
+	if(verboseLevel > 0) {cout << "Set Reg 7 finish" << endl;}
 }
 void gpio_init()
 {
@@ -251,7 +252,7 @@ void rx_mode()
 
 void tx_mode() 
 {
-	cout << "TX MODE" << endl;
+	if(verboseLevel > 0) {cout << "TX MODE" << endl;}
 	//1 3 0 2
 	setReg1();
 	setReg3();
@@ -321,8 +322,47 @@ void testToneOnly()
 	setReg(0x10F);
 	cout <<"Transmiting Tone only"<< endl;
 }
-int main(){
+int main(int argc, char *argv[]){
 	cout << "Main" << endl;
+	if (verboseLevel > 1)
+	{
+		cout << "There are " << argc << " arguments:\n";
+
+   		i = 0;
+   		while(i<argc)
+   		{
+   			cout << argv[i] << endl;
+   			i++;
+   		}
+	}
+	if(argc>1)
+	{
+		for(i = 1; i < argc; i++)
+		{
+			if(strcmp(argv[i], "-1") == 0)
+			{
+				
+			}
+			if(strcmp(argv[i], "-2") == 0)
+			{
+				
+			}
+			if(strcmp(argv[i], "-3") == 0)
+			{
+				
+			}
+			if(strcmp(argv[i], "-v") == 0)
+			{
+				//define verbose minimum
+				v = 1;
+			}
+			if(strcmp(argv[i], "-vv") == 0)
+			{
+				//define full verbose
+				v = 2;
+			}
+		}
+	}
 	//pin direction and initial GPIO level
 /*	//CE
 	system("config-pin p9.15 gpio_pd");
@@ -364,7 +404,7 @@ int main(){
 	//do something
 	tx_mode();
 	//hold for testing
-	readSiliconRevision();
+	//readSiliconRevision();
 	readSiliconRevisionV2();
 	testToneOnly();
 	//varify channel is on
