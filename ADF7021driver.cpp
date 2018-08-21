@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "SimpleGPIO.h"
 
@@ -9,7 +10,7 @@ using namespace std;
 
 //definition 
 //define full verbose 
-#define vv
+//#define vv
 #define dotLength 200000
 
 unsigned int CE		= 48;//P9_15
@@ -354,12 +355,12 @@ int main(int argc, char *argv[]){
 			if(strcmp(argv[i], "-v") == 0)
 			{
 				//define verbose minimum
-				v = 1;
+				verboseLevel = 1;
 			}
 			if(strcmp(argv[i], "-vv") == 0)
 			{
 				//define full verbose
-				v = 2;
+				verboseLevel = 2;
 			}
 		}
 	}
