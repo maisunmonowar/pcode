@@ -110,7 +110,7 @@ void sendReg()
 	usleep(400000); //400 mS
 	for(i = 31; i>=0; i--){
 		gpio_set_value_2(SDATA, db[i]);
-		cout << "asdf sending " << i << "  "<<db[i] << endl;
+		if (verboseLevel > 1) {cout << "asdf sending " << i << "  "<<db[i] << endl;}
 		regClock();
 	}
 	//while(i>=0)
@@ -178,28 +178,28 @@ void setReg(unsigned long word)
 void setReg0()
 {
 	if(verboseLevel > 0) {cout << "Set reg 0" << endl;}
-	setReg(0x8160D860);
+	setReg(0x9160D870);
 	usleep(500); //500 uS
 	if(verboseLevel > 0) {cout << "Set Reg 0 finish" << endl;}
 }
 void setReg1()
 {
 	if(verboseLevel > 0) {cout << "Set reg 1" << endl;}
-	setReg(0x00461011);
+	setReg(0x575011);
 	usleep(5000); //5 mS
 	if(verboseLevel > 0) {cout << "Set Reg 1 finish" << endl;}
 }
 void setReg2()
 {
 	if(verboseLevel > 0) {cout << "Set reg 2" << endl;}
-	setReg(0x08023882);
+	setReg(0x743082);
 	usleep(1000000); //1 S
 	if(verboseLevel > 0) {cout << "Set Reg 2 finish" << endl;}
 }
 void setReg3()
 {
 	if(verboseLevel > 0) {cout << "Set reg 3" << endl;}
-	setReg(0x2B13AA63);
+	setReg(0x2B160123);
 	usleep(5000); //5 mS
 	if(verboseLevel > 0) {cout << "Set Reg 3 finish" << endl;}
 }
@@ -404,9 +404,12 @@ int main(int argc, char *argv[]){
 
 	//do something
 	tx_mode();
+//hope this works
+setReg(0x80293814);
+usleep(2000000);
 	//hold for testing
 	//readSiliconRevision();
-	readSiliconRevisionV2();
+	//readSiliconRevisionV2();
 	testToneOnly();
 	//varify channel is on
 	usleep(10000000);
