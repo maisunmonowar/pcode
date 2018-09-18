@@ -11,7 +11,7 @@ using namespace std;
 //definition 
 //define full verbose 
 //#define vv
-#define dotLength 200000
+#define dotLength 60000 //60 mS
 
 unsigned int CE		= 48;//P9_15
 unsigned int SLE 	= 69;
@@ -192,7 +192,7 @@ void setReg1()
 void setReg2()
 {
 	if(verboseLevel > 0) {cout << "Set reg 2" << endl;}
-	setReg(0x743082);
+	setReg(0x779082);
 	usleep(1000000); //1 S
 	if(verboseLevel > 0) {cout << "Set Reg 2 finish" << endl;}
 }
@@ -274,36 +274,37 @@ void dash()
 	gpio_set_value(CE, HIGH);
 	usleep(3*dotLength);
 	gpio_set_value(CE, LOW);
-	usleep(dotLength);//400 mS
+	usleep(dotLength);
 }
 void space()
 {
 	gpio_set_value(CE, LOW);
-	usleep(3*dotLength);//400 mS
+	usleep(2*dotLength);// 120 mS
 }
+
 void J()
 {
-	dot();	dash();	dash();	dash();
+	dot();	dash();	dash();	dash();space();
 }
 void G()
 {
-	dash();	dash();	dot();
+	dash();	dash();	dot();space();
 }
 void M()
 {
-	dash();	dash();
+	dash();	dash();space();
 }
 void N()
 {
-	dash();	dot();
+	dash();	dot();space();
 }
 void B()
 {
-	dash();	dot();	dot();	dot();
+	dash();	dot();	dot();	dot();space();
 }
 void callSign()
 {
-	J();	G();	M();	N();	B();
+	space(); space(); J();	G();	M();	N();	B();space();space();
 }
 void readSiliconRevisionV2(){
 	setReg7();
@@ -340,17 +341,19 @@ int main(int argc, char *argv[]){
 	{
 		for(i = 1; i < argc; i++)
 		{
-			if(strcmp(argv[i], "-1") == 0)
+			if(strcmp(argv[i], "-on") == 0)
 			{
-				
+				gpio_init();
+				powerUp();
 			}
-			if(strcmp(argv[i], "-2") == 0)
+			if(strcmp(argv[i], "-off") == 0)
 			{
-				
+				powerDown();
+				gpio_release();
 			}
-			if(strcmp(argv[i], "-3") == 0)
+			if(strcmp(argv[i], "-cw") == 0)
 			{
-				
+				callSign();
 			}
 			if(strcmp(argv[i], "-v") == 0)
 			{
@@ -361,6 +364,14 @@ int main(int argc, char *argv[]){
 			{
 				//define full verbose
 				verboseLevel = 2;
+			}
+			if(strcmp(argv[i], "-tx") == 0)
+			{
+				tx_mode();
+			}
+			if(strcmp(argv[i], "-test") == 0)
+			{
+				testToneOnly();
 			}
 		}
 	}
@@ -386,6 +397,7 @@ int main(int argc, char *argv[]){
 	system("config-pin p8.10 out");
 	system("config-pin -q p8.10");
 */
+/* commented out as I want to test part by part
 	gpio_export(CE);
 	gpio_export(SLE);
 	gpio_export(SDATA);
@@ -398,21 +410,22 @@ int main(int argc, char *argv[]){
 	gpio_set_dir(SDATA, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SCLK, OUTPUT_PIN);   // The LED is an output
 	gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
-	//gpio_set_dir(MUXOUT, INPUT_PIN);
+*/	//gpio_set_dir(MUXOUT, INPUT_PIN);
 	//or
 	//gpio_init();
 
 	//do something
-	tx_mode();
+/*	tx_mode();
+*/
 //hope this works
-setReg(0x80293814);
+/*setReg(0x80293814);
 usleep(2000000);
-	//hold for testing
+*/	//hold for testing
 	//readSiliconRevision();
 	//readSiliconRevisionV2();
-	testToneOnly();
-	//varify channel is on
-	usleep(10000000);
+/*	testToneOnly();
+*/	//varify channel is on
+/*	usleep(10000000);
 	//try call sign
 	space(); 	callSign(); 	space();	callSign();	space(); callSign();
 	//power down
@@ -426,7 +439,7 @@ usleep(2000000);
 	//gpio_unexport(MUXOUT);
 	//or
 	//gpio_release();
-
+*/
 	cout << "All done" << endl;
 	
 	//return
