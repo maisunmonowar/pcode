@@ -18,6 +18,7 @@ unsigned int SLE 	= 69;
 unsigned int SDATA 	= 44;
 unsigned int SREAD 	= 66;
 unsigned int SCLK 	= 68;
+unsigned int DUE	= 47; //P8.15 OR GPIO 47
 //unsigned int MUXOUT = 13;
 
 //variables
@@ -192,7 +193,7 @@ void setReg1()
 void setReg2()
 {
 	if(verboseLevel > 0) {cout << "Set reg 2" << endl;}
-	setReg(0x779082);
+	setReg(0x71F082);
 	usleep(1000000); //1 S
 	if(verboseLevel > 0) {cout << "Set Reg 2 finish" << endl;}
 }
@@ -217,6 +218,7 @@ void gpio_init()
 	gpio_export(SDATA);
 	gpio_export(SREAD);
 	gpio_export(SCLK);
+	gpio_export(DUE);
 	//gpio_export(MUXOUT);
 	
 	gpio_set_dir(CE, OUTPUT_PIN);
@@ -224,8 +226,10 @@ void gpio_init()
 	gpio_set_dir(SDATA, OUTPUT_PIN);  
 	gpio_set_dir(SCLK, OUTPUT_PIN);   
 	gpio_set_dir(SREAD, INPUT_PIN);   
+	gpio_set_dir(DUE, OUTPUT_PIN);
 	//gpio_set_dir(MUXOUT, INPUT_PIN);
 
+	gpio_set_value(DUE, HIGH);
 	cout << "GPIO INIT finish" << endl;
 }
 
@@ -238,6 +242,7 @@ void gpio_release()
 	gpio_unexport(SREAD);
 	gpio_unexport(SLE);
 	gpio_unexport(SCLK);
+	gpio_unexport(DUE);
 	//gpio_unexport(MUXOUT);
 	cout << "GPIO Release finish" << endl;
 }
@@ -324,6 +329,26 @@ void testToneOnly()
 	setReg(0x10F);
 	cout <<"Transmiting Tone only"<< endl;
 }
+
+void enableSPI()
+{
+	setReg(0xE000F);
+	cout << "set spi";
+}
+
+void ardOn()
+{
+	system("config-pin -q p8.15");
+	gpio_set_value(DUE, LOW);
+	cout << "ard on";
+}
+
+void ardOff()
+{
+	gpio_set_value(DUE, HIGH);
+	cout << "ard off";
+}
+
 int main(int argc, char *argv[]){
 	cout << "Main" << endl;
 	if (verboseLevel > 1)
@@ -372,6 +397,18 @@ int main(int argc, char *argv[]){
 			if(strcmp(argv[i], "-test") == 0)
 			{
 				testToneOnly();
+			}
+			if(strcmp(argv[i], "-rev") == 0)
+			{
+				readSiliconRevisionV2();
+			}
+			if(strcmp(argv[i], "-ardOn") == 0)
+			{
+				ardOn();
+			}
+			if(strcmp(argv[i], "-ardOff") == 0)
+			{
+				ardOff();
 			}
 		}
 	}
