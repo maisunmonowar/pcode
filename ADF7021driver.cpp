@@ -33,7 +33,7 @@ unsigned char iterationTime;
 //set
 unsigned int T = 24000; //time period of register clock in us
 signed int i;
-int verboseLevel = 2; // 0 being quiet, 2 being full verbose
+int verboseLevel = 0; // 0 being quiet, 2 being full verbose
 
 //-------------------
 //Algorithm
@@ -43,7 +43,7 @@ void powerUp(){
 	gpio_set_value(CE, HIGH);//CE = 1
 	usleep(5000); // 5 mS. 
 	isOn = true;
-	cout <<"on"<< endl;
+	if(verboseLevel > 0){cout <<"on"<< endl;}
 }
 
 void powerDown(){
@@ -72,7 +72,7 @@ void regClock(){
 
 }
 void clearDB(){
-	cout << "clear db" <<endl;
+	if(verboseLevel > 1){cout << "clear db" <<endl;}
 	for(i = 0; i<32; i++){
 		db[i] = 0;
 	}
@@ -81,7 +81,7 @@ void clearDB(){
 }
 
 void readReg(){
-	cout << "read reg" << endl;
+	if(verboseLevel > 1){cout << "read reg" << endl;}
 	clearDB();
 	gpio_set_value(SLE, HIGH);
 	for(i = 17; i>=0; i--)
@@ -92,7 +92,7 @@ void readReg(){
 	usleep(T/4);
 	//SLE = 0;
 	gpio_set_value(SLE, LOW);
-	cout << "read Reg finish" << endl;
+	if(verboseLevel > 0){cout << "read Reg finish" << endl;}
 }
 void sendReg()
 {
@@ -449,20 +449,20 @@ int main(int argc, char *argv[]){
 	gpio_set_dir(SREAD, INPUT_PIN);   // The LED is an output
 */	//gpio_set_dir(MUXOUT, INPUT_PIN);
 	//or
-	//gpio_init();
+	gpio_init();
 
 	//do something
-/*	tx_mode();
-*/
+	tx_mode();
+
 //hope this works
 /*setReg(0x80293814);
 usleep(2000000);
 */	//hold for testing
-	//readSiliconRevision();
-	//readSiliconRevisionV2();
-/*	testToneOnly();
-*/	//varify channel is on
-/*	usleep(10000000);
+	readSiliconRevision();
+	readSiliconRevisionV2();
+	testToneOnly();
+	//varify channel is on
+	usleep(3000000);
 	//try call sign
 	space(); 	callSign(); 	space();	callSign();	space(); callSign();
 	//power down
@@ -476,7 +476,7 @@ usleep(2000000);
 	//gpio_unexport(MUXOUT);
 	//or
 	//gpio_release();
-*/
+
 	cout << "All done" << endl;
 	
 	//return
