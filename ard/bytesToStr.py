@@ -1,0 +1,10 @@
+msg = b'can\n'
+print(msg)
+msg2 = msg.decode()
+file = open("rec.txt", "w+")
+file.write(msg2)
+file.write("hello")
+file.write("World")
+file.write("\n")
+file.write("Konnichiwa")
+file.close()
