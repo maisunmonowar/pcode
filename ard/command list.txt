@@ -1,0 +1,3 @@
+gsToBIRDcommandendOfFile
+gsToBIRDcommandnameOfFilenewrec.txt
+gsToBIRDcommandmodeOfFilew+
