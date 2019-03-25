@@ -13,10 +13,14 @@ while x<2:
 	ser.write(msg.encode())
 	time.sleep(1)
 	x+=1
-nameOfFile = "test.txt"
+
+nameOfFile = "testTransfer.cpp"
 modeOfFile = "w+"
+
 file = open(nameOfFile, "r")
 
+#count execution time
+startTime = time.time()
 #--Command satellite to open a file
 time.sleep(1)
 msg = ''
@@ -69,7 +73,10 @@ time.sleep(1)
 
 #--Send the file
 x = 0
-while x < 20:
+while x < 5000:
+	#I know limiting the line size to 
+	#5000 is stupid
+	#will fix later
 	msg = 'data'
 	msg += file.readline()
 	msg += '\n'
@@ -91,6 +98,9 @@ while x < 20:
 		feedback2 = feedback[0:22] #This is still a byte obj
 		feedback3 = feedback2.decode() #Feedback3 is now a string
 		print(feedback3)
+	##--Detect End of File
+	if msg[9:18] == 'endOfFile':
+		break	
 	x+=1
 
 #Tell satellite to close the file
@@ -104,3 +114,8 @@ ser.write(msg.encode())
 #--GS work is done. Close and exit
 file.close()
 ser.close()
+#count execution time
+endTime = time.time()
+print ("Process took")
+print(endTime - startTime)
+ 

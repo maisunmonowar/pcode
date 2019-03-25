@@ -23,18 +23,27 @@ while x<40:
 			if msg3[15:24] == 'endOfFile':	
 				print("end of file command")
 				file.close()
+				#count execution time
+				endTime = time.time()
+				break
 			if msg3[15:25] == 'nameOfFile':	
 				print("name of file command")
 				nameOfFile = msg3[25:len(msg3)-2]
 				print(nameOfFile)
+				#count execution time
+				startTime = time.time()
 			if msg3[15:25] == 'modeOfFile':	
 				print("mode of file command")
 				modeOfFile = msg3[25:len(msg3)-2]
 				print(modeOfFile)
 				file = open(nameOfFile,modeOfFile)
+			x = 0
+			#so the loop will act as a timeout check	
 		if msg3[0:4] == 'data':
 			file.write(msg3[4:len(msg3)-1])	
-	
+			x = 0
+			#so the loop will act as a timeout check
+
 	time.sleep(.1)
 	x+=1
 	if x == 39:
@@ -44,4 +53,6 @@ while x<40:
 
 
 ser.close()
+print ("Process took")
+print(endTime - startTime)
 print("End")
