@@ -14,7 +14,7 @@ while x<2:
 	time.sleep(1)
 	x+=1
 
-nameOfFile = "testTransfer.cpp"
+nameOfFile = "test.txt"
 modeOfFile = "w+"
 
 file = open(nameOfFile, "r")
