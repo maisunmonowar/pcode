@@ -7,12 +7,7 @@ msg += '\n'
 if ser.isOpen():
     ser.close()
 ser.open()
-while x<2:
-	#ser.write(b'HelloPythonCOMport\n')
-	print(msg)
-	ser.write(msg.encode())
-	time.sleep(1)
-	x+=1
+
 
 nameOfFile = "test.txt"
 modeOfFile = "w+"

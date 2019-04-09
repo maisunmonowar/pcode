@@ -33,12 +33,14 @@ void loop() {
   {
     msg = ""; //force overwrite buffer
     msg = "ffff";
-    while (Serial.available()) {
+    while (Serial.available()) 
+    {
       // get the new byte:
       char inChar = (char)Serial.read();
 
       if (inChar == '\n') {
         stringComplete = true;
+        counter++;
       }
       else
       {
@@ -75,7 +77,7 @@ void loop() {
     lastPacketSuccess = false;
     stringComplete = false;
     //msg = "                                        ";
-    counter++;
+   
   }
 
 
