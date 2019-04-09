@@ -1,1 +1,1 @@
-for example, a file can be any item manipulated,edited or created 	tab lineby the user/OS.That means files can be images, text documents, executables, and much more. Most files are 	tab lineorganized by keeping them in individual folders.//---endOfFile---
+In Windows, for example, dataa file can be any item manipulated,edited or created 	tab lineby the user/OS.That means files can be images, text documents, executables, and much more. Most files are 	tab lineorganized by keeping them in individual folders.//---endOfFile---
