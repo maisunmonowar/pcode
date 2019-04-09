@@ -9,7 +9,7 @@ if ser.isOpen():
 ser.open()
 
 
-nameOfFile = "test.txt"
+nameOfFile = "testTransfer.cpp"
 modeOfFile = "w+"
 
 file = open(nameOfFile, "r")
