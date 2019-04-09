@@ -2,7 +2,7 @@ import serial
 import time
 ser = serial.Serial('COM12', baudrate = 9600, timeout = 1)
 x = 0
-oldPacketNumber = b'1010'
+oldPacketCode = b'xx'
 
 if ser.isOpen():
     ser.close()
@@ -20,16 +20,9 @@ while x<40:
 		print(len(msg))
 		msg2 = msg[4:len(msg)]
 		msg3 = msg2.decode()
+		newPacketCode = msg[0:4]
+		if newPacketCode != oldPacketCode:
 
-		currentPacketNumber = msg[0:4]
-		#message string made. 
-		
-		if oldPacketNumber == currentPacketNumber:
-			#no need to process
-			print("same packet")	
-		else:	
-			print("not same") 
-			#process the string
 			if msg3[0:15] == 'gsToBIRDcommand':
 				print("Command Received")
 				if msg3[15:24] == 'endOfFile':	
@@ -49,28 +42,18 @@ while x<40:
 					modeOfFile = msg3[25:len(msg3)-2]
 					print(modeOfFile)
 					file = open(nameOfFile,modeOfFile)
-				print("updateing pac nubmer") 
-				oldPacketNumber = currentPacketNumber	
 				x = 0
-				#so the loop will act as a timeout check
-				#tell arduino board what was received
-				print("tel ard") 
-				ser.write(msg + b'\n')	
+				#so the loop will act as a timeout check	
 			if msg3[0:4] == 'data':
 				file.write(msg3[4:len(msg3)-1])	
 				x = 0
 				#so the loop will act as a timeout check
-				#tell arduino board what was received
-				print("tel ard") 
-				ser.write(msg + b'\n')	
-				print("updateing pac nubmer") 
-				oldPacketNumber = currentPacketNumber	
-			#all processing done
-			#save the packet nubmer
-			
-
-
-		
+			oldPacketCode = newPacketCode	
+		else:
+			#same packet
+			print("same packet")
+	#tell ardunio >> ok
+	ser.write(b'ok\n')
 
 	time.sleep(.1)
 	x+=1
