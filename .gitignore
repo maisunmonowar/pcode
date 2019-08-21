@@ -11,3 +11,5 @@ buildTest2.cmd
 test2.exe.stackdump
 ADF7021driver
 Aruino_SPI_Master_Slave_Demo
+pyt/outputFile.hex
+pyt/outputFile.txt
