@@ -1,23 +1,29 @@
 import serial
 import time
 ser = serial.Serial('COM5', baudrate = 9600, timeout = 5, xonxoff=True)
+serialReadFile = open("serialReadFile.hex", "w+")
+if ser.isOpen():
+	#do nothing
+	print("Serial is open")
+else:
+	try:
+			ser.open()
+	except Exception as e:
+			print("error opening Serial Port: " + str(e))
+			exit()
 
-try:
-		ser.open()
-except Exception as e:
-		print("error opening Serial Port: " + str(e))
-		exit()
-
-if: ser.isOpen():
+if ser.isOpen():
 	while(True):
 		rBuffer = ser.readline()
 		msg = rBuffer.decode()
 		print(msg)
-		if(msg[len(msg)-1:len(msg)] == "\""):
+		serialReadFile.write(msg)
+		if(msg[0:5] == ";CRC="):
 			break
 else:
 	print("Serial is not open")
 ser.close()
+serialReadFile.close()
 print("End")
 '''
 x = 0
