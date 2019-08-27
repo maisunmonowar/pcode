@@ -38,7 +38,11 @@ except Exception as e:
 
 if ser.isOpen():
         print("Serial is Open")
-        ser.write("Hello Serial Port")
+        ser.write("Hello Serial Port\n\r")
+        for y in range(300):
+        	ser.write("\n\rBaby Shark")
+        	for z in range(50):
+        		ser.write(" do")
         for x in range(len(lineList)):
     		print(lineList[x])
     		ser.write(lineList[x])
