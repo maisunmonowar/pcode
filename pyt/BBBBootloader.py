@@ -1,5 +1,61 @@
 import serial
 import time
+import os
+import Adafruit_BBIO.GPIO as GPIO
+
+LED="P9_12"
+GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, GPIO.LOW) #to enter bootloader mode
+
+ser = serial.Serial()
+ser.port= "/dev/ttyO4"
+ser.baudrate = 9600
+ser.bytesize = serial.EIGHTBITS
+ser.parity = serial.PARITY_NONE
+ser.stopbits = serial.STOPBITS_ONE
+ser.timeout = 5
+ser.xonxoff= True
+ser.rtscts = False
+ser.dsrdtr = False
+ser.writeTimeout = 5
+
+nameOfFile = "appV2.hex"
+modeOfFile = "r"
+
+with open(nameOfFile, modeOfFile) as file:
+    lineList = file.readlines()
+print("list loading done.\n\r")
+print("Number of lines: ")
+print(len(lineList))
+
+
+
+try:
+        ser.open()
+except Exception as e:
+        print("error open Serial Port: " +str(e))
+        exit()
+
+
+if ser.isOpen():
+	print("\n\rSerial is Open\n\r")
+    for x in range(len(lineList)):
+    		print(lineList[x])
+    		ser.write(lineList[x])
+else:
+	print("Serial is not open")
+GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
+
+feedback = ser.read()
+print(feeback.decode())
+if feeback == 0x06:
+	print("Success")
+ser.close()
+file.close()
+GPIO.cleanup()
+print("end")
+"""import serial
+import time
 ser = serial.Serial('COM5', baudrate = 9600, timeout = 5, xonxoff=True)
 serialReadFile = open("serialReadFile.hex", "w+")
 if ser.isOpen():
@@ -26,7 +82,7 @@ else:
 ser.close()
 serialReadFile.close()
 print("End")
-'''
+
 x = 0
 msg = 'this is a message.'
 msg += '\n'
