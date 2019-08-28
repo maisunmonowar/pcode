@@ -13,9 +13,14 @@ else:
             exit()
 
 if ser.isOpen():
-    for x in range(5):
-        ser.write(0x06)
-    ser.write("you can stop\n\r")
+    o = "hello serial port\n\r"
+    o_out = o.encode()
+    ser.write(o_out)
+    for x in range(10):
+       ser.write(b'\x06')
+    ser.write(o_out)
+    youcan = "you can stop\n\r"
+    ser.write(youcan.encode())
 else:
     print("Serial is not open")
 ser.close()
