@@ -22,14 +22,16 @@ except Exception as e:
 
 if ser.isOpen():
         print("Serial is Open")
-        while(True):
-            msg = ser.readline()
-            print(str(msg))
-            if msg == 0x06:
-                print("06 Received")
-            if str(msg) == "you can stop\n\r"
-                print("I can stop")
-                break
+	loopLogic = True
+        while(loopLogic):
+		msg = ser.readline()
+		msg_str = msg.decode()
+		print(msg)
+		if msg.find(b'\x06') != -1:
+			print("06 Received")
+		if (msg.find(b'you can stop') != -1):
+			print("I can stop")
+			loopLogic = False
 else:
         print("Serial is not open")
 ser.close()
