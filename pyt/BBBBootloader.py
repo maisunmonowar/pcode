@@ -49,6 +49,9 @@ if ser.isOpen():
     for x in range(len(lineList)):
     		print(lineList[x])
     		ser.write(lineList[x])
+    		print("Feed, ")
+    		print(ser.readline())
+    		print("\n")
 else:
 	print("Serial is not open")
 
