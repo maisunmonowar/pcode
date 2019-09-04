@@ -11,6 +11,8 @@ with open(abs_file_path, "r") as file:
 print("list loading done.\n\r")
 print("Number of lines: ")
 print(len(lineList))
+print(type(lineList))
+print(type(lineList[1]))
 print("\n\r\n\rThey are:\n\r")
 for x in range(len(lineList)):
     print(lineList[x])
