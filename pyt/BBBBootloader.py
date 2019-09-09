@@ -33,8 +33,6 @@ print("list loading done.\n\r")
 print("Number of lines: ")
 print(len(lineList))
 
-
-
 try:
         ser.open()
 except Exception as e:
@@ -54,6 +52,7 @@ if ser.isOpen():
     		print(lineList[x])
     		ser.write(lineList[x])
     		print("Feed, ")
+<<<<<<< HEAD
 		feedbackMsg = ser.readline()
 		print(len(feedbackMsg))
 		print(" ")
@@ -62,6 +61,22 @@ if ser.isOpen():
 		stupid = [ord(g) for g in feedbackMsg]
 		print(stupid)
 		print("\n")
+=======
+            time.delay(0.01)
+            feedback = ser.readline()
+    		print(feedback)
+    		print("\n")
+            while (feedback.find(b'\x06') == -1):
+                #means there was no feedback
+                #try again
+                print("trying again")
+                ser.write(lineList[x])
+                print("Feed, ")
+                time.delay(0.01)
+                feedback = ser.readline()
+                print(feedback)
+                print("\n")
+>>>>>>> 7aaac375d6728cd69600c09e9b3f82c8868fc692
 else:
 	print("Serial is not open")
 
