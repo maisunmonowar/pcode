@@ -14,8 +14,8 @@ ser.baudrate = 9600
 ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE
 ser.stopbits = serial.STOPBITS_ONE
-ser.timeout = 5
-ser.writeTimeout = 5
+ser.timeout = 1
+ser.writeTimeout = 1
 ser.xonxoff= True
 ser.rtscts = False
 ser.dsrdtr = False
@@ -30,12 +30,12 @@ except Exception as e:
 #do the work
 if ser.isOpen():
         print("Serial is Open")
-		for x in range(50000):
-			msg = ser.readline()
-			msg_str = msg.decode()
-			print(msg)
-			if msg.find(b'\x06') != -1:
-				print("06 Received")
+	for x in range(50000):
+		msg = ser.readline()
+		msg_str = msg.decode()
+		print(msg)
+		if msg.find(b'\x06') != -1:
+			print("06 Received")
 else:
         print("Serial is not open")
 
