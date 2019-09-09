@@ -8,6 +8,7 @@ import Adafruit_BBIO.GPIO as GPIO
 LED="P9_12"
 GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, GPIO.LOW) #to enter bootloader mode
+time.sleep(2) #to give MCU to enter into boothloader mode
 
 #open Serial
 ser = serial.Serial()
@@ -16,11 +17,11 @@ ser.baudrate = 9600
 ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE
 ser.stopbits = serial.STOPBITS_ONE
-ser.timeout = 5
+ser.timeout = 1
 ser.xonxoff= True
 ser.rtscts = False
 ser.dsrdtr = False
-ser.writeTimeout = 5
+ser.writeTimeout = 1
 
 #prepare files
 nameOfFile = "appv2.hex"
@@ -46,12 +47,21 @@ except Exception as e:
 #do the work
 if ser.isOpen():
 	print("\n\rSerial is Open\n\r")
+	ser.readline()
+	ser.readline()#to clear the buffer
+	#there has to be a better way to do it
 	for x in range(len(lineList)):
     		print(lineList[x])
     		ser.write(lineList[x])
     		print("Feed, ")
-    		print(ser.readline())
+		feedbackMsg = ser.readline()
+		print(len(feedbackMsg))
+		print(" ")
+    		print(feedbackMsg)
     		print("\n")
+		stupid = [ord(g) for g in feedbackMsg]
+		print(stupid)
+		print("\n")
 else:
 	print("Serial is not open")
 
