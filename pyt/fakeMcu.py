@@ -71,15 +71,6 @@ if uart4.isOpen() and uart1.isOpen():
 			#timeout = 0
 			print(msg)
 			startTime = time.time()
-		if uart1.inWaiting() > 0:#PC
-			msg = uart1.readline()
-			uart4.write(msg)
-			pcData.write(msg)
-			#dataFromPc.append(msg)
-			#timeout = 0
-			#pc += 1
-			print(msg)
-			startTime = time.time()
 		if time.time()-startTime  > 30:
 			break
 		#timeout += 1
