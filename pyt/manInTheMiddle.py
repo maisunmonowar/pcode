@@ -3,6 +3,9 @@ import serial
 import time
 import os
 
+#open 2 files
+pcData = open("pcData.txt", "w+")
+mcuData = open("mcuData.txt", "w+")
 #open Serial
 uart4 = serial.Serial()
 uart4.port= "/dev/ttyO4"
@@ -49,23 +52,36 @@ except Exception as e:
 #do the work
 if uart4.isOpen() and uart1.isOpen():
 	uart4.write(b'a')
-	print("in waiting, " + str(uart1.in_waiting()))
+	print("in waiting, ")
+	time.sleep(1)
+	print(uart1.inWaiting())
 	print(uart1.readline())
 
 	uart4.write(b'b\x0D\x0A')
-	print("in waiting, " + str(uart1.in_waiting()))
+	time.sleep(1)
+	print("in waiting, ")
+	print(uart1.inWaiting())
 	print(uart1.readline())
 
 	uart4.write("c")
-	print("in waiting, " + str(uart1.in_waiting()))
+	time.sleep(1)
+	print("in waiting, ")
+	print(uart1.inWaiting())
 	print(uart1.readline())
-
+	
+	timeout = 0
+	while timeout <300:
+		if uart4.inWaiting() > 0:
+			uart1.write(uart4.readline())
+			timeout = 0
+		if uart1.inWaiting() > 0:
+			uart4.write(uart1.readline())
+			timeout = 0
+		timeout++
 
 #cleanup
 uart4.close()
 uart1.close()
-file.close()
-GPIO.cleanup()
 #count execution time
 #endTime = time.time()
 print("end")
