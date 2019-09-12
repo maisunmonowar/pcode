@@ -19,7 +19,7 @@ ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE
 ser.stopbits = serial.STOPBITS_ONE
 ser.timeout = 1
-ser.xonxoff= True
+ser.xonxoff= False
 ser.rtscts = False
 ser.dsrdtr = False
 ser.writeTimeout = 1
@@ -33,6 +33,7 @@ with open(nameOfFile, modeOfFile) as file:
 print("list loading done.\n\r")
 print("Number of lines: ")
 print(len(lineList))
+fail = 0
 
 try:
         ser.open()
@@ -55,41 +56,48 @@ if ser.isOpen():
 		print(feedback)
 		print("\n")
 	#flushing everything out of buffer
-	print(ser.readline())
-	print(ser.readline())
-	print(ser.readline())
-	print(ser.readline())
+	while ser.inWaiting() > 0:
+		print(ser.readline())
 	GPIO.output(LED, GPIO.HIGH)
 
 	for x in range(len(lineList)-2):
     		print(lineList[x])
     		ser.write(lineList[x])
-    		time.sleep(.1)
-		feedback = ser.readline()
-		print("Feed, ")
-    		print(feedback)
+		feedback = ser.read(3)
+		#print("Feed, ")
+    		#print(feedback)
     		#print("\n")
-		while (feedback.find(b'\x06') == -1):
+		while (feedback.find(b'\x11') == -1):
                 	#means there was no feedback
 	                #try again
 			print("trying again")
-			ser.write("refresh\x0D")#im thinking serial line may be noisy. need to clear things???
+			fail += 1
+			#ser.write("refresh\x0D")#im thinking serial line may be noisy. need to clear things???
 			ser.write(lineList[x])
-			time.sleep(.1)
-			feedback = ser.readline()
-			print("Feed, ")
-			print(feedback)
+			#time.sleep(.1)
+			#i = 0
+			#while ser.inWaiting() < 3 and i < 3000:
+				#wait
+		#		i += 1
+		#	if ser.inWaiting() == 3:
+			feedback = ser.read(3)
+		#	else:
+		#		feedback = ser.readline()
+			#print("Feed, ")
+			#print(feedback)
 	endTime = time.time()
 	#GPIO.output(LED, GPIO.HIGH)
 else:
 	print("Serial is not open")
 
 #analyze feedback
-for y in range(60):
-	feedback = ser.readline()
-	print(feedback)
-	if (feedback.find(b'\x06') != -1):
-		print("06 Received")
+print("\n\r Sending done")
+for y in range(10):
+	if ser.inWaiting() > 0:
+		feedback = ser.readline()
+		print(feedback)
+	else:
+		time.sleep(1)	
 
 #cleanup
 GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
@@ -101,4 +109,5 @@ GPIO.cleanup()
 print("process took, ")
 print(endTime - startTime)
 print(" seconds\n\r")
+print("fail count " + str(fail))
 print("end")
