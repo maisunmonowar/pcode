@@ -17,7 +17,7 @@ uart4.timeout = 1
 uart4.xonxoff= True
 uart4.rtscts = False
 uart4.dsrdtr = False
-uart4.writeTimeout = 1
+uart4.writeTimeout = 5
 
 uart1 = serial.Serial()
 uart1.port = "/dev/ttyO1"
@@ -29,59 +29,73 @@ uart1.timeout = 1
 uart1.xonxoff= True
 uart1.rtscts = False
 uart1.dsrdtr = False
-uart1.writeTimeout = 1
+uart1.writeTimeout = 5
 
 try:
         uart4.open()
 except Exception as e:
         print("error open Serial Port: " +str(e))
-        GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
-        file.close()
-	GPIO.cleanup()
+        #GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
+        pcData.close()
+	mcuData.close()
+	#GPIO.cleanup()
         exit()
 
 try:
         uart1.open()
 except Exception as e:
         print("error open Serial Port: " +str(e))
-        GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
-        file.close()
-	GPIO.cleanup()
+        #GPIO.output(LED, GPIO.HIGH) #Normally needs to be high
+        pcData.close()
+	mcuData.close()
+	#GPIO.cleanup()
         exit()
 
 #do the work
 if uart4.isOpen() and uart1.isOpen():
-	uart4.write(b'a')
-	print("in waiting, ")
-	time.sleep(1)
-	print(uart1.inWaiting())
-	print(uart1.readline())
-
-	uart4.write(b'b\x0D\x0A')
-	time.sleep(1)
-	print("in waiting, ")
-	print(uart1.inWaiting())
-	print(uart1.readline())
-
-	uart4.write("c")
-	time.sleep(1)
-	print("in waiting, ")
-	print(uart1.inWaiting())
-	print(uart1.readline())
+	print("Start")
 	
 	timeout = 0
-	while timeout <300:
+	pc = 0
+	#mcu = 0
+	dataFromPc = ["begin"]
+	dataFromMcu = ["begin"]
+	startTime = time.time()
+	while True:#timeout <30000:
 		if uart4.inWaiting() > 0:
-			uart1.write(uart4.readline())
-			timeout = 0
-		if uart1.inWaiting() > 0:
-			uart4.write(uart1.readline())
-			timeout = 0
-		timeout++
+			msg = uart4.read(1)
+			uart1.write(msg)
+			mcuData.write(msg)
+			#dataFromMcu.append(msg)
+			#mcu += 1
+			#timeout = 0
+			print(msg)
+		if uart1.inWaiting() > 0:#PC
+			msg = uart1.readline()
+			uart4.write(msg)
+			pcData.write(msg)
+			#dataFromPc.append(msg)
+			#timeout = 0
+			#pc += 1
+			print(msg)
+		if time.time()-startTime  > 30:
+			break
+		#timeout += 1
+		#time.sleep(0.001)
+
+#write to file
+#mcuData.write("Begin\n\r")
+#pcData.write("Begin\n\r")
+#for x in range(len(dataFromMcu)):
+#	mcuData.write(dataFromMcu[x])
+#for y in range(len(dataFromPc)):
+#	pcData.write(dataFromPc[x])
 
 #cleanup
 uart4.close()
 uart1.close()
+pcData.close()
+mcuData.close()
 #count execution time
 #endTime = time.time()
 print("end")
