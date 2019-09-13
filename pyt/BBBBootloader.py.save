@@ -33,7 +33,6 @@ with open(nameOfFile, modeOfFile) as file:
 print("list loading done.\n\r")
 print("Number of lines: ")
 print(len(lineList))
-fail = 0
 
 try:
         ser.open()
@@ -56,67 +55,50 @@ if ser.isOpen():
 		print(feedback)
 		print("\n")
 	#flushing everything out of buffer
-	while ser.inWaiting() > 0:
-		print(ser.readline())
+	print(ser.readline())
+	print(ser.readline())
+	print(ser.readline())
+	#print(ser.readline())
 	GPIO.output(LED, GPIO.HIGH)
 
-	x = 0
-	okToSend = True
-	while x < len(lineList)-2:
-		if okToSend:
-			#print(lineList[x])
-			#ser.write(lineList[x])
-			msg = lineList[x][:-1] + b'\x0D'
-			print(msg)
-			ser.write(msg)
-			#ser.write(b'\x0D')
-			fail += 1
-			#time.sleep(0.04)#time to Tx 46 bytes
-			time.sleep(0.06)#littel extra than required
-		if ser.inWaiting() > 0:
-			feedback = ser.read(1)
-			if feedback == b'\x06':
-				x +=1
-				print("ACK")
-			if feedback == b'\x11':
-				okToSend = True
-				print("Send")
-			if feedback == b'\x13':
-				okToSend = False
-				print("Stop")
-	#for x in range(len(lineList)-2):
-    	#	print(lineList[x])
-    	#	ser.write(lineList[x])
-	#	feedback = ser.read(3)
-	#	#print("Feed, ")
-    		#print(feedback)
+	for x in range(len(lineList)):
+    		print(lineList[x])
+    		ser.write(lineList[x])
+		i = 0
+    		while ser.inWaiting() < 3 and i < 3000:
+			#do nothing
+			i +=1
+		if ser.inWaiting() == 3:
+			feedback = ser.read(3)
+		else:
+			feedback = ser.readline()
+		print("Feed, ")
+    		print(feedback)
     		#print("\n")
-	#	while (feedback.find(b'\x11') == -1):
+		while (feedback.find(b'\x11') == -1):
                 	#means there was no feedback
 	                #try again
-	#		print("trying again")
-	#		fail += 1
+			print("trying again")
 			#ser.write("refresh\x0D")#im thinking serial line may be noisy. need to clear things???
-	#		ser.write(lineList[x])
+			ser.write(lineList[x])
 			#time.sleep(.1)
-			#i = 0
-			#while ser.inWaiting() < 3 and i < 3000:
+			i = 0
+			while ser.inWaiting() < 3 and i < 3000:
 				#wait
-		#		i += 1
-		#	if ser.inWaiting() == 3:
-	#		feedback = ser.read(3)
-		#	else:
-		#		feedback = ser.readline()
-			#print("Feed, ")
-			#print(feedback)
+				i += 1
+			if ser.inWaiting() == 3:
+				feedback = ser.read(3)
+			else:
+				feedback = ser.readline()
+			print("Feed, ")
+			print(feedback)
 	endTime = time.time()
 	#GPIO.output(LED, GPIO.HIGH)
 else:
 	print("Serial is not open")
 
 #analyze feedback
-print("\n\r Sending done")
-for y in range(10):
+for y in range(20):
 	if ser.inWaiting() > 0:
 		feedback = ser.readline()
 		print(feedback)
@@ -133,5 +115,4 @@ GPIO.cleanup()
 print("process took, ")
 print(endTime - startTime)
 print(" seconds\n\r")
-print("fail count " + str(fail-len(lineList)))
 print("end")
