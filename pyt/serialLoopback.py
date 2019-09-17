@@ -3,7 +3,7 @@ import serial
 
 #open serial
 ser = serial.Serial()
-ser.port = "/dev/ttyO4"
+ser.port = "/dev/ttyO1"
 ser.baudrate = 9600
 ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE

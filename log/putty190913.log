@@ -1,0 +1,9223 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.13 10:55:50 =~=~=~=~=~=~=~=~=~=~=~=
+login as: root
+Pre-authentication banner message from server:
+| Debian GNU/Linux 8
+| 
+| BeagleBoard.org Debian Image 2017-01-19
+| 
+| Support/FAQ: http://elinux.org/Beagleboard:BeagleBoneBlack_Debian
+| 
+| default username:password is [debian:temppwd]
+| 
+End of banner message from server
+Last login: Thu Sep 12 14:04:46 2019 from 192.168.7.1
+root@beaglebone:~# cd codes/maisunmonowar/pcode/pyt/
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 130 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0try:ser.open()except Exception as e:print("error open Serial Port: " +str(e))GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close()GPIO.cleanup()exit()        GPIO#do the workif ser.isOpen():#count start timestartTime = time.time()print("\n\rSerial is Open\n\r")#make sure the MCU is in bootloader mode:while feedback.find(b'ownload') == -1:feedback = ser.readline()print("Feed, ")print(feedback)print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])ser.write(lineList[x])fail += 1feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")Modifiedtime.slep ep()0).)0)4))#time to t Tx 46 bytesiif sr er.iininWaiting() > 0: feedback = ser.read(1) if feedback == b'\x06': x +=1 print("ACK") if feedback == b'\x11':okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ") okToSend = True print("Send") if feedback == b'\x13': okToSend = False print("Stop")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])iokToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#print(feedback)#print("\n")#       while (feedback.find(b'\x11') == -1):#means there was no feedback#try again#print("trying again")#fail += 1#ser.write("refresh\x0D")#im thinking serial line may b$#ser.write(lineList[x])#time.sleep(.1)#i = 0#while ser.inWaiting() < 3 and i < 3000:#wait#i += 1#       if ser.inWaiting() == 3:#feedback = ser.read(3)#       else:#feedback = ser.readline()#print("Feed, ")#print(feedback)endTime = time.time()#GPIO.output(LED, GPIO.HIGH)else:print("Serial is not open")#analyze feedbackprint("\n\r Sending done")for y in range(10):if ser.inWaiting() > 0:feedback = ser.readline()print(feedback)else:time.sleep(1)#cleanupGPIO.output(LED, GPIO.HIGH) #Normally needs to be highser.close()file.close()GPIO.cleanup()#count execution time)()#endTime = time.time()print("process took, ")print(endTime - startTime)print(" seconds\n\r")print("fail count " + str(fail-len(lineList)))print("end"))mSave modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 132 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pycd codes/maisunmonowar/pcode/pytt/ot@beaglebone:~/codes/maisunmonowar/pcode/pyt# exit
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# exitcd codes/maisunmonowar/pcode/pytt/ot@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pypython BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+v1  37 
+
+
+
+Feed, 
+v1  38 
+
+
+
+Feed, 
+v1  39 
+
+
+
+Feed, 
+v1  40 
+
+
+
+Feed, 
+v1  41 
+
+
+
+Feed, 
+v1  42 
+
+
+
+Feed, 
+v1  43 
+
+
+
+Feed, 
+v1  44 
+
+
+
+Feed, 
+v1  45 
+
+
+
+Feed, 
+v1  46 
+
+
+
+Feed, 
+v1  47 
+
+
+
+Feed, 
+v1  48 
+
+
+
+Feed, 
+v1  49 
+
+
+
+Feed, 
+v1  50 
+
+
+
+Feed, 
+v1  51 
+
+
+
+Feed, 
+v1  52 
+
+
+
+Feed, 
+v1  53 
+
+
+
+Feed, 
+v1  54 
+
+
+
+Feed, 
+v1  55 
+
+
+
+Feed, 
+v1  56 
+
+
+
+Feed, 
+v1  57 
+
+
+
+Feed, 
+v1  58 
+
+
+
+Feed, 
+v1  59 
+
+
+
+Feed, 
+v1  60 
+
+
+
+Feed, 
+v1  61 
+
+
+
+Feed, 
+v1  62 
+
+
+
+Feed, 
+v1  63 
+
+
+
+Feed, 
+v1  64 
+
+
+
+Feed, 
+v1  65 
+
+
+
+Feed, 
+v1  66 
+
+
+
+Feed, 
+v1  67 
+
+
+
+Feed, 
+v1  68 
+
+
+
+Feed, 
+v1  69 
+
+
+
+Feed, 
+v1  70 
+
+
+
+Feed, 
+v1  71 
+
+
+
+Feed, 
+v1  72 
+
+
+
+Feed, 
+v1  73 
+
+
+
+Feed, 
+v1  74 
+
+
+
+Feed, 
+v1  75 
+
+
+
+Feed, 
+v1  76 
+
+
+
+Feed, 
+v1  77 
+
+
+
+Feed, 
+v1  78 
+
+
+
+Feed, 
+v1  79 
+
+
+
+Feed, 
+v1  80 
+
+
+
+Feed, 
+v1  81 
+
+
+
+Feed, 
+v1  82 
+
+
+
+Feed, 
+v1  83 
+
+
+
+Feed, 
+v1  84 
+
+
+
+Feed, 
+v1  85 
+
+
+
+Feed, 
+v1  86 
+
+
+
+Feed, 
+v1  87 
+
+
+
+Feed, 
+v1  88 
+
+
+
+Feed, 
+v1  89 
+
+
+
+Feed, 
+v1  90 
+
+
+
+Feed, 
+v1  91 
+
+
+
+Feed, 
+v1  92 
+
+
+
+Feed, 
+v1  93 
+
+
+
+Feed, 
+v1  94 
+
+
+
+Feed, 
+v1  95 
+
+
+
+Feed, 
+v1  96 
+
+
+
+Feed, 
+v1  97 
+
+
+
+Feed, 
+v1  98 
+
+
+
+Feed, 
+v1  99 
+
+
+
+Feed, 
+v1 100 
+
+
+
+Feed, 
+v1 101 
+
+
+
+Feed, 
+v1 102 
+
+
+
+Feed, 
+v1 103 
+
+
+
+Feed, 
+v1 104 
+
+
+
+Feed, 
+v1 105 
+
+
+
+Feed, 
+v1 106 
+
+
+
+Feed, 
+v1 107 
+
+
+
+Feed, 
+v1 108 
+
+
+
+Feed, 
+v1 109 
+
+
+
+Feed, 
+v1 110 
+
+
+
+Feed, 
+v1 111 
+
+
+
+Feed, 
+v1 112 
+
+
+
+Feed, 
+v1 113 
+
+
+
+Feed, 
+v1 114 
+
+
+
+Feed, 
+v1 115 
+
+
+
+Feed, 
+v1 116 
+
+
+
+Feed, 
+v1 117 
+
+
+
+Feed, 
+v1 118 
+
+
+
+Feed, 
+v1 119 
+
+
+
+Feed, 
+v1 120 
+
+
+
+Feed, 
+v1 121 
+
+
+
+Feed, 
+v1 122 
+
+
+
+Feed, 
+v1 123 
+
+
+
+Feed, 
+v1 124 
+
+
+
+Feed, 
+v1 125 
+
+
+
+Feed, 
+v1 126 
+
+
+
+Feed, 
+v1 127 
+
+
+
+Feed, 
+v1 128 
+
+
+
+Feed, 
+v1 129 
+
+
+
+Feed, 
+v1 130 
+
+
+
+Feed, 
+v1 131 
+
+
+
+Feed, 
+v1 132 
+
+
+
+Feed, 
+v1 133 
+
+
+
+Feed, 
+v1 134 
+
+
+
+Feed, 
+v1 135 
+
+
+
+Feed, 
+v1 136 
+
+
+
+Feed, 
+v1 137 
+
+
+
+Feed, 
+v1 138 
+
+
+
+Feed, 
+v1 139 
+
+
+
+Feed, 
+v1 140 
+
+
+
+Feed, 
+v1 141 
+
+
+
+Feed, 
+v1 142 
+
+
+
+Feed, 
+v1 143 
+
+
+
+Feed, 
+v1 144 
+
+
+
+Feed, 
+v1 145 
+
+
+
+Feed, 
+v1 146 
+
+
+
+Feed, 
+v1 147 
+
+
+
+Feed, 
+v1 148 
+
+
+
+Feed, 
+v1 149 
+
+
+
+Feed, 
+v1 150 
+
+
+
+Feed, 
+v1 151 
+
+
+
+Feed, 
+v1 152 
+
+
+
+Feed, 
+v1 153 
+
+
+
+Feed, 
+v1 154 
+
+
+
+Feed, 
+v1 155 
+
+
+
+Feed, 
+v1 156 
+
+
+
+Feed, 
+v1 157 
+
+
+
+Feed, 
+v1 158 
+
+
+
+Feed, 
+v1 159 
+
+
+
+Feed, 
+v1 160 
+
+
+
+Feed, 
+v1 161 
+
+
+
+Feed, 
+v1 162 
+
+
+
+Feed, 
+v1 163 
+
+
+
+Feed, 
+v1 164 
+
+
+
+Feed, 
+v1 165 
+
+
+
+Feed, 
+v1 166 
+
+
+
+Feed, 
+v1 167 
+
+
+
+Feed, 
+v1 168 
+
+
+
+Feed, 
+v1 169 
+
+
+
+Feed, 
+v1 170 
+
+
+
+Feed, 
+v1 171 
+
+
+
+Feed, 
+v1 172 
+
+
+
+Feed, 
+v1 173 
+
+
+
+Feed, 
+v1 174 
+
+
+
+Feed, 
+v1 175 
+
+
+
+Feed, 
+v1 176 
+
+
+
+Feed, 
+v1 177 
+
+
+
+Feed, 
+v1 178 
+
+
+
+Feed, 
+v1 179 
+
+
+
+Feed, 
+v1 180 
+
+
+
+Feed, 
+v1 181 
+
+
+
+Feed, 
+v1 182 
+
+
+
+Feed, 
+v1 183 
+
+
+
+Feed, 
+v1 184 
+
+
+
+Feed, 
+v1 185 
+
+
+
+Feed, 
+v1 186 
+
+
+
+Feed, 
+v1 187 
+
+
+
+Feed, 
+v1 188 
+
+
+
+Feed, 
+v1 189 
+
+
+
+Feed, 
+v1 190 
+
+
+
+Feed, 
+v1 191 
+
+
+
+Feed, 
+v1 192 
+
+
+
+Feed, 
+v1 193 
+
+
+
+Feed, 
+v1 194 
+
+
+
+Feed, 
+v1 195 
+
+
+
+Feed, 
+v1 196 
+
+
+
+Feed, 
+v1 197 
+
+
+
+Feed, 
+v1 198 
+
+
+
+Feed, 
+v1 199 
+
+
+
+Feed, 
+v1 200 
+
+
+
+Feed, 
+v1 201 
+
+
+
+Feed, 
+v1 202 
+
+
+
+Feed, 
+v1 203 
+
+
+
+Feed, 
+v1 204 
+
+
+
+Feed, 
+v1 205 
+
+
+
+Feed, 
+v1 206 
+
+
+
+Feed, 
+v1 207 
+
+
+
+Feed, 
+v1 208 
+
+
+
+Feed, 
+v1 209 
+
+
+
+Feed, 
+v1 210 
+
+
+
+Feed, 
+v1 211 
+
+
+
+Feed, 
+v1 212 
+
+
+
+Feed, 
+v1 213 
+
+
+
+Feed, 
+v1 214 
+
+
+
+Feed, 
+v1 215 
+
+
+
+Feed, 
+v1 216 
+
+
+
+Feed, 
+v1 217 
+
+
+
+Feed, 
+v1 218 
+
+
+
+Feed, 
+v1 219 
+
+
+
+Feed, 
+v1 220 
+
+
+
+Feed, 
+v1 221 
+
+
+
+Feed, 
+v1 222 
+
+
+
+Feed, 
+v1 223 
+
+
+
+Feed, 
+v1 224 
+
+
+
+Feed, 
+v1 225 
+
+
+
+Feed, 
+v1 226 
+
+
+
+Feed, 
+v1 227 
+
+
+
+Feed, 
+v1 228 
+
+
+
+Feed, 
+v1 229 
+
+
+
+Feed, 
+v1 230 
+
+
+
+Feed, 
+v1 231 
+
+
+
+Feed, 
+v1 232 
+
+
+
+Feed, 
+v1 233 
+
+
+
+Feed, 
+v1 234 
+
+
+
+Feed, 
+v1 235 
+
+
+
+Feed, 
+v1 236 
+
+
+
+Feed, 
+v1 237 
+
+
+
+Feed, 
+v1 238 
+
+
+
+Feed, 
+v1 239 
+
+
+
+Feed, 
+v1 240 
+
+
+
+Feed, 
+v1 241 
+
+
+
+Feed, 
+v1 242 
+
+
+
+Feed, 
+v1 243 
+
+
+
+Feed, 
+v1 244 
+
+
+
+Feed, 
+v1 245 
+
+
+
+Feed, 
+v1 246 
+
+
+
+Feed, 
+v1 247 
+
+
+
+Feed, 
+v1 248 
+
+
+
+Feed, 
+v1 249 
+
+
+
+Feed, 
+v1 250 
+
+
+
+Feed, 
+v1 251 
+
+
+
+Feed, 
+v1 252 
+
+
+
+Feed, 
+v1 253 
+
+
+
+Feed, 
+v1 254 
+
+
+
+Feed, 
+v1 255 
+
+
+
+Feed, 
+v1   0 
+
+
+
+Feed, 
+v1   1 
+
+
+
+Feed, 
+v1   2 
+
+
+
+Feed, 
+v1   3 
+
+
+
+Feed, 
+v1   4 
+
+
+
+Feed, 
+v1   5 
+
+
+
+Feed, 
+v1   6 
+
+
+
+Feed, 
+v1   7 
+
+
+
+Feed, 
+v1   8 
+
+
+
+Feed, 
+v1   9 
+
+
+
+Feed, 
+v1  10 
+
+
+
+Feed, 
+v1  11 
+
+
+
+Feed, 
+v1  12 
+
+
+
+Feed, 
+v1  13 
+
+
+
+Feed, 
+v1  14 
+
+
+
+Feed, 
+v1  15 
+
+
+
+Feed, 
+v1  16 
+
+
+
+Feed, 
+v1  17 
+
+
+
+Feed, 
+v1  18 
+
+
+
+Feed, 
+v1  19 
+
+
+
+Feed, 
+v1  20 
+
+
+
+Feed, 
+v1  21 
+
+
+
+Feed, 
+v1  22 
+
+
+
+Feed, 
+v1  23 
+
+
+
+Feed, 
+v1  24 
+
+
+
+Feed, 
+v1  25 
+
+
+
+Feed, 
+v1  26 
+
+
+
+Feed, 
+v1  27 
+
+
+
+Feed, 
+v1  28 
+
+
+
+Feed, 
+v1  29 
+
+
+
+Feed, 
+v1  30 
+
+
+
+Feed, 
+v1  31 
+
+
+
+Feed, 
+v1  32 
+
+
+
+Feed, 
+v1  33 
+
+
+
+Feed, 
+v1  34 
+
+
+
+Feed, 
+v1  35 
+
+
+
+Feed, 
+v1  36 
+
+
+
+Feed, 
+v1  37 
+
+
+
+Feed, 
+v1  38 
+
+
+
+Feed, 
+v1  39 
+
+
+
+Feed, 
+v1  40 
+
+
+
+Feed, 
+v1  41 
+
+
+
+Feed, 
+v1  42 
+
+
+
+Feed, 
+v1  43 
+
+
+
+Feed, 
+v1  44 
+
+
+
+Feed, 
+v1  45 
+
+
+
+Feed, 
+v1  46 
+
+
+
+Feed, 
+v1  47 
+
+
+
+Feed, 
+v1  48 
+
+
+
+Feed, 
+v1  49 
+
+
+
+Feed, 
+v1  50 
+
+
+
+Feed, 
+v1  51 
+
+
+
+Feed, 
+v1  52 
+
+
+
+Feed, 
+v1  53 
+
+
+
+Feed, 
+v1  54 
+
+
+
+Feed, 
+v1  55 
+
+
+
+Feed, 
+v1  56 
+
+
+
+Feed, 
+v1  57 
+
+
+
+Feed, 
+v1  58 
+
+
+
+Feed, 
+v1  59 
+
+
+
+Feed, 
+v1  60 
+
+
+
+Feed, 
+v1  61 
+
+
+
+Feed, 
+v1  62 
+
+
+
+Feed, 
+v1  63 
+
+
+
+Feed, 
+v1  64 
+
+
+
+Feed, 
+v1  65 
+
+
+
+Feed, 
+v1  66 
+
+
+
+Feed, 
+v1  67 
+
+
+
+Feed, 
+v1  68 
+
+
+
+Feed, 
+v1  69 
+
+
+
+Feed, 
+v1  70 
+
+
+
+Feed, 
+v1  71 
+
+
+
+Feed, 
+v1  72 
+
+
+
+Feed, 
+v1  73 
+
+
+
+Feed, 
+v1  74 
+
+
+
+Feed, 
+v1  75 
+
+
+
+Feed, 
+v1  76 
+
+
+
+Feed, 
+v1  77 
+
+
+
+Feed, 
+v1  78 
+
+
+
+Feed, 
+v1  79 
+
+
+
+Feed, 
+v1  80 
+
+
+
+Feed, 
+v1  81 
+
+
+
+Feed, 
+v1  82 
+
+
+
+Feed, 
+v1  83 
+
+
+
+Feed, 
+v1  84 
+
+
+
+Feed, 
+v1  85 
+
+
+
+Feed, 
+v1  86 
+
+
+
+Feed, 
+v1  87 
+
+
+
+Feed, 
+v1  88 
+
+
+
+Feed, 
+v1  89 
+
+
+
+Feed, 
+v1  90 
+
+
+
+Feed, 
+v1  91 
+
+
+
+Feed, 
+v1  92 
+
+
+
+Feed, 
+v1  93 
+
+
+
+Feed, 
+v1  94 
+
+
+
+Feed, 
+v1  95 
+
+
+
+Feed, 
+v1  96 
+
+
+
+Feed, 
+v1  97 
+
+
+
+Feed, 
+v1  98 
+
+
+
+Feed, 
+v1  99 
+
+
+
+Feed, 
+v1 100 
+
+
+
+Feed, 
+v1 101 
+
+
+
+Feed, 
+v1 102 
+
+
+
+Feed, 
+v1 103 
+
+
+
+Feed, 
+v1 104 
+
+
+
+Feed, 
+v1 105 
+
+
+
+Feed, 
+v1 106 
+
+
+
+Feed, 
+v1 107 
+
+
+
+Feed, 
+v1 108 
+
+
+
+Feed, 
+v1 109 
+
+
+
+Feed, 
+v1 110 
+
+
+
+Feed, 
+v1 111 
+
+
+
+Feed, 
+v1 112 
+
+
+
+Feed, 
+v1 113 
+
+
+
+Feed, 
+v1 114 
+
+
+
+Feed, 
+v1 115 
+
+
+
+Feed, 
+v1 116 
+
+
+
+Feed, 
+v1 117 
+
+
+
+Feed, 
+v1 118 
+
+
+
+Feed, 
+v1 119 
+
+
+
+Feed, 
+v1 120 
+
+
+
+Feed, 
+v1 121 
+
+
+
+Feed, 
+v1 122 
+
+
+
+Feed, 
+v1 123 
+
+
+
+Feed, 
+v1 124 
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+v1 126 
+
+
+
+Feed, 
+v1 127 
+
+
+
+Feed, 
+v1 128 
+
+
+
+Feed, 
+v1 129 
+
+
+
+Feed, 
+v1
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+v1 131 
+
+
+
+Feed, 
+v1 132 
+
+
+
+Feed, 
+v1 133 
+
+
+
+Feed, 
+v1 134 
+
+
+
+Feed, 
+v1 135 
+
+
+
+Feed, 
+v1 136 
+
+
+
+Feed, 
+v1 137 
+
+
+
+Feed, 
+v1 138 
+
+
+
+Feed, 
+v1 139 
+
+
+
+Feed, 
+v1 140 
+
+
+
+Feed, 
+v1 141 
+
+
+
+Feed, 
+v1 142 
+
+
+
+Feed, 
+v1 143 
+
+
+
+Feed, 
+v1 144 
+
+
+
+Feed, 
+v1 145 
+
+
+
+Feed, 
+v1 146 
+
+
+
+Feed, 
+v1 147 
+
+
+
+Feed, 
+v1 148 
+
+
+
+Feed, 
+v1 149 
+
+
+
+Feed, 
+v1 150 
+
+
+
+Feed, 
+v1 151 
+
+
+
+Feed, 
+v1 152 
+
+
+
+Feed, 
+v1 153 
+
+
+
+Feed, 
+v1 154 
+
+
+
+Feed, 
+v1 155 
+
+
+
+Feed, 
+v1 156 
+
+
+
+Feed, 
+v1 157 
+
+
+
+Feed, 
+v1 158 
+
+
+
+Feed, 
+v1 159 
+
+
+
+Feed, 
+v1 160 
+
+
+
+Feed, 
+v1 161 
+
+
+
+Feed, 
+v1 162 
+
+
+
+Feed, 
+v1 163 
+
+
+
+Feed, 
+v1 164 
+
+
+
+Feed, 
+v1 165 
+
+
+
+Feed, 
+v1 166 
+
+
+
+Feed, 
+v1 167 
+
+
+
+Feed, 
+v1 168 
+
+
+
+Feed, 
+v1 169 
+
+
+
+Feed, 
+v1 170 
+
+
+
+Feed, 
+v1 171 
+
+
+
+Feed, 
+v1 172 
+
+
+
+Feed, 
+v1 173 
+
+
+
+Feed, 
+v1 174 
+
+
+
+Feed, 
+v1 175 
+
+
+
+Feed, 
+v1 176 
+
+
+
+Feed, 
+v1 177 
+
+
+
+Feed, 
+v1 178 
+
+
+
+Feed, 
+v1 179 
+
+
+
+Feed, 
+v1 180 
+
+
+
+Feed, 
+v1 181 
+
+
+
+Feed, 
+v1 182 
+
+
+
+Feed, 
+v1 183 
+
+
+
+Feed, 
+v1 184 
+
+
+
+Feed, 
+v1 185 
+
+
+
+Feed, 
+v1 186 
+
+
+
+Feed, 
+v1 187 
+
+
+
+Feed, 
+v1 188 
+
+
+
+Feed, 
+v1 189 
+
+
+
+Feed, 
+v1 190 
+
+
+
+Feed, 
+v1 191 
+
+
+
+Feed, 
+v1 192 
+
+
+
+Feed, 
+v1 193 
+
+
+
+Feed, 
+v1 194 
+
+
+
+Feed, 
+v1 195 
+
+
+
+Feed, 
+v1 196 
+
+
+
+Feed, 
+v1 197 
+
+
+
+Feed, 
+v1 198 
+
+
+
+Feed, 
+v1 199 
+
+
+
+Feed, 
+v1 200 
+
+
+
+Feed, 
+v1 201 
+
+
+
+Feed, 
+v1 202 
+
+
+
+Feed, 
+v1 203 
+
+
+
+Feed, 
+v1 204 
+
+
+
+Feed, 
+v1 205 
+
+
+
+Feed, 
+v1 206 
+
+
+
+Feed, 
+v1 207 
+
+
+
+Feed, 
+v1 208 
+
+
+
+Feed, 
+v1 209 
+
+
+
+Feed, 
+v1 210 
+
+
+
+Feed, 
+v1 211 
+
+
+
+Feed, 
+v1 212 
+
+
+
+Feed, 
+v1 213 
+
+
+
+Feed, 
+v1 214 
+
+
+
+Feed, 
+v1 215 
+
+
+
+Feed, 
+v1 216 
+
+
+
+Feed, 
+v1 217 
+
+
+
+Feed, 
+v1 218 
+
+
+
+Feed, 
+v1 219 
+
+
+
+Feed, 
+v1 220 
+
+
+
+Feed, 
+v1 221 
+
+
+
+Feed, 
+v1 222 
+
+
+
+Feed, 
+v1 223 
+
+
+
+Feed, 
+v1 224 
+
+
+
+Feed, 
+v1 225 
+
+
+
+Feed, 
+v1 226 
+
+
+
+Feed, 
+v1 227 
+
+
+
+Feed, 
+v1 228 
+
+
+
+Feed, 
+v1 229 
+
+
+
+Feed, 
+v1 230 
+
+
+
+Feed, 
+v1 231 
+
+
+
+Feed, 
+v1 232 
+
+
+
+Feed, 
+v1 233 
+
+
+
+Feed, 
+v1 234 
+
+
+
+Feed, 
+v1 235 
+
+
+
+Feed, 
+v1 236 
+
+
+
+Feed, 
+v1 237 
+
+
+
+Feed, 
+v1 238 
+
+
+
+Feed, 
+v1 239 
+
+
+
+Feed, 
+v1 240 
+
+
+
+Feed, 
+v1 241 
+
+
+
+Feed, 
+v1 242 
+
+
+
+Feed, 
+v1 243 
+
+
+
+Feed, 
+v1 244 
+
+
+
+Feed, 
+v1 245 
+
+
+
+Feed, 
+v1 246 
+
+
+
+Feed, 
+v1 247 
+
+
+
+Feed, 
+v1 248 
+
+
+
+Feed, 
+v1 249 
+
+
+
+Feed, 
+v1 250 
+
+
+
+Feed, 
+v1 251 
+
+
+
+Feed, 
+v1 252 
+
+
+
+Feed, 
+v1 253 
+
+
+
+Feed, 
+v1 254 
+
+
+
+Feed, 
+v1 255 
+
+
+
+Feed, 
+v1   0 
+
+
+
+Feed, 
+v1   1 
+
+
+
+Feed, 
+v1   2 
+
+
+
+Feed, 
+v1   3 
+
+
+
+Feed, 
+v1   4 
+
+
+
+Feed, 
+v1   5 
+
+
+
+Feed, 
+v1   6 
+
+
+
+Feed, 
+v1   7 
+
+
+
+Feed, 
+v1   8 
+
+
+
+Feed, 
+v1   9 
+
+
+
+Feed, 
+v1  10 
+
+
+
+Feed, 
+v1  11 
+
+
+
+Feed, 
+v1  12 
+
+
+
+Feed, 
+v1  13 
+
+
+
+Feed, 
+v1  14 
+
+
+
+Feed, 
+v1  15 
+
+
+
+Feed, 
+v1  16 
+
+
+
+Feed, 
+v1  17 
+
+
+
+Feed, 
+v1  18 
+
+
+
+Feed, 
+v1  19 
+
+
+
+Feed, 
+v1  20 
+
+
+
+Feed, 
+v1  21 
+
+
+
+Feed, 
+v1  22 
+
+
+
+Feed, 
+v1  23 
+
+
+
+Feed, 
+v1  24 
+
+
+
+Feed, 
+v1  25 
+
+
+
+Feed, 
+v1  26 
+
+
+
+Feed, 
+v1  27 
+
+
+
+Feed, 
+v1  28 
+
+
+
+Feed, 
+v1  29 
+
+
+
+Feed, 
+v1  30 
+
+
+
+Feed, 
+v1  31 
+
+
+
+Feed, 
+v1  32 
+
+
+
+Feed, 
+v1  33 
+
+
+
+Feed, 
+v1  34 
+
+
+
+Feed, 
+v1  35 
+
+
+
+Feed, 
+v1  36 
+
+
+
+Feed, 
+v1  37 
+
+
+
+Feed, 
+v1  38 
+
+
+
+Feed, 
+v1  39 
+
+
+
+Feed, 
+v1  40 
+
+
+
+Feed, 
+v1  41 
+
+
+
+Feed, 
+v1  42 
+
+
+
+Feed, 
+v1  43 
+
+
+
+Feed, 
+v1  44 
+
+
+
+Feed, 
+v1  45 
+
+
+
+Feed, 
+v1  46 
+
+
+
+Feed, 
+v1  47 
+
+
+
+Feed, 
+v1  48 
+
+
+
+Feed, 
+v1  49 
+
+
+
+Feed, 
+v1  50 
+
+
+
+Feed, 
+v1  51 
+
+
+
+Feed, 
+v1  52 
+
+
+
+Feed, 
+v1  53 
+
+
+
+Feed, 
+v1  54 
+
+
+
+Feed, 
+v1  55 
+
+
+
+Feed, 
+v1  56 
+
+
+
+Feed, 
+v1  57 
+
+
+
+Feed, 
+v1  58 
+
+
+
+Feed, 
+v1  59 
+
+
+
+Feed, 
+v1  60 
+
+
+
+Feed, 
+v1  61 
+
+
+
+Feed, 
+v1  62 
+
+
+
+Feed, 
+v1  63 
+
+
+
+Feed, 
+v1  64 
+
+
+
+Feed, 
+v1  65 
+
+
+
+Feed, 
+v1  66 
+
+
+
+Feed, 
+v1  67 
+
+
+
+Feed, 
+v1  68 
+
+
+
+Feed, 
+v1  69 
+
+
+
+Feed, 
+v1  70 
+
+
+
+Feed, 
+v1  71 
+
+
+
+Feed, 
+v1  72 
+
+
+
+Feed, 
+v1  73 
+
+
+
+Feed, 
+v1  74 
+
+
+
+Feed, 
+v1  75 
+
+
+
+Feed, 
+v1  76 
+
+
+
+Feed, 
+v1  77 
+
+
+
+Feed, 
+v1  78 
+
+
+
+Feed, 
+v1  79 
+
+
+
+Feed, 
+v1  80 
+
+
+
+Feed, 
+v1  81 
+
+
+
+Feed, 
+v1  82 
+
+
+
+Feed, 
+v1  83 
+
+
+
+Feed, 
+v1  84 
+
+
+
+Feed, 
+v1  85 
+
+
+
+Feed, 
+v1  86 
+
+
+
+Feed, 
+v1  87 
+
+
+
+Feed, 
+v1  88 
+
+
+
+Feed, 
+v1  89 
+
+
+
+Feed, 
+v1  90 
+
+
+
+Feed, 
+v1  91 
+
+
+
+Feed, 
+v1  92 
+
+
+
+Feed, 
+v1  93 
+
+
+
+Feed, 
+v1  94 
+
+
+
+Feed, 
+v1  95 
+
+
+
+Feed, 
+v1  96 
+
+
+
+Feed, 
+v1  97 
+
+
+
+Feed, 
+v1  98 
+
+
+
+Feed, 
+v1  99 
+
+
+
+Feed, 
+v1 100 
+
+
+
+Feed, 
+v1 101 
+
+
+
+Feed, 
+v1 102 
+
+
+
+Feed, 
+v1 103 
+
+
+
+Feed, 
+v1 104 
+
+
+
+Feed, 
+v1 105 
+
+
+
+Feed, 
+v1 106 
+
+
+
+Feed, 
+v1 107 
+
+
+
+Feed, 
+v1 108 
+
+
+
+Feed, 
+v1 109 
+
+
+
+Feed, 
+v1 110 
+
+
+
+Feed, 
+v1 111 
+
+
+
+Feed, 
+v1 112 
+
+
+
+Feed, 
+v1 113 
+
+
+
+Feed, 
+v1 114 
+
+
+
+Feed, 
+v1 115 
+
+
+
+Feed, 
+v1 116 
+
+
+
+Feed, 
+v1 117 
+
+
+
+Feed, 
+v1 118 
+
+
+
+Feed, 
+v1 119 
+
+
+
+Feed, 
+v1 120 
+
+
+
+Feed, 
+v1 121 
+
+
+
+Feed, 
+v1 122 
+
+
+
+Feed, 
+v1 123 
+
+
+
+Feed, 
+v1 124 
+
+
+
+Feed, 
+v1 125 
+
+
+
+Feed, 
+v1 126 
+
+
+
+Feed, 
+v1 127 
+
+
+
+Feed, 
+v1
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+^X^CTraceback (most recent call last):
+  File "BBBBootloader.py", line 54, in <module>
+    feedback = ser.readline()
+  File "/usr/local/lib/python2.7/dist-packages/serial/serialposix.py", line 472, in read
+    ready, _, _ = select.select([self.fd, self.pipe_abort_read_r], [], [], timeout.time_left())
+KeyboardInterrupt
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+
+:080688000D057619A012B33A2A
+
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+
+:1006900020002030850002308400000803195D2B03
+
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+
+:1006A0000230F800F701F70B532BF80B522B973061
+
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+
+:1006C0008B1323009517151400000000891B8B174E
+
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+
+:1006D0000318932B13087F392000A500230011086D
+
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+
+:1006F000772B23009A002000260823009100200079
+
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+
+:100710000000891B8B172000A20B8F2B912B23002D
+
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+
+:10072000932BB42B2300130D140D7F392000A5004B
+
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+
+:100740002508111EA12B23009A0020002608230053
+
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+
+:1007600003102000A20B5F2B8031282C2508F801F4
+
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+
+:10078000A600A40DF70D250877020318F700F80D51
+
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+Stop
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+
+:1007D0002208A4000A30A500B6237708A2007808F2
+
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+
+:1007F0002030F8077808111EFB2B23009A002000F8
+
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+
+:100800003030A2072208111E032C23009A008031E9
+
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+
+:1008200090309D008C018D018F019001220092017A
+
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+
+:10084000910003309200031005302000A2005F2BBE
+
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+
+:0E08600023009A0020001D2C2200192C63009A
+
+Stop
+ACK
+Send
+:020000040001F9
+
+:020000040001F9
+
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+
+Stop
+ACK
+Send
+:00000001FF
+
+:00000001FF
+
+Stop
+ACK
+Send
+;PIC16F1787
+
+;PIC16F1787
+
+;PIC16F1787
+
+;PIC16F1787
+
+Stop
+ACK
+Send
+;CRC=7161  CREATED="28-Aug-19 19:05"
+
+;CRC=7161  CREATED="28-Aug-19 19:05"
+
+Stop
+ACK
+
+ Sending done
+
+process took, 
+9.77277302742
+ seconds
+
+fail count 31
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python appModeListener.py 
+Serial is Open
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python appModeListener.py 
+Serial is Open
+!Wj
+
+v1 211 
+
+v1 212 
+
+v1 213 
+
+v1 214 
+
+v1 215 
+
+v1 216 
+
+v1 217 
+
+v1 218 
+
+v1 219 
+
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 132 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1: #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline() print("Feed, ") print(feedback) print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0: print(ser.readline())output(LED, GPIO.HIGH)x = 0 okToSend = True while x < len(lineList): if okToSend: printlineList[x]) ser.write(lineList[x]) fail += 1 time.sleep(0.04)#time to Tx 46 bytesif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falsetime.sleep(0.04Modified#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than e requiredSave modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 133 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pypython appModeListener.py BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+
+:080688000D057619A012B33A2A
+
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+
+:1006900020002030850002308400000803195D2B03
+
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+
+:1006D0000318932B13087F392000A500230011086D
+
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+
+:1006F000772B23009A002000260823009100200079
+
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+
+:100710000000891B8B172000A20B8F2B912B23002D
+
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+^CTraceback (most recent call last):
+  File "BBBBootloader.py", line 71, in <module>
+    time.sleep(0.06)#littel extra than required
+KeyboardInterrupt
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+
+:080688000D057619A012B33A2A
+
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+
+:1006900020002030850002308400000803195D2B03
+
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+
+:1006D0000318932B13087F392000A500230011086D
+
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+
+:1006F000772B23009A002000260823009100200079
+
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+
+:100710000000891B8B172000A20B8F2B912B23002D
+
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+
+:10073000230011082000A600230012082000A700B3
+
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+
+:1007500091002000270823009200910A0319920AB1
+
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+
+:1007700024020318BE2B2408F700CA2BF701083007
+
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+Stop
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+
+:1007D0002208A4000A30A500B6237708A2007808F2
+
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+
+:1007F0002030F8077808111EFB2B23009A002000F8
+
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+
+:1008100020002D2C23009F110C309B00A2309E0045
+
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+
+:10083000910164302000A200492BA10A443023001A
+
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+
+:100850002108A2001330A300CB2B2030111E2E2C18
+
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+
+Stop
+ACK
+Send
+:020000040001F9
+
+:020000040001F9
+
+:020000040001F9
+
+:020000040001F9
+
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+
+:04000E00C23FFF1ED0
+
+:04000E00C23FFF1ED0
+
+Stop
+ACK
+Send
+:00000001FF
+
+:00000001FF
+
+:00000001FF
+
+:00000001FF
+
+:00000001FF
+
+:00000001FF
+
+Stop
+ACK
+Send
+;PIC16F1787
+
+;PIC16F1787
+
+;PIC16F1787
+
+;PIC16F1787
+
+;PIC16F1787
+
+Stop
+ACK
+Send
+;CRC=7161  CREATED="28-Aug-19 19:05"
+
+;CRC=7161  CREATED="28-Aug-19 19:05"
+
+Stop
+ACK
+
+ Sending done
+
+process took, 
+7.30261206627
+ seconds
+
+fail count 37
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano bb  BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 133 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1: #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline() print("Feed, ") print(feedback) print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0: print(ser.readline())output(LED, GPIO.HIGH)x = 0 okToSend = True while x < len(lineList): if okToSend: printlineList[x]) ser.write(lineList[x]) fail += 1 #time.sleep(0.04)#time to Tx 46 bytesModifiedfail += 1ser.s write(b'\x0D\x0A\x0d D\x0A'\x0D\x0A\x0D\x0A')#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")')')'\x0D\x0A\x0D\')'\x0D\x0A\x0D')')')'\x0D\x0A\')'\x0D\x0A')')')'\x0D\')'\x0D')Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 134 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 134 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline()print("Feed, ")print(feedback)print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])ser.write(lineList[x])ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#print(feedback)#print("\n")#       while (feedback.find(b'\x11') == -1):#means there was no feedback#try againroot@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pypython BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+^CTraceback (most recent call last):
+  File "BBBBootloader.py", line 72, in <module>
+    time.sleep(0.06)#littel extra than required
+KeyboardInterrupt
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+Stop
+Send
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+^X:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+:0606800080310A2C00008D
+
+^CTraceback (most recent call last):
+  File "BBBBootloader.py", line 72, in <module>
+    time.sleep(0.06)#littel extra than required
+KeyboardInterrupt
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 134 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0try:ser.open()except Exception as e:print("error open Serial Port: " +str(e))GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close()GPIO.cleanup()exit() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline() print("Feed, ") print(feedback) print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0: print(ser.readline())output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])ser.write(lineList[x])ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:Modified#ser.write(b'\x0D')Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 134 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python
+Python 2.7.9 (default, Aug 13 2016, 17:56:53) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> file = Boudoir       open("app    v2.hex", "r")
+>>> for x in file: lineList = real dline() file.
+... 
+KeyboardInterrupt
+>>> [A  for x in file: lineList = file.readline()s
+... 
+KeyboardInterrupt
+>>> file.close()
+>>> lineList
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lineList' is not defined
+>>> with open(app   "appv2.hex:,  ", "r") as file: linel List = readlines()
+... 
+KeyboardInterrupt
+>>> ameOfFile = "appv2.hex"
+>>> modeOfFile = "r"
+>>> 
+>>> with open(nameOfFile, modeOfFile) as file:
+...     lineList = file.readlines()
+... 
+KeyboardInterrupt
+>>> nameOfFile = "appv2.hex"
+>>> modeOfFile = "r"
+>>> 
+>>> with open(nameOfFile, modeOfFile) as file:
+...     lineList = file.readlines()
+... print("list loading done.\n\r")
+  File "<stdin>", line 3
+    print("list loading done.\n\r")
+        ^
+SyntaxError: invalid syntax
+>>> nameOfFile = "appv2.hex"
+>>> modeOfFile = "r"
+>>> 
+>>> with open(nameOfFile, modeOfFile) as file:
+...     lineList = file.readlines()
+... print("list loading done.\n\r")
+  File "<stdin>", line 3
+    print("list loading done.\n\r")
+        ^
+SyntaxError: invalid syntax
+>>> nameOfFile = "appv2.hex"
+>>> modeOfFile = "r"
+>>> 
+>>> with open(nameOfFile, modeOfFile) as file:
+...     lineList = file.readlines()
+KeyboardInterrupt
+>>> ile   file
+<closed file 'appv2.hex', mode 'r' at 0xb6cdd5f8>
+>>> open    file      clear
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'clear' is not defined
+>>> clear ()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'clear' is not defined
+>>> clear()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'clear' is not defined
+>>> cls
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit()
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python
+Python 2.7.9 (default, Aug 13 2016, 17:56:53) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> file = open) ("appv2.hex", "r")
+>>> lineList = read    file.readline()
+>>> linel Li      
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lineLi' is not defined
+>>> linList
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'linList' is not defined
+>>> lineList
+':0606800080310A2C00008D\n'
+>>> lineList = file.readlines()
+>>> lineList
+[':080688000D057619A012B33A2A\n', ':1006900020002030850002308400000803195D2B03\n', ':1006A0000230F800F701F70B532BF80B522B973061\n', ':1006B000F700F70B592B800B502B80311D2C0B08AA\n', ':1006C0008B1323009517151400000000891B8B174E\n', ':1006D0000318932B13087F392000A500230011086D\n', ':1006E0002000A600230012082000A7002508111EE4\n', ':1006F000772B23009A002000260823009100200079\n', ':100700002708230092000B088B139517151400007F\n', ':100710000000891B8B172000A20B8F2B912B23002D\n', ':10072000932BB42B2300130D140D7F392000A5004B\n', ':10073000230011082000A600230012082000A700B3\n', ':100740002508111EA12B23009A0020002608230053\n', ':1007500091002000270823009200910A0319920AB1\n', ':1007600003102000A20B5F2B8031282C2508F801F4\n', ':1007700024020318BE2B2408F700CA2BF701083007\n', ':10078000A600A40DF70D250877020318F700F80D51\n', ':10079000A60BC12B080078082208A4006430A5002D\n', ':1007A000B6237708A20078083030031DDE2BA31C87\n', ':1007B000E82BA319E82B231A2030E12BA3112312D5\n', ':1007C0002314F8077808111EE32B23009A00200059\n', ':1007D0002208A4000A30A500B6237708A2007808F2\n', ':1007E0003030031DF92BA319002C231C002C231AD5\n', ':1007F0002030F8077808111EFB2B23009A002000F8\n', ':100800003030A2072208111E032C23009A008031E9\n', ':1008100020002D2C23009F110C309B00A2309E0045\n', ':1008200090309D008C018D018F019001220092017A\n', ':10083000910164302000A200492BA10A443023001A\n', ':10084000910003309200031005302000A2005F2BBE\n', ':100850002108A2001330A300CB2B2030111E2E2C18\n', ':0E08600023009A0020001D2C2200192C63009A\n', ':020000040001F9\n', ':04000E00C23FFF1ED0\n', ':00000001FF\n', ';PIC16F1787\n', ';CRC=7161  CREATED="28-Aug-19 19:05"\n']
+>>> lineList[2]
+':1006A0000230F800F701F70B532BF80B522B973061\n'
+>>> lineList[2]]0]
+':080688000D057619A012B33A2A\n'
+>>> lineList[0]]
+':080688000D057619A012B33A2A\n'
+>>> list = file.readlines()
+>>> list
+[]
+>>> foo = file.readlines)()   ()
+>>> foo
+[]
+>>> file.close))  ()
+>>> file.open()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'file' object has no attribute 'open'
+>>> file.open()close()>>> foo = file.readlines()>>> list = file.readlines()>>> lineList[0]2] = file.readlines()>>> lineListListeLi      st = file.readline()>>> file = open("appv2.hex", "r")
+>>> maisun = file.readlines()
+>>> maisun
+[':0606800080310A2C00008D\n', ':080688000D057619A012B33A2A\n', ':1006900020002030850002308400000803195D2B03\n', ':1006A0000230F800F701F70B532BF80B522B973061\n', ':1006B000F700F70B592B800B502B80311D2C0B08AA\n', ':1006C0008B1323009517151400000000891B8B174E\n', ':1006D0000318932B13087F392000A500230011086D\n', ':1006E0002000A600230012082000A7002508111EE4\n', ':1006F000772B23009A002000260823009100200079\n', ':100700002708230092000B088B139517151400007F\n', ':100710000000891B8B172000A20B8F2B912B23002D\n', ':10072000932BB42B2300130D140D7F392000A5004B\n', ':10073000230011082000A600230012082000A700B3\n', ':100740002508111EA12B23009A0020002608230053\n', ':1007500091002000270823009200910A0319920AB1\n', ':1007600003102000A20B5F2B8031282C2508F801F4\n', ':1007700024020318BE2B2408F700CA2BF701083007\n', ':10078000A600A40DF70D250877020318F700F80D51\n', ':10079000A60BC12B080078082208A4006430A5002D\n', ':1007A000B6237708A20078083030031DDE2BA31C87\n', ':1007B000E82BA319E82B231A2030E12BA3112312D5\n', ':1007C0002314F8077808111EE32B23009A00200059\n', ':1007D0002208A4000A30A500B6237708A2007808F2\n', ':1007E0003030031DF92BA319002C231C002C231AD5\n', ':1007F0002030F8077808111EFB2B23009A002000F8\n', ':100800003030A2072208111E032C23009A008031E9\n', ':1008100020002D2C23009F110C309B00A2309E0045\n', ':1008200090309D008C018D018F019001220092017A\n', ':10083000910164302000A200492BA10A443023001A\n', ':10084000910003309200031005302000A2005F2BBE\n', ':100850002108A2001330A300CB2B2030111E2E2C18\n', ':0E08600023009A0020001D2C2200192C63009A\n', ':020000040001F9\n', ':04000E00C23FFF1ED0\n', ':00000001FF\n', ';PIC16F1787\n', ';CRC=7161  CREATED="28-Aug-19 19:05"\n']
+>>> len(maisun)
+37
+>>> maisun] [0]
+':0606800080310A2C00008D\n'
+>>> maisun[0]][1]
+'0'
+>>> maisun[0][1]]0]
+':'
+>>> len(maisun[0]
+... 
+KeyboardInterrupt
+>>> len(maisun[0])
+24
+>>> len(maisun[0])>>> maisun[0][0]]2]3]
+'\n'
+>>> maisun[0][23] = \ '\x0d D'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
+>>> maisun[0][23] = '\x0D'             .pop()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'pop'
+>>> maisun[0].pop()  
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute 'pop'
+>>> msg = maisun[0][:-1] + bi '\x0d'
+>>> msg
+':0606800080310A2C00008D\r'
+>>> maisun[0]
+':0606800080310A2C00008D\n'
+>>> exit()
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 134 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline()print("Feed, ")print(feedback)print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])ser.write(lineList[x])#ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:exit()#do the workif ser.isOpen():#count start timestartTime = time.time()print("\n\rSerial is Open\n\r")#make sure the MCU is in bootloader mode:while feedback.find(b'ownload') == -1:feedback = ser.readline()okToSend = Truewhile x < len(lineList):if okToSend:print(lineList[x])ser.write(lineList[x])#ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:Modified#ser.write(lineList[x])#print(lineList[x])msg = m lineList[x]{ [:-1] + b'\x0D'\x0D'prinprint(msg)#ser.write(b'\x0D')fail += 1ser.write(msg)#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")(if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#print(feedback)#print("\n")Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 137 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pypython BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+Stop
+ACK
+Send
+:020000040001F9
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+Stop
+ACK
+Send
+:00000001FF
+Stop
+ACK
+Send
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+^X;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+;PIC16F1787
+^CTraceback (most recent call last):
+  File "BBBBootloader.py", line 75, in <module>
+    time.sleep(0.06)#littel extra than required
+KeyboardInterrupt
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python A appModeListener.py 
+Serial is Open
+!j
+
+v2 201 
+
+v2 202 
+
+v2 203 
+
+v2 204 
+
+v2 205 
+
+v2 206 
+
+v2 207 
+
+v2 208 
+
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 137 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1: #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline() print("Feed, ") print(feedback) print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0: print(ser.readline())output(LED, GPIO.HIGH)x = 0 okToSend = True while x < len(lineList): if okToSend: #print(lineList[x]) #ser.write(lineList[x]) msg = lineList[x][:-1] + b'\x0D' print(msg)ser.write(msg)#ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK") x < len(lineList):Modified-:2:Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend         [ Wrote 137 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.pypython appModeListener.py nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 137 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONEser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"with open(nameOfFile, modeOfFile) as file:    lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0print(len(lineList))fail = 0try: ser.open()except Exception as e: print("error open Serial Port: " +str(e)) GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close() GPIO.cleanup() exit()#do the workif ser.isOpen():    #count start time startTime = time.time( print("\n\rSerial is Open\n\r") #make sure the MCU is in bootloader mode: while feedback.find(b'ownload') == -1:feedback = ser.readline()print("Feed, ")print(feedback)print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList)-2:if okToSend:#print(lineList[x])#ser.write(lineList[x])msg = lineList[x][:-1] + b'\x0D'print(msg)ser.write(msg)#ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#print(feedback)#print("\n")root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+Stop
+ACK
+Send
+:020000040001F9
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+Stop
+ACK
+Send
+:00000001FF
+Stop
+ACK
+
+ Sending done
+
+
+v2   1 
+
+v2   2 
+
+v2   3 
+
+v2   4 
+
+v2   5 
+
+v2   6 
+
+v2   7 
+
+v2   8 
+
+v2   9 
+
+process took, 
+4.40700221062
+ seconds
+
+fail count -2
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# nano BBBBootloader.py
+  GNU nano 2.2.6            File: BBBBootloader.py                              #import every thing necessaryimport serialimport timeimport osimport Adafruit_BBIO.GPIO as GPIO#define pinsLED="P9_12"GPIO.setup(LED, GPIO.OUT)GPIO.output(LED, GPIO.LOW) #to enter bootloader modeprint("bootloader mode selected")feedback = "nothing"#open Serialser = serial.Serial()ser.port= "/dev/ttyO4"ser.baudrate = 9600ser.bytesize = serial.EIGHTBITSser.parity = serial.PARITY_NONE[ Read 137 lines ]^G Get Help  ^O WriteOut  ^R Read File ^Y Prev Page ^K Cut Text  ^C Cur Pos^X Exit^J Justify   ^W Where Is  ^V Next Page ^U UnCut Text^T To Spellser.stopbits = serial.STOPBITS_ONEser.timeout = 1ser.xonxoff= Falseser.rtscts = Falseser.dsrdtr = Falseser.writeTimeout = 1#prepare filesnameOfFile = "appv2.hex"modeOfFile = "r"Modified.hex"1.hex"with open(nameOfFile, modeOfFile) as file:lineList = file.readlines()print("list loading done.\n\r")print("Number of lines: ")print(len(lineList))fail = 0try:ser.open()except Exception as e:print("error open Serial Port: " +str(e))GPIO.output(LED, GPIO.HIGH) #Normally needs to be highfile.close()GPIO.cleanup()exit()#do the workif ser.isOpen():#count start timestartTime = time.time()print("\n\rSerial is Open\n\r")#make sure the MCU is in bootloader mode:while feedback.find(b'ownload') == -1:feedback = ser.readline()print("Feed, ")print(feedback)print("\n")#flushing everything out of bufferwhile ser.inWaiting() > 0:print(ser.readline())GPIO.output(LED, GPIO.HIGH)x = 0okToSend = Truewhile x < len(lineList)-2:if okToSend:#print(lineList[x])#ser.write(lineList[x])msg = lineList[x][:-1] + b'\x0D'print(msg)ser.write(msg)#ser.write(b'\x0D')fail += 1#time.sleep(0.04)#time to Tx 46 bytestime.sleep(0.06)#littel extra than requiredif ser.inWaiting() > 0:feedback = ser.read(1)if feedback == b'\x06':x +=1print("ACK")if feedback == b'\x11':okToSend = Trueprint("Send")if feedback == b'\x13':okToSend = Falseprint("Stop")#for x in range(len(lineList)-2):#       print(lineList[x])#       ser.write(lineList[x])#       feedback = ser.read(3)#       #print("Feed, ")#print(feedback)#print("\n")#       while (feedback.find(b'\x11') == -1):#means there was no feedback#try again#print("trying again")#fail += 1#ser.write("refresh\x0D")#im thinking serial line may b$#ser.write(lineList[x])#time.sleep(.1)#i = 0#while ser.inWaiting() < 3 and i < 3000:#wait#i += 1#       if ser.inWaiting() == 3:#feedback = ser.read(3)#       else:#feedback = ser.readline()#print("Feed, ")#print(feedback)endTime = time.time()#GPIO.output(LED, GPIO.HIGH)else:print("Serial is not open")#analyze feedbackprint("\n\r Sending done")for y in range(10):if ser.inWaiting() > 0:feedback = ser.readline()print(feedback)else:time.sleep(1)#cleanupGPIO.output(LED, GPIO.HIGH) #Normally needs to be highser.close()file.close())GPIO.cleanup()#count execution time#endTime = time.time()print("process took, ")print(endTime - startTime)print(" seconds\n\r")print("fail count " + str(fail-len(lineList)))print("end")Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                     Y Yes N No     ^C CancelFile Name to Write: BBBBootloader.py                        ^G Get HelpM-D DOS FormatM-A AppendM-B Backup File^C Cancel    M-M Mac FormatM-P Prepend                downgradeHex.pySave file under DIFFERENT NAME ?    Y Yes N No    ^C CanceldowngradeHex.py          [ Wrote 137 lines ]root@beaglebone:~/codes/maisunmonowar/pcode/pyt# git - add .
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# git commit -m "Finally it works . problem was r   ) 0D vs 0A"
+[listenFeedback 0da2159] Finally it works. problem was 0D vs 0A
+ 3 files changed, 290 insertions(+), 11 deletions(-)
+ create mode 100644 pyt/BBBBootloader.py.save
+ create mode 100644 pyt/downgradeHex.py
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# git push
+Counting objects: 6, done.
+Compressing objects:  16% (1/6)   Compressing objects:  33% (2/6)   Compressing objects:  50% (3/6)   Compressing objects:  66% (4/6)   Compressing objects:  83% (5/6)   Compressing objects: 100% (6/6)   Compressing objects: 100% (6/6), done.
+Writing objects:  16% (1/6)   Writing objects:  33% (2/6)   Writing objects:  50% (3/6)   Writing objects:  83% (5/6)   Writing objects: 100% (6/6)   Writing objects: 100% (6/6), 1.89 KiB | 0 bytes/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/4)remote: Resolving deltas:  25% (1/4)remote: Resolving deltas:  50% (2/4)remote: Resolving deltas:  75% (3/4)remote: Resolving deltas: 100% (4/4)remote: Resolving deltas: 100% (4/4), completed with 3 local objects.
+To https://github.com/maisunmonowar/pcode
+   c0c4683..0da2159  listenFeedback -> listenFeedback
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# git pull
+remote: Enumerating objects: 5, done.
+remote: Counting objects:  20% (1/5)remote: Counting objects:  40% (2/5)remote: Counting objects:  60% (3/5)remote: Counting objects:  80% (4/5)remote: Counting objects: 100% (5/5)remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (1/1)remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects:  33% (1/3)   Unpacking objects:  66% (2/3)   Unpacking objects: 100% (3/3)   Unpacking objects: 100% (3/3), done.
+From https://github.com/maisunmonowar/pcode
+   0da2159..97d8630  listenFeedback -> origin/listenFeedback
+Updating 0da2159..97d8630
+Fast-forward
+ pyt/appv1.hex | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 pyt/appv1.hex
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python downgradeHex.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+Stop
+ACK
+Send
+:080688000D05F618A012B33AAB
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+Stop
+ACK
+Send
+:020000040001F9
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+Stop
+ACK
+Send
+:00000001FF
+Stop
+ACK
+
+ Sending done
+
+
+v1 161 
+
+v1 162 
+
+v1 163 
+
+v1 164 
+
+v1 165 
+
+v1 166 
+
+v1 167 
+
+v1 168 
+
+v1 169 
+
+process took, 
+4.25623393059
+ seconds
+
+fail count -2
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# python BBBBootloader.py 
+bootloader mode selected
+list loading done.
+
+Number of lines: 
+37
+
+Serial is Open
+
+Feed, 
+
+
+
+Feed, 
+C!V 1
+
+
+
+Feed, 
+
+
+
+
+Feed, 
+downloading
+
+
+:0606800080310A2C00008D
+Stop
+ACK
+Send
+:080688000D057619A012B33A2A
+Stop
+ACK
+Send
+:1006900020002030850002308400000803195D2B03
+Stop
+ACK
+Send
+:1006A0000230F800F701F70B532BF80B522B973061
+Stop
+ACK
+Send
+:1006B000F700F70B592B800B502B80311D2C0B08AA
+Stop
+ACK
+Send
+:1006C0008B1323009517151400000000891B8B174E
+Stop
+ACK
+Send
+:1006D0000318932B13087F392000A500230011086D
+Stop
+ACK
+Send
+:1006E0002000A600230012082000A7002508111EE4
+Stop
+ACK
+Send
+:1006F000772B23009A002000260823009100200079
+Stop
+ACK
+Send
+:100700002708230092000B088B139517151400007F
+Stop
+ACK
+Send
+:100710000000891B8B172000A20B8F2B912B23002D
+Stop
+ACK
+Send
+:10072000932BB42B2300130D140D7F392000A5004B
+Stop
+ACK
+Send
+:10073000230011082000A600230012082000A700B3
+Stop
+ACK
+Send
+:100740002508111EA12B23009A0020002608230053
+Stop
+ACK
+Send
+:1007500091002000270823009200910A0319920AB1
+Stop
+ACK
+Send
+:1007600003102000A20B5F2B8031282C2508F801F4
+Stop
+ACK
+Send
+:1007700024020318BE2B2408F700CA2BF701083007
+Stop
+ACK
+Send
+:10078000A600A40DF70D250877020318F700F80D51
+Stop
+ACK
+Send
+:10079000A60BC12B080078082208A4006430A5002D
+Stop
+ACK
+Send
+:1007A000B6237708A20078083030031DDE2BA31C87
+Stop
+ACK
+Send
+:1007B000E82BA319E82B231A2030E12BA3112312D5
+Stop
+ACK
+Send
+:1007C0002314F8077808111EE32B23009A00200059
+Stop
+ACK
+Send
+:1007D0002208A4000A30A500B6237708A2007808F2
+Stop
+ACK
+Send
+:1007E0003030031DF92BA319002C231C002C231AD5
+Stop
+ACK
+Send
+:1007F0002030F8077808111EFB2B23009A002000F8
+Stop
+ACK
+Send
+:100800003030A2072208111E032C23009A008031E9
+Stop
+ACK
+Send
+:1008100020002D2C23009F110C309B00A2309E0045
+Stop
+ACK
+Send
+:1008200090309D008C018D018F019001220092017A
+Stop
+ACK
+Send
+:10083000910164302000A200492BA10A443023001A
+Stop
+ACK
+Send
+:10084000910003309200031005302000A2005F2BBE
+Stop
+ACK
+Send
+:100850002108A2001330A300CB2B2030111E2E2C18
+Stop
+ACK
+Send
+:0E08600023009A0020001D2C2200192C63009A
+Stop
+ACK
+Send
+:020000040001F9
+Stop
+ACK
+Send
+:04000E00C23FFF1ED0
+Stop
+ACK
+Send
+:00000001FF
+Stop
+ACK
+
+ Sending done
+
+
+v2 188 
+
+v2 189 
+
+v2 190 
+
+v2 191 
+
+v2 192 
+
+v2 193 
+
+v2 194 
+
+v2 195 
+
+v2 196 
+
+process took, 
+4.46328306198
+ seconds
+
+fail count -2
+end
+root@beaglebone:~/codes/maisunmonowar/pcode/pyt# exit    exit
+logout
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.09.13 16:35:15 =~=~=~=~=~=~=~=~=~=~=~=
+login as: root
+Pre-authentication banner message from server:
+| Debian GNU/Linux 8
+| 
+| BeagleBoard.org Debian Image 2017-01-19
+| 
+| Support/FAQ: http://elinux.org/Beagleboard:BeagleBoneBlack_Debian
+| 
+| default username:password is [debian:temppwd]
+| 
+End of banner message from server
+Last login: Fri Sep 13 03:13:49 2019 from 192.168.7.1
+root@beaglebone:~# cd codes/maisunmonowar/pcode/
+root@beaglebone:~/codes/maisunmonowar/pcode# git status
+On branch listenFeedback
+Your branch is up-to-date with 'origin/listenFeedback'.
+nothing to commit, working directory clean
+root@beaglebone:~/codes/maisunmonowar/pcode# git push
+Everything up-to-date
+root@beaglebone:~/codes/maisunmonowar/pcode# c exit
+logout

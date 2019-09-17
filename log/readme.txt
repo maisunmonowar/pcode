@@ -1,0 +1,1 @@
+the folder contains log files of SSH sessions with BBB board.
