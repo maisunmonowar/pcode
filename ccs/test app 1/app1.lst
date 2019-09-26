@@ -1,0 +1,421 @@
+CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
+
+               Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\test app 1\app1.lst
+
+               ROM used:   250 words (3%)
+                           Largest free fragment is 2048
+               RAM used:   6 (1%) at main() level
+                           23 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 16
+
+*
+0340:  MOVLP  00
+0341:  GOTO   409
+0342:  NOP
+....................  
+.................... #include <app1.h> 
+.................... #include <16F1787.h> 
+.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1787 
+*
+0344:  DATA 0D,05
+0345:  DATA F6,19
+0346:  DATA A0,12
+0347:  DATA B3,3A
+0348:  DATA 20,00
+*
+035E:  MOVF   0B,W
+035F:  BCF    0B.7
+0360:  MOVLB  03
+0361:  BSF    15.7
+0362:  BSF    15.0
+0363:  NOP
+0364:  NOP
+0365:  BTFSC  09.7
+0366:  BSF    0B.7
+0367:  BTFSC  03.0
+0368:  GOTO   392
+0369:  MOVF   13,W
+036A:  ANDLW  7F
+036B:  MOVLB  00
+036C:  MOVWF  25
+036D:  MOVLB  03
+036E:  MOVF   11,W
+036F:  MOVLB  00
+0370:  MOVWF  26
+0371:  MOVLB  03
+0372:  MOVF   12,W
+0373:  MOVLB  00
+0374:  MOVWF  27
+0375:  MOVF   25,W
+0376:  BTFSS  11.4
+0377:  GOTO   376
+0378:  MOVLB  03
+0379:  MOVWF  1A
+037A:  MOVLB  00
+037B:  MOVF   26,W
+037C:  MOVLB  03
+037D:  MOVWF  11
+037E:  MOVLB  00
+037F:  MOVF   27,W
+0380:  MOVLB  03
+0381:  MOVWF  12
+0382:  MOVF   0B,W
+0383:  BCF    0B.7
+0384:  BSF    15.7
+0385:  BSF    15.0
+0386:  NOP
+0387:  NOP
+0388:  BTFSC  09.7
+0389:  BSF    0B.7
+038A:  MOVLB  00
+038B:  DECFSZ 22,F
+038C:  GOTO   38E
+038D:  GOTO   390
+038E:  MOVLB  03
+038F:  GOTO   392
+0390:  GOTO   3B3
+0391:  MOVLB  03
+0392:  RLF    13,W
+0393:  RLF    14,W
+0394:  ANDLW  7F
+0395:  MOVLB  00
+0396:  MOVWF  25
+0397:  MOVLB  03
+0398:  MOVF   11,W
+0399:  MOVLB  00
+039A:  MOVWF  26
+039B:  MOVLB  03
+039C:  MOVF   12,W
+039D:  MOVLB  00
+039E:  MOVWF  27
+039F:  MOVF   25,W
+03A0:  BTFSS  11.4
+03A1:  GOTO   3A0
+03A2:  MOVLB  03
+03A3:  MOVWF  1A
+03A4:  MOVLB  00
+03A5:  MOVF   26,W
+03A6:  MOVLB  03
+03A7:  MOVWF  11
+03A8:  MOVLB  00
+03A9:  MOVF   27,W
+03AA:  MOVLB  03
+03AB:  MOVWF  12
+03AC:  INCF   11,F
+03AD:  BTFSC  03.2
+03AE:  INCF   12,F
+03AF:  BCF    03.0
+03B0:  MOVLB  00
+03B1:  DECFSZ 22,F
+03B2:  GOTO   35E
+03B3:  MOVLP  00
+03B4:  GOTO   427 (RETURN)
+03B5:  MOVF   25,W
+03B6:  CLRF   78
+03B7:  SUBWF  24,W
+03B8:  BTFSC  03.0
+03B9:  GOTO   3BD
+03BA:  MOVF   24,W
+03BB:  MOVWF  77
+03BC:  GOTO   3C9
+03BD:  CLRF   77
+03BE:  MOVLW  08
+03BF:  MOVWF  26
+03C0:  RLF    24,F
+03C1:  RLF    77,F
+03C2:  MOVF   25,W
+03C3:  SUBWF  77,W
+03C4:  BTFSC  03.0
+03C5:  MOVWF  77
+03C6:  RLF    78,F
+03C7:  DECFSZ 26,F
+03C8:  GOTO   3C0
+03C9:  RETURN
+03CA:  MOVF   78,W
+03CB:  MOVF   22,W
+03CC:  MOVWF  24
+03CD:  MOVLW  64
+03CE:  MOVWF  25
+03CF:  CALL   3B5
+03D0:  MOVF   77,W
+03D1:  MOVWF  22
+03D2:  MOVF   78,W
+03D3:  MOVLW  30
+03D4:  BTFSS  03.2
+03D5:  GOTO   3DD
+03D6:  BTFSS  23.1
+03D7:  GOTO   3E7
+03D8:  BTFSC  23.3
+03D9:  GOTO   3E7
+03DA:  BTFSC  23.4
+03DB:  MOVLW  20
+03DC:  GOTO   3E0
+03DD:  BCF    23.3
+03DE:  BCF    23.4
+03DF:  BSF    23.0
+03E0:  ADDWF  78,F
+03E1:  MOVF   78,W
+03E2:  BTFSS  11.4
+03E3:  GOTO   3E2
+03E4:  MOVLB  03
+03E5:  MOVWF  1A
+03E6:  MOVLB  00
+03E7:  MOVF   22,W
+03E8:  MOVWF  24
+03E9:  MOVLW  0A
+03EA:  MOVWF  25
+03EB:  CALL   3B5
+03EC:  MOVF   77,W
+03ED:  MOVWF  22
+03EE:  MOVF   78,W
+03EF:  MOVLW  30
+03F0:  BTFSS  03.2
+03F1:  GOTO   3F8
+03F2:  BTFSC  23.3
+03F3:  GOTO   3FF
+03F4:  BTFSS  23.0
+03F5:  GOTO   3FF
+03F6:  BTFSC  23.4
+03F7:  MOVLW  20
+03F8:  ADDWF  78,F
+03F9:  MOVF   78,W
+03FA:  BTFSS  11.4
+03FB:  GOTO   3FA
+03FC:  MOVLB  03
+03FD:  MOVWF  1A
+03FE:  MOVLB  00
+03FF:  MOVLW  30
+0400:  ADDWF  22,F
+0401:  MOVF   22,W
+0402:  BTFSS  11.4
+0403:  GOTO   402
+0404:  MOVLB  03
+0405:  MOVWF  1A
+0406:  MOVLP  00
+0407:  MOVLB  00
+0408:  GOTO   42C (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+.................... #use delay(crystal=8000000) 
+*
+0349:  MOVLW  20
+034A:  MOVWF  05
+034B:  MOVLW  02
+034C:  MOVWF  04
+034D:  MOVF   00,W
+034E:  BTFSC  03.2
+034F:  GOTO   35D
+0350:  MOVLW  02
+0351:  MOVWF  78
+0352:  CLRF   77
+0353:  DECFSZ 77,F
+0354:  GOTO   353
+0355:  DECFSZ 78,F
+0356:  GOTO   352
+0357:  MOVLW  97
+0358:  MOVWF  77
+0359:  DECFSZ 77,F
+035A:  GOTO   359
+035B:  DECFSZ 00,F
+035C:  GOTO   350
+035D:  RETURN
+.................... #fuses NOWDT 
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
+.................... #define PUSH_BUTTON PIN_D0 
+....................  
+.................... #include <bootloader.h> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                       BOOTLOADER.H                                //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example bootloader (ex_bootloader.c).                     //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  LOADER_END may need to be adjusted for a specific chip and       //// 
+.................... ////  bootloader.  LOADER_END must be 1 minus a multiple of            //// 
+.................... ////  FLASH_ERASE_SIZE.                                                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2014 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #ifndef __BOOTLOADER_H__ 
+.................... #define __BOOTLOADER_H__ 
+....................  
+.................... #ifndef LOADER_END 
+....................  #if defined(__PCM__) 
+....................   #ifdef BOOTLOADER_MODE2X 
+....................    #define LOADER_END 0x4BF 
+....................   #else 
+....................    #define LOADER_END 0x33F 
+....................   #endif 
+....................  #elif defined(__PCH__) 
+....................   #define FLASH_SIZE getenv("FLASH_ERASE_SIZE") 
+....................   #if ((0x500 % FLASH_SIZE) == 0)         //IF 0x500 is even flash boundary 
+....................    #define LOADER_END   0x4FF 
+....................   #else                                  //ELSE, goto next even boundary 
+....................    #define LOADER_END   ((0x500+FLASH_SIZE-(0x500 % FLASH_SIZE))-1) 
+....................   #endif 
+....................  #else 
+....................   #error Bootloader only works with PCM or PCH compiler 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #define LOADER_SIZE   LOADER_END 
+....................  
+.................... #ifndef BOOTLOADER_AT_START 
+....................  #define BOOTLOADER_AT_START 
+.................... #endif 
+....................  
+.................... #ifndef _bootloader 
+....................  #if defined(__PCM__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+5) 
+....................  #elif defined(__PCH__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+9) 
+....................  #endif 
+....................  
+....................  #org 0, LOADER_END {} 
+.................... #else 
+....................  #ifdef __PCM__ 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x800 
+....................    #org LOADER_END+3, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+3, 0x7FF {} 
+....................    #if getenv("PROGRAM_MEMORY") <= 0x1000 
+....................     #org 0x800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................    #else 
+....................     #org 0x800, 0xFFF{} 
+....................     #if getenv("PROGRAM_MEMORY") <= 0x1800 
+....................      #org 0x1000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................     #else 
+....................      #org 0x1000, 0x17FF {} 
+....................      #if getenv("PROGRAM_MEMORY") <= 0x2000 
+....................       #org 0x1800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................      #else 
+....................       #org 0x1800, 0x1FFF {} 
+....................       #if getenv("PROGRAM_MEMORY") <= 0x2800 
+....................        #org 0x2000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................       #else 
+....................        #org 0x2000, 0x27FF {} 
+....................        #if getenv("PROGRAM_MEMORY") <= 0x3000 
+....................         #org 0x2800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................        #else 
+....................         #org 0x2800, 0x2FFF {} 
+....................         #if getenv("PROGRAM_MEMORY") <= 0x3800 
+....................          #org 0x3000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................         #else 
+....................          #org 0x3000, 0x37FF {} 
+....................          #org 0x3800, 0x3FFF {} 
+....................         #endif 
+....................        #endif 
+....................       #endif 
+....................      #endif 
+....................     #endif 
+....................    #endif 
+....................   #endif 
+....................  #else 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x10000 
+....................    #org LOADER_END+5, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+5, 0xFFFE {} 
+....................    #org 0x10000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #endif 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... void main() 
+*
+0409:  MOVLB  03
+040A:  BCF    1F.3
+040B:  MOVLW  0C
+040C:  MOVWF  1B
+040D:  MOVLW  A2
+040E:  MOVWF  1E
+040F:  MOVLW  90
+0410:  MOVWF  1D
+0411:  CLRF   0C
+0412:  CLRF   0D
+0413:  CLRF   0F
+0414:  CLRF   10
+0415:  MOVLB  02
+0416:  CLRF   12
+0417:  CLRF   11
+.................... { 
+....................    INT8 i; 
+....................    delay_ms (100) ; 
+0418:  MOVLW  64
+0419:  MOVLB  00
+041A:  MOVWF  22
+041B:  CALL   349
+....................     
+....................    WHILE (TRUE) 
+....................    { 
+....................       printf ("\r\nv3 %3u ", ++i); 
+041C:  INCF   21,F
+041D:  MOVLW  44
+041E:  MOVLB  03
+041F:  MOVWF  11
+0420:  MOVLW  03
+0421:  MOVWF  12
+0422:  BCF    03.0
+0423:  MOVLW  05
+0424:  MOVLB  00
+0425:  MOVWF  22
+0426:  GOTO   35E
+0427:  MOVF   21,W
+0428:  MOVWF  22
+0429:  MOVLW  13
+042A:  MOVWF  23
+042B:  GOTO   3CA
+042C:  MOVLW  20
+042D:  BTFSS  11.4
+042E:  GOTO   42D
+042F:  MOVLB  03
+0430:  MOVWF  1A
+....................       //TODO: User Code 
+....................       // Enter Bootloader if Pin D0 is low after a RESET 
+....................       if(!input(PUSH_BUTTON)) 
+0431:  MOVLB  01
+0432:  BSF    0F.0
+0433:  MOVLB  00
+0434:  BTFSS  0F.0
+....................       { 
+....................          //load_program(); 
+....................          reset_cpu(); //Since I can't call load_program() withough loader.c 
+0435:  RESET
+....................          //loader.c not to be included in apps 
+....................       } 
+....................       delay_ms (100) ; 
+0436:  MOVLW  64
+0437:  MOVWF  22
+0438:  CALL   349
+0439:  GOTO   41C
+....................    } 
+.................... } 
+043A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

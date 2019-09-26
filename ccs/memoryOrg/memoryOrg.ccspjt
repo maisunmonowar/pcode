@@ -1,0 +1,54 @@
+[PROJECT]
+Target=memoryOrg.hex
+Processor_Text=PIC16F1787
+CCSVerions=5.056
+Compiler=PCM
+CCSVersion=5.056
+[Target Data]
+FileList=memoryOrg.c
+[Directories]
+Include=
+[C:\Users\maisun\Documents\PhD\offline\code\ccs\memoryOrg\memoryOrg]
+Type=4
+[mru-list]
+1=memoryOrg.c
+
+[ProjectLog]
+Days=2
+D1=17-09-2019
+D1_L=10
+D1_L1=[67632]Project Opened.
+D1_L2=[67723]Started Editing.
+D1_L3=[68674]Stopped Editing.
+TotalEdit=19
+TotalDebug=0
+D1_E=19
+D1_D=0
+D1_L4=[68674]Project Closed.
+D1_L5=[68729]Project Opened.
+D1_L6=[69024]Project Closed.
+D1_L7=[69076]Project Opened.
+D1_L8=[69151]Started Editing.
+D1_L9=[69578]Stopped Editing.
+D1_L10=[69915]Project Closed.
+D2=26-09-2019
+D2_L=2
+D2_L1=[57453]Project Opened.
+D2_L2=[57786]Project Closed.
+
+[Opened Files]
+1=memoryOrg.c
+t1=1
+2=memoryOrg.h
+t2=1
+Count=3
+3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\loader.c
+t3=1
+[memoryOrg.c]
+Type=4
+
+[defines]
+buildcount=4
+[Units]
+Count=1
+1=memoryOrg (main)

@@ -25,7 +25,7 @@ ser.dsrdtr = False
 ser.writeTimeout = 1
 
 #prepare files
-nameOfFile = "appv4.hex"
+nameOfFile = "appv1.hex"
 modeOfFile = "r"
 
 with open(nameOfFile, modeOfFile) as file:

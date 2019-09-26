@@ -1,0 +1,43 @@
+#include <main.h>
+ 
+#define _bootloader
+
+// NOTE - User must include bootloader.h in application program
+#include <bootloader.h>
+#include <loader.c>
+
+#define PUSH_BUTTON PIN_A5
+
+#INT_GLOBAL
+void isr(void){
+   jump_to_isr(LOADER_END+5);
+}
+
+#org LOADER_END+1, LOADER_END+2
+void application(void) {
+int8 i;
+   
+   delay_ms(100);
+      
+  while(TRUE)
+  {
+   printf("\r\n %3u ",++i);
+  }
+}
+
+void main()
+{
+ 
+   // Enter Bootloader if Pin A5 is low after a RESET
+   if(!input(PIN_A5))
+   {
+      printf("\r\nBootloader V 1\r\n");
+   
+      // Let the user know it is ready to accept a download
+      printf("\r\ndownloading");
+      load_program();
+   }
+   
+   application();
+
+}

@@ -1,0 +1,7 @@
+notes
+main.hex
+270 onwards empty
+
+readBackAfterBootload
+340 theke start
+430 end

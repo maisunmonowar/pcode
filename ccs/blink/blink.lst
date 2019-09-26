@@ -1,0 +1,116 @@
+CCS PCM C Compiler, Version 5.056, 29513               26-Jul-19 15:16
+
+               Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\blink\blink.lst
+
+               ROM used:   59 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (1%) at main() level
+                           18 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   018
+0002:  NOP
+.................... #include <blink.h> 
+.................... #include <16F1787.h> 
+.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1787 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+.................... #use delay(clock=8000000,crystal=8000000) 
+0003:  MOVLW  20
+0004:  MOVWF  05
+0005:  MOVLW  02
+0006:  MOVWF  04
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   017
+000A:  MOVLW  02
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  97
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  DECFSZ 00,F
+0016:  GOTO   00A
+0017:  RETURN
+....................  
+.................... #define LED PIN_D2 
+.................... #define DELAY 2000 
+....................  
+....................  
+....................  
+....................  
+.................... void main() 
+0018:  MOVLB  03
+0019:  CLRF   0C
+001A:  CLRF   0D
+001B:  CLRF   0F
+001C:  CLRF   10
+001D:  MOVLB  02
+001E:  CLRF   12
+001F:  CLRF   11
+.................... { 
+....................  
+.................... 	while(TRUE) 
+.................... 	{ 
+....................  
+.................... 		//Example blinking LED program 
+.................... 		output_low(LED); 
+0020:  MOVLB  01
+0021:  BCF    0F.2
+0022:  MOVLB  02
+0023:  BCF    0F.2
+.................... 		delay_ms(DELAY); 
+0024:  MOVLW  08
+0025:  MOVLB  00
+0026:  MOVWF  21
+0027:  MOVLW  FA
+0028:  MOVWF  22
+0029:  CALL   003
+002A:  DECFSZ 21,F
+002B:  GOTO   027
+.................... 		output_high(LED); 
+002C:  MOVLB  01
+002D:  BCF    0F.2
+002E:  MOVLB  02
+002F:  BSF    0F.2
+.................... 		delay_ms(DELAY); 
+0030:  MOVLW  08
+0031:  MOVLB  00
+0032:  MOVWF  21
+0033:  MOVLW  FA
+0034:  MOVWF  22
+0035:  CALL   003
+0036:  DECFSZ 21,F
+0037:  GOTO   033
+0038:  MOVLB  02
+0039:  GOTO   020
+....................  
+.................... 		//TODO: User Code 
+.................... 	} 
+....................  
+.................... } 
+003A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

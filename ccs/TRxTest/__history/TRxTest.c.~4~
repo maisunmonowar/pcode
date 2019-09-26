@@ -1,0 +1,29 @@
+#include <TRxTest.h>
+
+char* inMsg[64];
+void main()
+{
+
+   while(TRUE)
+   {
+
+      //Example blinking LED program
+      output_low(LED);
+      printf("\r\nHola");
+      delay_ms(DELAY);
+      output_high(LED);
+      if(kbhit())
+      {
+         gets(inMsg);
+         printf("\r\n" + inMsg);
+      }
+      else
+      {
+         printf("Nothing in buffer");
+      }
+      delay_ms(DELAY);
+
+      //TODO: User Code
+   }
+
+}
