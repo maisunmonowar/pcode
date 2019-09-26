@@ -1,17 +1,17 @@
-CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 16:24
+CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
 
                Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\test app 1\app1.lst
 
-               ROM used:   248 words (3%)
+               ROM used:   250 words (3%)
                            Largest free fragment is 2048
                RAM used:   6 (1%) at main() level
                            23 (2%) worst case
-               Stack used: 1 locations
+               Stack used: 0 locations
                Stack size: 16
 
 *
 0340:  MOVLP  00
-0341:  GOTO   40A
+0341:  GOTO   409
 0342:  NOP
 ....................  
 .................... #include <app1.h> 
@@ -29,182 +29,182 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 16:24
 .................... #device PIC16F1787 
 *
 0344:  DATA 0D,05
-0345:  DATA 76,1A
+0345:  DATA F6,19
 0346:  DATA A0,12
 0347:  DATA B3,3A
 0348:  DATA 20,00
 *
-035F:  MOVF   0B,W
-0360:  BCF    0B.7
-0361:  MOVLB  03
-0362:  BSF    15.7
-0363:  BSF    15.0
+035E:  MOVF   0B,W
+035F:  BCF    0B.7
+0360:  MOVLB  03
+0361:  BSF    15.7
+0362:  BSF    15.0
+0363:  NOP
 0364:  NOP
-0365:  NOP
-0366:  BTFSC  09.7
-0367:  BSF    0B.7
-0368:  BTFSC  03.0
-0369:  GOTO   393
-036A:  MOVF   13,W
-036B:  ANDLW  7F
-036C:  MOVLB  00
-036D:  MOVWF  25
-036E:  MOVLB  03
-036F:  MOVF   11,W
-0370:  MOVLB  00
-0371:  MOVWF  26
-0372:  MOVLB  03
-0373:  MOVF   12,W
-0374:  MOVLB  00
-0375:  MOVWF  27
-0376:  MOVF   25,W
-0377:  BTFSS  11.4
-0378:  GOTO   377
-0379:  MOVLB  03
-037A:  MOVWF  1A
-037B:  MOVLB  00
-037C:  MOVF   26,W
-037D:  MOVLB  03
-037E:  MOVWF  11
-037F:  MOVLB  00
-0380:  MOVF   27,W
-0381:  MOVLB  03
-0382:  MOVWF  12
-0383:  MOVF   0B,W
-0384:  BCF    0B.7
-0385:  BSF    15.7
-0386:  BSF    15.0
+0365:  BTFSC  09.7
+0366:  BSF    0B.7
+0367:  BTFSC  03.0
+0368:  GOTO   392
+0369:  MOVF   13,W
+036A:  ANDLW  7F
+036B:  MOVLB  00
+036C:  MOVWF  25
+036D:  MOVLB  03
+036E:  MOVF   11,W
+036F:  MOVLB  00
+0370:  MOVWF  26
+0371:  MOVLB  03
+0372:  MOVF   12,W
+0373:  MOVLB  00
+0374:  MOVWF  27
+0375:  MOVF   25,W
+0376:  BTFSS  11.4
+0377:  GOTO   376
+0378:  MOVLB  03
+0379:  MOVWF  1A
+037A:  MOVLB  00
+037B:  MOVF   26,W
+037C:  MOVLB  03
+037D:  MOVWF  11
+037E:  MOVLB  00
+037F:  MOVF   27,W
+0380:  MOVLB  03
+0381:  MOVWF  12
+0382:  MOVF   0B,W
+0383:  BCF    0B.7
+0384:  BSF    15.7
+0385:  BSF    15.0
+0386:  NOP
 0387:  NOP
-0388:  NOP
-0389:  BTFSC  09.7
-038A:  BSF    0B.7
-038B:  MOVLB  00
-038C:  DECFSZ 22,F
-038D:  GOTO   38F
-038E:  GOTO   391
-038F:  MOVLB  03
-0390:  GOTO   393
-0391:  GOTO   3B4
-0392:  MOVLB  03
-0393:  RLF    13,W
-0394:  RLF    14,W
-0395:  ANDLW  7F
-0396:  MOVLB  00
-0397:  MOVWF  25
-0398:  MOVLB  03
-0399:  MOVF   11,W
-039A:  MOVLB  00
-039B:  MOVWF  26
-039C:  MOVLB  03
-039D:  MOVF   12,W
-039E:  MOVLB  00
-039F:  MOVWF  27
-03A0:  MOVF   25,W
-03A1:  BTFSS  11.4
-03A2:  GOTO   3A1
-03A3:  MOVLB  03
-03A4:  MOVWF  1A
-03A5:  MOVLB  00
-03A6:  MOVF   26,W
-03A7:  MOVLB  03
-03A8:  MOVWF  11
-03A9:  MOVLB  00
-03AA:  MOVF   27,W
-03AB:  MOVLB  03
-03AC:  MOVWF  12
-03AD:  INCF   11,F
-03AE:  BTFSC  03.2
-03AF:  INCF   12,F
-03B0:  BCF    03.0
-03B1:  MOVLB  00
-03B2:  DECFSZ 22,F
-03B3:  GOTO   35F
-03B4:  MOVLP  00
-03B5:  GOTO   428 (RETURN)
-03B6:  MOVF   25,W
-03B7:  CLRF   78
-03B8:  SUBWF  24,W
-03B9:  BTFSC  03.0
-03BA:  GOTO   3BE
-03BB:  MOVF   24,W
-03BC:  MOVWF  77
-03BD:  GOTO   3CA
-03BE:  CLRF   77
-03BF:  MOVLW  08
-03C0:  MOVWF  26
-03C1:  RLF    24,F
-03C2:  RLF    77,F
-03C3:  MOVF   25,W
-03C4:  SUBWF  77,W
-03C5:  BTFSC  03.0
-03C6:  MOVWF  77
-03C7:  RLF    78,F
-03C8:  DECFSZ 26,F
-03C9:  GOTO   3C1
-03CA:  RETURN
-03CB:  MOVF   78,W
-03CC:  MOVF   22,W
-03CD:  MOVWF  24
-03CE:  MOVLW  64
-03CF:  MOVWF  25
-03D0:  CALL   3B6
-03D1:  MOVF   77,W
-03D2:  MOVWF  22
-03D3:  MOVF   78,W
-03D4:  MOVLW  30
-03D5:  BTFSS  03.2
-03D6:  GOTO   3DE
-03D7:  BTFSS  23.1
-03D8:  GOTO   3E8
-03D9:  BTFSC  23.3
-03DA:  GOTO   3E8
-03DB:  BTFSC  23.4
-03DC:  MOVLW  20
-03DD:  GOTO   3E1
-03DE:  BCF    23.3
-03DF:  BCF    23.4
-03E0:  BSF    23.0
-03E1:  ADDWF  78,F
-03E2:  MOVF   78,W
-03E3:  BTFSS  11.4
-03E4:  GOTO   3E3
-03E5:  MOVLB  03
-03E6:  MOVWF  1A
-03E7:  MOVLB  00
-03E8:  MOVF   22,W
-03E9:  MOVWF  24
-03EA:  MOVLW  0A
-03EB:  MOVWF  25
-03EC:  CALL   3B6
-03ED:  MOVF   77,W
-03EE:  MOVWF  22
-03EF:  MOVF   78,W
-03F0:  MOVLW  30
-03F1:  BTFSS  03.2
-03F2:  GOTO   3F9
-03F3:  BTFSC  23.3
-03F4:  GOTO   400
-03F5:  BTFSS  23.0
-03F6:  GOTO   400
-03F7:  BTFSC  23.4
-03F8:  MOVLW  20
-03F9:  ADDWF  78,F
-03FA:  MOVF   78,W
-03FB:  BTFSS  11.4
-03FC:  GOTO   3FB
-03FD:  MOVLB  03
-03FE:  MOVWF  1A
-03FF:  MOVLB  00
-0400:  MOVLW  30
-0401:  ADDWF  22,F
-0402:  MOVF   22,W
-0403:  BTFSS  11.4
-0404:  GOTO   403
-0405:  MOVLB  03
-0406:  MOVWF  1A
-0407:  MOVLP  00
-0408:  MOVLB  00
-0409:  GOTO   42D (RETURN)
+0388:  BTFSC  09.7
+0389:  BSF    0B.7
+038A:  MOVLB  00
+038B:  DECFSZ 22,F
+038C:  GOTO   38E
+038D:  GOTO   390
+038E:  MOVLB  03
+038F:  GOTO   392
+0390:  GOTO   3B3
+0391:  MOVLB  03
+0392:  RLF    13,W
+0393:  RLF    14,W
+0394:  ANDLW  7F
+0395:  MOVLB  00
+0396:  MOVWF  25
+0397:  MOVLB  03
+0398:  MOVF   11,W
+0399:  MOVLB  00
+039A:  MOVWF  26
+039B:  MOVLB  03
+039C:  MOVF   12,W
+039D:  MOVLB  00
+039E:  MOVWF  27
+039F:  MOVF   25,W
+03A0:  BTFSS  11.4
+03A1:  GOTO   3A0
+03A2:  MOVLB  03
+03A3:  MOVWF  1A
+03A4:  MOVLB  00
+03A5:  MOVF   26,W
+03A6:  MOVLB  03
+03A7:  MOVWF  11
+03A8:  MOVLB  00
+03A9:  MOVF   27,W
+03AA:  MOVLB  03
+03AB:  MOVWF  12
+03AC:  INCF   11,F
+03AD:  BTFSC  03.2
+03AE:  INCF   12,F
+03AF:  BCF    03.0
+03B0:  MOVLB  00
+03B1:  DECFSZ 22,F
+03B2:  GOTO   35E
+03B3:  MOVLP  00
+03B4:  GOTO   427 (RETURN)
+03B5:  MOVF   25,W
+03B6:  CLRF   78
+03B7:  SUBWF  24,W
+03B8:  BTFSC  03.0
+03B9:  GOTO   3BD
+03BA:  MOVF   24,W
+03BB:  MOVWF  77
+03BC:  GOTO   3C9
+03BD:  CLRF   77
+03BE:  MOVLW  08
+03BF:  MOVWF  26
+03C0:  RLF    24,F
+03C1:  RLF    77,F
+03C2:  MOVF   25,W
+03C3:  SUBWF  77,W
+03C4:  BTFSC  03.0
+03C5:  MOVWF  77
+03C6:  RLF    78,F
+03C7:  DECFSZ 26,F
+03C8:  GOTO   3C0
+03C9:  RETURN
+03CA:  MOVF   78,W
+03CB:  MOVF   22,W
+03CC:  MOVWF  24
+03CD:  MOVLW  64
+03CE:  MOVWF  25
+03CF:  CALL   3B5
+03D0:  MOVF   77,W
+03D1:  MOVWF  22
+03D2:  MOVF   78,W
+03D3:  MOVLW  30
+03D4:  BTFSS  03.2
+03D5:  GOTO   3DD
+03D6:  BTFSS  23.1
+03D7:  GOTO   3E7
+03D8:  BTFSC  23.3
+03D9:  GOTO   3E7
+03DA:  BTFSC  23.4
+03DB:  MOVLW  20
+03DC:  GOTO   3E0
+03DD:  BCF    23.3
+03DE:  BCF    23.4
+03DF:  BSF    23.0
+03E0:  ADDWF  78,F
+03E1:  MOVF   78,W
+03E2:  BTFSS  11.4
+03E3:  GOTO   3E2
+03E4:  MOVLB  03
+03E5:  MOVWF  1A
+03E6:  MOVLB  00
+03E7:  MOVF   22,W
+03E8:  MOVWF  24
+03E9:  MOVLW  0A
+03EA:  MOVWF  25
+03EB:  CALL   3B5
+03EC:  MOVF   77,W
+03ED:  MOVWF  22
+03EE:  MOVF   78,W
+03EF:  MOVLW  30
+03F0:  BTFSS  03.2
+03F1:  GOTO   3F8
+03F2:  BTFSC  23.3
+03F3:  GOTO   3FF
+03F4:  BTFSS  23.0
+03F5:  GOTO   3FF
+03F6:  BTFSC  23.4
+03F7:  MOVLW  20
+03F8:  ADDWF  78,F
+03F9:  MOVF   78,W
+03FA:  BTFSS  11.4
+03FB:  GOTO   3FA
+03FC:  MOVLB  03
+03FD:  MOVWF  1A
+03FE:  MOVLB  00
+03FF:  MOVLW  30
+0400:  ADDWF  22,F
+0401:  MOVF   22,W
+0402:  BTFSS  11.4
+0403:  GOTO   402
+0404:  MOVLB  03
+0405:  MOVWF  1A
+0406:  MOVLP  00
+0407:  MOVLB  00
+0408:  GOTO   42C (RETURN)
 ....................  
 .................... #list 
 ....................  
@@ -231,8 +231,7 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 16:24
 035A:  GOTO   359
 035B:  DECFSZ 00,F
 035C:  GOTO   350
-035D:  MOVLP  00
-035E:  GOTO   41D (RETURN)
+035D:  RETURN
 .................... #fuses NOWDT 
 .................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
 .................... #define PUSH_BUTTON PIN_D0 
@@ -348,70 +347,74 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 16:24
 ....................  
 .................... void main() 
 *
-040A:  MOVLB  03
-040B:  BCF    1F.3
-040C:  MOVLW  0C
-040D:  MOVWF  1B
-040E:  MOVLW  A2
-040F:  MOVWF  1E
-0410:  MOVLW  90
-0411:  MOVWF  1D
-0412:  CLRF   0C
-0413:  CLRF   0D
-0414:  CLRF   0F
-0415:  CLRF   10
-0416:  MOVLB  02
-0417:  CLRF   12
-0418:  CLRF   11
+0409:  MOVLB  03
+040A:  BCF    1F.3
+040B:  MOVLW  0C
+040C:  MOVWF  1B
+040D:  MOVLW  A2
+040E:  MOVWF  1E
+040F:  MOVLW  90
+0410:  MOVWF  1D
+0411:  CLRF   0C
+0412:  CLRF   0D
+0413:  CLRF   0F
+0414:  CLRF   10
+0415:  MOVLB  02
+0416:  CLRF   12
+0417:  CLRF   11
 .................... { 
 ....................    INT8 i; 
 ....................    delay_ms (100) ; 
-0419:  MOVLW  64
-041A:  MOVLB  00
-041B:  MOVWF  22
-041C:  GOTO   349
+0418:  MOVLW  64
+0419:  MOVLB  00
+041A:  MOVWF  22
+041B:  CALL   349
 ....................     
 ....................    WHILE (TRUE) 
 ....................    { 
-....................       printf ("\r\nv4 %3u ", ++i); 
-041D:  INCF   21,F
-041E:  MOVLW  44
-041F:  MOVLB  03
-0420:  MOVWF  11
-0421:  MOVLW  03
-0422:  MOVWF  12
-0423:  BCF    03.0
-0424:  MOVLW  05
-0425:  MOVLB  00
-0426:  MOVWF  22
-0427:  GOTO   35F
-0428:  MOVF   21,W
-0429:  MOVWF  22
-042A:  MOVLW  13
-042B:  MOVWF  23
-042C:  GOTO   3CB
-042D:  MOVLW  20
-042E:  BTFSS  11.4
-042F:  GOTO   42E
-0430:  MOVLB  03
-0431:  MOVWF  1A
+....................       printf ("\r\nv3 %3u ", ++i); 
+041C:  INCF   21,F
+041D:  MOVLW  44
+041E:  MOVLB  03
+041F:  MOVWF  11
+0420:  MOVLW  03
+0421:  MOVWF  12
+0422:  BCF    03.0
+0423:  MOVLW  05
+0424:  MOVLB  00
+0425:  MOVWF  22
+0426:  GOTO   35E
+0427:  MOVF   21,W
+0428:  MOVWF  22
+0429:  MOVLW  13
+042A:  MOVWF  23
+042B:  GOTO   3CA
+042C:  MOVLW  20
+042D:  BTFSS  11.4
+042E:  GOTO   42D
+042F:  MOVLB  03
+0430:  MOVWF  1A
 ....................       //TODO: User Code 
 ....................       // Enter Bootloader if Pin D0 is low after a RESET 
 ....................       if(!input(PUSH_BUTTON)) 
-0432:  MOVLB  01
-0433:  BSF    0F.0
-0434:  MOVLB  00
-0435:  BTFSS  0F.0
+0431:  MOVLB  01
+0432:  BSF    0F.0
+0433:  MOVLB  00
+0434:  BTFSS  0F.0
 ....................       { 
 ....................          //load_program(); 
 ....................          reset_cpu(); //Since I can't call load_program() withough loader.c 
-0436:  RESET
+0435:  RESET
 ....................          //loader.c not to be included in apps 
 ....................       } 
-0437:  GOTO   41D
+....................       delay_ms (100) ; 
+0436:  MOVLW  64
+0437:  MOVWF  22
+0438:  CALL   349
+0439:  GOTO   41C
 ....................    } 
 .................... } 
-0438:  SLEEP
+043A:  SLEEP
 
 Configuration Fuses:
    Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN

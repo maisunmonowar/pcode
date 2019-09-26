@@ -39,18 +39,18 @@
 ROM Allocation:
 000344  @const722.call
 000349  @delay_ms1
-00035F  @PSTRINGCN7_9600_118_119
-0003B6  @DIV88
-0003CB  @PRINTF_U_9600_118_119
-00040A  main
-00040A  @cinit1
-000419  @cinit2
+00035E  @PSTRINGCN7_9600_118_119
+0003B5  @DIV88
+0003CA  @PRINTF_U_9600_118_119
+000409  main
+000409  @cinit1
+000418  @cinit2
 
 Project Directory:
     C:\Users\maisun\Documents\PhD\offline\code\ccs\test app 1\
 
 Project Files:
-    app1.c                                                  [26-Sep-19 16:24  CRC=8EF2DF2C]
+    app1.c                                                  [26-Sep-19 18:08  CRC=8EF2DF2C]
     app1.h                                                  [26-Sep-19 16:08  CRC=D872A938]
     ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h [01-Mar-16 16:00  CRC=FEB6EB35]
     ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\bootloader.h [17-Apr-14 11:29  CRC=10C6F83E]
@@ -58,7 +58,7 @@ Project Files:
 Source signature=87AA6415
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=05AD
+Hex file CRC=C181
 
 Units:
     app1 (main)

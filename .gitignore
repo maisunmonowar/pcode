@@ -33,3 +33,14 @@ MP/blink.X/nbproject/Package-default.bash.
 *.hxl
 *.map
 *.rlf
+ccs/test app 1/app1.STA
+ccs/test app 1/app1.ccspjt
+ccs/test app 1/app1.cof
+ccs/test app 1/app1.esym
+ccs/test app 1/app1.lst
+ccs/test app 1/app1.sym
+ccs/test app 1/app1.tre
+ccs/test app 1/app1.xsym
+ccs/test app 1/__history/app1.c.~10~
+ccs/test app 1/__history/app1.c.~11~
+ccs/test app 1/app1.err

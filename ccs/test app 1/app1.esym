@@ -1,11 +1,9 @@
-C L "main" 0 13 1 "FUNCTION"
-C L "main" 0 13 2 "FUNCTION"
-D G "__PCM__" 0 24 ""5.056""
-D G "__DEVICE__" 0 24 "1787"
-D G "__DATE__" 0 24 ""26-Sep-19""
-D G "__TIME__" 0 24 ""16:24:54""
-D G "_UNICODE" 0 24 ""?""
-D G "__EVAL" 0 24 ""?"" "Standard Header file for the PIC16F1787 device ////////////////"
+D G "__PCM__" 0 25 ""5.056""
+D G "__DEVICE__" 0 25 "1787"
+D G "__DATE__" 0 25 ""26-Sep-19""
+D G "__TIME__" 0 25 ""18:08:11""
+D G "_UNICODE" 0 25 ""?""
+D G "__EVAL" 0 25 ""?"" "Standard Header file for the PIC16F1787 device ////////////////"
 c L "set_tris_a" 2 3 6 "FUNCTION"
 f N "set_tris_a" 2 40 ""
 v L "value" 2 40 "int8" `54 
@@ -1544,6 +1542,8 @@ D G "BOOTLOADER_AT_START" 3 47 ""
 F N "main" 0 5 ""
 F G "main" 0 6 "void()" `718 
 V L "i" 0 7 "int8" `719 
+C L "main" 0 13 2 "FUNCTION"
+C L "main" 0 13 1 "FUNCTION"
 C L "main" 0 13 2 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0

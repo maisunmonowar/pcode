@@ -72,7 +72,7 @@ D5_L4=[67632]Project Closed.
 D5_L5=[69054]Project Opened.
 D5_L6=[69076]Project Closed.
 D6=26-09-2019
-D6_L=8
+D6_L=11
 D6_L1=[57786]Project Opened.
 D6_L2=[57965]Started Editing.
 D6_L3=[58735]Stopped Editing.
@@ -83,10 +83,13 @@ D6_D=0
 D6_L6=[59143]Project Closed.
 D6_L7=[61097]Project Opened.
 D6_L8=[61217]Project Closed.
+D6_L9=[65195]Project Opened.
+D6_L10=[65233]Started Editing.
+D6_L11=[65582]Stopped Editing.
 
 [Opened Files]
 1=app1.c
-t1=1
+t1=4
 2=app1.h
 t2=1
 Count=3
@@ -100,7 +103,7 @@ t5=1
 Type=4
 
 [defines]
-buildcount=9
+buildcount=11
 [Units]
 Count=1
 1=app1 (main)
