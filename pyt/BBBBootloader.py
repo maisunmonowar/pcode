@@ -69,7 +69,6 @@ if ser.isOpen():
 			msg = lineList[x][:-1] + b'\x0D'
 			print(msg)
 			ser.write(msg)
-			#ser.write(b'\x0D')
 			fail += 1
 			#time.sleep(0.04)#time to Tx 46 bytes
 			time.sleep(0.06)#littel extra than required
@@ -84,31 +83,6 @@ if ser.isOpen():
 			if feedback == b'\x13':
 				okToSend = False
 				print("Stop")
-	#for x in range(len(lineList)-2):
-    	#	print(lineList[x])
-    	#	ser.write(lineList[x])
-	#	feedback = ser.read(3)
-	#	#print("Feed, ")
-    		#print(feedback)
-    		#print("\n")
-	#	while (feedback.find(b'\x11') == -1):
-                	#means there was no feedback
-	                #try again
-	#		print("trying again")
-	#		fail += 1
-			#ser.write("refresh\x0D")#im thinking serial line may be noisy. need to clear things???
-	#		ser.write(lineList[x])
-			#time.sleep(.1)
-			#i = 0
-			#while ser.inWaiting() < 3 and i < 3000:
-				#wait
-		#		i += 1
-		#	if ser.inWaiting() == 3:
-	#		feedback = ser.read(3)
-		#	else:
-		#		feedback = ser.readline()
-			#print("Feed, ")
-			#print(feedback)
 	endTime = time.time()
 	#GPIO.output(LED, GPIO.HIGH)
 else:
@@ -129,7 +103,7 @@ ser.close()
 file.close()
 GPIO.cleanup()
 #count execution time
-#endTime = time.time()
+endTime = time.time()
 print("process took, ")
 print(endTime - startTime)
 print(" seconds\n\r")
