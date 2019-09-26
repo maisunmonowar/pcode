@@ -1,0 +1,46 @@
+[PROJECT]
+Target=blink.hex
+Processor_Text=PIC16F1787
+CCSVerions=5.056
+Compiler=PCM
+CCSVersion=5.056
+[Target Data]
+FileList=blink.c
+[Directories]
+Include=
+[C:\Users\maisun\Documents\PhD\offline\code\ccs\blink\blink]
+Type=4
+[mru-list]
+1=blink.c
+
+[ProjectLog]
+Days=2
+D1=26-07-2019
+D1_L=4
+D1_L1=[54958]Project Opened.
+D1_L2=[55000]Started Editing.
+D1_L3=[55300]Stopped Editing.
+TotalEdit=0
+TotalDebug=0
+D1_E=0
+D1_D=0
+D1_L4=[58376]Project Closed.
+D2=01-08-2019
+D2_L=2
+D2_L1=[60794]Project Opened.
+D2_L2=[61148]Project Closed.
+
+[Opened Files]
+1=blink.c
+t1=1
+2=blink.h
+t2=1
+Count=2
+[blink.c]
+Type=4
+[Units]
+Count=1
+1=blink (main)
+
+[defines]
+buildcount=1

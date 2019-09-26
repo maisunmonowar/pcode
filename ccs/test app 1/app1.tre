@@ -1,0 +1,8 @@
+ÀÄapp1
+   ÀÄmain  0/47  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@delay_ms1  0/22  Ram=1
+      ÃÄ@PSTRINGCN7_9600_118_119  0/87  Ram=4
+      ÀÄ@PRINTF_U_9600_118_119  0/63  Ram=2
+         ÃÄ@DIV88  0/21  Ram=3
+         ÀÄ@DIV88  0/21  Ram=3
