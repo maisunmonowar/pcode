@@ -35,6 +35,7 @@ MP/blink.X/nbproject/Package-default.bash.
 *.rlf
 ccs/test app 1/app1.STA
 ccs/test app 1/app1.ccspjt
+"ccs/test app 1/app1.ccspjt"
 ccs/test app 1/app1.cof
 ccs/test app 1/app1.esym
 ccs/test app 1/app1.lst
