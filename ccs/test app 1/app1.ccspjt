@@ -1,0 +1,109 @@
+[PROJECT]
+Target=app1.hex
+Processor_Text=PIC16F1787
+CCSVerions=5.056
+Compiler=PCM
+CCSVersion=5.056
+[Target Data]
+FileList=app1.c
+[Directories]
+Include=
+[C:\Users\maisun\Documents\PhD\offline\code\ccs\test app 1\app1]
+Type=4
+[mru-list]
+1=app1.c
+
+[ProjectLog]
+Days=6
+D1=16-08-2019
+D1_L=10
+D1_L1=[50855]Project Opened.
+D1_L2=[50902]Started Editing.
+D1_L3=[51295]Stopped Editing.
+TotalEdit=18
+TotalDebug=0
+D1_E=2
+D1_D=0
+D1_L4=[54078]Project Closed.
+D1_L5=[57842]Project Opened.
+D1_L6=[57984]Project Closed.
+D1_L7=[58168]Project Opened.
+D1_L8=[58507]Project Closed.
+D1_L9=[58584]Project Opened.
+D1_L10=[58786]Project Closed.
+D2=19-08-2019
+D2_L=12
+D2_L1=[52955]Project Opened.
+D2_L2=[53271]Started Editing.
+D2_L3=[53319]Stopped Editing.
+D2_E=2
+D2_D=0
+D2_L4=[53319]Project Closed.
+D2_L5=[54041]Project Opened.
+D2_L6=[54303]Project Closed.
+D2_L7=[54990]Project Opened.
+D2_L8=[55025]Started Editing.
+D2_L9=[55054]Stopped Editing.
+D2_L10=[55054]Project Closed.
+D2_L11=[66945]Project Opened.
+D2_L12=[66967]Project Closed.
+D3=20-08-2019
+D3_L=4
+D3_L1=[76026]Project Opened.
+D3_L2=[76035]Started Editing.
+D3_L3=[76054]Stopped Editing.
+D3_E=1
+D3_D=0
+D3_L4=[76054]Project Closed.
+D4=28-08-2019
+D4_L=4
+D4_L1=[68715]Project Opened.
+D4_L2=[68722]Started Editing.
+D4_L3=[68775]Stopped Editing.
+D4_E=1
+D4_D=0
+D4_L4=[68775]Project Closed.
+D5=17-09-2019
+D5_L=6
+D5_L1=[57831]Project Opened.
+D5_L2=[57915]Project Closed.
+D5_L3=[67495]Project Opened.
+D5_L4=[67632]Project Closed.
+D5_L5=[69054]Project Opened.
+D5_L6=[69076]Project Closed.
+D6=26-09-2019
+D6_L=11
+D6_L1=[57786]Project Opened.
+D6_L2=[57965]Started Editing.
+D6_L3=[58735]Stopped Editing.
+D6_L4=[58929]Started Editing.
+D6_L5=[59143]Stopped Editing.
+D6_E=12
+D6_D=0
+D6_L6=[59143]Project Closed.
+D6_L7=[61097]Project Opened.
+D6_L8=[61217]Project Closed.
+D6_L9=[65195]Project Opened.
+D6_L10=[65233]Started Editing.
+D6_L11=[65582]Stopped Editing.
+
+[Opened Files]
+1=app1.c
+t1=4
+2=app1.h
+t2=1
+Count=3
+3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\bootloader.h
+t3=106
+4=..\bootlo\readback.hex
+t4=1
+5=..\bootlo\main.hex
+t5=1
+[app1.c]
+Type=4
+
+[defines]
+buildcount=11
+[Units]
+Count=1
+1=app1 (main)

@@ -1,0 +1,1087 @@
+CCS PCM C Compiler, Version 5.056, 29513               20-Aug-19 21:06
+
+               Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\bootlo\main.lst
+
+               ROM used:   620 words (8%)
+                           Largest free fragment is 2047
+               RAM used:   74 (7%) at main() level
+                           142 (14%) worst case
+               Stack used: 2 locations (1 in main + 1 for interrupts)
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   242
+0002:  NOP
+.................... #include <main.h> 
+.................... #include <16F1787.h> 
+.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1787 
+*
+0009:  DATA 0D,05
+000A:  DATA C2,37
+000B:  DATA 6F,3A
+000C:  DATA EC,37
+000D:  DATA 61,32
+000E:  DATA 65,39
+000F:  DATA 20,2B
+0010:  DATA A0,18
+0011:  DATA 0D,05
+0012:  DATA 00,00
+0013:  DATA 0D,05
+0014:  DATA E4,37
+0015:  DATA 77,37
+0016:  DATA EC,37
+0017:  DATA 61,32
+0018:  DATA 69,37
+0019:  DATA 67,00
+001A:  MOVF   0B,W
+001B:  BCF    0B.7
+001C:  MOVLB  03
+001D:  BSF    15.7
+001E:  BSF    15.0
+001F:  NOP
+0020:  NOP
+0021:  BTFSC  09.7
+0022:  BSF    0B.7
+0023:  MOVF   13,W
+0024:  ANDLW  7F
+0025:  BTFSC  03.2
+0026:  GOTO   068
+0027:  MOVLB  00
+0028:  MOVWF  67
+0029:  MOVLB  03
+002A:  MOVF   11,W
+002B:  MOVLB  00
+002C:  MOVWF  68
+002D:  MOVLB  03
+002E:  MOVF   12,W
+002F:  MOVLB  00
+0030:  MOVWF  69
+0031:  MOVF   67,W
+0032:  BTFSS  11.4
+0033:  GOTO   032
+0034:  MOVLB  03
+0035:  MOVWF  1A
+0036:  MOVLB  00
+0037:  MOVF   68,W
+0038:  MOVLB  03
+0039:  MOVWF  11
+003A:  MOVLB  00
+003B:  MOVF   69,W
+003C:  MOVLB  03
+003D:  MOVWF  12
+003E:  MOVF   0B,W
+003F:  BCF    0B.7
+0040:  BSF    15.7
+0041:  BSF    15.0
+0042:  NOP
+0043:  NOP
+0044:  BTFSC  09.7
+0045:  BSF    0B.7
+0046:  RLF    13,W
+0047:  RLF    14,W
+0048:  ANDLW  7F
+0049:  BTFSC  03.2
+004A:  GOTO   068
+004B:  MOVLB  00
+004C:  MOVWF  67
+004D:  MOVLB  03
+004E:  MOVF   11,W
+004F:  MOVLB  00
+0050:  MOVWF  68
+0051:  MOVLB  03
+0052:  MOVF   12,W
+0053:  MOVLB  00
+0054:  MOVWF  69
+0055:  MOVF   67,W
+0056:  BTFSS  11.4
+0057:  GOTO   056
+0058:  MOVLB  03
+0059:  MOVWF  1A
+005A:  MOVLB  00
+005B:  MOVF   68,W
+005C:  MOVLB  03
+005D:  MOVWF  11
+005E:  MOVLB  00
+005F:  MOVF   69,W
+0060:  MOVLB  03
+0061:  MOVWF  12
+0062:  INCF   11,F
+0063:  BTFSC  03.2
+0064:  INCF   12,F
+0065:  MOVLB  00
+0066:  GOTO   01A
+0067:  MOVLB  03
+0068:  MOVLB  00
+0069:  RETURN
+*
+00A7:  MOVF   0B,W
+00A8:  MOVWF  78
+00A9:  BCF    0B.7
+00AA:  MOVLB  03
+00AB:  MOVLW  55
+00AC:  MOVWF  16
+00AD:  MOVLW  AA
+00AE:  MOVWF  16
+00AF:  BSF    15.1
+00B0:  NOP
+00B1:  NOP
+00B2:  BTFSC  15.1
+00B3:  GOTO   0B2
+00B4:  BCF    15.2
+00B5:  MOVF   78,W
+00B6:  IORWF  0B,F
+00B7:  MOVLB  00
+00B8:  RETURN
+*
+01DB:  MOVLB  03
+01DC:  BSF    15.7
+01DD:  BSF    15.5
+01DE:  MOVF   11,W
+01DF:  ANDLW  1F
+01E0:  BTFSC  03.2
+01E1:  GOTO   1F2
+01E2:  MOVWF  79
+01E3:  MOVF   11,W
+01E4:  ANDLW  E0
+01E5:  MOVWF  11
+01E6:  BSF    15.0
+01E7:  NOP
+01E8:  NOP
+01E9:  BSF    15.2
+01EA:  MOVLB  00
+01EB:  CALL   0A7
+01EC:  MOVLB  03
+01ED:  INCF   11,F
+01EE:  BTFSC  03.2
+01EF:  INCF   12,F
+01F0:  DECFSZ 79,F
+01F1:  GOTO   1E6
+01F2:  MOVLB  01
+01F3:  MOVF   44,W
+01F4:  MOVWF  79
+01F5:  BCF    03.0
+01F6:  RRF    79,F
+01F7:  MOVF   00,W
+01F8:  MOVLB  03
+01F9:  MOVWF  13
+01FA:  ADDFSR 01,FSR0
+01FB:  MOVF   00,W
+01FC:  MOVWF  14
+01FD:  ADDFSR 01,FSR0
+01FE:  MOVF   11,W
+01FF:  ANDLW  1F
+0200:  SUBLW  1F
+0201:  BTFSS  03.2
+0202:  GOTO   209
+0203:  BSF    15.4
+0204:  BSF    15.2
+0205:  BCF    15.5
+0206:  MOVLB  00
+0207:  CALL   0A7
+0208:  MOVLB  03
+0209:  BSF    15.2
+020A:  MOVLB  00
+020B:  CALL   0A7
+020C:  MOVLB  03
+020D:  BSF    15.5
+020E:  INCF   11,F
+020F:  BTFSC  03.2
+0210:  INCF   12,F
+0211:  DECFSZ 79,F
+0212:  GOTO   214
+0213:  GOTO   216
+0214:  MOVLB  01
+0215:  GOTO   1F7
+0216:  MOVF   11,W
+0217:  ANDLW  1F
+0218:  BTFSC  03.2
+0219:  GOTO   233
+021A:  SUBLW  20
+021B:  MOVWF  79
+021C:  BSF    15.0
+021D:  NOP
+021E:  NOP
+021F:  MOVF   11,W
+0220:  ANDLW  1F
+0221:  SUBLW  1F
+0222:  BTFSS  03.2
+0223:  GOTO   22A
+0224:  BSF    15.4
+0225:  BSF    15.2
+0226:  BCF    15.5
+0227:  MOVLB  00
+0228:  CALL   0A7
+0229:  MOVLB  03
+022A:  BSF    15.2
+022B:  MOVLB  00
+022C:  CALL   0A7
+022D:  MOVLB  03
+022E:  INCF   11,F
+022F:  BTFSC  03.2
+0230:  INCF   12,F
+0231:  DECFSZ 79,F
+0232:  GOTO   21C
+0233:  MOVLB  00
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+.................... #use delay(crystal=8000000) 
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
+*
+006A:  BTFSS  11.4
+006B:  GOTO   06A
+006C:  MOVLB  03
+006D:  MOVWF  1A
+006E:  MOVLB  00
+006F:  RETURN
+....................  
+....................   
+.................... #define _bootloader 
+....................  
+.................... // NOTE - User must include bootloader.h in application program 
+.................... #include <bootloader.h> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                       BOOTLOADER.H                                //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example bootloader (ex_bootloader.c).                     //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  LOADER_END may need to be adjusted for a specific chip and       //// 
+.................... ////  bootloader.  LOADER_END must be 1 minus a multiple of            //// 
+.................... ////  FLASH_ERASE_SIZE.                                                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2014 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #ifndef __BOOTLOADER_H__ 
+.................... #define __BOOTLOADER_H__ 
+....................  
+.................... #ifndef LOADER_END 
+....................  #if defined(__PCM__) 
+....................   #ifdef BOOTLOADER_MODE2X 
+....................    #define LOADER_END 0x4BF 
+....................   #else 
+....................    #define LOADER_END 0x33F 
+....................   #endif 
+....................  #elif defined(__PCH__) 
+....................   #define FLASH_SIZE getenv("FLASH_ERASE_SIZE") 
+....................   #if ((0x500 % FLASH_SIZE) == 0)         //IF 0x500 is even flash boundary 
+....................    #define LOADER_END   0x4FF 
+....................   #else                                  //ELSE, goto next even boundary 
+....................    #define LOADER_END   ((0x500+FLASH_SIZE-(0x500 % FLASH_SIZE))-1) 
+....................   #endif 
+....................  #else 
+....................   #error Bootloader only works with PCM or PCH compiler 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #define LOADER_SIZE   LOADER_END 
+....................  
+.................... #ifndef BOOTLOADER_AT_START 
+....................  #define BOOTLOADER_AT_START 
+.................... #endif 
+....................  
+.................... #ifndef _bootloader 
+....................  #if defined(__PCM__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+5) 
+....................  #elif defined(__PCH__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+9) 
+....................  #endif 
+....................  
+....................  #org 0, LOADER_END {} 
+.................... #else 
+....................  #ifdef __PCM__ 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x800 
+....................    #org LOADER_END+3, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+3, 0x7FF {} 
+....................    #if getenv("PROGRAM_MEMORY") <= 0x1000 
+....................     #org 0x800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................    #else 
+....................     #org 0x800, 0xFFF{} 
+....................     #if getenv("PROGRAM_MEMORY") <= 0x1800 
+....................      #org 0x1000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................     #else 
+....................      #org 0x1000, 0x17FF {} 
+....................      #if getenv("PROGRAM_MEMORY") <= 0x2000 
+....................       #org 0x1800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................      #else 
+....................       #org 0x1800, 0x1FFF {} 
+....................       #if getenv("PROGRAM_MEMORY") <= 0x2800 
+....................        #org 0x2000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................       #else 
+....................        #org 0x2000, 0x27FF {} 
+....................        #if getenv("PROGRAM_MEMORY") <= 0x3000 
+....................         #org 0x2800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................        #else 
+....................         #org 0x2800, 0x2FFF {} 
+....................         #if getenv("PROGRAM_MEMORY") <= 0x3800 
+....................          #org 0x3000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................         #else 
+....................          #org 0x3000, 0x37FF {} 
+....................          #org 0x3800, 0x3FFF {} 
+....................         #endif 
+....................        #endif 
+....................       #endif 
+....................      #endif 
+....................     #endif 
+....................    #endif 
+....................   #endif 
+....................  #else 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x10000 
+....................    #org LOADER_END+5, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+5, 0xFFFE {} 
+....................    #org 0x10000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #endif 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #endif 
+....................  
+.................... #include <loader.c> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                         loader.c                                  //// 
+.................... ////                                                                   //// 
+.................... //// This driver will take an Intel 8-bit Hex file over RS232 channels //// 
+.................... //// and modify the flash program memory with the new code.  A proxy   //// 
+.................... //// function is required to sit between the real loading function     //// 
+.................... //// and the main code because the #org preprocessor command could     //// 
+.................... //// possibly change the order of functions within a defined block.    //// 
+.................... ////                                                                   //// 
+.................... //// After each good line, the loader sends an ACKLOD character.  The  //// 
+.................... //// driver uses XON/XOFF flow control.  Also, any buffer on the PC    //// 
+.................... //// UART must be turned off, or to its lowest setting, otherwise it   //// 
+.................... //// will miss data.                                                   //// 
+.................... ////                                                                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2014 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef LOADER_END 
+....................  #define LOADER_END      getenv("PROGRAM_MEMORY")-1 
+....................  
+....................  #if defined(__PCM__) 
+....................   #define LOADER_SIZE   0x27F 
+....................  #elif defined(__PCH__) 
+....................   #if (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE")) == 0 
+....................    #define LOADER_SIZE   0x3FF 
+....................   #else 
+....................    #define LOADER_SIZE   (getenv("PROGRAM_MEMORY") % (getenv("FLASH_ERASE_SIZE")) - 1) 
+....................   #endif 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #define LOADER_ADDR LOADER_END-LOADER_SIZE 
+....................  
+.................... #ifndef BOOTLOADER_AT_START 
+....................  #ORG LOADER_ADDR+4, LOADER_END auto=0 default 
+.................... #endif 
+....................  
+.................... #ifndef BUFFER_LEN_LOD 
+....................  #define BUFFER_LEN_LOD    64 
+.................... #endif 
+....................  
+.................... #ifdef BOOTLOADER_MODE2X 
+....................  #define BUFFER_COUNT   2 
+.................... #else 
+....................  #define BUFFER_COUNT   1 
+.................... #endif 
+....................  
+.................... #if defined(__PCM__) && !getenv("ENH16") && (BUFFER_COUNT == 2) 
+....................  struct 
+....................  { 
+....................    int8 idx; 
+....................    char *buffer; 
+....................  } rBuffer[BUFFER_COUNT]; 
+....................  
+....................  char Buffer1[BUFFER_LEN_LOD]; 
+....................  char Buffer2[BUFFER_LEN_LOD]; 
+.................... #else 
+....................  struct 
+....................  { 
+....................    int8 idx; 
+....................    char buffer[BUFFER_LEN_LOD]; 
+....................  } rBuffer[BUFFER_COUNT]; 
+.................... #endif 
+....................  
+.................... #define ACKLOD 0x06 
+.................... #define XON    0x11 
+.................... #define XOFF   0x13 
+....................  
+.................... unsigned int atoi_b16(char *s); 
+....................  
+.................... #ifdef BOOTLOADER_STREAM 
+....................  #define BootLoaderGetc()     fgetc(BOOTLOADER_STREAM) 
+....................  #define BootLoaderPutc(c)    fputc(c, BOOTLOADER_STREAM) 
+.................... #else 
+....................  #define BootLoaderGetc()     getc() 
+....................  #define BootLoaderPutc(c)    putc(c) 
+.................... #endif 
+....................  
+.................... void real_load_program (void) 
+*
+00B9:  BCF    65.1
+00BA:  CLRF   6B
+00BB:  CLRF   6A
+.................... { 
+....................    int1  do_ACKLOD, done=FALSE; 
+....................    int8  checksum, line_type; 
+....................    int16 l_addr,h_addr=0; 
+....................    int32 addr; 
+....................   #if getenv("FLASH_ERASE_SIZE") != getenv("FLASH_WRITE_SIZE") 
+....................    int32 next_addr; 
+....................   #endif 
+....................    int8  dataidx, i, count; 
+....................    int8  data[BUFFER_LEN_LOD / 2]; 
+....................   #ifdef BOOTLOADER_MODE2X 
+....................    int8  buffidx; 
+....................   #endif 
+....................     
+....................   #if defined(__PCM__) && !getenv("ENH16") && (BUFFER_COUNT == 2) 
+....................    rBuffer[0].buffer = &Buffer1[0]; 
+....................    rBuffer[1].buffer = &Buffer2[0]; 
+....................   #endif 
+....................     
+....................   #ifdef BOOTLOADER_MODE2X 
+....................    buffidx = 0; 
+....................  
+....................    while (!done)  // Loop until the entire program is downloaded 
+....................    { 
+....................       rBuffer[buffidx].idx = 0;     // Read into the buffer until 0x0D ('\r') is received or the buffer is full 
+....................        
+....................       do { 
+....................          rBuffer[buffidx].buffer[rBuffer[buffidx].idx] = BootLoaderGetc(); 
+....................           
+....................       } while ((rBuffer[buffidx].buffer[rBuffer[buffidx].idx++] != 0x0D) && (rBuffer[buffidx].idx <= BUFFER_LEN_LOD)); 
+....................        
+....................       if(++buffidx >= BUFFER_COUNT) 
+....................       { 
+....................   #else 
+....................    while (!done)  // Loop until the entire program is downloaded 
+00BC:  BTFSC  65.1
+00BD:  GOTO   23B
+....................    { 
+....................       rBuffer[0].idx = 0; 
+00BE:  CLRF   22
+....................        
+....................       do { 
+....................          rBuffer[0].buffer[rBuffer[0].idx] = BootLoaderGetc(); 
+00BF:  MOVLW  03
+00C0:  ADDWF  22,W
+00C1:  MOVWF  04
+00C2:  MOVLW  20
+00C3:  MOVWF  05
+00C4:  BTFSC  03.0
+00C5:  INCF   05,F
+00C6:  BTFSS  11.5
+00C7:  GOTO   0C6
+00C8:  MOVLB  03
+00C9:  MOVF   19,W
+00CA:  MOVWF  00
+....................           
+....................       } while ((rBuffer[0].buffer[rBuffer[0].idx++] != 0x0D) && (rBuffer[0].idx <= BUFFER_LEN_LOD)); 
+00CB:  MOVLB  00
+00CC:  MOVF   22,W
+00CD:  INCF   22,F
+00CE:  ADDLW  03
+00CF:  MOVWF  04
+00D0:  MOVLW  20
+00D1:  MOVWF  05
+00D2:  BTFSC  03.0
+00D3:  INCF   05,F
+00D4:  MOVF   00,W
+00D5:  SUBLW  0D
+00D6:  BTFSC  03.2
+00D7:  GOTO   0DC
+00D8:  MOVF   22,W
+00D9:  SUBLW  40
+00DA:  BTFSC  03.0
+00DB:  GOTO   0BF
+....................   #endif 
+....................    
+....................          BootLoaderPutc(XOFF);  // Suspend sender 
+00DC:  MOVLW  13
+00DD:  CALL   06A
+....................     
+....................          do_ACKLOD = TRUE; 
+00DE:  BSF    65.0
+....................           
+....................         #ifdef BOOTLOADER_MODE2X 
+....................          if(rBuffer[0].idx != rBuffer[1].idx) 
+....................             do_ACKLOD = FALSE; 
+....................          else 
+....................          { 
+....................             for(i=0;i<(rBuffer[0].idx-1);i++) 
+....................             { 
+....................                if(rBuffer[0].buffer[i] != rBuffer[1].buffer[i]) 
+....................                { 
+....................                   do_ACKLOD = FALSE; 
+....................                   break; 
+....................                } 
+....................             } 
+....................              
+....................             if(do_ACKLOD) 
+....................             { 
+....................         #endif    
+....................                // Only process data blocks that start with ':' 
+....................                if (rBuffer[0].buffer[0] == ':') 
+00DF:  MOVF   23,W
+00E0:  SUBLW  3A
+00E1:  BTFSS  03.2
+00E2:  GOTO   234
+....................                { 
+....................                   count = atoi_b16 (&rBuffer[0].buffer[1]);  // Get the number of bytes from the buffer 
+00E3:  MOVLW  20
+00E4:  MOVLB  01
+00E5:  MOVWF  49
+00E6:  MOVLW  04
+00E7:  MOVWF  48
+00E8:  MOVLB  00
+00E9:  CALL   070
+00EA:  MOVF   78,W
+00EB:  MOVLB  01
+00EC:  MOVWF  22
+....................           
+....................                   // Get the lower 16 bits of address 
+....................                   l_addr = make16(atoi_b16(&rBuffer[0].buffer[3]),atoi_b16(&rBuffer[0].buffer[5])); 
+00ED:  MOVLW  20
+00EE:  MOVWF  49
+00EF:  MOVLW  06
+00F0:  MOVWF  48
+00F1:  MOVLB  00
+00F2:  CALL   070
+00F3:  MOVF   78,W
+00F4:  MOVLB  01
+00F5:  MOVWF  44
+00F6:  MOVLW  20
+00F7:  MOVWF  49
+00F8:  MOVLW  08
+00F9:  MOVWF  48
+00FA:  MOVLB  00
+00FB:  CALL   070
+00FC:  MOVF   78,W
+00FD:  MOVLB  01
+00FE:  MOVWF  45
+00FF:  MOVF   44,W
+0100:  MOVLB  00
+0101:  MOVWF  69
+0102:  MOVLB  01
+0103:  MOVF   45,W
+0104:  MOVLB  00
+0105:  MOVWF  68
+....................           
+....................                   line_type = atoi_b16 (&rBuffer[0].buffer[7]); 
+0106:  MOVLW  20
+0107:  MOVLB  01
+0108:  MOVWF  49
+0109:  MOVLW  0A
+010A:  MOVWF  48
+010B:  MOVLB  00
+010C:  CALL   070
+010D:  MOVF   78,W
+010E:  MOVWF  67
+....................           
+....................                   addr = make32(h_addr,l_addr); 
+010F:  MOVF   6A,W
+0110:  MOVWF  6E
+0111:  MOVF   6B,W
+0112:  MOVWF  6F
+0113:  MOVF   68,W
+0114:  MOVWF  6C
+0115:  MOVF   69,W
+0116:  MOVWF  6D
+....................           
+....................                  #if defined(__PCM__)  // PIC16 uses word addresses 
+....................                   addr /= 2; 
+0117:  BCF    03.0
+0118:  RRF    6F,F
+0119:  RRF    6E,F
+011A:  RRF    6D,F
+011B:  RRF    6C,F
+....................                  #endif 
+....................                    
+....................                   checksum = 0;  // Sum the bytes to find the check sum value 
+011C:  CLRF   66
+....................                   for (i=1; i<(rBuffer[0].idx-3); i+=2) 
+011D:  MOVLW  01
+011E:  MOVLB  01
+011F:  MOVWF  21
+0120:  MOVLW  03
+0121:  MOVLB  00
+0122:  SUBWF  22,W
+0123:  MOVLB  01
+0124:  SUBWF  21,W
+0125:  BTFSC  03.0
+0126:  GOTO   13D
+....................                      checksum += atoi_b16 (&rBuffer[0].buffer[i]); 
+0127:  MOVLW  03
+0128:  ADDWF  21,W
+0129:  MOVWF  78
+012A:  MOVLW  20
+012B:  MOVWF  7A
+012C:  BTFSC  03.0
+012D:  INCF   7A,F
+012E:  MOVF   78,W
+012F:  MOVWF  44
+0130:  MOVF   7A,W
+0131:  MOVWF  45
+0132:  MOVWF  49
+0133:  MOVF   44,W
+0134:  MOVWF  48
+0135:  MOVLB  00
+0136:  CALL   070
+0137:  MOVF   78,W
+0138:  ADDWF  66,F
+0139:  MOVLW  02
+013A:  MOVLB  01
+013B:  ADDWF  21,F
+013C:  GOTO   120
+....................                   checksum = 0xFF - checksum + 1; 
+013D:  MOVLB  00
+013E:  MOVF   66,W
+013F:  SUBLW  FF
+0140:  ADDLW  01
+0141:  MOVWF  66
+....................           
+....................                   if (checksum != atoi_b16 (&rBuffer[0].buffer[rBuffer[0].idx-3])) 
+0142:  MOVLW  03
+0143:  SUBWF  22,W
+0144:  ADDLW  03
+0145:  MOVWF  78
+0146:  MOVLW  20
+0147:  MOVWF  7A
+0148:  BTFSC  03.0
+0149:  INCF   7A,F
+014A:  MOVF   78,W
+014B:  MOVLB  01
+014C:  MOVWF  44
+014D:  MOVF   7A,W
+014E:  MOVWF  45
+014F:  MOVWF  49
+0150:  MOVF   44,W
+0151:  MOVWF  48
+0152:  MOVLB  00
+0153:  CALL   070
+0154:  MOVF   78,W
+0155:  SUBWF  66,W
+0156:  BTFSC  03.2
+0157:  GOTO   15A
+....................                      do_ACKLOD = FALSE; 
+0158:  BCF    65.0
+0159:  GOTO   234
+....................                   else 
+....................                   { 
+....................                      // If the line type is 1, then data is done being sent 
+....................                      if (line_type == 1) 
+015A:  DECFSZ 67,W
+015B:  GOTO   15E
+....................                         done = TRUE; 
+015C:  BSF    65.1
+015D:  GOTO   234
+....................                      else if (line_type == 4) 
+015E:  MOVF   67,W
+015F:  SUBLW  04
+0160:  BTFSS  03.2
+0161:  GOTO   17D
+....................                         h_addr = make16(atoi_b16(&rBuffer[0].buffer[9]), atoi_b16(&rBuffer[0].buffer[11])); 
+0162:  MOVLW  20
+0163:  MOVLB  01
+0164:  MOVWF  49
+0165:  MOVLW  0C
+0166:  MOVWF  48
+0167:  MOVLB  00
+0168:  CALL   070
+0169:  MOVF   78,W
+016A:  MOVLB  01
+016B:  MOVWF  44
+016C:  MOVLW  20
+016D:  MOVWF  49
+016E:  MOVLW  0E
+016F:  MOVWF  48
+0170:  MOVLB  00
+0171:  CALL   070
+0172:  MOVF   78,W
+0173:  MOVLB  01
+0174:  MOVWF  45
+0175:  MOVF   44,W
+0176:  MOVLB  00
+0177:  MOVWF  6B
+0178:  MOVLB  01
+0179:  MOVF   45,W
+017A:  MOVLB  00
+017B:  MOVWF  6A
+017C:  GOTO   234
+....................                      else if (line_type == 0) 
+017D:  MOVF   67,F
+017E:  BTFSS  03.2
+017F:  GOTO   234
+....................                      { 
+....................                         if ((addr < LOADER_ADDR || addr > LOADER_END) && addr < getenv("PROGRAM_MEMORY")) 
+0180:  MOVF   6F,F
+0181:  BTFSS  03.2
+0182:  GOTO   191
+0183:  MOVF   6E,F
+0184:  BTFSS  03.2
+0185:  GOTO   191
+0186:  MOVF   6D,W
+0187:  SUBLW  02
+0188:  BTFSC  03.0
+0189:  GOTO   234
+018A:  XORLW  FF
+018B:  BTFSS  03.2
+018C:  GOTO   191
+018D:  MOVF   6C,W
+018E:  SUBLW  3F
+018F:  BTFSC  03.0
+0190:  GOTO   234
+0191:  MOVF   6F,F
+0192:  BTFSS  03.2
+0193:  GOTO   234
+0194:  MOVF   6E,F
+0195:  BTFSS  03.2
+0196:  GOTO   234
+0197:  MOVF   6D,W
+0198:  SUBLW  1F
+0199:  BTFSS  03.0
+019A:  GOTO   234
+....................                         { 
+....................                            // Loops through all of the data and stores it in data 
+....................                            // The last 2 bytes are the check sum, hence buffidx-3 
+....................                            for (i = 9,dataidx=0; i < rBuffer[0].idx-3; i += 2) 
+019B:  MOVLW  09
+019C:  MOVLB  01
+019D:  MOVWF  21
+019E:  CLRF   20
+019F:  MOVLW  03
+01A0:  MOVLB  00
+01A1:  SUBWF  22,W
+01A2:  MOVLB  01
+01A3:  SUBWF  21,W
+01A4:  BTFSC  03.0
+01A5:  GOTO   1CC
+....................                               data[dataidx++]=atoi_b16(&rBuffer[0].buffer[i]); 
+01A6:  MOVF   20,W
+01A7:  INCF   20,F
+01A8:  ADDLW  53
+01A9:  MOVWF  78
+01AA:  MOVLW  20
+01AB:  MOVWF  7A
+01AC:  BTFSC  03.0
+01AD:  INCF   7A,F
+01AE:  MOVF   78,W
+01AF:  MOVWF  44
+01B0:  MOVF   7A,W
+01B1:  MOVWF  45
+01B2:  MOVLW  03
+01B3:  ADDWF  21,W
+01B4:  MOVWF  78
+01B5:  MOVLW  20
+01B6:  MOVWF  7A
+01B7:  BTFSC  03.0
+01B8:  INCF   7A,F
+01B9:  MOVF   78,W
+01BA:  MOVWF  46
+01BB:  MOVF   7A,W
+01BC:  MOVWF  47
+01BD:  MOVWF  49
+01BE:  MOVF   46,W
+01BF:  MOVWF  48
+01C0:  MOVLB  00
+01C1:  CALL   070
+01C2:  MOVLB  01
+01C3:  MOVF   45,W
+01C4:  MOVWF  05
+01C5:  MOVF   44,W
+01C6:  MOVWF  04
+01C7:  MOVF   78,W
+01C8:  MOVWF  00
+....................           
+....................                            #if getenv("FLASH_ERASE_SIZE") > getenv("FLASH_WRITE_SIZE") 
+....................                               if ((addr!=next_addr) && (addr > (next_addr + (getenv("FLASH_ERASE_SIZE") - (next_addr % getenv("FLASH_ERASE_SIZE"))))) && ((addr & (getenv("FLASH_ERASE_SIZE")-1)) != 0)) 
+....................                               { 
+....................                                  #if defined(__PCH__) && defined(BOOTLOADER_AT_START) 
+....................                                     #if ((getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE")) != 0) 
+....................                                        if (addr > (getenv("PROGRAM_MEMORY") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE")))) 
+....................                                        { 
+....................                                           read_program_memory(getenv("PROGRAM_MEMORY"), rBuffer[0].buffer, getenv("FLASH_ERASE_SIZE") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE"))); 
+....................                                           erase_program_eeprom(addr); 
+....................                                           write_program_memory(getenv("PROGRAM_MEMORY"), rBuffer[0].buffer, getenv("FLASH_ERASE_SIZE") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE"))); 
+....................                                        } 
+....................                                        else 
+....................                                     #endif 
+....................                                  #endif 
+....................                                           erase_program_eeprom(addr); 
+....................                               } 
+....................                               #if defined(__PCM__) 
+....................                                  next_addr = addr + count/2; 
+....................                               #else 
+....................                                  next_addr = addr + count; 
+....................                               #endif 
+....................                            #endif 
+....................                             
+....................                            #if defined(__PCH__) && defined(BOOTLOADER_AT_START) 
+01C9:  MOVLW  02
+01CA:  ADDWF  21,F
+01CB:  GOTO   19F
+....................                               #if ((getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE")) != 0) 
+....................                                  if (addr == (getenv("PROGRAM_MEMORY") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE")))) 
+....................                                  { 
+....................                                     read_program_memory(getenv("PROGRAM_MEMORY"), rBuffer[0].buffer, getenv("FLASH_ERASE_SIZE") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE"))); 
+....................                                     write_program_memory(addr, data, count); 
+....................                                     write_program_memory(getenv("PROGRAM_MEMORY"), rBuffer[0].buffer, getenv("FLASH_ERASE_SIZE") - (getenv("PROGRAM_MEMORY") % getenv("FLASH_ERASE_SIZE"))); 
+....................                                  } 
+....................                                  else 
+....................                               #endif 
+....................                            #endif 
+....................                                     write_program_memory(addr, data, count); 
+01CC:  MOVLB  00
+01CD:  MOVF   6D,W
+01CE:  MOVLB  03
+01CF:  MOVWF  12
+01D0:  MOVLB  00
+01D1:  MOVF   6C,W
+01D2:  MOVLB  03
+01D3:  MOVWF  11
+01D4:  MOVLW  20
+01D5:  MOVWF  05
+01D6:  MOVLW  53
+01D7:  MOVWF  04
+01D8:  MOVLB  01
+01D9:  MOVF   22,W
+01DA:  MOVWF  44
+....................                         } 
+....................                      } 
+....................                   } 
+....................                } 
+....................         #ifdef BOOTLOADER_MODE2X 
+....................             } 
+....................          } 
+....................           
+....................          buffidx = 0; 
+....................         #endif 
+....................  
+....................          if (do_ACKLOD) 
+*
+0234:  BTFSS  65.0
+0235:  GOTO   238
+....................             BootLoaderPutc(ACKLOD); 
+0236:  MOVLW  06
+0237:  CALL   06A
+....................           
+....................          BootLoaderPutc(XON); 
+0238:  MOVLW  11
+0239:  CALL   06A
+....................           
+....................      #ifdef BOOTLOADER_MODE2X 
+023A:  GOTO   0BC
+....................       }  
+....................      #endif 
+....................    } 
+....................  
+....................    BootLoaderPutc(ACKLOD); 
+023B:  MOVLW  06
+023C:  CALL   06A
+....................    BootLoaderPutc(XON); 
+023D:  MOVLW  11
+023E:  CALL   06A
+....................  
+....................    reset_cpu(); 
+023F:  RESET
+.................... } 
+....................  
+.................... unsigned int atoi_b16(char *s) {  // Convert two hex characters to a int8 
+*
+0070:  MOVLB  01
+0071:  CLRF   4A
+....................    unsigned int result = 0; 
+....................    int i; 
+....................  
+....................    for (i=0; i<2; i++,s++)  { 
+0072:  CLRF   4B
+0073:  MOVF   4B,W
+0074:  SUBLW  01
+0075:  BTFSS  03.0
+0076:  GOTO   0A3
+....................       if (*s >= 'A') 
+0077:  MOVF   49,W
+0078:  MOVWF  7A
+0079:  MOVF   48,W
+007A:  MOVWF  04
+007B:  MOVF   7A,W
+007C:  MOVWF  05
+007D:  MOVF   00,W
+007E:  SUBLW  40
+007F:  BTFSC  03.0
+0080:  GOTO   091
+....................          result = 16*result + (*s) - 'A' + 10; 
+0081:  SWAPF  4A,W
+0082:  MOVWF  4C
+0083:  MOVLW  F0
+0084:  ANDWF  4C,F
+0085:  MOVF   49,W
+0086:  MOVWF  7A
+0087:  MOVF   48,W
+0088:  MOVWF  04
+0089:  MOVF   7A,W
+008A:  MOVWF  05
+008B:  MOVF   00,W
+008C:  ADDWF  4C,W
+008D:  ADDLW  BF
+008E:  ADDLW  0A
+008F:  MOVWF  4A
+0090:  GOTO   09D
+....................       else 
+....................          result = 16*result + (*s) - '0'; 
+0091:  SWAPF  4A,W
+0092:  MOVWF  4C
+0093:  MOVLW  F0
+0094:  ANDWF  4C,F
+0095:  MOVF   48,W
+0096:  MOVWF  04
+0097:  MOVF   49,W
+0098:  MOVWF  05
+0099:  MOVF   00,W
+009A:  ADDWF  4C,W
+009B:  ADDLW  D0
+009C:  MOVWF  4A
+009D:  MOVF   4B,W
+009E:  INCF   4B,F
+009F:  INCF   48,F
+00A0:  BTFSC  03.2
+00A1:  INCF   49,F
+00A2:  GOTO   073
+....................    } 
+....................  
+....................    return(result); 
+00A3:  MOVF   4A,W
+00A4:  MOVWF  78
+00A5:  MOVLB  00
+00A6:  RETURN
+.................... } 
+....................  
+.................... #ifndef BOOTLOADER_AT_START 
+....................  #ORG default 
+....................  #ORG LOADER_ADDR, LOADER_ADDR+3 
+.................... #endif 
+.................... void load_program(void) 
+.................... { 
+....................    real_load_program(); 
+*
+0240:  MOVLP  00
+0241:  GOTO   269 (RETURN)
+.................... } 
+....................  
+....................  
+.................... #define PUSH_BUTTON PIN_D0 
+....................  
+.................... #INT_GLOBAL 
+.................... void isr(void){ 
+....................    jump_to_isr(LOADER_END+5); 
+*
+0004:  CLRF   03
+0005:  MOVLP  00
+0006:  MOVLP  03
+0007:  GOTO   346
+0008:  RETFIE
+.................... } 
+....................  
+.................... #org LOADER_END+1, LOADER_END+2 
+.................... void application(void)  
+.................... {  
+....................     
+....................   while(1); 
+*
+0340:  GOTO   340
+0341:  RETURN
+.................... } 
+....................  
+.................... void main() 
+*
+0242:  MOVLB  03
+0243:  BCF    1F.3
+0244:  MOVLW  0C
+0245:  MOVWF  1B
+0246:  MOVLW  A2
+0247:  MOVWF  1E
+0248:  MOVLW  90
+0249:  MOVWF  1D
+024A:  MOVLB  00
+024B:  CLRF   64
+024C:  CLRF   63
+024D:  MOVLB  03
+024E:  CLRF   0C
+024F:  CLRF   0D
+0250:  CLRF   0F
+0251:  CLRF   10
+0252:  MOVLB  02
+0253:  CLRF   12
+0254:  CLRF   11
+.................... { 
+....................   
+....................    // Enter Bootloader if Pin D0 is low after a RESET 
+....................    if(!input(PUSH_BUTTON)) 
+0255:  MOVLB  01
+0256:  BSF    0F.0
+0257:  MOVLB  00
+0258:  BTFSC  0F.0
+0259:  GOTO   269
+....................    { 
+....................       printf("\r\nBootloader V 1\r\n"); 
+025A:  MOVLW  09
+025B:  MOVLB  03
+025C:  MOVWF  11
+025D:  MOVLW  00
+025E:  MOVWF  12
+025F:  MOVLB  00
+0260:  CALL   01A
+....................     
+....................       // Let the user know it is ready to accept a download 
+....................       printf("\r\ndownloading"); 
+0261:  MOVLW  13
+0262:  MOVLB  03
+0263:  MOVWF  11
+0264:  MOVLW  00
+0265:  MOVWF  12
+0266:  MOVLB  00
+0267:  CALL   01A
+....................       load_program(); 
+0268:  GOTO   0B9
+....................    } 
+....................     
+....................    application(); 
+0269:  CALL   340
+....................  
+.................... } 
+026A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

@@ -1,0 +1,121 @@
+CCS PCM C Compiler, Version 5.056, 29513               17-Sep-19 19:14
+
+               Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\memoryOrg\memoryOrg.lst
+
+               ROM used:   59 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (1%) at main() level
+                           18 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   500
+0002:  NOP
+.................... #include <memoryOrg.h> 
+.................... #include <16F1787.h> 
+.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1787 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+.................... #use delay(crystal=8MHz) 
+*
+0004:  MOVLW  20
+0005:  MOVWF  05
+0006:  MOVLW  02
+0007:  MOVWF  04
+0008:  MOVF   00,W
+0009:  BTFSC  03.2
+000A:  GOTO   018
+000B:  MOVLW  02
+000C:  MOVWF  78
+000D:  CLRF   77
+000E:  DECFSZ 77,F
+000F:  GOTO   00E
+0010:  DECFSZ 78,F
+0011:  GOTO   00D
+0012:  MOVLW  97
+0013:  MOVWF  77
+0014:  DECFSZ 77,F
+0015:  GOTO   014
+0016:  DECFSZ 00,F
+0017:  GOTO   00B
+0018:  RETURN
+....................  
+.................... #define LED PIN_D0 
+.................... #define DELAY 1000 
+....................  
+.................... //!#include <bootloader.h> 
+.................... //!#include <loader.c> 
+....................  
+.................... #if defined(__PCM__) 
+....................  #org 0x500, 0x628//LOADER_END+1,LOADER_END+256 
+.................... #elif defined(__PCH__) 
+....................  #org LOADER_END+2,LOADER_END+4 
+.................... #endif 
+.................... void main() 
+*
+0500:  MOVLB  03
+0501:  CLRF   0C
+0502:  CLRF   0D
+0503:  CLRF   0F
+0504:  CLRF   10
+0505:  MOVLB  02
+0506:  CLRF   12
+0507:  CLRF   11
+.................... { 
+....................    while(TRUE) 
+....................    { 
+....................       //Example blinking LED program 
+....................       output_low(LED); 
+0508:  MOVLB  01
+0509:  BCF    0F.0
+050A:  MOVLB  02
+050B:  BCF    0F.0
+....................       delay_ms(DELAY); 
+050C:  MOVLW  04
+050D:  MOVLB  00
+050E:  MOVWF  21
+050F:  MOVLW  FA
+0510:  MOVWF  22
+0511:  CALL   004
+0512:  DECFSZ 21,F
+0513:  GOTO   50F
+....................       output_high(LED); 
+0514:  MOVLB  01
+0515:  BCF    0F.0
+0516:  MOVLB  02
+0517:  BSF    0F.0
+....................       delay_ms(DELAY); 
+0518:  MOVLW  04
+0519:  MOVLB  00
+051A:  MOVWF  21
+051B:  MOVLW  FA
+051C:  MOVWF  22
+051D:  CALL   004
+051E:  DECFSZ 21,F
+051F:  GOTO   51B
+0520:  MOVLB  02
+0521:  GOTO   508
+....................  
+....................       //TODO: User Code 
+....................    } 
+.................... } 
+....................  
+0522:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

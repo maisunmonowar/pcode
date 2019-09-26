@@ -1,0 +1,94 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC16F1787
+CCSVerions=5.056
+Compiler=PCM
+CCSVersion=5.056
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[C:\Users\maisun\Documents\PhD\offline\code\ccs\bootlo\main]
+Type=4
+[mru-list]
+1=main.c
+
+[ProjectLog]
+Days=7
+D1=01-08-2019
+D1_L=2
+D1_L1=[61148]Project Opened.
+D1_L2=[66889]Project Closed.
+D2=02-08-2019
+D2_L=2
+D2_L1=[54304]Project Opened.
+D2_L2=[54741]Project Closed.
+D3=16-08-2019
+D3_L=8
+D3_L1=[48565]Project Opened.
+D3_L2=[49576]Started Editing.
+D3_L3=[49876]Stopped Editing.
+D3_L4=[49928]Started Editing.
+D3_L5=[50855]Stopped Editing.
+TotalEdit=20
+TotalDebug=0
+D3_E=16
+D3_D=0
+D3_L6=[50855]Project Closed.
+D3_L7=[58507]Project Opened.
+D3_L8=[58584]Project Closed.
+D4=19-08-2019
+D4_L=8
+D4_L1=[53332]Project Opened.
+D4_L2=[53467]Started Editing.
+D4_L3=[53817]Stopped Editing.
+D4_E=2
+D4_D=0
+D4_L4=[54038]Project Closed.
+D4_L5=[55054]Project Opened.
+D4_L6=[55063]Started Editing.
+D4_L7=[55373]Stopped Editing.
+D4_L8=[55727]Project Closed.
+D5=20-08-2019
+D5_L=8
+D5_L1=[75925]Project Opened.
+D5_L2=[75938]Started Editing.
+D5_L3=[76026]Stopped Editing.
+D5_E=2
+D5_D=0
+D5_L4=[76026]Project Closed.
+D5_L5=[76054]Project Opened.
+D5_L6=[76065]Project Closed.
+D5_L7=[76651]Project Opened.
+D5_L8=[77560]Project Closed.
+D6=28-08-2019
+D6_L=2
+D6_L1=[68690]Project Opened.
+D6_L2=[68711]Project Closed.
+D7=17-09-2019
+D7_L=4
+D7_L1=[68674]Project Opened.
+D7_L2=[68729]Project Closed.
+D7_L3=[69024]Project Opened.
+D7_L4=[69054]Project Closed.
+
+[Opened Files]
+1=main.c
+t1=1
+Count=2
+2=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\loader.c
+t2=1
+3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\loader.c
+t3=1
+4=main.tre
+t4=-1
+5=main.lst
+t5=1
+[main.c]
+Type=4
+
+[defines]
+buildcount=6
+[Units]
+Count=1
+1=main (main)

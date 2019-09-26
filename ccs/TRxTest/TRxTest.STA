@@ -1,0 +1,54 @@
+
+ROM used:   244/8192 (3%)
+            244/8192 (3%) including unused fragments
+
+            0.2 Average locations per line
+            18.8 Average locations per statement
+
+RAM used:   137/1024 (13%) at main() level
+            150/1024 (15%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 16
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   32    13 100  TRxTest.c
+   13     0   0  TRxTest.h
+ 1127     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h
+----- -----
+ 1172    13 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     21   9    1             @delay_ms1
+0     98  40    2    228  3.0  main
+0      4   2    0             @const722
+0     82  34    3             @PSTRINGC7_9600_118_119
+0      3   1    0             @const727
+0     24  10    2             @PSTRINGR_9600_118_119
+0      9   4    0             @const729
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              13
+    Comments                183
+    Volume (V)              243
+    Difficulty (D)          2.3
+    Effort to implement (E) 557
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    144
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     3  0  
+00003-007FF   241  1804  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

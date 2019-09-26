@@ -1,0 +1,85 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+004-005 @WRITE_PACKED_MEMORY.P3
+004-005 @READ_PACKED_MEMORY.P4
+006-007 @READ_PACKED_MEMORY.P1
+006-007 @WRITE_PACKED_MEMORY.P2
+020-06F,0A0-0CF inMsg
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+0D0-0D1 @sprintf_string
+0D2     main.@SCRATCH1
+0D2     @PSTRINGC7_9600_118_119.@SCRATCH1
+0D3     @delay_ms1.P1
+0D3     main.@SCRATCH2
+0D3     @PSTRINGC7_9600_118_119.@SCRATCH2
+0D4     @PSTRINGC7_9600_118_119.@SCRATCH3
+0D4     @PSTRINGR_9600_118_119.@SCRATCH1
+0D5     @PSTRINGR_9600_118_119.@SCRATCH2
+111.6   C1OUT
+113.6   C2OUT
+11A.6   C4OUT
+11E.6   C3OUT
+191-192 @WRITE_PROGRAM_MEMORY8.P1
+191-192 @READ_PROGRAM_MEMORY8.P2
+291     CCP_1_LOW
+291     CCP_1
+292     CCP_1_HIGH
+298     CCP_2_LOW
+298     CCP_2
+299     CCP_2_HIGH
+311     CCP_3_LOW
+311     CCP_3
+312     CCP_3_HIGH
+
+ROM Allocation:
+000003  @const722.call
+000007  @const727.call
+00000A  @const729.call
+000013  @PSTRINGC7_9600_118_119
+000065  @delay_ms1
+00007A  @PSTRINGR_9600_118_119
+000092  main
+000092  @cinit1
+0000A5  @cinit2
+
+Project Directory:
+    C:\Users\maisun\Documents\PhD\offline\code\ccs\TRxTest\
+
+Project Files:
+    TRxTest.c                                               [20-Aug-19 20:34  CRC=0DBB82D4]
+    TRxTest.h                                               [20-Aug-19 20:34  CRC=0886E292]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h [01-Mar-16 16:00  CRC=FEB6EB35]
+
+Source signature=13B03BD0
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=4FC0
+
+Units:
+    TRxTest (main)
+
+Compiler Settings:
+    Processor:      PIC16F1787
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Enhanced 16:    Yes
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   TRxTest.xsym
+    Errors:      TRxTest.err
+    Ext Symbols: TRxTest.esym
+    INHX8:       TRxTest.hex
+    Symbols:     TRxTest.sym
+    List:        TRxTest.lst
+    Debug/COFF:  TRxTest.cof
+    Project:     TRxTest.ccspjt
+    Call Tree:   TRxTest.tre
+    Statistics:  TRxTest.STA

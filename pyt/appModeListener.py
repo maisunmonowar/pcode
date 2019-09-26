@@ -31,6 +31,14 @@ except Exception as e:
 #do the work
 if ser.isOpen():
         print("Serial is Open")
+<<<<<<< HEAD
+	for x in range(50000):
+		msg = ser.readline()
+		msg_str = msg.decode()
+		print(msg)
+		if msg.find(b'\x06') != -1:
+			print("06 Received")
+=======
 	for x in range(10):
 		if ser.inWaiting() > 0:
 			msg = ser.readline()
@@ -40,6 +48,7 @@ if ser.isOpen():
 			time.sleep(1)
 		#if msg.find(b'\x06') != -1:
 		#	print("06 Received")
+>>>>>>> uartTrigger
 else:
         print("Serial is not open")
 
