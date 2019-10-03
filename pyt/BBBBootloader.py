@@ -65,10 +65,10 @@ if ser.isOpen():
 	while x < len(lineList)-2:
 		if okToSend:
 			#print(lineList[x])
-			#ser.write(lineList[x])
-			msg = lineList[x][:-1] + b'\x0D'
-			print(msg)
-			ser.write(msg)
+			ser.write(lineList[x])
+			#msg = lineList[x][:-1] + b'\x0D'
+			#print(msg)
+			#ser.write(msg)
 			fail += 1
 			#time.sleep(0.04)#time to Tx 46 bytes
 			time.sleep(0.06)#littel extra than required
