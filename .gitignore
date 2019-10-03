@@ -45,3 +45,7 @@ ccs/test app 1/__history/app1.c.~10~
 ccs/test app 1/__history/app1.c.~11~
 ccs/test app 1/app1.err
 test2.txt
+test.txt
+testTransfer.cpp
+rec.txt
+test.hex

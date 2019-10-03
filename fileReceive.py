@@ -15,7 +15,7 @@ ser.timeout = 1
 ser.xonxoff= False
 ser.rtscts = False
 ser.dsrdtr = False
-ser.writeTimeout = 1
+#ser.writeTimeout = 1#having issue with this line. notsure what.
 
 
 try:
@@ -70,7 +70,7 @@ while x<40:
 			#same packet
 			print("same packet")
 	#tell ardunio >> ok
-	ser.write(b'ok\n')
+	ser.write("ok\n")
 
 	time.sleep(.1)
 	x+=1
