@@ -62,7 +62,7 @@ while x<40:
 				x = 0
 				#so the loop will act as a timeout check	
 			if msg3[0:4] == 'data':
-				file.write(msg3[4:len(msg3)-1])	
+				file.write(msg3[4:len(msg3)])	
 				x = 0
 				#so the loop will act as a timeout check
 			oldPacketCode = newPacketCode	
