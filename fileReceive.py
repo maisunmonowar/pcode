@@ -1,12 +1,29 @@
 import serial
 import time
-ser = serial.Serial('COM12', baudrate = 9600, timeout = 1)
+
 x = 0
 oldPacketCode = b'xx'
 
-if ser.isOpen():
-    ser.close()
-ser.open()
+#open Serial
+ser = serial.Serial()
+ser.port= "/dev/ttyACM0"
+ser.baudrate = 9600
+ser.bytesize = serial.EIGHTBITS
+ser.parity = serial.PARITY_NONE
+ser.stopbits = serial.STOPBITS_ONE
+ser.timeout = 1
+ser.xonxoff= False
+ser.rtscts = False
+ser.dsrdtr = False
+ser.writeTimeout = 1
+
+
+try:
+        ser.open()
+except Exception as e:
+        print("error open Serial Port: " +str(e))
+        exit()
+
 while x<40:
 	#ser.write(b'HelloPythonCOMport\n')
 	msg = ser.readline()
