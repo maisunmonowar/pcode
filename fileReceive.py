@@ -6,7 +6,7 @@ oldPacketCode = b'xx'
 
 #open Serial
 ser = serial.Serial()
-ser.port= "/dev/ttyACM0"
+ser.port= "COM8"
 ser.baudrate = 9600
 ser.bytesize = serial.EIGHTBITS
 ser.parity = serial.PARITY_NONE
@@ -15,7 +15,7 @@ ser.timeout = 1
 ser.xonxoff= False
 ser.rtscts = False
 ser.dsrdtr = False
-ser.writeTimeout = 1
+#ser.writeTimeout = 1
 
 
 try:
