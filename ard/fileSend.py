@@ -9,7 +9,7 @@ if ser.isOpen():
 ser.open()
 
 
-nameOfFile = "test.hex"
+nameOfFile = input("What is the name of the file? eg. appv4.hex\r\n")
 modeOfFile = "w+"
 
 with open(nameOfFile, "r") as file:

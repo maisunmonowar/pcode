@@ -12,7 +12,7 @@ stdout, stderr = out.communicate()
 print(stdout)
 print(stderr)
 
-if stdout.find(b'successfully') != -1:
+if out.stderr is None:
 	firstPointer = stdout.find(b'hex')
 	md5Checksum = stdout[firstPointer+6:firstPointer+6+32]
 	print(md5Checksum)
@@ -20,10 +20,21 @@ if stdout.find(b'successfully') != -1:
 	outputFile = open(outputFileName, "w+")
 	hashType = stdout[:4]
 	outputFile.write(hashType.decode())
-	outputFile.write("\x0D\x0A")
+	#lineList[0] = hashType.decode()
+	outputFile.write("\x0D")
 	outputFile.write(filename)
-	outputFile.write("\x0D\x0A")
+	#lineList[1] = filename
+	outputFile.write("\x0D")
 	outputFile.write(md5Checksum.decode())
-	outputFile.close()
+	outputFile.write("\x0D")
+	#lineList[2] = md5Checksum.decode()
+	#outputFile.write(lineList)
+	#outputFile.write("0D0A")
+	#outputFile.write("\x0D\x0A")
+	#outputFile.write("0D")
+	#outputFile.write("\x0D")
+	#o3utputFile.write("0A")
+	#outputFile.write("\x0A")
+	#outputFile.close()
 else:
 	print("oopps")
