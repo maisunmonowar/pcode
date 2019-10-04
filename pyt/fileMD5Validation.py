@@ -15,13 +15,20 @@ print(stderr)
 if out.stderr is None:
 	md5Checksum = stdout[:32]
 	print(md5Checksum)
-	outputFileName = filename[:-4] + "Hash" + ".txt"
-	outputFile = open(outputFileName, "w+")
-	outputFile.write("MD5")
-	outputFile.write("\x0D\x0A")
-	outputFile.write(filename)
-	outputFile.write("\x0D\x0A")
-	outputFile.write(md5Checksum)
-	outputFile.close()
+	inputFileName = filename[:-4] + "Hash" + ".txt"
+	with open(inputFileName, "r") as inputFile:
+		lineList = inputFile.readlines()
+	print(lineList)
+	print(len(lineList[2]))
+	if lineList[2] == md5Checksum:
+		print("Match")
+	else:
+		print(":(")
+	#outputFile.write("MD5")
+	#outputFile.write("\x0D")
+	#outputFile.write(filename)
+	#outputFile.write("\x0D")
+	#outputFile.write(md5Checksum)
+	inputFile.close()
 else:
 	print("oopps")

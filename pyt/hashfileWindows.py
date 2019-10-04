@@ -20,9 +20,9 @@ if stdout.find(b'successfully') != -1:
 	outputFile = open(outputFileName, "w+")
 	hashType = stdout[:4]
 	outputFile.write(hashType.decode())
-	outputFile.write("\x0D")
+	outputFile.write("\x0D\x0A")
 	outputFile.write(filename)
-	outputFile.write("\x0D")
+	outputFile.write("\x0D\x0A")
 	outputFile.write(md5Checksum.decode())
 	outputFile.close()
 else:
