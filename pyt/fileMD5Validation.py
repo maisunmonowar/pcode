@@ -20,7 +20,7 @@ if out.stderr is None:
 		lineList = inputFile.readlines()
 	print(lineList)
 	print(len(lineList[2]))
-	if lineList[2] == md5Checksum:
+	if lineList[2][:32] == md5Checksum:
 		print("Match")
 	else:
 		print(":(")
