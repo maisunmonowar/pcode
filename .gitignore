@@ -51,4 +51,6 @@ rec.txt
 test.hex
 playbox/*
 appv4HashCalc.txt
-appv1Hash.txt
+pyt/appv4Hash.txt
+pyt/__pycache__/
+pyt/appv3Hash.txt
