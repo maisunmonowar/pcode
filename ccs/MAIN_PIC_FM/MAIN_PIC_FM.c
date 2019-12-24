@@ -1,7 +1,9 @@
 
 #include <MAIN_PIC_FM.h>
+#include <bootloader.h>
 
 #int_timer0                                                                      //Interrupcion del TMR0
+
 void intval()
 {   
    static int32 counter = 0;                                                     //la variable se activa como global, mantiene su valor al entrar y salir de la funcion
