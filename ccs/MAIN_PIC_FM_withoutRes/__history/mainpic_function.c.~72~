@@ -648,30 +648,40 @@ int pos=0;
          pos=71; 
          break;
    }
-   TLE[pos] = data1;                                                      
-   TLE[pos+1] = data2;                                                      
-   TLE[pos+2] = data3;                                                      
-   TLE[pos+3] = data4;                                                      
-   TLE[pos+4] = data5;   
-  fprintf(PC,"\r\nTLE data from array:\r\n");
-  for(int p = 0; p < TLE_size; p++)                                                 // print TLE data
-      {
-         fprintf(PC,"%x,",TLE[p]);
-      } 
+
    output_low(PIN_C4);
    output_low(PIN_A5);
-   for(int i = 0; i < TLE_size; i++)                                                   // save everything to flash memory
+   delay_ms(100);
+   for(int c = 0; c < TLE_size; c++)                                           // Read TLE data from flash and put in TLE[] array
+      {
+         TLE[c]=READ_DATA_BYTE_OF(ADCS_TLE_ADDRESS+c);
+      }
+      REFRESH_SECTOR_OF(0x06,0x65,0x00,0x00);                                    // Clear flash memory TO SAVE NEW DATA
+      REFRESH_SECTOR_SCF(0x06,0x65,0x00,0x00);
+      REFRESH_SECTOR_SMF(0x06,0x65,0x00,0x00);
+      
+      TLE[0] = 0xAA;
+      TLE[pos] = data1;                                                          //update TLE[] array data
+      TLE[pos+1] = data2;                                                      
+      TLE[pos+2] = data3;                                                      
+      TLE[pos+3] = data4;                                                      
+      TLE[pos+4] = data5;
+      TLE[TLE_size] = 0xBB;
+      
+   for(int i = 0; i < TLE_size; i++)                                             // save everything to flash memory
       {
          WRITE_DATA_BYTE_OF(ADCS_TLE_ADDRESS + i,TLE[i]);
          WRITE_DATA_BYTE_SCF(ADCS_TLE_ADDRESS + i,TLE[i]);
          WRITE_DATA_BYTE_SMF(ADCS_TLE_ADDRESS + i,TLE[i]);
       }
-   output_high(PIN_C4);
-   fprintf(PC,"\r\nTLE data from flash:\r\n");
-   for(i = 0; i < TLE_size; i++)                                                 // print TLE data
+
+   fprintf(PC,"\r\nTLE:\r\n");
+   for(int p = 0; p < TLE_size; p++)                                                 // print TLE data
       {
-         fprintf(PC,"%x,",READ_DATA_BYTE_OF(ADCS_TLE_ADDRESS+i));
+         fprintf(PC,"%x,",READ_DATA_BYTE_OF(ADCS_TLE_ADDRESS+p));
       }
+      fprintf(PC,"\r\n");
+   output_high(PIN_C4);
    return;
 
 }
@@ -1410,7 +1420,7 @@ void ADCS_TEST_OPERATION(unsigned int16 duration, int8 OPERATION_MODE)          
    Turn_On_ADCS();                                                               //Turn on ADCS
    /*delay_ms(8000);*/
    
-   fputc(0x21,ADCS);                                                               //ADCS hand shake
+   fputc(0x21,ADCS);                                                             //ADCS hand shake
 
    CHECK_ACK_FROM_ADCS_10k();
    if(ADCS_ACK == 0x55)                                                            //Success ACK
@@ -1495,6 +1505,38 @@ void ADCS_TEST_OPERATION(unsigned int16 duration, int8 OPERATION_MODE)          
    return;
 }
 
+void ADCS_TLE_TRANSFER()                                                         //send TLE data to ADCS
+{
+
+   fprintf(PC,"Turn On ADCS \r\n");
+   Turn_On_ADCS();                                                               //Turn on ADCS
+   /*delay_ms(8000);*/
+   for(int c = 0; c < TLE_size; c++)                                           // Read TLE data from flash and put in TLE[] array
+      {
+         TLE[c]=READ_DATA_BYTE_OF(ADCS_TLE_ADDRESS+c);
+      }
+   
+   fputc(0x21,ADCS);                                                             //ADCS hand shake
+
+   CHECK_ACK_FROM_ADCS_10k();
+   if(ADCS_ACK == 0x55)                                                            //Success ACK
+   {
+      fprintf(PC,"Received ACK From ADCS\r\n");
+      //delay_ms(1000);
+      ADCS_ACK = 0;      
+      for(int t = 0; t < TLE_size; t++)                                           // Read TLE data from flash and put in TLE[] array
+      {
+         fputc(TLE[t],ADCS);
+      }
+      fprintf(PC,"Sent TLE data to ADCS\r\n");
+   }else{
+      ADCS_ACK = 0;
+      fprintf(PC,"FAILURED GETTING ACK From ADCS\r\n");
+   }
+   CMD_FROM_PC[0] = 0;                                                           //prepare to get MAIN command
+   PC_DATA = 0;                                                                  //prepare to get MAIN command
+   return;
+}
 
 
 //--------HIGH SAMPLING HK collection------------------------------------------
@@ -1775,7 +1817,6 @@ void CAM_SETTINGS()
    COM_ONEBYTE_COMMAND = 0;
    fprintf(PC,"Deleting 1 sector SMF Address 00080000\r\n");
    REFRESH_SECTOR_SMF(0x00,0x08,0x00,0x00);                                      //clear 1 sector MISSION flash CAM PART
-   
    output_high(PIN_A5);                                                          //turn on MUX (give access to CAM)
    delay_ms(100);
    Turn_On_CAM();                                                                //Turn on CAM
@@ -1787,6 +1828,20 @@ void CAM_SETTINGS()
 void CHECK_ACK_FROM_CAM_10k()                                                    //check 10000 times (keep listening about 10 sec)
 {
    for(int32 num = 0; num < 1000000; num++) 
+   {
+      if(kbhit(CAM))                                                             //kbhit(PC)
+      {
+         CAM_ACK = fgetc(CAM);                                                   //PC   
+         break;
+      }
+      //delay_ms(1);
+   }
+   return;
+}
+
+void CHECK_ACK_FROM_CAM_30k()                                                    //check 30000 times (keep listening about 30 sec)
+{
+   for(int32 num = 0; num < 3000000; num++) 
    {
       if(kbhit(CAM))                                                             //kbhit(PC)
       {
@@ -1834,11 +1889,9 @@ void CAM_TEST_OPERATION(int8 mode)                                              
    delay_ms(5000);                                                               //Time is necessary for CAM to be ready
 
 
-   fprintf(PC,"Sending 0x54 Command to CAM\r\n");
+   fprintf(PC,"Sending hand shake Command to CAM\r\n");
    delay_ms(10);
-
    Send_Command_to_CAM(0x54);                                                    //CAM MISSION ID
-
    //fputc(0x54,PC);
    CHECK_ACK_FROM_CAM_10k();                                                     //keep listening about 10 sec
    
@@ -1853,15 +1906,14 @@ void CAM_TEST_OPERATION(int8 mode)                                              
       CHECK_ACK_FROM_CAM_10k();                                                  //keep listening about 10 sec
       if(CAM_ACK == mode)
       {
-            fprintf(PC,"Waiting Next Command from CAM...\r\n\r\n");
+            fprintf(PC,"Capturing and saving in SFM...\r\n\r\n");
          
          CHECK_ACK_FROM_CAM_200k();                                              //keep listening about 200 sec
          
          if(CAM_ACK == 0x62)                                                     //CAM Finish Storing
          {
             CAM_ACK = 0;
-            fprintf(PC,"PHOTO SAVING DONE\r\n");
-            
+            fprintf(PC,"PHOTO SAVING DONE\r\n");   
             output_low(PIN_A5);                                                  //Mission Flash MUX Main side
             delay_ms(10);
             //TRANSFER_DATA_NBYTE_TOPC_SMF(0x00000000,256);                      //for checking
@@ -1870,7 +1922,7 @@ void CAM_TEST_OPERATION(int8 mode)                                              
             fprintf(PC,"Read and Transfer data from SMF TO SCF and OF Start\r\n");
             delay_ms(1000);
             
-            if(mode == 0xB0 || mode == 0xB1 || mode == 0xB2)                     //if CAM data size will be large
+            if(mode == 0xB0 || mode == 0xB1 || mode == 0xB2)                     //if CAM data size will be 2sectors
             {
                sector_erase_SCF(CAM_ADDRESS);                                    //delete 1st sector
                sector_erase_SCF(CAM_ADDRESS + 65536);                            //delete 2nd sector
@@ -1879,7 +1931,9 @@ void CAM_TEST_OPERATION(int8 mode)                                              
                TRANSFER_DATA_NBYTE_TOPC_SCF(CAM_ADDRESS,90000);                  //From(SCF): FROM CAM_ADDRESS To PC
                CAM_ADDRESS = CAM_ADDRESS + 65536*2;                              //se ubica en la nueva posicion, dos sectores adelante
                delay_ms(10);
-            }else{
+            }
+            if(mode == 0xA0 || mode == 0xA1 || mode == 0xA2)
+            {
                sector_erase_SCF(CAM_ADDRESS);                                    //delete 1st sector
                sector_erase_SCF(CAM_ADDRESS + 65536);                            //delete 2nd sector
                TRANSFER_DATA_NBYTE_SMFtoSCF(0x00080000,CAM_ADDRESS,65536);       //From(SMF): sector8, To(SCF): sector indicated by CAM_ADDRESS
@@ -1892,37 +1946,13 @@ void CAM_TEST_OPERATION(int8 mode)                                              
          }else{
             CAM_ACK = 0;
             fprintf(PC,"CAM DATA SAVING FAILURED\r\n");
-         
-         }
-      
+         }   
       }   
 
    }else{
       CAM_ACK = 0;
       fprintf(PC,"CAM ACK FAILURED\r\n");
    }
-   
-   
-   
-
-   
-//*****************************************************************************
-//!   int8 CAMSIZE[4] = {};
-//!   int32 CAM_ADD;
-//!   while(true)
-//!   {
-//!      if(fgetc(CAM) == 0x23)
-//!      {
-//!         for(int a = 0; a < 4; a++)
-//!         {
-//!            CAMSIZE[a] = fgetc(CAM);
-//!         }
-//!      }
-//!   }
-//!   CAM_ADD = ((CAMSIZE[0]<<24 | CAMSIZE[1]<<16 | CAMSIZE[2]<<8 | CAMSIZE[3]) & 0xffffffff);
-//!   
-//!   fprintf(PC,"data adress is %x\r\n", CAM_ADD);//for testing
-//*****************************************************************************
   
    Turn_Off_CAM();
    fprintf(PC,"Turned OFF CAM\r\n");
@@ -1932,6 +1962,55 @@ void CAM_TEST_OPERATION(int8 mode)                                              
    return;
 }
 
+void CAM_DEPLOYMENT_OPERATION(int8 mode)
+{
+   CAM_SETTINGS();                                                               //Turn ON CAM, delete 1 sector SCF address 00080000, MUX CAM side
+   delay_ms(5000);                                                               //Time is necessary for CAM to be ready
+   fprintf(PC,"Sending hand shake Command to CAM\r\n");
+   delay_ms(10);
+   Send_Command_to_CAM(0x54);                                                    //CAM MISSION ID
+   CHECK_ACK_FROM_CAM_10k();                                                     //keep listening about 10 sec
+   if(CAM_ACK == 0x61)                                                           //CAM ACK
+   {
+      fprintf(PC,"ACK received from CAM\r\n\r\n");
+      CAM_ACK = 0;      
+      for(int a = 0; a < 10; a++)                                               //deployment capture repetition
+      {
+         LOOP_CAM_ADDRESS();                                                    //hace un loop en las posiciones de memoria para almacenar CAM data
+         fprintf(PC,"Sending CAM MODE data\r\n");
+         delay_ms(2000);                                                         //for CAM to go waiting for OBC cmnd
+         fputc(mode,CAM);
+         CHECK_ACK_FROM_CAM_10k();                                              //keep listening about 10 sec
+            if(CAM_ACK == mode)
+            {
+               fprintf(PC,"Capturing and saving in SFM...\r\n\r\n");
+               CHECK_ACK_FROM_CAM_200k();                                       //keep listening about 200 sec
+               //CHECK_ACK_FROM_CAM_30k();                                         //keep listening about 30 sec
+                  if(CAM_ACK == 0x62)                                           //CAM Finish Storing
+                  {
+                     CAM_ACK = 0;
+                     fprintf(PC,"PHOTO %d SAVING DONE\r\n",a+1);                    
+                     //CAM_ADDRESS = CAM_ADDRESS + 65536;                          //se ubica en la nueva posicion, 10 sectores adelante
+                     //sector_erase_SCF(CAM_ADDRESS);
+                     delay_ms(10);
+      
+                  }else{
+                     CAM_ACK = 0;
+                     fprintf(PC,"CAM DATA SAVING FAILURED\r\n");
+                  }   
+            }   
+         }
+   }else{
+      CAM_ACK = 0;
+      fprintf(PC,"CAM ACK FAILURED\r\n");
+   }
+   output_low(PIN_A5);                                                           //Mission Flash MUX Main side
+   delay_ms(10);
+   Turn_Off_CAM();
+   fprintf(PC,"Turned OFF CAM\r\n");
+   output_high(PIN_C4);                                                          //Give Access to COM PIC
+   return;
+}
 
 
 //--------Mission Boss PIC Data Collection----------------------------------------------
@@ -2119,6 +2198,25 @@ void MISSION_TEST_OPERATION(int8 cmd1,int8 cmd2,int8 cmd3,int8 cmd4,int8 cmd5,in
    }else{
       DC_ACK = 0;
       fprintf(PC,"FAILURED GETTING ACK From MBP\r\n");
+      fprintf(PC,"PWR cycle and sending commands again\r\n");
+      Turn_Off_MBP();
+      delay_ms(1000);
+      Turn_On_MBP();                                                              //RF5=HIGH
+      delay_ms(1000);
+
+      fputc(cmd1,DC);
+      delay_ms(100);
+      fputc(cmd2,DC);
+      delay_ms(100);
+      fputc(cmd3,DC);
+      delay_ms(100);
+      fputc(cmd4,DC);
+      delay_ms(100);
+      fputc(cmd5,DC);
+      delay_ms(100);
+      fputc(cmd6,DC);
+      delay_ms(100);
+      fputc(cmd7,DC);   
    }
    return;
 }

@@ -109,10 +109,8 @@ void settings()
    output_high(PIN_C4);                                                          //MUX: COM side (MAIN-COM)
    output_low(PIN_A5);                                                           //MUX: Main side (MAIN-MISSION)
   
-   /*maisun
-   Get_RSV();                                                                    //read the reservation table info from flash memory
-   */
-   SAVE_SAT_LOG(0x25,0x25,0x25);                                                 //carga el RESET_bffr[] con los datos del reset PIC, verifica nro de escrituras flash
+   Get_RSV();                                                                    //read the reservation table info from flash memory  
+   SAVE_SAT_LOG(0x25,0x25,0x25);                                                 //carga el RESET_bffr[] con los datos del reset PIC, verifica nro de escrituras flash 
    return;                                                                       //y guarda en las flash los datos en la direccion indicada por SAT_LOG
   
 }                                  
@@ -215,13 +213,10 @@ void main()
          if(in_bffr_main[5] == 0)                                                //if time data is not placed
          {
             EXECUTE_MISSION_from_COM(in_bffr_main[4],in_bffr_main[6],in_bffr_main[7],in_bffr_main[8],in_bffr_main[9],in_bffr_main[10],in_bffr_main[11]);
-         }
-         /*maisun
-         else{                                                                  //if time data is placed (that means reservation command)
+         }else{                                                                  //if time data is placed (that means reservation command)
             SAVE_SAT_LOG(in_bffr_main[4],in_bffr_main[5],in_bffr_main[6]);       //reservation command log
             Reserve_command_COM();                                               //used when in_bffr_main[5] has a Time value
          }
-         */
          DELETE_CMD_FROM_PC();                                                   //set to zero the array CMD_FROM_PC[]
          Delete_Buffer();                                                        //set to zero the array in_bffr_main[]
          CMD_FROM_PC[1] = 0;
@@ -243,13 +238,10 @@ void main()
          if(CMD_FROM_PC[1] == 0)                                                 //if time data is not placed
          {
             EXECUTE_MISSION_from_PC(CMD_FROM_PC[0],CMD_FROM_PC[2],CMD_FROM_PC[3],CMD_FROM_PC[4],CMD_FROM_PC[5],CMD_FROM_PC[6],CMD_FROM_PC[7]);//execute mission
-         }
-         /*maisun
-         else{                                                                  //if time data is placed (that means reservation command)
+         }else{                                                                  //if time data is placed (that means reservation command)
             SAVE_SAT_LOG(CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2]);          //reservation command log
             Reserve_command_PC();                                                //mission command reservation from PC comand
          }
-         */
          DELETE_CMD_FROM_PC();                                                   //clear CMD_FROM_PC[] array
          Delete_Buffer();                                                        //clear in_bffr_main[] array
          CMD_FROM_PC[1] = 0;

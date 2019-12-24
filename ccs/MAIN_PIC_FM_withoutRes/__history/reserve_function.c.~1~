@@ -1,3 +1,5 @@
+
+
 #define table_size 80
 unsigned int8 reserve_table[table_size+1] = {};
 unsigned int8 table_num = 0;
@@ -12,7 +14,6 @@ void initialize_table()                                                         
    return;
 }
 
-/*
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //                          ***Sort Function***
 //This is for sorting the saved reservation commands in ascending order.
@@ -26,7 +27,6 @@ void initialize_table()                                                         
 //
 //by comapring j-8 and j data,if it is needed, swhich j-9 and j-1, j-8 and j, j-7 and j+1....etc
 ////////////////////////////////////////////////////////////////////////////////////////////////
-*/
 
 int8 count_reservation()                                                         //Funcion que cuenta la cantidad de posiciones en la tabla con datos distintos de 0xFF 
 {
@@ -137,12 +137,14 @@ void table_refresh()                                                            
 }
 
 void Get_RSV()
-{   
+{
+   //fprintf(PC,"%x");
    for(int num = 0; num < table_size+1; num++)                                   //Carga en el vector reserve_table[] los datos leidos de la flash memory 
    {                                                                             //desde la posicion RSV_DATA_ADDRESS hasta el tamaño de la tabla
       reserve_table[num]=READ_DATA_BYTE_OF(RSV_DATA_ADDRESS + num);              //import reservation table info
    }
    reserve_table[80] = count_reservation();                                      //Carga en la posicion 30 la cantidad de posiciones ocupadas con datos
+//   RESERVE_MIN_FLAG = READ_DATA_BYTE_OF(RSV_DATA_ADDRESS+31);
    if(reserve_table[80] == 0xFF || reserve_table[80] == 0x00)                    //Si la tabla no tiene datos almacenados
    {
       initialize_table();                                                        //completa con 0xff toda la tabla
@@ -197,6 +199,10 @@ void Disp_RSV()                                                                 
 
 void input_reservation_COM()                                                     //put the command from COM into the table and sort in ascending form
 {
+//!   reserve_table[table_num] = CMD_FROM_PC[0];                                 //input the data about mission content
+//!   reserve_table[table_num + 1] = CMD_FROM_PC[1];                             //input the data about time data
+//!   reserve_table[table_num + 2] = CMD_FROM_PC[2];                             //input the data about mission detail mode
+   //fprintf(PC,"Table num: %x\r\n",reserve_table[80]);                          //show the amount of bytes ocupied in the table
    table_num = reserve_table[80];
    if(reserve_table[80] == 80)
    {
@@ -241,7 +247,13 @@ void input_reservation_COM()                                                    
          reserve_table[table_num + 6] = in_bffr_main[10];                        //input address
          reserve_table[table_num + 7] = in_bffr_main[11];                        //input packet number
       }
+      //table_num = table_num + 3;
+      //reserve_table[30] = table_num;
       sort_table();
+//!      for(int num = 0; num < table_size+1; num++)
+//!      {
+//!         fprintf(PC,"%x",reserve_table[num]);//show for the test
+//!      }
    }
    reserve_table[80] = count_reservation();                                      //update the table number data
    return;
@@ -251,6 +263,9 @@ void input_reservation_COM()                                                    
 
 void input_reservation_PC()                                                      //put the command from PC into the table and sort
 {
+//!   reserve_table[table_num] = in_bffr_main[4];
+//!   reserve_table[table_num + 1] = in_bffr_main[5];
+//!   reserve_table[table_num + 2] = in_bffr_main[6];
    fprintf(PC,"Table num: %x\r\n",reserve_table[80]);                            //print the table
    table_num = reserve_table[80];
    if(reserve_table[80] == 80)
@@ -285,8 +300,7 @@ void input_reservation_PC()                                                     
             RESERVE_TARGET_FLAG = RESERVE_TARGET_FLAG - RESERVE_MIN_FLAG;
             RESERVE_MIN_FLAG = 0;
          }
-      }else{
-         //if first reservation
+      }else{                                                                     //if first reservation
          RESERVE_MIN_FLAG = 0;
          RESERVE_SEC_FLAG = 0;
          reserve_table[table_num] = CMD_FROM_PC[0];                              //input the data about mission content
@@ -298,11 +312,19 @@ void input_reservation_PC()                                                     
          reserve_table[table_num + 6] = CMD_FROM_PC[6];                          //input address
          reserve_table[table_num + 7] = CMD_FROM_PC[7];                          //input packet number
       }
+      //table_num = table_num + 3;
+      //reserve_table[30] = table_num;
       sort_table();
-   }   
+//!      for(int num = 0; num < table_size+1; num++)
+//!      {
+//!         fprintf(PC,"%x",reserve_table[num]);//show for the test
+//!      }
+   }
    reserve_table[80] = count_reservation();                                      //update the table number data
    return;
 }
+
+
 
 void Remove_1_Reservation()                                                      //after executing the mission, it should be finished
 {
@@ -350,6 +372,8 @@ void Reserve_command_COM()                                                      
    RESERVE_PACKET_NUM = reserve_table[7];                                        //closest mission pckt number
 }
 
+
+
 void Reserve_command_PC()                                                        //reservation from PC
 {
    fprintf(PC,"Reserve CMD from PC\r\n");
@@ -370,6 +394,8 @@ void Reserve_command_PC()                                                       
    RESERVE_PACKET_NUM = reserve_table[7];                                        //closest mission pckt number
 }
 
+
+
 void Reserve_next()                                                              //after finish execution of reservation command, this function should be execute
 {
    fprintf(PC,"Reserve next\r\n");
@@ -386,3 +412,5 @@ void Reserve_next()                                                             
    RESERVE_ADDRESS_4 = reserve_table[6];                                         //closest mission address
    RESERVE_PACKET_NUM = reserve_table[7];                                        //closest mission pckt number
 }
+
+

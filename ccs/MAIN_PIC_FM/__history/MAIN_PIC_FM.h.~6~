@@ -38,6 +38,9 @@
 #use spi(MASTER, CLK=PIN_A3, DI=PIN_A0, DO=PIN_A1,  BAUD=1000000, BITS=8, STREAM=MISSION_FM, MODE=0)     //MISSION flash memory port
 
 //-------------mainpic_function.c----------------------------------------------
+
+
+
 void Check_UART();
 void waiting(int32 counterval);
 //void Turn_On_PWM(int a)
@@ -115,6 +118,7 @@ void CAM_DEPLOYMENT_OPERATION(int8 mode);
 
 
 /////////////ADCS MISSION/////////////
+
 void Turn_On_ADCS();
 void Turn_Off_ADCS();
 void Send_Command_to_ADCS(int8 data);
@@ -149,7 +153,6 @@ void MEMORY_ERASE();
 
 
 ////////////////////////////////RESERVATION FUNCTION (reserve_function.c)/////////////////////////////////
-/*maisun
 void initialize_table();
 void sort_table();                                                               //(command info, time info, mission mode)Å~10Å®compare the time and sort
 void Save_RSV();
@@ -163,5 +166,8 @@ void Reserve_command_COM();                                                     
 void Reserve_command_PC();                                                       //reservation from PC
 void Reserve_next();                                                             //after finishing executing the reservation command, this function should be execute
 void RSV_DATA_DOWNLOAD();                                                        //send cmd to COM for data download reservation function
-*/
 #include<mainpic_function.h>
+
+
+
+

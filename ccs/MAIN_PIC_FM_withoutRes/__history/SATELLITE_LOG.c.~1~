@@ -20,9 +20,7 @@ void DELETE_RESET()                                                             
 void SEND_CMD_FOR_RESET_SATELLITE()
 {  
    STORE_FLAG_INFO();                                                            //save flag data to flash memory
-   /*maisun
    Save_RSV();                                                                   //save in flash memory reserve_table[] content
-   */
    STORE_ADRESS_DATA_TO_FLASH();
 // while(true)
 // {
