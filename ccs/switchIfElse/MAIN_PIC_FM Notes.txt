@@ -1,0 +1,1 @@
+What happes when you have a default case in Switch case string???

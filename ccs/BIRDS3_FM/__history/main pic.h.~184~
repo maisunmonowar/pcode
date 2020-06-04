@@ -1,0 +1,90 @@
+#include <18F67J94.h>
+#FUSES NOWDT NOBROWNOUT
+#use delay(crystal=16Mhz, clock=16Mhz)
+#include<PIC18F67J94_registers.h>
+
+//-------------UART and SPI Setting--------------------------------------------
+//#pin_select TX1=PIN_C6
+//#pin_select RX1=PIN_C7
+//#pin_select TX1=PIN_G0
+//#pin_select RX1=PIN_G1
+//#use rs232(baud=9600,parity=N,UART1,bits=8,stream=pc) // MAIN to MISSION BOARD(Now just putted)
+#use rs232(baud=9600,parity=N,xmit=PIN_B7,rcv=PIN_B6,bits=8,stream=pc)
+
+#pin_select TX2=PIN_D3
+#pin_select RX2=PIN_D2
+#use rs232(baud=9600,parity=N,UART2,bits=8,stream=com) // Main to COM PIC
+
+#pin_select TX3=PIN_E5  
+#pin_select RX3=PIN_E4
+#use rs232(baud=9600,parity=N,UART3,bits=8,stream=fab) //MAIN to FAB PIC
+
+#pin_select TX4=PIN_E3  
+#pin_select RX4=PIN_F2
+#use rs232(baud=9600,parity=N,UART4,bits=8,stream=reset) //MAIN to RESET PIC
+
+#use rs232(baud=9600,parity=N,xmit=pin_F7,rcv=pin_F6,bits=8,stream=ADCS) //MAIN to ADCS
+#use rs232(baud=9600,parity=N,xmit=pin_G2,rcv=pin_G3,bits=8,stream=CAM) //MAIN to CAM
+//#use rs232(baud=9600,parity=N,xmit=pin_G0,rcv=pin_G1,bits=8,stream=DC) //MAIN to DCM
+
+#use spi(MASTER, CLK=PIN_E1, DI=PIN_F7, DO=PIN_E0,  BAUD=4000000, BITS=8, STREAM=MAIN_FM, MODE=0) //MAIN flash memory port
+#use spi(MASTER, CLK=PIN_B2, DI=PIN_B5, DO=PIN_B4,  BAUD=4000000, BITS=8, STREAM=COM_FM, MODE=0) //COM flash memory port
+#use spi(MASTER, CLK=PIN_A3, DI=PIN_A0, DO=PIN_A1,  BAUD=4000000, BITS=8, STREAM=MISSION_FM, MODE=0) //MISSION flash memory port
+//-------------PWM Settings----------------------------------------------------
+
+#pin_select p2a=PIN_c2 //set c2 as ccp2
+#use pwm(CCP2,TIMER=2,FREQUENCY=1000)//set frequency of ccp2
+
+//-------------mainpic_function.c----------------------------------------------
+
+#include<mainpic_function.h>
+
+void Check_UART();
+//void Turn_On_PWM(int a)
+//void Turn_OFF_PWM()
+
+
+/////////////MAIN PIC Buffer/////////////
+void SerialDataReceive(); //get buffer data one by one
+void Delete_Buffer(); //get buffer data one by one
+void Transfer_Buffer(int PORT_NUM); //get buffer data one by one
+
+SerialDataReceive();
+Transfer_Buffer(int PORT_NUM); //1:PC 2:COMPIC 3:RESETPIC 4:ADCS 5:S&F 6:CAM
+
+
+/////////////FAB HK collection/////////////
+void collect_HK_from_FAB();
+void delete_HK();
+void save_HK_to_MF(unsigned int32 Memory_Adress);
+void save_HK_to_SCF(unsigned int32 Memory_Adress);
+void ACK_to_FAB();
+void Send_HK_to_SCF();
+void Send_HK_to_PC();
+
+
+/////////////CAM MISSION/////////////
+void Turn_On_CAM();
+void Turn_Off_CAM();
+void Send_Command_to_CAM(int8 data);
+int8 ACK_from_CAM();
+void Transfer_Photo();
+void CAM_TEST_OPERATION();
+
+
+/////////////ADCS MISSION/////////////
+
+void Turn_On_ADCS();
+void Turn_Off_ADCS();
+void Send_Command_to_ADCS(int8 data);
+int8 ACK_from_ADCS();
+void ADCS_Data();
+void ADCS_TEST_OPERATION();
+
+
+/////////////Data Collection MISSION/////////////
+void Turn_On_DC();
+void Turn_Off_DC();
+
+
+

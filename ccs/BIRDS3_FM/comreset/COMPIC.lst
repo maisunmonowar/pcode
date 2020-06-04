@@ -1,0 +1,238 @@
+CCS PCM C Compiler, Version 5.050, 43599               25-7-18 11:17
+
+               Filename:   C:\Users\Kaki\Documents\CCS C Projects\main pic v1.7.4\comreset\COMPIC.lst
+
+               ROM used:   141 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   23 (1%) at main() level
+                           35 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   03F
+0002:  NOP
+.................... #include <16F1789.h> //EM: 16f1789 
+.................... //////////// Standard Header file for the PIC16F1789 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1789 
+....................  
+.................... #list 
+....................  
+.................... #fuses NOMCLR,NOWDT 
+.................... #use delay(internal=16Mhz,clock=16mhz) 
+0003:  MOVLW  20
+0004:  MOVWF  05
+0005:  MOVLW  12
+0006:  MOVWF  04
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  05
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  2E
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................  
+....................  
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_B1,rcv=PIN_B2,bits=8,stream=mpic) //PC reading port 
+0019:  MOVLB  01
+001A:  BCF    0D.1
+001B:  MOVLB  02
+001C:  BCF    0D.1
+001D:  MOVLW  08
+001E:  MOVWF  78
+001F:  GOTO   020
+0020:  NOP
+0021:  BSF    78.7
+0022:  GOTO   033
+0023:  BCF    78.7
+0024:  MOVLB  00
+0025:  RRF    32,F
+0026:  MOVLB  02
+0027:  BTFSC  03.0
+0028:  BSF    0D.1
+0029:  BTFSS  03.0
+002A:  BCF    0D.1
+002B:  BSF    78.6
+002C:  GOTO   033
+002D:  BCF    78.6
+002E:  DECFSZ 78,F
+002F:  GOTO   024
+0030:  GOTO   031
+0031:  NOP
+0032:  BSF    0D.1
+0033:  MOVLW  84
+0034:  MOVWF  04
+0035:  DECFSZ 04,F
+0036:  GOTO   035
+0037:  NOP
+0038:  BTFSC  78.7
+0039:  GOTO   023
+003A:  BTFSC  78.6
+003B:  GOTO   02D
+003C:  MOVLP  00
+003D:  MOVLB  00
+003E:  GOTO   083 (RETURN)
+....................  
+.................... //#use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,stream=TR_CP) //UART port from com pic to TRX pic   
+.................... //#use rs232(baud=9600,parity=N,xmit=PIN_B3,rcv=PIN_B4,bits=8,stream=RP_CP) //UART port from com pic to reset pic 
+.................... #use rs232(baud=9600,parity=N,UART1,xmit=PIN_C6,rcv=PIN_C7,bits=8,stream=PC) //UART port from com pic to MAIN PIC    
+....................  
+.................... //#use spi(MASTER, CLK=PIN_D4, DI=PIN_D6, DO=PIN_D7,BAUD=300000,BITS=8,STREAM=CFM, MODE=0) //COM flash memory port 
+.................... //#use spi(MASTER, CLK=PIN_C3, DI=PIN_C4, DO=PIN_C5,BAUD=960000,BITS=8,STREAM=SFM, MODE=0) 
+....................  
+.................... //#include <flash_ memory_ MT25QL01GBBB.c> 
+....................  
+.................... unsigned int8 in_bffr_main[16] = {0xAA,0x67,0x67,0x67,0x55,0x67,0x67,0x73,0x67,0x67,0x67,0x67,0x67,0x67,0x67,0xBB}; 
+....................  
+.................... /*#INT_rda 
+.................... void UART1_RXD(void) 
+.................... { 
+....................    if(fgetc(mpic)==0x69) 
+....................    { 
+....................       fputc(0x69,PC); 
+....................    } 
+.................... }*/ 
+....................  
+.................... void settings() 
+.................... { 
+....................   enable_interrupts(global);   
+....................   enable_interrupts(INT_rda); 
+....................   return; 
+.................... } 
+.................... /* 
+.................... Void main() 
+.................... {  
+....................    settings(); 
+....................    int8 k; 
+....................    While(true) 
+....................    { 
+....................    k = fgetc(mpic); 
+....................    fputc(0xbb,PC); 
+....................       while(k!=0x69) 
+....................       { 
+....................          fputc(0x69,mpic); 
+....................          fputc(0xaa,PC); 
+....................          delay_ms(1500); 
+....................       } 
+....................    fputc(0x87,PC); 
+....................    } 
+....................   
+.................... } 
+.................... */ 
+....................  
+.................... void main() 
+003F:  MOVLW  7A
+0040:  MOVLB  01
+0041:  MOVWF  19
+0042:  BCF    0D.1
+0043:  MOVLB  02
+0044:  BSF    0D.1
+0045:  MOVLB  03
+0046:  BSF    1F.3
+0047:  MOVLW  A0
+0048:  MOVWF  1B
+0049:  MOVLW  01
+004A:  MOVWF  1C
+004B:  MOVLW  A6
+004C:  MOVWF  1E
+004D:  MOVLW  90
+004E:  MOVWF  1D
+004F:  CLRF   0C
+0050:  CLRF   0D
+0051:  CLRF   0E
+0052:  CLRF   0F
+0053:  CLRF   10
+0054:  MOVLB  02
+0055:  CLRF   12
+0056:  CLRF   11
+0057:  MOVLW  AA
+0058:  MOVLB  00
+0059:  MOVWF  20
+005A:  MOVLW  67
+005B:  MOVWF  21
+005C:  MOVWF  22
+005D:  MOVWF  23
+005E:  MOVLW  55
+005F:  MOVWF  24
+0060:  MOVLW  67
+0061:  MOVWF  25
+0062:  MOVWF  26
+0063:  MOVLW  73
+0064:  MOVWF  27
+0065:  MOVLW  67
+0066:  MOVWF  28
+0067:  MOVWF  29
+0068:  MOVWF  2A
+0069:  MOVWF  2B
+006A:  MOVWF  2C
+006B:  MOVWF  2D
+006C:  MOVWF  2E
+006D:  MOVLW  BB
+006E:  MOVWF  2F
+.................... { 
+....................    //while(true) 
+....................    //{ 
+....................    delay_ms(2000); 
+006F:  MOVLW  08
+0070:  MOVWF  31
+0071:  MOVLW  FA
+0072:  MOVWF  32
+0073:  CALL   003
+0074:  DECFSZ 31,F
+0075:  GOTO   071
+....................       for(int i = 0; i < 16; i++) 
+0076:  CLRF   30
+0077:  MOVF   30,W
+0078:  SUBLW  0F
+0079:  BTFSS  03.0
+007A:  GOTO   085
+....................       { 
+....................          fputc(in_bffr_main[i],mpic); 
+007B:  MOVF   30,W
+007C:  MOVWF  04
+007D:  MOVLW  20
+007E:  MOVWF  05
+007F:  MOVF   00,W
+0080:  MOVWF  31
+0081:  MOVWF  32
+0082:  GOTO   019
+0083:  INCF   30,F
+0084:  GOTO   077
+....................       } 
+....................       //fputc(fgetc(mpic),PC); 
+....................       delay_ms(1000); 
+0085:  MOVLW  04
+0086:  MOVWF  31
+0087:  MOVLW  FA
+0088:  MOVWF  32
+0089:  CALL   003
+008A:  DECFSZ 31,F
+008B:  GOTO   087
+....................    //} 
+.................... } 
+008C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F84   INTRC_IO NOWDT PUT NOMCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1E23   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

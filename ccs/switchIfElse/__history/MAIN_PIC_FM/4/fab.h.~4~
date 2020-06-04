@@ -1,0 +1,19 @@
+#ifndef FAB_h
+#define FAB_h
+
+#define HK_size 124                                                              //HK FORMAT ARRAY SIZE
+#define CW_size 5                                                                //CW FORMAT ARRAY SIZE
+#define HIGH_SAMP_HK_size 124                                                    //High Sampling HK FORMAT ARRAY SIZE
+#define FAB_SENSOR_size 45                                                       //HK FAB Part
+#define buffer_from_FAB  (in_bffr_main[0]==0x33)
+
+static unsigned int8 CW_FORMAT[CW_size] = {};
+unsigned int8 in_HK[FAB_SENSOR_size] = {};
+unsigned int8 HKDATA[HK_size] ={};
+BYTE FAB_DATA = 0;
+static int8 FAB_MEASUERING_FLAG= 0;
+static int8 HIGH_SAMP_FAB_MEASUERING_FLAG = 0;
+int32 FAB_FLAG = 0;
+int8 CHECK_FAB_RESPONSE = 0;
+
+#endif

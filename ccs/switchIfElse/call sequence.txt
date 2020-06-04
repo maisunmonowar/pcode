@@ -1,0 +1,34 @@
+fine tuned program
+==================
+MAIN_PIC_FM.c starts
+	MAIN_PIC_FM.h 						called
+		18F67J94.h						called
+		PIC18F67J94_registers.h			called
+	MAIN_PIC_FM.h 									compiled
+	mainpic_function.h 					called
+		flash_memory_MT25QL01GBBB.c 	called
+		MEMORY_OPERATION 				called
+		reserved function 				called and 	compiled
+		satelite log 					called and 	compiled
+		flash operation 				called and 	compiled
+		mainpic funcition c 			called
+			mbp.c 						called
+				memory operation 		called but not needed
+				satellite log 			called but not needed
+			mbp.c 									compiled
+			adcs test 					called
+				adcs 					called
+					adcs h 				called
+					memory operation 	called but not needed
+					cw.c 				called
+						fab.h 			called and 	compiled
+					cw.c 							compiled
+				adcs 								compiled
+				adcs test h 			called and 	compiled
+			adcs test 								compiled
+		mainpic function 							compiled
+		auto msn 						called and 	compiled
+		analyze command 				called and 	compiled
+	mainpic function h 								compiled
+main pic fm c 										compiled
+=============================================================

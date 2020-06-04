@@ -1,0 +1,60 @@
+#define SECT 65536
+
+void TRANSFER_SECTOR_OF2SCF(int32 address)
+{
+   address = address - (address%65536);
+   output_low(PIN_C4);
+   sector_erase_SCF(address);
+   for(int32 i = 0; i < 65536; i++)
+   {
+      WRITE_DATA_BYTE_SCF(address + i, READ_DATA_BYTE_OF(address + i));
+   }
+   delay_ms(100);
+   output_high(PIN_C4);
+   return;
+}
+
+void TRANSFER_SECTOR_SMF2SCF(int32 address)
+{
+   address = address - (address%65536);
+   output_low(PIN_C4);
+   output_low(PIN_A5);
+   sector_erase_SCF(address);
+   for(int32 i = 0; i < 65536; i++)
+   {
+      WRITE_DATA_BYTE_SCF(address + i, READ_DATA_BYTE_SMF(address + i));
+   }
+   delay_ms(100);
+   output_high(PIN_C4);
+   return;
+}
+
+void TRANSFER_SECTOR_OF2SMF(int32 address)
+{
+   address = address - (address%65536);
+   output_low(PIN_C4);
+   output_low(PIN_A5);
+   sector_erase_SCF(address);
+   for(int32 i = 0; i < 65536; i++)
+   {
+      WRITE_DATA_BYTE_SCF(address + i, READ_DATA_BYTE_SMF(address + i));
+   }
+   delay_ms(100);
+   output_high(PIN_C4);
+   return;
+}
+
+void TRANSFER_SECTOR_SCF2OF(int32 address)
+{
+   address = address - (address%65536);
+   output_low(PIN_C4);
+   output_low(PIN_A5);
+   sector_erase_SCF(address);
+   for(int32 i = 0; i < 65536; i++)
+   {
+      WRITE_DATA_BYTE_SCF(address + i, READ_DATA_BYTE_SMF(address + i));
+   }
+   delay_ms(100);
+   output_high(PIN_C4);
+   return;
+}

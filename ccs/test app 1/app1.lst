@@ -1,22 +1,21 @@
-CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
+CCS PCH C Compiler, Version 5.056, 29513               04-Jun-20 17:45
 
                Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\test app 1\app1.lst
 
-               ROM used:   250 words (3%)
-                           Largest free fragment is 2048
-               RAM used:   6 (1%) at main() level
-                           23 (2%) worst case
-               Stack used: 0 locations
-               Stack size: 16
+               ROM used:   438 bytes (0%)
+                           Largest free fragment is 65520
+               RAM used:   5 (0%) at main() level
+                           10 (0%) worst case
+               Stack used: 1 locations
+               Stack size: 31
 
 *
-0340:  MOVLP  00
-0341:  GOTO   409
-0342:  NOP
+00800:  NOP   
+00802:  GOTO   0934
 ....................  
-.................... #include <app1.h> 
-.................... #include <16F1787.h> 
-.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... #include "app1.h" 
+.................... #include <18F67J94.h> 
+.................... //////////// Standard Header file for the PIC18F67J94 device //////////////// 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
 .................... //// This source code may only be used by licensed users of the CCS C  //// 
@@ -26,217 +25,156 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
 .................... //// Derivative programs created using this software in object code    //// 
 .................... //// form are not restricted in any way.                               //// 
 .................... /////////////////////////////////////////////////////////////////////////// 
-.................... #device PIC16F1787 
+.................... #device PIC18F67J94 
 *
-0344:  DATA 0D,05
-0345:  DATA F6,19
-0346:  DATA A0,12
-0347:  DATA B3,3A
-0348:  DATA 20,00
+00808:  DATA 0D,0A
+0080A:  DATA 76,34
+0080C:  DATA 20,25
+0080E:  DATA 33,75
+00810:  DATA 20,00
 *
-035E:  MOVF   0B,W
-035F:  BCF    0B.7
-0360:  MOVLB  03
-0361:  BSF    15.7
-0362:  BSF    15.0
-0363:  NOP
-0364:  NOP
-0365:  BTFSC  09.7
-0366:  BSF    0B.7
-0367:  BTFSC  03.0
-0368:  GOTO   392
-0369:  MOVF   13,W
-036A:  ANDLW  7F
-036B:  MOVLB  00
-036C:  MOVWF  25
-036D:  MOVLB  03
-036E:  MOVF   11,W
-036F:  MOVLB  00
-0370:  MOVWF  26
-0371:  MOVLB  03
-0372:  MOVF   12,W
-0373:  MOVLB  00
-0374:  MOVWF  27
-0375:  MOVF   25,W
-0376:  BTFSS  11.4
-0377:  GOTO   376
-0378:  MOVLB  03
-0379:  MOVWF  1A
-037A:  MOVLB  00
-037B:  MOVF   26,W
-037C:  MOVLB  03
-037D:  MOVWF  11
-037E:  MOVLB  00
-037F:  MOVF   27,W
-0380:  MOVLB  03
-0381:  MOVWF  12
-0382:  MOVF   0B,W
-0383:  BCF    0B.7
-0384:  BSF    15.7
-0385:  BSF    15.0
-0386:  NOP
-0387:  NOP
-0388:  BTFSC  09.7
-0389:  BSF    0B.7
-038A:  MOVLB  00
-038B:  DECFSZ 22,F
-038C:  GOTO   38E
-038D:  GOTO   390
-038E:  MOVLB  03
-038F:  GOTO   392
-0390:  GOTO   3B3
-0391:  MOVLB  03
-0392:  RLF    13,W
-0393:  RLF    14,W
-0394:  ANDLW  7F
-0395:  MOVLB  00
-0396:  MOVWF  25
-0397:  MOVLB  03
-0398:  MOVF   11,W
-0399:  MOVLB  00
-039A:  MOVWF  26
-039B:  MOVLB  03
-039C:  MOVF   12,W
-039D:  MOVLB  00
-039E:  MOVWF  27
-039F:  MOVF   25,W
-03A0:  BTFSS  11.4
-03A1:  GOTO   3A0
-03A2:  MOVLB  03
-03A3:  MOVWF  1A
-03A4:  MOVLB  00
-03A5:  MOVF   26,W
-03A6:  MOVLB  03
-03A7:  MOVWF  11
-03A8:  MOVLB  00
-03A9:  MOVF   27,W
-03AA:  MOVLB  03
-03AB:  MOVWF  12
-03AC:  INCF   11,F
-03AD:  BTFSC  03.2
-03AE:  INCF   12,F
-03AF:  BCF    03.0
-03B0:  MOVLB  00
-03B1:  DECFSZ 22,F
-03B2:  GOTO   35E
-03B3:  MOVLP  00
-03B4:  GOTO   427 (RETURN)
-03B5:  MOVF   25,W
-03B6:  CLRF   78
-03B7:  SUBWF  24,W
-03B8:  BTFSC  03.0
-03B9:  GOTO   3BD
-03BA:  MOVF   24,W
-03BB:  MOVWF  77
-03BC:  GOTO   3C9
-03BD:  CLRF   77
-03BE:  MOVLW  08
-03BF:  MOVWF  26
-03C0:  RLF    24,F
-03C1:  RLF    77,F
-03C2:  MOVF   25,W
-03C3:  SUBWF  77,W
-03C4:  BTFSC  03.0
-03C5:  MOVWF  77
-03C6:  RLF    78,F
-03C7:  DECFSZ 26,F
-03C8:  GOTO   3C0
-03C9:  RETURN
-03CA:  MOVF   78,W
-03CB:  MOVF   22,W
-03CC:  MOVWF  24
-03CD:  MOVLW  64
-03CE:  MOVWF  25
-03CF:  CALL   3B5
-03D0:  MOVF   77,W
-03D1:  MOVWF  22
-03D2:  MOVF   78,W
-03D3:  MOVLW  30
-03D4:  BTFSS  03.2
-03D5:  GOTO   3DD
-03D6:  BTFSS  23.1
-03D7:  GOTO   3E7
-03D8:  BTFSC  23.3
-03D9:  GOTO   3E7
-03DA:  BTFSC  23.4
-03DB:  MOVLW  20
-03DC:  GOTO   3E0
-03DD:  BCF    23.3
-03DE:  BCF    23.4
-03DF:  BSF    23.0
-03E0:  ADDWF  78,F
-03E1:  MOVF   78,W
-03E2:  BTFSS  11.4
-03E3:  GOTO   3E2
-03E4:  MOVLB  03
-03E5:  MOVWF  1A
-03E6:  MOVLB  00
-03E7:  MOVF   22,W
-03E8:  MOVWF  24
-03E9:  MOVLW  0A
-03EA:  MOVWF  25
-03EB:  CALL   3B5
-03EC:  MOVF   77,W
-03ED:  MOVWF  22
-03EE:  MOVF   78,W
-03EF:  MOVLW  30
-03F0:  BTFSS  03.2
-03F1:  GOTO   3F8
-03F2:  BTFSC  23.3
-03F3:  GOTO   3FF
-03F4:  BTFSS  23.0
-03F5:  GOTO   3FF
-03F6:  BTFSC  23.4
-03F7:  MOVLW  20
-03F8:  ADDWF  78,F
-03F9:  MOVF   78,W
-03FA:  BTFSS  11.4
-03FB:  GOTO   3FA
-03FC:  MOVLB  03
-03FD:  MOVWF  1A
-03FE:  MOVLB  00
-03FF:  MOVLW  30
-0400:  ADDWF  22,F
-0401:  MOVF   22,W
-0402:  BTFSS  11.4
-0403:  GOTO   402
-0404:  MOVLB  03
-0405:  MOVWF  1A
-0406:  MOVLP  00
-0407:  MOVLB  00
-0408:  GOTO   42C (RETURN)
+0087C:  TBLRD*+
+0087E:  MOVFF  FF6,07
+00882:  MOVFF  FF7,08
+00886:  MOVFF  FF8,09
+0088A:  MOVFF  FF5,0A
+0088E:  RCALL  083A
+00890:  MOVFF  07,FF6
+00894:  MOVFF  08,FF7
+00898:  MOVFF  09,FF8
+0089C:  DECFSZ 06,F
+0089E:  BRA    087C
+008A0:  GOTO   0996 (RETURN)
+008A4:  MOVF   09,W
+008A6:  CLRF   01
+008A8:  SUBWF  08,W
+008AA:  BC    08B2
+008AC:  MOVFF  08,00
+008B0:  BRA    08CA
+008B2:  CLRF   00
+008B4:  MOVLW  08
+008B6:  MOVWF  0A
+008B8:  RLCF   08,F
+008BA:  RLCF   00,F
+008BC:  MOVF   09,W
+008BE:  SUBWF  00,W
+008C0:  BTFSC  FD8.0
+008C2:  MOVWF  00
+008C4:  RLCF   01,F
+008C6:  DECFSZ 0A,F
+008C8:  BRA    08B8
+008CA:  RETURN 0
+008CC:  MOVF   01,W
+008CE:  MOVFF  06,08
+008D2:  MOVLW  64
+008D4:  MOVWF  09
+008D6:  RCALL  08A4
+008D8:  MOVFF  00,06
+008DC:  MOVF   01,W
+008DE:  MOVLW  30
+008E0:  BNZ   08F0
+008E2:  BTFSS  07.1
+008E4:  BRA    08FE
+008E6:  BTFSC  07.3
+008E8:  BRA    08FE
+008EA:  BTFSC  07.4
+008EC:  MOVLW  20
+008EE:  BRA    08F6
+008F0:  BCF    07.3
+008F2:  BCF    07.4
+008F4:  BSF    07.0
+008F6:  ADDWF  01,F
+008F8:  MOVFF  01,0A
+008FC:  RCALL  083A
+008FE:  MOVFF  06,08
+00902:  MOVLW  0A
+00904:  MOVWF  09
+00906:  RCALL  08A4
+00908:  MOVFF  00,06
+0090C:  MOVF   01,W
+0090E:  MOVLW  30
+00910:  BNZ   091E
+00912:  BTFSC  07.3
+00914:  BRA    0926
+00916:  BTFSS  07.0
+00918:  BRA    0926
+0091A:  BTFSC  07.4
+0091C:  MOVLW  20
+0091E:  ADDWF  01,F
+00920:  MOVFF  01,0A
+00924:  RCALL  083A
+00926:  MOVLW  30
+00928:  ADDWF  06,F
+0092A:  MOVFF  06,0A
+0092E:  RCALL  083A
+00930:  GOTO   09A0 (RETURN)
 ....................  
 .................... #list 
 ....................  
-.................... #device ADC=16 
-.................... #use delay(crystal=8000000) 
+.................... //#device ADC=16 
+.................... #use delay(clock=16000000, crystal=16000000) 
 *
-0349:  MOVLW  20
-034A:  MOVWF  05
-034B:  MOVLW  02
-034C:  MOVWF  04
-034D:  MOVF   00,W
-034E:  BTFSC  03.2
-034F:  GOTO   35D
-0350:  MOVLW  02
-0351:  MOVWF  78
-0352:  CLRF   77
-0353:  DECFSZ 77,F
-0354:  GOTO   353
-0355:  DECFSZ 78,F
-0356:  GOTO   352
-0357:  MOVLW  97
-0358:  MOVWF  77
-0359:  DECFSZ 77,F
-035A:  GOTO   359
-035B:  DECFSZ 00,F
-035C:  GOTO   350
-035D:  RETURN
-.................... #fuses NOWDT 
-.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
-.................... #define PUSH_BUTTON PIN_D0 
+00812:  CLRF   FEA
+00814:  MOVLW  06
+00816:  MOVWF  FE9
+00818:  MOVF   FEF,W
+0081A:  BZ    0838
+0081C:  MOVLW  05
+0081E:  MOVWF  01
+00820:  CLRF   00
+00822:  DECFSZ 00,F
+00824:  BRA    0822
+00826:  DECFSZ 01,F
+00828:  BRA    0820
+0082A:  MOVLW  2E
+0082C:  MOVWF  00
+0082E:  DECFSZ 00,F
+00830:  BRA    082E
+00832:  BRA    0834
+00834:  DECFSZ FEF,F
+00836:  BRA    081C
+00838:  RETURN 0
+.................... #fuses NOWDT NOBROWNOUT 
 ....................  
-.................... #include <bootloader.h> 
+....................  
+.................... #use rs232(baud=9600, xmit=PIN_E5, rcv=PIN_E4)//#use rs232(baud=9600, xmit=PIN_E5, rcv=PIN_E4) 
+0083A:  BCF    F96.5
+0083C:  BCF    F8D.5
+0083E:  MOVLW  08
+00840:  MOVWF  01
+00842:  BRA    0844
+00844:  NOP   
+00846:  BSF    01.7
+00848:  BRA    0866
+0084A:  BCF    01.7
+0084C:  RRCF   0A,F
+0084E:  BTFSC  FD8.0
+00850:  BSF    F8D.5
+00852:  BTFSS  FD8.0
+00854:  BCF    F8D.5
+00856:  BSF    01.6
+00858:  BRA    0866
+0085A:  BCF    01.6
+0085C:  DECFSZ 01,F
+0085E:  BRA    084C
+00860:  BRA    0862
+00862:  NOP   
+00864:  BSF    F8D.5
+00866:  MOVLW  84
+00868:  MOVWF  FE9
+0086A:  DECFSZ FE9,F
+0086C:  BRA    086A
+0086E:  BRA    0870
+00870:  NOP   
+00872:  BTFSC  01.7
+00874:  BRA    084A
+00876:  BTFSC  01.6
+00878:  BRA    085A
+0087A:  RETURN 0
+....................  
+.................... #define PUSH_BUTTON PIN_B7 
+....................  
+.................... #include "bootloader.h" 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                       BOOTLOADER.H                                //// 
 .................... ////                                                                   //// 
@@ -270,10 +208,10 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
 ....................   #endif 
 ....................  #elif defined(__PCH__) 
 ....................   #define FLASH_SIZE getenv("FLASH_ERASE_SIZE") 
-....................   #if ((0x500 % FLASH_SIZE) == 0)         //IF 0x500 is even flash boundary 
-....................    #define LOADER_END   0x4FF 
+....................   #if ((0x700 % FLASH_SIZE) == 0)         //IF 0x500 is even flash boundary 
+....................    #define LOADER_END   0x6FF 
 ....................   #else                                  //ELSE, goto next even boundary 
-....................    #define LOADER_END   ((0x500+FLASH_SIZE-(0x500 % FLASH_SIZE))-1) 
+....................    #define LOADER_END   ((0x700+FLASH_SIZE-(0x700 % FLASH_SIZE))-1) 
 ....................   #endif 
 ....................  #else 
 ....................   #error Bootloader only works with PCM or PCH compiler 
@@ -347,75 +285,96 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Sep-19 18:08
 ....................  
 .................... void main() 
 *
-0409:  MOVLB  03
-040A:  BCF    1F.3
-040B:  MOVLW  0C
-040C:  MOVWF  1B
-040D:  MOVLW  A2
-040E:  MOVWF  1E
-040F:  MOVLW  90
-0410:  MOVWF  1D
-0411:  CLRF   0C
-0412:  CLRF   0D
-0413:  CLRF   0F
-0414:  CLRF   10
-0415:  MOVLB  02
-0416:  CLRF   12
-0417:  CLRF   11
+00934:  CLRF   FF8
+00936:  BCF    FD0.7
+00938:  MOVLB  E
+0093A:  MOVLW  55
+0093C:  MOVWF  F7E
+0093E:  MOVLW  AA
+00940:  MOVWF  F7E
+00942:  BCF    F66.6
+00944:  MOVLW  55
+00946:  MOVWF  F7E
+00948:  MOVLW  AA
+0094A:  MOVWF  F7E
+0094C:  BSF    F66.6
+0094E:  CLRF   F9B
+00950:  CLRF   F64
+00952:  CLRF   F65
+00954:  CLRF   F66
+00956:  MOVLW  02
+00958:  MOVWF  FD3
+0095A:  BCF    F96.5
+0095C:  BSF    F8D.5
+0095E:  CLRF   xD9
+00960:  CLRF   xDA
+00962:  CLRF   x45
+00964:  CLRF   x46
+00966:  CLRF   x47
+00968:  BCF    x8D.7
+0096A:  BCF    x8D.6
+0096C:  BCF    x8D.5
+0096E:  MOVLB  1
+00970:  CLRF   x88
+00972:  MOVLB  F
+00974:  CLRF   x53
+00976:  CLRF   x38
+00978:  CLRF   x37
 .................... { 
 ....................    INT8 i; 
 ....................    delay_ms (100) ; 
-0418:  MOVLW  64
-0419:  MOVLB  00
-041A:  MOVWF  22
-041B:  CALL   349
+0097A:  MOVLW  64
+0097C:  MOVWF  06
+0097E:  MOVLB  0
+00980:  RCALL  0812
 ....................     
 ....................    WHILE (TRUE) 
 ....................    { 
-....................       printf ("\r\nv3 %3u ", ++i); 
-041C:  INCF   21,F
-041D:  MOVLW  44
-041E:  MOVLB  03
-041F:  MOVWF  11
-0420:  MOVLW  03
-0421:  MOVWF  12
-0422:  BCF    03.0
-0423:  MOVLW  05
-0424:  MOVLB  00
-0425:  MOVWF  22
-0426:  GOTO   35E
-0427:  MOVF   21,W
-0428:  MOVWF  22
-0429:  MOVLW  13
-042A:  MOVWF  23
-042B:  GOTO   3CA
-042C:  MOVLW  20
-042D:  BTFSS  11.4
-042E:  GOTO   42D
-042F:  MOVLB  03
-0430:  MOVWF  1A
+....................       printf ("\r\nv4 %3u ", ++i); 
+00982:  INCF   05,F
+00984:  MOVLW  08
+00986:  MOVWF  FF6
+00988:  MOVLW  08
+0098A:  MOVWF  FF7
+0098C:  MOVLW  00
+0098E:  MOVWF  FF8
+00990:  MOVLW  05
+00992:  MOVWF  06
+00994:  BRA    087C
+00996:  MOVFF  05,06
+0099A:  MOVLW  13
+0099C:  MOVWF  07
+0099E:  BRA    08CC
+009A0:  MOVLW  20
+009A2:  MOVWF  0A
+009A4:  RCALL  083A
 ....................       //TODO: User Code 
 ....................       // Enter Bootloader if Pin D0 is low after a RESET 
 ....................       if(!input(PUSH_BUTTON)) 
-0431:  MOVLB  01
-0432:  BSF    0F.0
-0433:  MOVLB  00
-0434:  BTFSS  0F.0
+009A6:  BSF    F93.7
+009A8:  BTFSC  F81.7
+009AA:  BRA    09AE
 ....................       { 
 ....................          //load_program(); 
 ....................          reset_cpu(); //Since I can't call load_program() withough loader.c 
-0435:  RESET
+009AC:  RESET
 ....................          //loader.c not to be included in apps 
 ....................       } 
 ....................       delay_ms (100) ; 
-0436:  MOVLW  64
-0437:  MOVWF  22
-0438:  CALL   349
-0439:  GOTO   41C
+009AE:  MOVLW  64
+009B0:  MOVWF  06
+009B2:  RCALL  0812
+009B4:  BRA    0982
 ....................    } 
 .................... } 
-043A:  SLEEP
+009B6:  SLEEP 
 
 Configuration Fuses:
-   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
-   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP
+   Word  1: F6A0   STVREN NOXINST NODEBUG NOBROWNOUT BORV18 NOPROTECT
+   Word  2: FFA2   PR SOSC_DIG CLOCKOUT IESO NOPLL
+   Word  3: F032   HS
+   Word  4: F7FF   WPFP WPDIS WPEND NOWPCFG
+   Word  5: FF03   T5G_IS_T5G CINA_DEFAULT IOL1WAY LS48MHZ MSSP2MSK7 MSSPMSK7
+   Word  6: FCFF   WDTWIN_25% WDTCLK_FRC WDT32768 NOWDT WINDIS WPRES128
+   Word  7: F01D   NOVREGSLEEP VBATBOR DSBOR DS_SW
+   Word  8: F3F8   DSWDT_25DAYS DSWDT DSWDTOSC_INT

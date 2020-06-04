@@ -1,0 +1,217 @@
+unsigned int8 ACK_for_COM[16] = {0xAA,0,0,0,0x85,0,0,0,0,0,0,0,0,0,0,0xBB};
+void EXECUTE_MISSION_from_COM(int8 CMD)
+{
+   for(int n = 0; n < 16; n++)//send back the acknowledge
+   {
+      fputc(ACK_for_COM[n],COM);
+   }
+   switch(CMD)
+   {
+      case 0xC0:
+         CAM_TEST_OPERATION();
+         if(AUTO_CAM_DONE == 0)
+         {
+            AUTO_CAM_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         //delay_ms(10);
+         break;
+      case 0xA0:
+         ADCS_TEST_OPERATION();
+         if(AUTO_ADCS_DONE == 0)
+         {
+            AUTO_ADCS_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         //delay_ms(10);
+         break;
+      case 0xD0:
+         DATACOLLECTION_TEST_OPERATION();
+         if(AUTO_LDM_DONE == 0)
+         {
+            AUTO_LDM_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         delay_ms(10);
+         break;
+      case 0x99:
+         CURRENT_ADDRESS_OF_FLASH();
+         //delay_ms(10);
+         break;
+      case 0xaa:
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //delay_ms(10);
+         break;
+      case 0x23:
+         //STORE_ADRESS_DATA_TO_FLASH();
+         RESET_SATELLITE();
+         break;
+      case 0xb0:
+         CLEAR_BC_FLAG();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb1:
+         MAKE_BC_FLAG_1();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb2:
+         MAKE_BC_FLAG_2();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;               
+      case 0xb3:
+         MAKE_BC_FLAG_3();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb4:
+         MAKE_BC_FLAG_4();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0x4b:
+         Count_Kill_Flag();
+         break;
+      case 0xfa:
+         //enable_interrupts(INT_rda3);
+         HIGHSAMP_SENSOR_COLLECTION(HIGH_SAMP_TIMES);
+         //disable_interrupts(INT_rda3);
+         break;
+      case 0x59:
+         GIVE_ACCESS_SCF_Nsec(5);
+         //Turn_OFF_ADCS();
+         break;
+      case 0x9f:
+         Disp_RSV();
+         break;
+      case 0x50:
+//!         CW_for_COM[0] = 0x11;
+//!         CW_for_COM[1] = 0x22;
+//!         CW_for_COM[2] = 0x33;
+//!         CW_for_COM[3] = 0x44;
+//!         CW_for_COM[4] = 0x55;
+         for(int a = 0; a < 16; a++)//send the latest CW data to COM PIC
+         {
+            
+            fputc(CW_for_COM[a],COM);
+         }
+         break;
+   }
+   return;
+}
+
+
+
+
+void EXECUTE_MISSION_from_PC(int8 CMD)
+{
+   switch(CMD)
+   {
+      case 0xC0:
+         CAM_TEST_OPERATION();
+         if(AUTO_CAM_DONE == 0)
+         {
+            AUTO_CAM_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         //delay_ms(10);
+         break;
+      case 0xA0:
+         ADCS_TEST_OPERATION();
+         if(AUTO_ADCS_DONE == 0)
+         {
+            AUTO_ADCS_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         //delay_ms(10);
+         break;
+      case 0xD0:
+         DATACOLLECTION_TEST_OPERATION();
+         if(AUTO_LDM_DONE == 0)
+         {
+            AUTO_LDM_DONE = 1;
+            STORE_FLAG_INFO();
+         }
+         delay_ms(10);
+         break;
+      case 0x99:
+         CURRENT_ADDRESS_OF_FLASH();
+         //delay_ms(10);
+         break;
+      case 0xaa:
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //delay_ms(10);
+         break;
+      case 0x23:
+         STORE_ADRESS_DATA_TO_FLASH();
+         RESET_SATELLITE();
+         break;
+      case 0xb0:
+         CLEAR_BC_FLAG();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb1:
+         MAKE_BC_FLAG_1();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb2:
+         MAKE_BC_FLAG_2();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;               
+      case 0xb3:
+         MAKE_BC_FLAG_3();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         break;
+      case 0xb4:
+         MAKE_BC_FLAG_4();
+         STORE_ADRESS_DATA_TO_FLASH();
+         STORE_FLAG_INFO();
+         //WRITE_FLAG_to_EEPROM();
+         //READ_FLAG_from_EEPROM();
+         break;
+      case 0x4b:
+         Count_Kill_Flag();
+         break;
+      case 0xfa:
+         //enable_interrupts(INT_rda3);
+         HIGHSAMP_SENSOR_COLLECTION(HIGH_SAMP_TIMES);
+         Turn_OFF_ADCS();
+         //disable_interrupts(INT_rda3);
+         break;
+      case 0x59:
+         GIVE_ACCESS_SCF_Nsec(5);
+         //Turn_OFF_ADCS();
+         break;
+      case 0xee:
+         MEMORY_ERASE();
+      break;
+      case 0x9f:
+         Disp_RSV();
+         break;
+      case 0xcf:
+         table_refresh();
+         break;
+   }
+   return;
+}
+
+
+
+

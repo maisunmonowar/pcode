@@ -1,0 +1,5 @@
+#ifndef ADDITIONALFUNCTION_H
+#define ADDITIONALFUNCTION_H
+int test1(int num1, int num2)
+int sub(int num1, int num2)
+#end

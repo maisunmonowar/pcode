@@ -1,0 +1,7 @@
+#ifndef ADCS_H
+#define ADCS_H
+
+#define ADCS_SENSOR_SIZE 78                                                      //for testing additional 6byte for checking duty
+
+int8 ADCS_SENSOR_DATA[ADCS_SENSOR_SIZE] = {};
+#endif

@@ -1,0 +1,4 @@
+--- Info 300 "C:\Users\maisun\Documents\PhD\offline\code\ccs\orgFuncWithoutRes\flash_ memory_ MT25QL01GBBB_OF.c" Line 23(6,16): More info:   Segment at 00000-0FFFE (0000 used)
+--- Info 300 "C:\Users\maisun\Documents\PhD\offline\code\ccs\orgFuncWithoutRes\flash_ memory_ MT25QL01GBBB_OF.c" Line 23(6,16): More info:   Segment at 10000-1FFEE (0000 used)
+--- Info 300 "C:\Users\maisun\Documents\PhD\offline\code\ccs\orgFuncWithoutRes\flash_ memory_ MT25QL01GBBB_OF.c" Line 23(6,16): More info:   Attempted to create: 11800-00000  for #org
+*** Error 126 "C:\Users\maisun\Documents\PhD\offline\code\ccs\orgFuncWithoutRes\flash_ memory_ MT25QL01GBBB_OF.c" Line 23(6,16): Invalid ORG range

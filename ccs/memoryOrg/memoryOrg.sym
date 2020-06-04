@@ -4,8 +4,14 @@
 004-005 @READ_PACKED_MEMORY.P4
 006-007 @WRITE_PACKED_MEMORY.P1
 006-007 @READ_PACKED_MEMORY.P2
-021     main.@SCRATCH1
+021     sub_caller.num1
+021     test1.num1
+021     MAIN.@SCRATCH1
 022     @delay_ms1.P1
+022     sub_caller.num2
+022     test1.num2
+023     sub.num1
+024     sub.num2
 077     @SCRATCH
 078     @SCRATCH
 078     _RETURN_
@@ -15,10 +21,10 @@
 113.6   C2OUT
 11A.6   C4OUT
 11E.6   C3OUT
-191-192 @READ_PROGRAM_MEMORY8.P1
-191-192 @WRITE_PROGRAM_MEMORY8.P2
-291     CCP_1
+191-192 @WRITE_PROGRAM_MEMORY8.P1
+191-192 @READ_PROGRAM_MEMORY8.P2
 291     CCP_1_LOW
+291     CCP_1
 292     CCP_1_HIGH
 298     CCP_2_LOW
 298     CCP_2
@@ -29,22 +35,27 @@
 
 ROM Allocation:
 000004  @delay_ms1
-000500  @cinit1
-000500  main
-000508  @cinit2
+000019  MAIN
+000019  @cinit1
+000021  @cinit2
+001000  test1
+001200  sub_caller
+001204  sub
 
 Project Directory:
     C:\Users\maisun\Documents\PhD\offline\code\ccs\memoryOrg\
 
 Project Files:
-    memoryOrg.c                                             [17-Sep-19 19:14  CRC=03B83C90]
-    memoryOrg.h                                             [17-Sep-19 18:49  CRC=00000000]
+    memoryOrg.c                                             [03-Feb-20 15:58  CRC=9149B46A]
+    memoryOrg.h                                             [03-Feb-20 16:20  CRC=2DDD63E0]
     ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h [01-Mar-16 16:00  CRC=FEB6EB35]
+    additionalFunction.h                                    [03-Feb-20 16:06  CRC=D872A938]
+    additionalFunction.c                                    [03-Feb-20 15:58  CRC=28B00D6B]
 
-Source signature=012612FA
+Source signature=E7B0C78D
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=5D8A
+Hex file CRC=29CC
 
 Units:
     memoryOrg (main)
@@ -52,7 +63,7 @@ Units:
 Compiler Settings:
     Processor:      PIC16F1787
     Pointer Size:   16
-    ADC Range:      0-65535
+    ADC Range:      0-255
     Opt Level:      9
     Short,Int,Long: UNSIGNED: 1,8,16
     Float,Double:   32,32

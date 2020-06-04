@@ -1,19 +1,22 @@
-CCS PCM C Compiler, Version 5.056, 29513               17-Sep-19 19:14
+CCS PCM C Compiler, Version 5.056, 29513               03-Feb-20 16:20
 
                Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\memoryOrg\memoryOrg.lst
 
-               ROM used:   59 words (1%)
+               ROM used:   86 words (1%)
                            Largest free fragment is 2048
                RAM used:   6 (1%) at main() level
-                           18 (2%) worst case
+                           20 (2%) worst case
                Stack used: 0 locations
                Stack size: 16
 
 *
 0000:  MOVLP  00
-0001:  GOTO   500
+0001:  GOTO   019
 0002:  NOP
 .................... #include <memoryOrg.h> 
+.................... #ifndef MEMORYORG_H 
+.................... #define MEMORYORG_H 
+....................  
 .................... #include <16F1787.h> 
 .................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
 .................... /////////////////////////////////////////////////////////////////////////// 
@@ -29,7 +32,54 @@ CCS PCM C Compiler, Version 5.056, 29513               17-Sep-19 19:14
 ....................  
 .................... #list 
 ....................  
-.................... #device ADC=16 
+.................... #include "additionalFunction.h" 
+.................... #ifndef ADDITIONALFUNCTION_H 
+.................... #define ADDITIONALFUNCTION_H 
+....................  
+.................... #include "additionalFunction.c" 
+.................... //#include "additionalFunction.h" 
+....................  
+.................... #org 0x1000, 0x11FF 
+.................... int test1(int num1, int num2) 
+.................... { 
+....................    return num1 + num2; 
+*
+1000:  MOVF   22,W
+1001:  ADDWF  21,W
+1002:  MOVWF  78
+1003:  RETURN
+.................... } 
+....................  
+....................  
+.................... int sub(int num1, int num2) 
+.................... { 
+....................    return num1 - num2; 
+*
+1204:  MOVF   24,W
+1205:  SUBWF  23,W
+1206:  MOVWF  78
+.................... } 
+.................... #org 0x1200 
+.................... int sub_caller(int num1, int num2) 
+.................... { 
+....................    return sub(num1, num2); 
+*
+1200:  MOVF   21,W
+1201:  MOVWF  23
+1202:  MOVF   22,W
+1203:  MOVWF  24
+*
+1207:  MOVF   78,W
+1208:  RETURN
+.................... } 
+....................  
+....................  
+.................... //int test1(int num1, int num2); 
+.................... int sub(int num1, int num2); 
+.................... #endif 
+....................  
+.................... //#include "additionalFunction.c" 
+.................... //#device ADC=16 
 .................... #use delay(crystal=8MHz) 
 *
 0004:  MOVLW  20
@@ -57,64 +107,85 @@ CCS PCM C Compiler, Version 5.056, 29513               17-Sep-19 19:14
 .................... #define LED PIN_D0 
 .................... #define DELAY 1000 
 ....................  
+.................... //int test1(int num1, int num2); 
+.................... int sub(int num1, int num2); 
+.................... #endif 
+....................  
 .................... //!#include <bootloader.h> 
 .................... //!#include <loader.c> 
 ....................  
+.................... /* 
 .................... #if defined(__PCM__) 
 ....................  #org 0x500, 0x628//LOADER_END+1,LOADER_END+256 
 .................... #elif defined(__PCH__) 
 ....................  #org LOADER_END+2,LOADER_END+4 
 .................... #endif 
+.................... */ 
 .................... void main() 
-*
-0500:  MOVLB  03
-0501:  CLRF   0C
-0502:  CLRF   0D
-0503:  CLRF   0F
-0504:  CLRF   10
-0505:  MOVLB  02
-0506:  CLRF   12
-0507:  CLRF   11
+0019:  MOVLB  03
+001A:  CLRF   0C
+001B:  CLRF   0D
+001C:  CLRF   0F
+001D:  CLRF   10
+001E:  MOVLB  02
+001F:  CLRF   12
+0020:  CLRF   11
 .................... { 
 ....................    while(TRUE) 
 ....................    { 
 ....................       //Example blinking LED program 
 ....................       output_low(LED); 
-0508:  MOVLB  01
-0509:  BCF    0F.0
-050A:  MOVLB  02
-050B:  BCF    0F.0
+0021:  MOVLB  01
+0022:  BCF    0F.0
+0023:  MOVLB  02
+0024:  BCF    0F.0
 ....................       delay_ms(DELAY); 
-050C:  MOVLW  04
-050D:  MOVLB  00
-050E:  MOVWF  21
-050F:  MOVLW  FA
-0510:  MOVWF  22
-0511:  CALL   004
-0512:  DECFSZ 21,F
-0513:  GOTO   50F
+0025:  MOVLW  04
+0026:  MOVLB  00
+0027:  MOVWF  21
+0028:  MOVLW  FA
+0029:  MOVWF  22
+002A:  CALL   004
+002B:  DECFSZ 21,F
+002C:  GOTO   028
 ....................       output_high(LED); 
-0514:  MOVLB  01
-0515:  BCF    0F.0
-0516:  MOVLB  02
-0517:  BSF    0F.0
+002D:  MOVLB  01
+002E:  BCF    0F.0
+002F:  MOVLB  02
+0030:  BSF    0F.0
 ....................       delay_ms(DELAY); 
-0518:  MOVLW  04
-0519:  MOVLB  00
-051A:  MOVWF  21
-051B:  MOVLW  FA
-051C:  MOVWF  22
-051D:  CALL   004
-051E:  DECFSZ 21,F
-051F:  GOTO   51B
-0520:  MOVLB  02
-0521:  GOTO   508
+0031:  MOVLW  04
+0032:  MOVLB  00
+0033:  MOVWF  21
+0034:  MOVLW  FA
+0035:  MOVWF  22
+0036:  CALL   004
+0037:  DECFSZ 21,F
+0038:  GOTO   034
 ....................  
 ....................       //TODO: User Code 
+....................       test1(4, 2); 
+0039:  MOVLW  04
+003A:  MOVWF  21
+003B:  MOVLW  02
+003C:  MOVWF  22
+003D:  MOVLP  10
+003E:  CALL   000
+003F:  MOVLP  00
+....................       sub_caller(4,2); 
+0040:  MOVLW  04
+0041:  MOVWF  21
+0042:  MOVLW  02
+0043:  MOVWF  22
+0044:  MOVLP  10
+0045:  CALL   200
+0046:  MOVLP  00
+0047:  MOVLB  02
+0048:  GOTO   021
 ....................    } 
 .................... } 
 ....................  
-0522:  SLEEP
+0049:  SLEEP
 
 Configuration Fuses:
    Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN

@@ -1,0 +1,156 @@
+#include <main pic1.h>
+
+int8 BUF_CMD_FROM_PC[4] = {};
+int8 ynflag1 = 0;//for checking address info
+int8 ynflag2 = 0;//for checking data size info
+int32 address = 0;
+int32 data_size = 0;
+
+void settings();
+void delete_pc_buffer();
+void certification1();
+void certification2();
+void put_address_number();
+void put_data_size();
+
+
+#INT_rda//PC Interrupt
+void UART1_RXD(void)
+{
+   BUF_CMD_FROM_PC[PC_DATA] = fgetc(PC);
+   PC_DATA = ((PC_DATA + 1) % 4);
+   //fputc(fgetc(PC),PC);
+}
+
+void main()
+{
+   settings();
+   while(true)
+   {
+      if(BUF_CMD_FROM_PC[0]==0x25)
+      {
+         delete_pc_buffer();
+         put_address_number();
+         
+         if(ynflag1 == 0)
+         {
+            delete_pc_buffer();
+            put_data_size();
+            if(ynflag2 == 0)
+            {
+               TRANSFER_DATA_NBYTE_TOPC_SCF(address, data_size); //for testing
+            }else{
+               fprintf(PC,"error1\r\n");
+               delay_ms(1000);
+               delete_pc_buffer();
+               BUF_CMD_FROM_PC[0] = 0x25;
+            }
+         delete_pc_buffer();
+         }else{
+            fprintf(PC,"error2\r\n");
+            delay_ms(1000);
+            delete_pc_buffer();
+            BUF_CMD_FROM_PC[0] = 0x25;
+         }
+
+      }
+   }
+   
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void settings()
+{
+   enable_interrupts(global);
+   enable_interrupts(INT_rda);   // Main to PC
+//   enable_interrupts(INT_rda2);  // Main to COM PIC
+   //enable_interrupts(INT_rda3);  // Main to FAB PIC
+   //enable_interrupts(INT_rda4);  // Main to RESET PIC
+   //enable_interrupts(INT_TIMER0);
+   
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_256 | RTCC_8_BIT);
+   set_timer0(0);
+   return;
+}
+
+void delete_pc_buffer()//delete everything
+{
+   ynflag1 = 0;
+   ynflag2 = 0;
+   PC_DATA = 0;
+   for(int i = 0; i < 3; i++)
+   {
+      BUF_CMD_FROM_PC[i] = 0;
+   }
+return;
+}
+
+void certification1()
+{
+   while(true){
+      if(BUF_CMD_FROM_PC[0] == 0x02)
+      {
+         ynflag1 = 1;
+         break;
+      }else if(BUF_CMD_FROM_PC[0] == 0x01){
+         ynflag1 = 0;
+         break;
+      }
+   }
+   return;
+}
+
+void certification2()
+{
+   while(true){
+      if(BUF_CMD_FROM_PC[0] == 0x02)
+      {
+         ynflag2 = 1;
+         break;
+      }else if(BUF_CMD_FROM_PC[0] == 0x01){
+         ynflag2 = 0;
+         break;
+      }
+   }
+   return;
+}
+
+void put_address_number()
+{
+   fprintf(PC,"Download satellite data manually.\r\n");
+   fprintf(PC,"Please input address number\r\n");
+   while(true)
+   {
+      if(PC_data == 3)
+      {
+         delay_ms(100);
+         break;
+      }
+   }
+   address = make32(BUF_CMD_FROM_PC[0],BUF_CMD_FROM_PC[1],BUF_CMD_FROM_PC[2],BUF_CMD_FROM_PC[3]);
+   fprintf(PC,"%lx\r\n",address);
+   fprintf(PC,"Is the address correct?(yes:01, no:02)\r\n");
+   delete_pc_buffer();
+   certification1();
+   return;
+}
+
+void put_data_size()
+{
+   fprintf(PC,"Please input data size information \r\n");
+   while(true)
+   {
+      if(PC_data == 3)
+      {
+         delay_ms(100);
+         break;
+      }
+   }
+   data_size = make32(BUF_CMD_FROM_PC[0],BUF_CMD_FROM_PC[1],BUF_CMD_FROM_PC[2],BUF_CMD_FROM_PC[3]);
+   fprintf(PC,"%ld\r\n",data_size);
+   fprintf(PC,"Is the data size correct?(yes:01, no:02)\r\n");
+   delete_pc_buffer();
+   certification2();
+   return;
+}

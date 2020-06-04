@@ -1,0 +1,16 @@
+#include<mainpic_function.c>
+#include<flash_ memory_ MT25QL01GBBB_v1.c>
+
+//----------Flash memory functions---------------------------------------------
+
+//void sector_erase(unsigned int32 sector_address);  //this is for sector erase
+
+
+//-----------------------------------------------------------------------------
+
+
+//----------main pic functions-------------------------------------------------
+void Check_UART();
+
+
+//-----------------------------------------------------------------------------

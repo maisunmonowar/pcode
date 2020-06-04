@@ -1,0 +1,18 @@
+Original Program
+================================================================
+MAIN_PIC_FM.c starts						
+	MAIN_PIC_FM.h 							called
+		18F67J94.h							called and 	compiled
+		PIC18F67J94_registers.h				called and 	compiled
+		mainpic_function.h 					called
+			flash_memory_MT25QL01GBBB.c 	called and 	compiled
+			MEMORY_OPERATION 				called and 	compiled
+			reserved function 				called and 	compiled
+			satelite log 					called and 	compiled
+			flash operation 				called and 	compiled
+			mainpic funcition c 			called and 	compiled			
+			auto msn 						called and 	compiled
+			analyze command 				called and 	compiled
+		mainpic function h 								compiled
+main pic fm c 											compiled
+================================================================

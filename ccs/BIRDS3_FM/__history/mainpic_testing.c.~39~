@@ -1,0 +1,77 @@
+#define sector 0x00007FFe
+void testing_function()
+{
+   while(true){
+      if(buffer_from_com)
+      {
+         fprintf(PC,"Buffer: ");
+         Transfer_Buffer(1);
+         fprintf(PC,"\r\n");
+         if(buffer_flash)
+         {
+            fprintf(PC,"go");
+            delay_ms(600);
+            fprintf(PC,".");
+            delay_ms(600);
+            fprintf(PC,".");
+            delay_ms(600);
+            fprintf(PC,".\r\n");
+            delay_ms(1000);
+            
+            TRANSFER_Buffer_OF(sector);
+            fprintf(PC,"done\r\n");
+            delay_ms(4000);
+            
+            fprintf(PC,"\r\nbuffer: ");
+            TRANSFER_DATA_NBYTE_TOPC_OF(sector,16);
+            fprintf(PC,"\r\n");
+            
+            fprintf(PC,"sector delete...\r\n");
+            SUBSECTOR_4KB_ERASE_OF(0);
+            SUBSECTOR_32KB_ERASE_OF(0);
+            delay_ms(2000);
+            fprintf(PC,"deleted data:");
+            TRANSFER_DATA_NBYTE_TOPC_OF(sector,16);
+            fprintf(PC,"\r\nDone\r\n\r\n");
+         }
+         delay_ms(4000);
+         
+      }
+      delay_ms(100);
+      Delete_Buffer();
+      
+      if(in_bffr_main[0]==0&&in_bffr_main[1]==0&&in_bffr_main[14]==0&&in_bffr_main[15]==0){
+         fprintf(PC,"delete done\r\n");
+      
+         fprintf(PC,"deleted buffer: ");
+         Transfer_Buffer(1);
+         fprintf(PC,"\r\n");
+      }
+      
+      delay_ms(3000);
+   }
+   return;
+}
+
+void transfer64kb_toPC()
+{
+   TRANSFER_DATA_NBYTE_TOPC_OF(0x00000000,65536);
+}
+
+void allsectorerase()
+{
+   fprintf(PC,"start\r\n");
+   All_SECTOR_ERASE_OF();
+   fprintf(PC,"done\r\n");
+}
+
+void get_com_command()
+{
+   if(buffer_from_com)
+   {
+      fputc(0x77,com);
+   }
+   delay_ms(5);
+   delete_buffer();
+   return;
+}

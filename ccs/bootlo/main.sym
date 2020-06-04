@@ -1,140 +1,142 @@
-004-005 @WRITE_PROGRAM_MEMORY8.P1
-004-005 @WRITE_PACKED_MEMORY.P2
-004-005 @READ_PROGRAM_MEMORY8.P3
-004-005 @READ_PACKED_MEMORY.P4
-004-005 @WRITE_PROGRAM_MEMORY.P5
-006-007 @READ_PACKED_MEMORY.P1
-006-007 @WRITE_PACKED_MEMORY.P2
-020     @INTERRUPT_AREA
-021     @INTERRUPT_AREA
-022-062 rBuffer
-063-064 @sprintf_string
-065.0   real_load_program.do_ACKLOD
-065.1   real_load_program.done
-066     real_load_program.checksum
-067     real_load_program.line_type
-067     @PSTRINGC7_9600_118_119.@SCRATCH1
-068-069 real_load_program.l_addr
-068     @PSTRINGC7_9600_118_119.@SCRATCH2
-069     @PSTRINGC7_9600_118_119.@SCRATCH3
-06A-06B real_load_program.h_addr
-06C-06F,0A0-09F real_load_program.addr
-077     @SCRATCH
-078     @SCRATCH
-078     _RETURN_
-079     @SCRATCH
-07A     @SCRATCH
-07F     @INTERRUPT_AREA
-0A0     real_load_program.dataidx
-0A1     real_load_program.i
-0A2     real_load_program.count
-0A3-0C2 real_load_program.data
-0C4     @WRITE_PROGRAM_MEMORY.P1
-0C4     real_load_program.@SCRATCH1
-0C5     real_load_program.@SCRATCH2
-0C6     real_load_program.@SCRATCH3
-0C7     real_load_program.@SCRATCH4
-0C8-0C9 atoi_b16.s
-0CA     atoi_b16.result
-0CB     atoi_b16.i
-0CC     atoi_b16.@SCRATCH1
-0FF     @INTERRUPT_AREA
-111.6   C1OUT
-113.6   C2OUT
-11A.6   C4OUT
-11E.6   C3OUT
-17F     @INTERRUPT_AREA
-191-192 @WRITE_PROGRAM_MEMORY.P1
-191-192 @READ_PROGRAM_MEMORY8.P2
-191-192 @WRITE_PROGRAM_MEMORY8.P3
-1FF     @INTERRUPT_AREA
-27F     @INTERRUPT_AREA
-291     CCP_1
-291     CCP_1_LOW
-292     CCP_1_HIGH
-298     CCP_2
-298     CCP_2_LOW
-299     CCP_2_HIGH
-2FF     @INTERRUPT_AREA
-311     CCP_3_LOW
-311     CCP_3
-312     CCP_3_HIGH
-37F     @INTERRUPT_AREA
-3FF     @INTERRUPT_AREA
-47F     @INTERRUPT_AREA
-4FF     @INTERRUPT_AREA
-57F     @INTERRUPT_AREA
-5FF     @INTERRUPT_AREA
-67F     @INTERRUPT_AREA
-6FF     @INTERRUPT_AREA
-77F     @INTERRUPT_AREA
-7FF     @INTERRUPT_AREA
-87F     @INTERRUPT_AREA
-8FF     @INTERRUPT_AREA
-97F     @INTERRUPT_AREA
-9FF     @INTERRUPT_AREA
-A7F     @INTERRUPT_AREA
-AFF     @INTERRUPT_AREA
-B7F     @INTERRUPT_AREA
-BFF     @INTERRUPT_AREA
-C7F     @INTERRUPT_AREA
-CFF     @INTERRUPT_AREA
-D7F     @INTERRUPT_AREA
-DFF     @INTERRUPT_AREA
-E7F     @INTERRUPT_AREA
-EFF     @INTERRUPT_AREA
-F7F     @INTERRUPT_AREA
-FFF     @INTERRUPT_AREA
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006-046 rBuffer
+047-048 @sprintf_string
+049.0   real_load_program.do_ACKLOD
+049.1   real_load_program.done
+049     @PSTRINGC_824.@SCRATCH1
+04A     real_load_program.checksum
+04A     @PSTRINGC_824.@SCRATCH2
+04B     real_load_program.line_type
+04B     @PSTRINGC_824.@SCRATCH3
+04C-04D real_load_program.l_addr
+04E-04F real_load_program.h_addr
+050-053 real_load_program.addr
+054-057 real_load_program.next_addr
+058     real_load_program.dataidx
+059     real_load_program.i
+05A     real_load_program.count
+05B-07A real_load_program.data
+07B-07C @WRITE_PROGRAM_MEMORY16.P1
+07B     @PUTCHAR_1_.P2
+07B     @WRITE_PROGRAM_MEMORY.P3
+07B-07C @READ_PROGRAM_MEMORY.P4
+07B     real_load_program.@SCRATCH1
+07C     real_load_program.@SCRATCH2
+07D     real_load_program.@SCRATCH3
+07E     real_load_program.@SCRATCH4
+07F-080 atoi_b16.s
+07F     @GETCH_1_.@SCRATCH1
+081     atoi_b16.result
+082     atoi_b16.i
+083     atoi_b16.@SCRATCH1
+EEF.0   MDBIT
+EEF.3   MDOUT
+F08     CCP_7_LOW
+F08     CCP_7
+F09     CCP_7_HIGH
+F0B     CCP_6_LOW
+F0B     CCP_6
+F0C     CCP_6_HIGH
+F0E     CCP_5_LOW
+F0E     CCP_5
+F0F     CCP_5_HIGH
+F11     CCP_4
+F11     CCP_4_LOW
+F12     CCP_4_HIGH
+F21     DSGPR3
+F22     DSGPR2
+F23     DSGPR1
+F24     DSGPR0
+F41     CCP_10_LOW
+F41     CCP_10
+F42     CCP_10_HIGH
+F44     CCP_9
+F44     CCP_9_LOW
+F45     CCP_9_HIGH
+F47     CCP_8_LOW
+F47     CCP_8
+F48     CCP_8_HIGH
+F4A     CCP_3_LOW
+F4A     CCP_3
+F4B     CCP_3_HIGH
+F4F     CCP_2_LOW
+F4F     CCP_2
+F50     CCP_2_HIGH
+F83     PSP_DATA
+FBA     CCP_1_LOW
+FBA     CCP_1
+FBB     CCP_1_HIGH
+FC4.0   C1OUT
+FC4.1   C2OUT
+FC4.2   C3OUT
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY16.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FE9-FEA @WRITE_PACKED_MEMORY.P5
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY16.P3
 
 ROM Allocation:
-000004  isr
-000009  @const748.call
-000013  @const753.call
-00001A  @PSTRINGC7_9600_118_119
-00006A  @PUTCHARI_BIU_1
-000070  atoi_b16
-0000A7  @FLASHWR
-0000B9  load_program
-0000B9  real_load_program
-0001DB  @WRITE_PROGRAM_MEMORY
-000242  MAIN
-000242  @cinit1
-000255  @cinit2
-000340  application
+000008  isr
+00001E  @const861.call
+000032  @const866.call
+000040  @PUTCHAR_1_
+000082  @PSTRINGC_824
+0000AA  @GETCH_1_
+0000F2  atoi_b16
+000158  @READ_PROGRAM_MEMORY
+000176  @FLASHWR
+000194  @WRITE_PROGRAM_MEMORY16
+0001FA  @WRITE_PROGRAM_MEMORY
+000250  real_load_program
+0005C2  load_program
+0005C8  @cinit1
+0005C8  MAIN
+000612  @cinit2
+000800  application
 
 Project Directory:
     C:\Users\maisun\Documents\PhD\offline\code\ccs\bootlo\
 
 Project Files:
-    main.c                                                  [19-Aug-19 14:59  CRC=2D2F9AEB]
-    main.h                                                  [20-Aug-19 21:06  CRC=00000000]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h [01-Mar-16 16:00  CRC=FEB6EB35]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\bootloader.h [17-Apr-14 11:29  CRC=10C6F83E]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\loader.c [16-Jun-15 17:52  CRC=6EA5BD02]
+    main.c                                                  [04-Jun-20 17:20  CRC=BCC28106]
+    main.h                                                  [04-Jun-20 17:21  CRC=EF240690]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F67J94.h [01-Mar-16 16:02  CRC=1DAFEAAE]
+    bootloader.h                                            [04-Jun-20 17:16  CRC=10C6F83E]
+    loader.c                                                [16-Jun-15 17:52  CRC=6EA5BD02]
 
-Source signature=19F8F862
+Source signature=B7A8E486
 Program memory checksum=0000
 Program memory CRC=0000
-Hex file CRC=A4B0
+Hex file CRC=8724
 
 Units:
     main (main)
 
 Compiler Settings:
-    Processor:      PIC16F1787
+    Processor:      PIC18F67J94
     Pointer Size:   16
-    ADC Range:      0-65535
+    ADC Range:      0-255
     Opt Level:      9
     Short,Int,Long: UNSIGNED: 1,8,16
     Float,Double:   32,32
-    Enhanced 16:    Yes
     Compile Mode:       CCS5
 
 Output Files:
     XREF file:   main.xsym
     Errors:      main.err
     Ext Symbols: main.esym
-    INHX8:       main.hex
+    INHX32:      main.hex
     Symbols:     main.sym
     List:        main.lst
     Debug/COFF:  main.cof

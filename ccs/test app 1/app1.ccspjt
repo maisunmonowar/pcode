@@ -20,7 +20,7 @@ D1_L=10
 D1_L1=[50855]Project Opened.
 D1_L2=[50902]Started Editing.
 D1_L3=[51295]Stopped Editing.
-TotalEdit=18
+TotalEdit=23
 TotalDebug=0
 D1_E=2
 D1_D=0
@@ -87,12 +87,15 @@ D6_L9=[65195]Project Opened.
 D6_L10=[65233]Started Editing.
 D6_L11=[65582]Stopped Editing.
 D7=04-06-2020
-D7_L=5
+D7_L=6
 D7_L1=[62551]Project Opened.
 D7_L2=[62573]Started Editing.
 D7_L3=[63096]Stopped Editing.
 D7_L4=[63879]Started Editing.
 D7_L5=[64204]Stopped Editing.
+D7_E=5
+D7_D=0
+D7_L6=[71706]Project Closed.
 
 [Opened Files]
 1=app1.c

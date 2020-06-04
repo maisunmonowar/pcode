@@ -1,0 +1,85 @@
+#ifndef ADCS_TEST_C
+#define ADCS_TEST_C
+
+#include "adcs.c"
+
+void DISPLAY_ADCS_SENSOR_TO_PC()//for testing
+{
+   for(int b = 0; b < ADCS_SENSOR_SIZE; b++)//for checking
+   {
+      fputc(ADCS_SENSOR_DATA[b],PC);
+   }
+   return;
+}
+
+void Get_ADCS_MISSION_Data()
+{
+   
+   Delete_ADCS_SENSOR(); //initialize
+   CHECK_50_and_CW_RESPOND();
+   fputc(0x55,ADCS);
+   fputc(0x55,PC);
+   int i = 0;
+   for(int32 num = 0; num < 1000000 ;num++)
+   {
+      if(kbhit(ADCS) && fgetc(ADCS) == 0x67)
+      {
+         for(num = 0; num < 10000; num++)
+         {
+            if(Kbhit(ADCS))
+            {
+               ADCS_SENSOR_DATA[i] = fgetc(ADCS);
+               i++;
+               if(i == 60)
+               {
+                  break;
+               }
+            }
+         }
+         ADCS_ACK = 0x67;
+         break;
+      }
+   }
+   if(num == 1000000)
+   {
+      fprintf(PC,"NO DATA\r\n");
+   }
+   CHECK_50_and_CW_RESPOND();
+   return;
+}
+
+int8 compare_before_after(int32 beginning, int32 end)
+{
+   int8 data[12] = {};
+   for(int i = 0; i < 6; i++)
+   {
+      data[i] = READ_DATA_BYTE_OF(beginning+222+10+i);
+   }
+   for(i = 0; i < 6; i++)
+   {
+      data[i+6] = READ_DATA_BYTE_OF(end-101+i);
+   }
+   signed int16 Bx = make16(data[0],data[1]);
+   signed int16 By = make16(data[2],data[3]);
+   signed int16 Bz = make16(data[4],data[5]);
+   
+   signed int16 Ax = make16(data[6],data[7]);
+   signed int16 Ay = make16(data[8],data[9]);
+   signed int16 Az = make16(data[10],data[11]);
+   
+   signed int16 Total_B = Bx + By + Bz;
+   signed int16 Total_A = Ax + Ay + Az;
+   Total_B = abs(Total_B);
+   Total_A = abs(Total_A);
+   fprintf(PC,"%lx,%lx,%lx\r\n",Bx,By,Bz);
+   fprintf(PC,"%lx,%lx,%lx\r\n",Ax,Ay,Az);
+   fprintf(PC,"%lud,%lud\r\n",Total_B,Total_A);
+   if(Total_B >= Total_A)
+   {
+      return 1;//declease --> continue
+   }else{
+      return 0;//inclease --> stop
+   }
+}
+
+#endif

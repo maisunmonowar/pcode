@@ -1,0 +1,4 @@
+>>> Warning 216 "main_pic.c" Line 313(1,2): Interrupts disabled during call to prevent re-entrancy:  (@DIV88)
+      Memory usage:   ROM=25%      RAM=19% - 20%
+      0 Errors,  1 Warnings.
+Build Successful.

@@ -1,0 +1,11 @@
+<2019/02/10>
+[修正前]
+}else if(((PASSED_DAYS%loop_day) >= 10 && UPLINK_SUCCESS == 0) && AUTO_LDM_DONE){//LDM and download (502行目)
+}else if(((PASSED_DAYS%loop_day) >= 10 && UPLINK_SUCCESS == 0) && AUTO_LDM_DONE){//LDM and download (541行目)
+これだと自動ミッションが発動しない
+
+
+[修正後]
+}else if(((PASSED_DAYS%loop_day) >= 10 && UPLINK_SUCCESS == 0) && AUTO_LDM_DONE == 0){//LDM and download (502行目)
+}else if(((PASSED_DAYS%loop_day) >= 10 && UPLINK_SUCCESS == 0) && AUTO_LDM_DONE == 0){//LDM and download（541行目）
+

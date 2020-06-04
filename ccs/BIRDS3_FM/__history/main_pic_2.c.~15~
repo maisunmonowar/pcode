@@ -1,0 +1,211 @@
+#include <main pic1.h>
+//#include <mainpic_testing.c>
+
+#int_timer0
+void intval()
+{
+   static int32 counter = 0;
+   static int32 nowtime = 0;
+   static int32 currenttime = 0;
+   counter++;
+   if (counter > 60)
+   {
+      counter = 0;
+      nowtime++;
+      currenttime++;
+      if(nowtime == 20)
+      {
+         nowtime = 0;
+         FAB_FLAG++;
+         
+         //fprintf(PC,"Done\r\n");
+      }
+      //fprintf(PC,"\r\n%dsec\r\n",nowtime);
+   }
+}
+
+#INT_rda
+void UART1_RXD(void)
+{
+   //sector_erase_OF(0x00000000);
+   //for(int i = 0;i<HK_size;i++)
+   //{
+   //   in_HK[i]=fgetc(PC);
+   //}
+   CMD_FROM_PC = fgetc(PC);
+   //fputc(fgetc(PC),PC);
+} 
+#INT_rda2 //COM Interrupt
+void UART2_RXD(void)
+{
+   //SerialDataReceive();  //get 32 byte
+   //COM_ONEBYTE_COMMAND = fgetc(COM);
+   in_bffr_main[COM_DATA] = fgetc(COM);
+   fputc(in_bffr_main[COM_DATA],PC);
+   COM_DATA = ((COM_DATA + 1) % 16);
+} 
+
+#INT_rda3 //FAB Interrupt
+void UART3_RXD(void)
+{
+   //collect_HK_from_FAB();
+   in_HK[FAB_DATA] = fgetc(FAB);
+   t = FAB_DATA;
+   FAB_DATA = (FAB_DATA + 1) % 43;
+//!   for(int num = 0; num < 43 ; num++)
+//!   {
+      //if(kbhit())
+//!      in_HK[num] = fgetc(FAB);
+//!   }
+   
+   //fputc(fgetc(FAB),PC);
+} 
+
+#INT_rda4
+void UART4_RXD(void)
+{
+   if(fgetc(reset)==0x70)
+   {
+      STORE_ADRESS_DATA_TO_OF();
+   }
+   
+} 
+
+void settings()
+{
+   enable_interrupts(global);
+   enable_interrupts(INT_rda);   // Main to PC
+   enable_interrupts(INT_rda2);  // Main to COM PIC
+   enable_interrupts(INT_rda3);  // Main to FAB PIC
+   enable_interrupts(INT_rda4);  // Main to RESET PIC
+   //enable_interrupts(INT_TIMER0);
+   
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_256 | RTCC_8_BIT);
+   set_timer0(0);
+   
+   //setup_adc_ports(sAN9);
+   //ANCON2 = 0x01;
+   //setup_adc(ADC_CLOCK_DIV_32); //VSS_VDD
+   //ADCON2L = 0x00;
+   //ADCON1H = 
+   //ADON = 1;
+   //ADCHS0H = 0x89;
+   BC_SETUP();
+   
+   Turn_OFF_CAM();
+   Turn_OFF_ADCS();
+   Turn_OFF_DC();
+   //sector_erase_of(0);
+   CHECK_ADDRESS_DATA();
+   fprintf(PC,"\r\n");
+   CURRENT_ADDRESS_OF_COM_FLASH();
+   
+   output_high(PIN_C4); //MUX: COM (MAIN-COM)
+   output_low(PIN_A5); //MUX: MAIN (MAIN-MISSION)
+   return;  
+}
+
+
+///////////ADCS TEST PART//////////////////////////
+
+void main()
+{
+//!
+   //MEMORY_ERASE();
+
+   settings();
+   fprintf(PC,"Start Operating\r\n");
+   //disable_interrupts(INT_TIMER0);
+   //BC_OPERATION();
+   enable_interrupts(INT_TIMER0);
+   //TRANSFER_DATA_NBYTE_TOPC_SCF(0, 399);
+   //output_high(PIN_C4);
+   //Turn_On_ADCS();
+   //delay_ms(2000);
+   //Turn_On_CAM();
+   //output_high(PIN_A5);
+
+   //output_low(PIN_C4);
+   //TRANSFER_DATA_NBYTE_TOPC_SCF(65536,65536);
+   //DATACOLLECTION_TEST_OPERATION();
+   while(true)
+   {
+   //delay_ms(5000);
+   //fprintf(PC,"FAB_FLAG:%d\r\n",FAB_FLAG);
+   
+   //if(FAB_FLAG > 0)
+   //{
+      FAB_FLAG = 0;
+      fprintf(PC,"90sec passed\r\n");
+      FAB_TEST_OPERATION();   
+   //}
+   
+//!   //for(int num = 0 ; num < 16; num++)
+//!   //{
+//!   //   fputc(in_bffr_main[num],PC);
+//!   //}
+   //fprintf(PC,"waiting\r\n");
+      if(buffer_from_com)
+      {
+         fprintf(PC,"COM COMMAND\r\n");
+         switch(in_bffr_main[4])
+         {
+            case 0xC0:
+               CAM_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0xA0:
+               ADCS_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0xD0:
+               DATACOLLECTION_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0x99:
+               CURRENT_ADDRESS_OF_COM_FLASH();
+               delay_ms(10);
+               break;
+         }
+         Delete_Buffer();
+         COM_DATA = 0;
+      }
+      if(CMD_FROM_PC)
+      {
+         fprintf(PC,"PC COMMAND\r\n");
+         switch(CMD_FROM_PC)
+         {
+            case 0xC0:
+               CAM_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0xA0:
+               ADCS_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0xD0:
+               DATACOLLECTION_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0x99:
+               CURRENT_ADDRESS_OF_COM_FLASH();
+               delay_ms(10);
+               break;
+            case 0xaa:
+               STORE_ADRESS_DATA_TO_OF();
+               delay_ms(10);
+               break;
+         }
+         CMD_FROM_PC = 0;
+      }
+      
+      for(int ia = 0; ia < 43; ia++)
+      {
+          fputc(in_HK[ia],PC);
+      }
+      FAB_DATA =0;
+      delay_ms(1000);
+   }
+//!return;
+}
+

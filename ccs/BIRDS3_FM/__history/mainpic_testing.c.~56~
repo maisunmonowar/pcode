@@ -1,0 +1,56 @@
+#include <main pic1.h>
+
+#INT_rda//PC Interrupt
+void UART1_RXD(void)
+{
+   CMD_FROM_PC[PC_DATA] = fgetc(PC);
+   PC_DATA = ((PC_DATA + 1) % 4);
+   //fputc(fgetc(PC),PC);
+}
+
+void delete_pc_buffer();
+
+void main()
+{
+   int32 address = 0;
+   int32 data_size = 0;
+   while(true)
+   {
+      if(fgetc(PC)==0x25)
+      {
+      delete_pc_buffer();
+         fprintf(PC,"Download satellite data manually.\r\n");
+         fprintf(PC,"Please input address number\r\naddress:");
+         while(true)
+         {
+            if(PC_data == 3)
+            {
+               break;
+            }
+         }
+         make32(address,CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2],CMD_FROM_PC[3]);
+         fprintf(PC,"Is address collect %lx ?\r\n",address);
+         
+         while(true)
+         {
+            if(PC_data == 3)
+            {
+               break;
+            }
+         }
+         make32(data_size,CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2],CMD_FROM_PC[3]);
+         TRANSFER_DATA_NBYTE_TOPC_OF(address, 65536); //for testing
+         
+      }
+   }
+   
+}
+
+void delete_pc_buffer()
+{
+   PC_DATA = 0;
+   for(int i = 0; i < 3; i++)
+   {
+      CMD_FROM_PC[i] = 0;
+   }
+}

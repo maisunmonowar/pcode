@@ -1,0 +1,9 @@
+*** Error 12 "MAIN_PIC_FM.c" Line 19(10,18): Undefined identifier   FAB_FLAG
+*** Error 12 "MAIN_PIC_FM.c" Line 20(31,47): Undefined identifier   RESERVE_SEC_FLAG
+*** Error 12 "MAIN_PIC_FM.c" Line 21(31,42): Undefined identifier   currenttime
+*** Error 12 "MAIN_PIC_FM.c" Line 25(10,26): Undefined identifier   RESERVE_SEC_FLAG
+*** Error 12 "MAIN_PIC_FM.c" Line 27(10,26): Undefined identifier   RESERVE_SEC_FLAG
+*** Error 12 "MAIN_PIC_FM.c" Line 28(10,26): Undefined identifier   RESERVE_MIN_FLAG
+*** Error 79 "MAIN_PIC_FM.c" Line 28(28,29): Expect }
+*** Error 79 "MAIN_PIC_FM.c" Line 28(28,29): Expect }
+*** Error 79 "MAIN_PIC_FM.c" Line 28(28,29): Expect }

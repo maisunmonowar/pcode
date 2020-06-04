@@ -1,0 +1,2621 @@
+CCS PCM C Compiler, Version 5.050, 5967               31-10-18 16:28
+
+               Filename:   C:\Users\kakimoto\Documents\CCS C Projects\main pic v1.10.1\reset_pic_150818\reset_130818.lst
+
+               ROM used:   1647 words (10%)
+                           Largest free fragment is 2048
+               RAM used:   59 (3%) at main() level
+                           89 (4%) worst case
+               Stack used: 5 locations (2 in main + 3 for interrupts)
+               Stack size: 16
+
+*
+0000:  MOVLP  00
+0001:  GOTO   521
+0002:  NOP
+*
+0004:  CLRF   03
+0005:  MOVLP  00
+0006:  MOVLB  00
+0007:  MOVF   77,W
+0008:  MOVWF  20
+0009:  MOVF   78,W
+000A:  MOVWF  21
+000B:  MOVF   79,W
+000C:  MOVWF  22
+000D:  MOVF   7A,W
+000E:  MOVWF  23
+000F:  MOVLB  03
+0010:  MOVF   11,W
+0011:  MOVLB  00
+0012:  MOVWF  24
+0013:  MOVLB  03
+0014:  MOVF   12,W
+0015:  MOVLB  00
+0016:  MOVWF  25
+0017:  MOVLB  03
+0018:  MOVF   13,W
+0019:  MOVLB  00
+001A:  MOVWF  26
+001B:  MOVLB  03
+001C:  MOVF   14,W
+001D:  MOVLB  00
+001E:  MOVWF  27
+001F:  BTFSS  0B.5
+0020:  GOTO   023
+0021:  BTFSC  0B.2
+0022:  GOTO   043
+0023:  CLRF   05
+0024:  MOVLW  91
+0025:  MOVWF  04
+0026:  BTFSS  00.0
+0027:  GOTO   02A
+0028:  BTFSC  11.0
+0029:  GOTO   045
+002A:  MOVF   20,W
+002B:  MOVWF  77
+002C:  MOVF   21,W
+002D:  MOVWF  78
+002E:  MOVF   22,W
+002F:  MOVWF  79
+0030:  MOVF   23,W
+0031:  MOVWF  7A
+0032:  MOVF   24,W
+0033:  MOVLB  03
+0034:  MOVWF  11
+0035:  MOVLB  00
+0036:  MOVF   25,W
+0037:  MOVLB  03
+0038:  MOVWF  12
+0039:  MOVLB  00
+003A:  MOVF   26,W
+003B:  MOVLB  03
+003C:  MOVWF  13
+003D:  MOVLB  00
+003E:  MOVF   27,W
+003F:  MOVLB  03
+0040:  MOVWF  14
+0041:  RETFIE
+0042:  MOVLB  00
+0043:  MOVLP  00
+0044:  GOTO   2C7
+0045:  MOVLP  00
+0046:  GOTO   1CD
+.................... #include <16F1789.h> 
+.................... //////////// Standard Header file for the PIC16F1789 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F1789 
+0047:  DATA 2A,15
+0048:  DATA 2A,15
+0049:  DATA 2A,15
+004A:  DATA 49,37
+004B:  DATA 69,3A
+004C:  DATA E9,30
+004D:  DATA EC,34
+004E:  DATA FA,34
+004F:  DATA EE,33
+0050:  DATA A0,30
+0051:  DATA 6E,3A
+0052:  DATA 65,37
+0053:  DATA EE,30
+0054:  DATA 20,32
+0055:  DATA 65,38
+0056:  DATA EC,37
+0057:  DATA F9,36
+0058:  DATA 65,37
+0059:  DATA 74,10
+005A:  DATA E6,34
+005B:  DATA F2,39
+005C:  DATA 74,10
+005D:  DATA 74,39
+005E:  DATA E9,30
+005F:  DATA 6C,10
+0060:  DATA 2A,15
+0061:  DATA 2A,15
+0062:  DATA 2A,15
+0063:  DATA 2A,15
+0064:  DATA 2A,05
+0065:  DATA 0D,00
+0066:  DATA 2A,15
+0067:  DATA 2A,15
+0068:  DATA 2A,15
+0069:  DATA C3,27
+006A:  DATA 4D,10
+006B:  DATA D0,24
+006C:  DATA 43,10
+006D:  DATA 4F,27
+006E:  DATA 20,15
+006F:  DATA 2A,15
+0070:  DATA 2A,15
+0071:  DATA 2A,15
+0072:  DATA 2A,15
+0073:  DATA 8A,06
+0074:  DATA 00,01
+0075:  DATA 2A,15
+0076:  DATA 2A,15
+0077:  DATA 2A,15
+0078:  DATA CD,30
+0079:  DATA 69,37
+007A:  DATA 20,28
+007B:  DATA C9,21
+007C:  DATA A0,27
+007D:  DATA 4E,10
+007E:  DATA 2A,15
+007F:  DATA 2A,15
+0080:  DATA 2A,15
+0081:  DATA 2A,15
+0082:  DATA 2A,05
+0083:  DATA 0D,00
+0084:  DATA 2A,15
+0085:  DATA 2A,15
+0086:  DATA 2A,15
+0087:  DATA 55,37
+0088:  DATA F2,32
+0089:  DATA 67,10
+008A:  DATA 23,19
+008B:  DATA A0,27
+008C:  DATA 4E,10
+008D:  DATA 2A,15
+008E:  DATA 2A,15
+008F:  DATA 2A,15
+0090:  DATA 2A,15
+0091:  DATA 2A,05
+0092:  DATA 0D,00
+0093:  DATA 2A,15
+0094:  DATA 2A,15
+0095:  DATA 2A,15
+0096:  DATA 55,37
+0097:  DATA F2,32
+0098:  DATA 67,10
+0099:  DATA 23,19
+009A:  DATA A0,27
+009B:  DATA 46,23
+009C:  DATA 20,15
+009D:  DATA 2A,15
+009E:  DATA 2A,15
+009F:  DATA 2A,15
+00A0:  DATA 2A,15
+00A1:  DATA 8A,06
+00A2:  DATA 00,00
+00A3:  DATA 2A,15
+00A4:  DATA 2A,15
+00A5:  DATA 2A,15
+00A6:  DATA 55,37
+00A7:  DATA F2,32
+00A8:  DATA 67,10
+00A9:  DATA 23,19
+00AA:  DATA A0,27
+00AB:  DATA 46,23
+00AC:  DATA 20,23
+00AD:  DATA 4F,29
+00AE:  DATA 45,2B
+00AF:  DATA 45,29
+00B0:  DATA 20,15
+00B1:  DATA 2A,15
+00B2:  DATA 2A,15
+00B3:  DATA 2A,15
+00B4:  DATA 2A,15
+00B5:  DATA 8A,06
+00B6:  DATA 00,00
+00B7:  DATA 2A,15
+00B8:  DATA 2A,15
+00B9:  DATA 2A,15
+00BA:  DATA D2,32
+00BB:  DATA F3,32
+00BC:  DATA 74,10
+00BD:  DATA ED,37
+00BE:  DATA E4,32
+00BF:  DATA A0,27
+00C0:  DATA 4E,10
+00C1:  DATA 2A,15
+00C2:  DATA 2A,15
+00C3:  DATA 2A,15
+00C4:  DATA 2A,15
+00C5:  DATA 2A,05
+00C6:  DATA 0D,00
+00C7:  DATA 2A,15
+00C8:  DATA 2A,15
+00C9:  DATA 2A,15
+00CA:  DATA 4F,23
+00CB:  DATA 46,10
+00CC:  DATA 2A,15
+00CD:  DATA 2A,15
+00CE:  DATA 2A,15
+00CF:  DATA 2A,15
+00D0:  DATA 2A,05
+00D1:  DATA 0D,00
+00D2:  DATA 2A,15
+00D3:  DATA 2A,15
+00D4:  DATA 2A,15
+00D5:  DATA 4F,27
+00D6:  DATA 20,15
+00D7:  DATA 2A,15
+00D8:  DATA 2A,15
+00D9:  DATA 2A,15
+00DA:  DATA 2A,15
+00DB:  DATA 8A,06
+00DC:  DATA 00,00
+00DD:  DATA 2A,15
+00DE:  DATA 2A,15
+00DF:  DATA 2A,15
+00E0:  DATA 41,22
+00E1:  DATA 43,10
+00E2:  DATA F2,32
+00E3:  DATA 61,32
+00E4:  DATA 69,37
+00E5:  DATA 67,10
+00E6:  DATA 73,3A
+00E7:  DATA 61,39
+00E8:  DATA 74,10
+00E9:  DATA 2A,15
+00EA:  DATA 2A,15
+00EB:  DATA 2A,15
+00EC:  DATA 2A,15
+00ED:  DATA 2A,05
+00EE:  DATA 0D,00
+00EF:  MOVF   65,W
+00F0:  CLRF   78
+00F1:  SUBWF  64,W
+00F2:  BTFSC  03.0
+00F3:  GOTO   0F7
+00F4:  MOVF   64,W
+00F5:  MOVWF  77
+00F6:  GOTO   103
+00F7:  CLRF   77
+00F8:  MOVLW  08
+00F9:  MOVWF  66
+00FA:  RLF    64,F
+00FB:  RLF    77,F
+00FC:  MOVF   65,W
+00FD:  SUBWF  77,W
+00FE:  BTFSC  03.0
+00FF:  MOVWF  77
+0100:  RLF    78,F
+0101:  DECFSZ 66,F
+0102:  GOTO   0FA
+0103:  RETURN
+0104:  MOVLW  20
+0105:  BTFSS  5F.4
+0106:  MOVLW  30
+0107:  MOVWF  60
+0108:  MOVF   5E,W
+0109:  MOVWF  77
+010A:  BTFSS  5E.7
+010B:  GOTO   114
+010C:  COMF   77,F
+010D:  INCF   77,F
+010E:  MOVF   77,W
+010F:  MOVWF  5E
+0110:  MOVLW  2D
+0111:  MOVWF  60
+0112:  BSF    5F.7
+0113:  BSF    5F.0
+0114:  MOVF   5E,W
+0115:  MOVWF  64
+0116:  MOVLW  64
+0117:  MOVWF  65
+0118:  CALL   0EF
+0119:  MOVF   77,W
+011A:  MOVWF  5E
+011B:  MOVLW  30
+011C:  ADDWF  78,W
+011D:  MOVWF  61
+011E:  MOVF   5E,W
+011F:  MOVWF  64
+0120:  MOVLW  0A
+0121:  MOVWF  65
+0122:  CALL   0EF
+0123:  MOVLW  30
+0124:  ADDWF  77,W
+0125:  MOVWF  63
+0126:  MOVLW  30
+0127:  ADDWF  78,W
+0128:  MOVWF  62
+0129:  MOVF   60,W
+012A:  MOVWF  77
+012B:  MOVLW  30
+012C:  SUBWF  61,W
+012D:  BTFSC  03.2
+012E:  GOTO   133
+012F:  BSF    5F.1
+0130:  BTFSC  5F.7
+0131:  BSF    5F.2
+0132:  GOTO   147
+0133:  BTFSC  5F.2
+0134:  GOTO   147
+0135:  MOVF   60,W
+0136:  MOVWF  61
+0137:  BTFSC  5F.1
+0138:  GOTO   13E
+0139:  MOVLW  30
+013A:  SUBWF  62,W
+013B:  BTFSC  03.2
+013C:  GOTO   141
+013D:  BSF    5F.0
+013E:  BTFSC  5F.7
+013F:  BSF    5F.1
+0140:  GOTO   147
+0141:  BTFSS  03.2
+0142:  BSF    5F.0
+0143:  BTFSS  03.2
+0144:  GOTO   147
+0145:  MOVF   61,W
+0146:  MOVWF  62
+0147:  BTFSC  5F.2
+0148:  GOTO   14E
+0149:  BTFSC  5F.1
+014A:  GOTO   154
+014B:  BTFSC  5F.0
+014C:  GOTO   15A
+014D:  GOTO   160
+014E:  MOVF   60,W
+014F:  BTFSS  11.4
+0150:  GOTO   14F
+0151:  MOVLB  03
+0152:  MOVWF  1A
+0153:  MOVLB  00
+0154:  MOVF   61,W
+0155:  BTFSS  11.4
+0156:  GOTO   155
+0157:  MOVLB  03
+0158:  MOVWF  1A
+0159:  MOVLB  00
+015A:  MOVF   62,W
+015B:  BTFSS  11.4
+015C:  GOTO   15B
+015D:  MOVLB  03
+015E:  MOVWF  1A
+015F:  MOVLB  00
+0160:  MOVF   63,W
+0161:  BTFSS  11.4
+0162:  GOTO   161
+0163:  MOVLB  03
+0164:  MOVWF  1A
+0165:  MOVLB  00
+0166:  RETURN
+0167:  MOVF   0B,W
+0168:  BCF    0B.7
+0169:  MOVLB  03
+016A:  BSF    15.7
+016B:  BSF    15.0
+016C:  NOP
+016D:  NOP
+016E:  BTFSC  09.7
+016F:  BSF    0B.7
+0170:  MOVF   13,W
+0171:  ANDLW  7F
+0172:  BTFSC  03.2
+0173:  GOTO   1B5
+0174:  MOVLB  00
+0175:  MOVWF  5E
+0176:  MOVLB  03
+0177:  MOVF   11,W
+0178:  MOVLB  00
+0179:  MOVWF  5F
+017A:  MOVLB  03
+017B:  MOVF   12,W
+017C:  MOVLB  00
+017D:  MOVWF  60
+017E:  MOVF   5E,W
+017F:  BTFSS  11.4
+0180:  GOTO   17F
+0181:  MOVLB  03
+0182:  MOVWF  1A
+0183:  MOVLB  00
+0184:  MOVF   5F,W
+0185:  MOVLB  03
+0186:  MOVWF  11
+0187:  MOVLB  00
+0188:  MOVF   60,W
+0189:  MOVLB  03
+018A:  MOVWF  12
+018B:  MOVF   0B,W
+018C:  BCF    0B.7
+018D:  BSF    15.7
+018E:  BSF    15.0
+018F:  NOP
+0190:  NOP
+0191:  BTFSC  09.7
+0192:  BSF    0B.7
+0193:  RLF    13,W
+0194:  RLF    14,W
+0195:  ANDLW  7F
+0196:  BTFSC  03.2
+0197:  GOTO   1B5
+0198:  MOVLB  00
+0199:  MOVWF  5E
+019A:  MOVLB  03
+019B:  MOVF   11,W
+019C:  MOVLB  00
+019D:  MOVWF  5F
+019E:  MOVLB  03
+019F:  MOVF   12,W
+01A0:  MOVLB  00
+01A1:  MOVWF  60
+01A2:  MOVF   5E,W
+01A3:  BTFSS  11.4
+01A4:  GOTO   1A3
+01A5:  MOVLB  03
+01A6:  MOVWF  1A
+01A7:  MOVLB  00
+01A8:  MOVF   5F,W
+01A9:  MOVLB  03
+01AA:  MOVWF  11
+01AB:  MOVLB  00
+01AC:  MOVF   60,W
+01AD:  MOVLB  03
+01AE:  MOVWF  12
+01AF:  INCF   11,F
+01B0:  BTFSC  03.2
+01B1:  INCF   12,F
+01B2:  MOVLB  00
+01B3:  GOTO   167
+01B4:  MOVLB  03
+01B5:  MOVLB  00
+01B6:  RETURN
+*
+01EF:  MOVF   05,W
+01F0:  MOVWF  68
+01F1:  MOVF   04,W
+01F2:  MOVWF  67
+01F3:  BTFSS  5F.7
+01F4:  GOTO   1FD
+01F5:  BSF    67.7
+01F6:  BTFSS  67.4
+01F7:  INCF   67,F
+01F8:  COMF   5E,F
+01F9:  COMF   5F,F
+01FA:  INCF   5E,F
+01FB:  BTFSC  03.2
+01FC:  INCF   5F,F
+01FD:  SWAPF  5F,W
+01FE:  IORLW  F0
+01FF:  MOVWF  63
+0200:  ADDWF  63,F
+0201:  ADDLW  E2
+0202:  MOVWF  64
+0203:  ADDLW  32
+0204:  MOVWF  66
+0205:  MOVF   5F,W
+0206:  ANDLW  0F
+0207:  ADDWF  64,F
+0208:  ADDWF  64,F
+0209:  ADDWF  66,F
+020A:  ADDLW  E9
+020B:  MOVWF  65
+020C:  ADDWF  65,F
+020D:  ADDWF  65,F
+020E:  SWAPF  5E,W
+020F:  ANDLW  0F
+0210:  ADDWF  65,F
+0211:  ADDWF  66,F
+0212:  RLF    65,F
+0213:  RLF    66,F
+0214:  COMF   66,F
+0215:  RLF    66,F
+0216:  MOVF   5E,W
+0217:  ANDLW  0F
+0218:  ADDWF  66,F
+0219:  RLF    63,F
+021A:  MOVLW  07
+021B:  MOVWF  62
+021C:  MOVLW  0A
+021D:  ADDWF  66,F
+021E:  DECF   65,F
+021F:  BTFSS  03.0
+0220:  GOTO   21D
+0221:  ADDWF  65,F
+0222:  DECF   64,F
+0223:  BTFSS  03.0
+0224:  GOTO   221
+0225:  ADDWF  64,F
+0226:  DECF   63,F
+0227:  BTFSS  03.0
+0228:  GOTO   225
+0229:  ADDWF  63,F
+022A:  DECF   62,F
+022B:  BTFSS  03.0
+022C:  GOTO   229
+022D:  MOVLW  20
+022E:  MOVWF  05
+022F:  MOVLW  42
+0230:  MOVWF  04
+0231:  MOVLW  07
+0232:  ANDWF  67,W
+0233:  BCF    67.6
+0234:  ADDFSR 3F,FSR0
+0235:  ANDWF  67,W
+0236:  BTFSS  03.2
+0237:  GOTO   23F
+0238:  BTFSC  67.4
+0239:  ADDFSR 01,FSR0
+023A:  BTFSC  67.4
+023B:  GOTO   23F
+023C:  MOVLW  20
+023D:  MOVWF  77
+023E:  GOTO   262
+023F:  ADDWF  04,F
+0240:  MOVLW  00
+0241:  ADDWFC 05,F
+0242:  MOVF   04,W
+0243:  SUBLW  46
+0244:  BTFSS  03.2
+0245:  GOTO   24A
+0246:  MOVF   05,W
+0247:  SUBLW  20
+0248:  BTFSC  03.2
+0249:  BSF    67.6
+024A:  MOVF   00,W
+024B:  MOVWF  77
+024C:  BTFSS  03.2
+024D:  GOTO   256
+024E:  BTFSC  67.6
+024F:  GOTO   256
+0250:  BTFSC  67.4
+0251:  GOTO   268
+0252:  BTFSC  67.3
+0253:  GOTO   256
+0254:  MOVLW  20
+0255:  GOTO   261
+0256:  BTFSS  67.7
+0257:  GOTO   25E
+0258:  MOVLW  2D
+0259:  MOVWF  77
+025A:  MOVIW  [--FSR0],W
+025B:  BCF    67.6
+025C:  BCF    67.7
+025D:  GOTO   262
+025E:  BSF    67.3
+025F:  BCF    67.4
+0260:  MOVLW  30
+0261:  ADDWF  77,F
+0262:  MOVF   77,W
+0263:  BTFSS  11.4
+0264:  GOTO   263
+0265:  MOVLB  03
+0266:  MOVWF  1A
+0267:  MOVLB  00
+0268:  ADDFSR 01,FSR0
+0269:  BTFSS  67.6
+026A:  GOTO   242
+*
+02D4:  DATA 2A,15
+02D5:  DATA 2A,15
+02D6:  DATA 2A,15
+02D7:  DATA 2A,15
+02D8:  DATA 2A,15
+02D9:  DATA 2A,15
+02DA:  DATA 2A,15
+02DB:  DATA 2A,15
+02DC:  DATA 2A,15
+02DD:  DATA 2A,15
+02DE:  DATA 2A,15
+02DF:  DATA 2A,15
+02E0:  DATA 2A,15
+02E1:  DATA 2A,15
+02E2:  DATA 2A,15
+02E3:  DATA 2A,15
+02E4:  DATA 2A,15
+02E5:  DATA 2A,15
+02E6:  DATA 2A,15
+02E7:  DATA 2A,15
+02E8:  DATA 2A,15
+02E9:  DATA 2A,15
+02EA:  DATA 2A,15
+02EB:  DATA 2A,15
+02EC:  DATA 2A,15
+02ED:  DATA 2A,15
+02EE:  DATA 2A,15
+02EF:  DATA 2A,15
+02F0:  DATA 2A,05
+02F1:  DATA 0D,00
+02F2:  DATA 2A,15
+02F3:  DATA 2A,15
+02F4:  DATA 2A,15
+02F5:  DATA 20,10
+02F6:  DATA 20,10
+02F7:  DATA 20,2A
+02F8:  DATA C8,24
+02F9:  DATA 53,10
+02FA:  DATA C9,29
+02FB:  DATA 20,29
+02FC:  DATA C5,29
+02FD:  DATA 45,2A
+02FE:  DATA 20,28
+02FF:  DATA C9,21
+0300:  DATA A0,22
+0301:  DATA 4D,10
+0302:  DATA D6,22
+0303:  DATA D2,29
+0304:  DATA C9,27
+0305:  DATA 4E,10
+0306:  DATA 20,10
+0307:  DATA 20,10
+0308:  DATA 20,10
+0309:  DATA 20,10
+030A:  DATA 2A,15
+030B:  DATA 2A,15
+030C:  DATA 2A,15
+030D:  DATA 2A,15
+030E:  DATA 2A,05
+030F:  DATA 0D,00
+0310:  DATA 2A,15
+0311:  DATA 2A,15
+0312:  DATA 2A,15
+0313:  DATA 2A,15
+0314:  DATA 2A,15
+0315:  DATA 2A,15
+0316:  DATA 2A,15
+0317:  DATA 2A,15
+0318:  DATA 2A,15
+0319:  DATA 2A,15
+031A:  DATA 2A,15
+031B:  DATA 2A,15
+031C:  DATA 2A,15
+031D:  DATA 2A,15
+031E:  DATA 2A,15
+031F:  DATA 2A,15
+0320:  DATA 2A,15
+0321:  DATA 2A,15
+0322:  DATA 2A,15
+0323:  DATA 2A,15
+0324:  DATA 2A,15
+0325:  DATA 2A,15
+0326:  DATA 2A,15
+0327:  DATA 2A,15
+0328:  DATA 2A,15
+0329:  DATA 2A,15
+032A:  DATA 2A,15
+032B:  DATA 2A,15
+032C:  DATA 2A,05
+032D:  DATA 0D,00
+032E:  DATA 2A,15
+032F:  DATA 2A,15
+0330:  DATA 2A,15
+0331:  DATA CE,37
+0332:  DATA F2,36
+0333:  DATA 61,36
+0334:  DATA A0,26
+0335:  DATA 6F,32
+0336:  DATA 65,10
+0337:  DATA 53,3A
+0338:  DATA 61,39
+0339:  DATA 74,10
+033A:  DATA 2A,15
+033B:  DATA 2A,15
+033C:  DATA 2A,15
+033D:  DATA 2A,15
+033E:  DATA 2A,05
+033F:  DATA 0D,00
+0340:  DATA C7,37
+0341:  DATA 74,10
+0342:  DATA E3,37
+0343:  DATA ED,36
+0344:  DATA 61,37
+0345:  DATA 64,10
+0346:  DATA 66,39
+0347:  DATA EF,36
+0348:  DATA A0,26
+0349:  DATA C1,24
+034A:  DATA 4E,1D
+034B:  DATA 25,3C
+034C:  DATA 0D,05
+034D:  DATA 00,00
+034E:  DATA 2A,15
+034F:  DATA 2A,15
+0350:  DATA 2A,15
+0351:  DATA D3,32
+0352:  DATA 6E,32
+0353:  DATA 69,37
+0354:  DATA 64,10
+0355:  DATA E4,30
+0356:  DATA F4,30
+0357:  DATA 20,3A
+0358:  DATA 6F,10
+0359:  DATA ED,30
+035A:  DATA 69,37
+035B:  DATA 20,15
+035C:  DATA 2A,15
+035D:  DATA 2A,15
+035E:  DATA 2A,15
+035F:  DATA 2A,15
+0360:  DATA 8A,06
+0361:  DATA 00,01
+0362:  DATA 2A,15
+0363:  DATA 2A,15
+0364:  DATA 2A,15
+0365:  DATA C3,37
+0366:  DATA 72,39
+0367:  DATA E5,31
+0368:  DATA 74,10
+0369:  DATA C3,37
+036A:  DATA ED,36
+036B:  DATA 61,37
+036C:  DATA 64,10
+036D:  DATA EE,37
+036E:  DATA 74,10
+036F:  DATA F2,32
+0370:  DATA E3,32
+0371:  DATA 69,3B
+0372:  DATA 65,32
+0373:  DATA 20,15
+0374:  DATA 2A,15
+0375:  DATA 2A,15
+0376:  DATA 2A,15
+0377:  DATA 2A,15
+0378:  DATA 8A,06
+0379:  DATA 00,00
+*
+047C:  MOVF   0B,W
+047D:  BCF    0B.7
+047E:  MOVLB  03
+047F:  BSF    15.7
+0480:  BSF    15.0
+0481:  NOP
+0482:  NOP
+0483:  BTFSC  09.7
+0484:  BSF    0B.7
+0485:  BTFSC  03.0
+0486:  GOTO   4B0
+0487:  MOVF   13,W
+0488:  ANDLW  7F
+0489:  MOVLB  00
+048A:  MOVWF  55
+048B:  MOVLB  03
+048C:  MOVF   11,W
+048D:  MOVLB  00
+048E:  MOVWF  56
+048F:  MOVLB  03
+0490:  MOVF   12,W
+0491:  MOVLB  00
+0492:  MOVWF  57
+0493:  MOVF   55,W
+0494:  BTFSS  11.4
+0495:  GOTO   494
+0496:  MOVLB  03
+0497:  MOVWF  1A
+0498:  MOVLB  00
+0499:  MOVF   56,W
+049A:  MOVLB  03
+049B:  MOVWF  11
+049C:  MOVLB  00
+049D:  MOVF   57,W
+049E:  MOVLB  03
+049F:  MOVWF  12
+04A0:  MOVF   0B,W
+04A1:  BCF    0B.7
+04A2:  BSF    15.7
+04A3:  BSF    15.0
+04A4:  NOP
+04A5:  NOP
+04A6:  BTFSC  09.7
+04A7:  BSF    0B.7
+04A8:  MOVLB  00
+04A9:  DECFSZ 54,F
+04AA:  GOTO   4AC
+04AB:  GOTO   4AE
+04AC:  MOVLB  03
+04AD:  GOTO   4B0
+04AE:  GOTO   4D1
+04AF:  MOVLB  03
+04B0:  RLF    13,W
+04B1:  RLF    14,W
+04B2:  ANDLW  7F
+04B3:  MOVLB  00
+04B4:  MOVWF  55
+04B5:  MOVLB  03
+04B6:  MOVF   11,W
+04B7:  MOVLB  00
+04B8:  MOVWF  56
+04B9:  MOVLB  03
+04BA:  MOVF   12,W
+04BB:  MOVLB  00
+04BC:  MOVWF  57
+04BD:  MOVF   55,W
+04BE:  BTFSS  11.4
+04BF:  GOTO   4BE
+04C0:  MOVLB  03
+04C1:  MOVWF  1A
+04C2:  MOVLB  00
+04C3:  MOVF   56,W
+04C4:  MOVLB  03
+04C5:  MOVWF  11
+04C6:  MOVLB  00
+04C7:  MOVF   57,W
+04C8:  MOVLB  03
+04C9:  MOVWF  12
+04CA:  INCF   11,F
+04CB:  BTFSC  03.2
+04CC:  INCF   12,F
+04CD:  BCF    03.0
+04CE:  MOVLB  00
+04CF:  DECFSZ 54,F
+04D0:  GOTO   47C
+04D1:  MOVLP  00
+04D2:  GOTO   621 (RETURN)
+04D3:  BTFSC  55.7
+04D4:  GOTO   4E8
+04D5:  MOVLW  0F
+04D6:  MOVWF  77
+04D7:  SWAPF  54,W
+04D8:  ANDWF  77,F
+04D9:  MOVLW  0A
+04DA:  SUBWF  77,W
+04DB:  BTFSC  03.0
+04DC:  GOTO   4E0
+04DD:  MOVLW  30
+04DE:  ADDWF  77,F
+04DF:  GOTO   4E2
+04E0:  MOVF   55,W
+04E1:  ADDWF  77,F
+04E2:  MOVF   77,W
+04E3:  BTFSS  11.4
+04E4:  GOTO   4E3
+04E5:  MOVLB  03
+04E6:  MOVWF  1A
+04E7:  MOVLB  00
+04E8:  MOVLW  0F
+04E9:  ANDWF  54,F
+04EA:  MOVLW  0A
+04EB:  SUBWF  54,W
+04EC:  BTFSC  03.0
+04ED:  GOTO   4F0
+04EE:  MOVLW  30
+04EF:  GOTO   4F2
+04F0:  BCF    55.7
+04F1:  MOVF   55,W
+04F2:  ADDWF  54,F
+04F3:  MOVF   54,W
+04F4:  BTFSS  11.4
+04F5:  GOTO   4F4
+04F6:  MOVLB  03
+04F7:  MOVWF  1A
+04F8:  MOVLP  00
+04F9:  MOVLB  00
+04FA:  GOTO   626 (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #fuses NOWDT, NOBROWNOUT, NOPROTECT 
+.................... #use delay(crystal=16MHz,clock=16MHz) 
+*
+01B7:  MOVLW  20
+01B8:  MOVWF  05
+01B9:  MOVLW  3F
+01BA:  MOVWF  04
+01BB:  MOVF   00,W
+01BC:  BTFSC  03.2
+01BD:  GOTO   1CC
+01BE:  MOVLW  05
+01BF:  MOVWF  78
+01C0:  CLRF   77
+01C1:  DECFSZ 77,F
+01C2:  GOTO   1C1
+01C3:  DECFSZ 78,F
+01C4:  GOTO   1C0
+01C5:  MOVLW  2E
+01C6:  MOVWF  77
+01C7:  DECFSZ 77,F
+01C8:  GOTO   1C7
+01C9:  GOTO   1CA
+01CA:  DECFSZ 00,F
+01CB:  GOTO   1BE
+01CC:  RETURN
+.................... #include <PIC16F1789_registers.h> 
+.................... #byte INDF0 = 0x000 
+.................... #byte INDF1 = 0x001 
+.................... #byte PCL = 0x002 
+.................... #byte STATUS = 0x003 
+.................... #bit    C = STATUS.0 
+.................... #bit    DC = STATUS.1 
+.................... #bit    Z = STATUS.2 
+.................... #bit    PD = STATUS.3 
+.................... #bit    TO = STATUS.4 
+.................... #byte FSR0L = 0x004 
+.................... #byte FSR0H = 0x005 
+.................... #byte FSR1L = 0x006 
+.................... #byte FSR1H = 0x007 
+.................... #byte BSR = 0x008 
+.................... #byte WREG = 0x009 
+.................... #byte PCLATH = 0x00A 
+.................... #byte INTCON = 0x00B 
+.................... #bit    IOCIF = INTCON.0 
+.................... #bit    INTF = INTCON.1 
+.................... #bit    TMR0IF = INTCON.2 
+.................... #bit    IOCIE = INTCON.3 
+.................... #bit    INTE = INTCON.4 
+.................... #bit    TMR0IE = INTCON.5 
+.................... #bit    PEIE = INTCON.6 
+.................... #bit    GIE = INTCON.7 
+.................... #byte INTCON = 0x00B 
+.................... #bit    T0IF = INTCON.2 
+.................... #bit    T0IE = INTCON.5 
+.................... #byte PORTA = 0x00C 
+.................... #bit    RA0 = PORTA.0 
+.................... #bit    RA1 = PORTA.1 
+.................... #bit    RA2 = PORTA.2 
+.................... #bit    RA3 = PORTA.3 
+.................... #bit    RA4 = PORTA.4 
+.................... #bit    RA5 = PORTA.5 
+.................... #bit    RA6 = PORTA.6 
+.................... #bit    RA7 = PORTA.7 
+.................... #byte PORTB = 0x00D 
+.................... #bit    RB0 = PORTB.0 
+.................... #bit    RB1 = PORTB.1 
+.................... #bit    RB2 = PORTB.2 
+.................... #bit    RB3 = PORTB.3 
+.................... #bit    RB4 = PORTB.4 
+.................... #bit    RB5 = PORTB.5 
+.................... #bit    RB6 = PORTB.6 
+.................... #bit    RB7 = PORTB.7 
+.................... #byte PORTC = 0x00E 
+.................... #bit    RC0 = PORTC.0 
+.................... #bit    RC1 = PORTC.1 
+.................... #bit    RC2 = PORTC.2 
+.................... #bit    RC3 = PORTC.3 
+.................... #bit    RC4 = PORTC.4 
+.................... #bit    RC5 = PORTC.5 
+.................... #bit    RC6 = PORTC.6 
+.................... #bit    RC7 = PORTC.7 
+.................... #byte PORTD = 0x00F 
+.................... #bit    RD0 = PORTD.0 
+.................... #bit    RD1 = PORTD.1 
+.................... #bit    RD2 = PORTD.2 
+.................... #bit    RD3 = PORTD.3 
+.................... #bit    RD4 = PORTD.4 
+.................... #bit    RD5 = PORTD.5 
+.................... #bit    RD6 = PORTD.6 
+.................... #bit    RD7 = PORTD.7 
+.................... #byte PORTE = 0x010 
+.................... #byte PIR1 = 0x011 
+.................... #bit    TMR1IF = PIR1.0 
+.................... #bit    TMR2IF = PIR1.1 
+.................... #bit    CCP1IF = PIR1.2 
+.................... #bit    SSP1IF = PIR1.3 
+.................... #bit    TXIF = PIR1.4 
+.................... #bit    RCIF = PIR1.5 
+.................... #bit    ADIF = PIR1.6 
+.................... #bit    TMR1GIF = PIR1.7 
+.................... #byte PIR2 = 0x012 
+.................... #bit    CCP2IF = PIR2.0 
+.................... #bit    C3IF = PIR2.1 
+.................... #bit    C4IF = PIR2.2 
+.................... #bit    BCL1IF = PIR2.3 
+.................... #bit    EEIF = PIR2.4 
+.................... #bit    C1IF = PIR2.5 
+.................... #bit    C2IF = PIR2.6 
+.................... #bit    OSFIF = PIR2.7 
+.................... #byte PIR3 = 0x013 
+.................... #bit    CCP3IF = PIR3.4 
+.................... #byte PIR4 = 0x014 
+.................... #bit    PSMC1SIF = PIR4.0 
+.................... #bit    PSMC2SIF = PIR4.1 
+.................... #bit    PSMC3SIF = PIR4.2 
+.................... #bit    PSMC4SIF = PIR4.3 
+.................... #bit    PSMC1TIF = PIR4.4 
+.................... #bit    PSMC2TIF = PIR4.5 
+.................... #bit    PSMC3TIF = PIR4.6 
+.................... #bit    PSMC4TIF = PIR4.7 
+.................... #byte TMR0 = 0x015 
+.................... #byte TMR1L = 0x016 
+.................... #byte TMR1H = 0x017 
+.................... #byte T1CON = 0x018 
+.................... #bit    TMR1ON = T1CON.0 
+.................... #bit    T1SYNC = T1CON.2 
+.................... #bit    T1OSCEN = T1CON.3 
+.................... #bit    T1CKPS0 = T1CON.4 
+.................... #bit    T1CKPS1 = T1CON.5 
+.................... #bit    TMR1CS0 = T1CON.6 
+.................... #bit    TMR1CS1 = T1CON.7 
+.................... #byte T1GCON = 0x019 
+.................... #bit    T1GSS0 = T1GCON.0 
+.................... #bit    T1GSS1 = T1GCON.1 
+.................... #bit    T1GVAL = T1GCON.2 
+.................... #bit    T1GGO = T1GCON.3 
+.................... #bit    T1GSPM = T1GCON.4 
+.................... #bit    T1GTM = T1GCON.5 
+.................... #bit    T1GPOL = T1GCON.6 
+.................... #bit    TMR1GE = T1GCON.7 
+.................... #byte TMR2 = 0x01A 
+.................... #byte PR2 = 0x01B 
+.................... #byte T2CON = 0x01C 
+.................... #bit    T2CKPS0 = T2CON.0 
+.................... #bit    T2CKPS1 = T2CON.1 
+.................... #bit    TMR2ON = T2CON.2 
+.................... #bit    T2OUTPS0 = T2CON.3 
+.................... #bit    T2OUTPS1 = T2CON.4 
+.................... #bit    T2OUTPS2 = T2CON.5 
+.................... #bit    T2OUTPS3 = T2CON.6 
+.................... #byte TRISA = 0x08C 
+.................... #bit    TRISA0 = TRISA.0 
+.................... #bit    TRISA1 = TRISA.1 
+.................... #bit    TRISA2 = TRISA.2 
+.................... #bit    TRISA3 = TRISA.3 
+.................... #bit    TRISA4 = TRISA.4 
+.................... #bit    TRISA5 = TRISA.5 
+.................... #bit    TRISA6 = TRISA.6 
+.................... #bit    TRISA7 = TRISA.7 
+.................... #byte TRISB = 0x08D 
+.................... #bit    TRISB0 = TRISB.0 
+.................... #bit    TRISB1 = TRISB.1 
+.................... #bit    TRISB2 = TRISB.2 
+.................... #bit    TRISB3 = TRISB.3 
+.................... #bit    TRISB4 = TRISB.4 
+.................... #bit    TRISB5 = TRISB.5 
+.................... #bit    TRISB6 = TRISB.6 
+.................... #bit    TRISB7 = TRISB.7 
+.................... #byte TRISC = 0x08E 
+.................... #bit    TRISC0 = TRISC.0 
+.................... #bit    TRISC1 = TRISC.1 
+.................... #bit    TRISC2 = TRISC.2 
+.................... #bit    TRISC3 = TRISC.3 
+.................... #bit    TRISC4 = TRISC.4 
+.................... #bit    TRISC5 = TRISC.5 
+.................... #bit    TRISC6 = TRISC.6 
+.................... #bit    TRISC7 = TRISC.7 
+.................... #byte TRISD = 0x08F 
+.................... #bit    TRISD0 = TRISD.0 
+.................... #bit    TRISD1 = TRISD.1 
+.................... #bit    TRISD2 = TRISD.2 
+.................... #bit    TRISD3 = TRISD.3 
+.................... #bit    TRISD4 = TRISD.4 
+.................... #bit    TRISD5 = TRISD.5 
+.................... #bit    TRISD6 = TRISD.6 
+.................... #bit    TRISD7 = TRISD.7 
+.................... #byte TRISE = 0x090 
+.................... #byte PIE1 = 0x091 
+.................... #bit    TMR1IE = PIE1.0 
+.................... #bit    TMR2IE = PIE1.1 
+.................... #bit    CCP1IE = PIE1.2 
+.................... #bit    SSP1IE = PIE1.3 
+.................... #bit    TXIE = PIE1.4 
+.................... #bit    RCIE = PIE1.5 
+.................... #bit    ADIE = PIE1.6 
+.................... #bit    TMR1GIE = PIE1.7 
+.................... #byte PIE2 = 0x092 
+.................... #bit    CCP2IE = PIE2.0 
+.................... #bit    C3IE = PIE2.1 
+.................... #bit    C4IE = PIE2.2 
+.................... #bit    BCL1IE = PIE2.3 
+.................... #bit    EEIE = PIE2.4 
+.................... #bit    C1IE = PIE2.5 
+.................... #bit    C2IE = PIE2.6 
+.................... #bit    OSFIE = PIE2.7 
+.................... #byte PIE3 = 0x093 
+.................... #bit    CCP3IE = PIE3.4 
+.................... #byte PIE4 = 0x094 
+.................... #bit    PSMC1SIE = PIE4.0 
+.................... #bit    PSMC2SIE = PIE4.1 
+.................... #bit    PSMC3SIE = PIE4.2 
+.................... #bit    PSMC4SIE = PIE4.3 
+.................... #bit    PSMC1TIE = PIE4.4 
+.................... #bit    PSMC2TIE = PIE4.5 
+.................... #bit    PSMC3TIE = PIE4.6 
+.................... #bit    PSMC4TIE = PIE4.7 
+.................... #byte PIE4 = 0x094 
+.................... #bit    PMSC3TIE = PIE4.6 
+.................... #byte OPTION_REG = 0x095 
+.................... #bit    PS0 = OPTION_REG.0 
+.................... #bit    PS1 = OPTION_REG.1 
+.................... #bit    PS2 = OPTION_REG.2 
+.................... #bit    PSA = OPTION_REG.3 
+.................... #bit    TMR0SE = OPTION_REG.4 
+.................... #bit    TMR0CS = OPTION_REG.5 
+.................... #bit    INTEDG = OPTION_REG.6 
+.................... #bit    WPUEN = OPTION_REG.7 
+.................... #byte OPTION_REG = 0x095 
+.................... #bit    T0SE = OPTION_REG.4 
+.................... #bit    T0CS = OPTION_REG.5 
+.................... #byte PCON = 0x096 
+.................... #bit    BOR = PCON.0 
+.................... #bit    POR = PCON.1 
+.................... #bit    RI = PCON.2 
+.................... #bit    RMCLR = PCON.3 
+.................... #bit    RWDT = PCON.4 
+.................... #bit    STKUNF = PCON.6 
+.................... #bit    STKOVF = PCON.7 
+.................... #byte WDTCON = 0x097 
+.................... #bit    SWDTEN = WDTCON.0 
+.................... #bit    WDTPS0 = WDTCON.1 
+.................... #bit    WDTPS1 = WDTCON.2 
+.................... #bit    WDTPS2 = WDTCON.3 
+.................... #bit    WDTPS3 = WDTCON.4 
+.................... #bit    WDTPS4 = WDTCON.5 
+.................... #byte ADRESL = 0x09B 
+.................... #byte ADRESH = 0x09C 
+.................... #byte ADCON0 = 0x09D 
+.................... #bit    ADON = ADCON0.0 
+.................... #bit    GO = ADCON0.1 
+.................... #bit    CHS0 = ADCON0.2 
+.................... #bit    CHS1 = ADCON0.3 
+.................... #bit    CHS2 = ADCON0.4 
+.................... #bit    CHS3 = ADCON0.5 
+.................... #bit    CHS4 = ADCON0.6 
+.................... #bit    ADRMD = ADCON0.7 
+.................... #byte ADCON0 = 0x09D 
+.................... #bit    ADGO = ADCON0.1 
+.................... #byte ADCON0 = 0x09D 
+.................... #bit    DONE = ADCON0.1 
+.................... #byte ADCON1 = 0x09E 
+.................... #bit    ADPREF0 = ADCON1.0 
+.................... #bit    ADPREF1 = ADCON1.1 
+.................... #bit    ADNREF = ADCON1.2 
+.................... #bit    ADCS0 = ADCON1.4 
+.................... #bit    ADCS1 = ADCON1.5 
+.................... #bit    ADCS2 = ADCON1.6 
+.................... #bit    ADFM = ADCON1.7 
+.................... #byte ADCON2 = 0x09F 
+.................... #bit    CHSN0 = ADCON2.0 
+.................... #bit    CHSN1 = ADCON2.1 
+.................... #bit    CHSN2 = ADCON2.2 
+.................... #bit    CHSN3 = ADCON2.3 
+.................... #bit    TRIGSEL0 = ADCON2.4 
+.................... #bit    TRIGSEL1 = ADCON2.5 
+.................... #bit    TRIGSEL2 = ADCON2.6 
+.................... #bit    TRIGSEL3 = ADCON2.7 
+.................... #byte LATA = 0x10C 
+.................... #bit    LATA0 = LATA.0 
+.................... #bit    LATA1 = LATA.1 
+.................... #bit    LATA2 = LATA.2 
+.................... #bit    LATA3 = LATA.3 
+.................... #bit    LATA4 = LATA.4 
+.................... #bit    LATA5 = LATA.5 
+.................... #bit    LATA6 = LATA.6 
+.................... #bit    LATA7 = LATA.7 
+.................... #byte LATB = 0x10D 
+.................... #bit    LATB0 = LATB.0 
+.................... #bit    LATB1 = LATB.1 
+.................... #bit    LATB2 = LATB.2 
+.................... #bit    LATB3 = LATB.3 
+.................... #bit    LATB4 = LATB.4 
+.................... #bit    LATB5 = LATB.5 
+.................... #bit    LATB6 = LATB.6 
+.................... #bit    LATB7 = LATB.7 
+.................... #byte LATC = 0x10E 
+.................... #bit    LATC0 = LATC.0 
+.................... #bit    LATC1 = LATC.1 
+.................... #bit    LATC2 = LATC.2 
+.................... #bit    LATC3 = LATC.3 
+.................... #bit    LATC4 = LATC.4 
+.................... #bit    LATC5 = LATC.5 
+.................... #bit    LATC6 = LATC.6 
+.................... #bit    LATC7 = LATC.7 
+.................... #byte LATD = 0x10F 
+.................... #bit    LATD0 = LATD.0 
+.................... #bit    LATD1 = LATD.1 
+.................... #bit    LATD2 = LATD.2 
+.................... #bit    LATD3 = LATD.3 
+.................... #bit    LATD4 = LATD.4 
+.................... #bit    LATD5 = LATD.5 
+.................... #bit    LATD6 = LATD.6 
+.................... #bit    LATD7 = LATD.7 
+.................... #byte LATE = 0x110 
+.................... #byte APFCON2 = 0x11C 
+.................... #bit    CCP3SEL = APFCON2.0 
+.................... #bit    SSSEL0 = APFCON2.1 
+.................... #bit    SSSEL1 = APFCON2.2 
+.................... #byte APFCON1 = 0x11D 
+.................... #bit    CCP2SEL = APFCON1.0 
+.................... #bit    RXSEL = APFCON1.1 
+.................... #bit    TXSEL = APFCON1.2 
+.................... #bit    SDISEL = APFCON1.3 
+.................... #bit    SCKSEL = APFCON1.4 
+.................... #bit    SDOSEL = APFCON1.5 
+.................... #bit    CCP1SEL = APFCON1.6 
+.................... #bit    C2OUTSEL = APFCON1.7 
+.................... #byte ANSELA = 0x18C 
+.................... #bit    ANSA0 = ANSELA.0 
+.................... #bit    ANSA1 = ANSELA.1 
+.................... #bit    ANSA2 = ANSELA.2 
+.................... #bit    ANSA3 = ANSELA.3 
+.................... #bit    ANSA4 = ANSELA.4 
+.................... #bit    ANSA5 = ANSELA.5 
+.................... #bit    ANSA7 = ANSELA.7 
+.................... #byte ANSELB = 0x18D 
+.................... #byte ANSELC = 0x18E 
+.................... #bit    ANSC0 = ANSELC.0 
+.................... #bit    ANSC1 = ANSELC.1 
+.................... #bit    ANSC2 = ANSELC.2 
+.................... #bit    ANSC3 = ANSELC.3 
+.................... #bit    ANSC4 = ANSELC.4 
+.................... #bit    ANSC5 = ANSELC.5 
+.................... #bit    ANSC6 = ANSELC.6 
+.................... #bit    ANSC7 = ANSELC.7 
+.................... #byte ANSELD = 0x18F 
+.................... #byte ANSELE = 0x190 
+.................... #byte RC1REG = 0x199 
+.................... #byte TX1REG = 0x19A 
+.................... #byte SP1BRGL = 0x19B 
+.................... #byte SP1BRGH = 0x19C 
+.................... #byte RC1STA = 0x19D 
+.................... #bit    RX9D = RC1STA.0 
+.................... #bit    OERR = RC1STA.1 
+.................... #bit    FERR = RC1STA.2 
+.................... #bit    ADDEN = RC1STA.3 
+.................... #bit    CREN = RC1STA.4 
+.................... #bit    SREN = RC1STA.5 
+.................... #bit    RX9 = RC1STA.6 
+.................... #bit    SPEN = RC1STA.7 
+.................... #byte TX1STA = 0x19E 
+.................... #bit    TX9D = TX1STA.0 
+.................... #bit    TRMT = TX1STA.1 
+.................... #bit    BRGH = TX1STA.2 
+.................... #bit    SENDB = TX1STA.3 
+.................... #bit    SYNC = TX1STA.4 
+.................... #bit    TXEN = TX1STA.5 
+.................... #bit    TX9 = TX1STA.6 
+.................... #bit    CSRC = TX1STA.7 
+.................... #byte BAUD1CON = 0x19F 
+.................... #bit    ABDEN = BAUD1CON.0 
+.................... #bit    WUE = BAUD1CON.1 
+.................... #bit    BRG16 = BAUD1CON.2 
+.................... #bit    SCKP = BAUD1CON.3 
+.................... #bit    RCIDL = BAUD1CON.4 
+.................... #bit    ABDOVF = BAUD1CON.5 
+.................... #byte WPUA = 0x20C 
+.................... #bit    WPUA0 = WPUA.0 
+.................... #bit    WPUA1 = WPUA.1 
+.................... #bit    WPUA2 = WPUA.2 
+.................... #bit    WPUA3 = WPUA.3 
+.................... #bit    WPUA4 = WPUA.4 
+.................... #bit    WPUA5 = WPUA.5 
+.................... #bit    WPUA6 = WPUA.6 
+.................... #bit    WPUA7 = WPUA.7 
+.................... #byte WPUB = 0x20D 
+.................... #bit    WPUB0 = WPUB.0 
+.................... #bit    WPUB1 = WPUB.1 
+.................... #bit    WPUB2 = WPUB.2 
+.................... #bit    WPUB3 = WPUB.3 
+.................... #bit    WPUB4 = WPUB.4 
+.................... #bit    WPUB5 = WPUB.5 
+.................... #bit    WPUB6 = WPUB.6 
+.................... #bit    WPUB7 = WPUB.7 
+.................... #byte WPUC = 0x20E 
+.................... #bit    WPUC0 = WPUC.0 
+.................... #bit    WPUC1 = WPUC.1 
+.................... #bit    WPUC2 = WPUC.2 
+.................... #bit    WPUC3 = WPUC.3 
+.................... #bit    WPUC4 = WPUC.4 
+.................... #bit    WPUC5 = WPUC.5 
+.................... #bit    WPUC6 = WPUC.6 
+.................... #bit    WPUC7 = WPUC.7 
+.................... #byte WPUD = 0x20F 
+.................... #bit    WPUD0 = WPUD.0 
+.................... #bit    WPUD1 = WPUD.1 
+.................... #bit    WPUD2 = WPUD.2 
+.................... #bit    WPUD3 = WPUD.3 
+.................... #bit    WPUD4 = WPUD.4 
+.................... #bit    WPUD5 = WPUD.5 
+.................... #bit    WPUD6 = WPUD.6 
+.................... #bit    WPUD7 = WPUD.7 
+.................... #byte WPUE = 0x210 
+.................... #byte SSP1BUF = 0x211 
+.................... #bit    SSP1BUF0 = SSP1BUF.0 
+.................... #bit    SSP1BUF1 = SSP1BUF.1 
+.................... #bit    SSP1BUF2 = SSP1BUF.2 
+.................... #bit    SSP1BUF3 = SSP1BUF.3 
+.................... #bit    SSP1BUF4 = SSP1BUF.4 
+.................... #bit    SSP1BUF5 = SSP1BUF.5 
+.................... #bit    SSP1BUF6 = SSP1BUF.6 
+.................... #bit    SSP1BUF7 = SSP1BUF.7 
+.................... #byte SSP1BUF = 0x211 
+.................... #bit    BUF0 = SSP1BUF.0 
+.................... #bit    BUF1 = SSP1BUF.1 
+.................... #bit    BUF2 = SSP1BUF.2 
+.................... #bit    BUF3 = SSP1BUF.3 
+.................... #bit    BUF4 = SSP1BUF.4 
+.................... #bit    BUF5 = SSP1BUF.5 
+.................... #bit    BUF6 = SSP1BUF.6 
+.................... #bit    BUF7 = SSP1BUF.7 
+.................... #byte SSP1ADD = 0x212 
+.................... #bit    SSP1ADD0 = SSP1ADD.0 
+.................... #bit    SSP1ADD1 = SSP1ADD.1 
+.................... #bit    SSP1ADD2 = SSP1ADD.2 
+.................... #bit    SSP1ADD3 = SSP1ADD.3 
+.................... #bit    SSP1ADD4 = SSP1ADD.4 
+.................... #bit    SSP1ADD5 = SSP1ADD.5 
+.................... #bit    SSP1ADD6 = SSP1ADD.6 
+.................... #bit    SSP1ADD7 = SSP1ADD.7 
+.................... #byte SSP1ADD = 0x212 
+.................... #bit    ADD0 = SSP1ADD.0 
+.................... #bit    ADD1 = SSP1ADD.1 
+.................... #bit    ADD2 = SSP1ADD.2 
+.................... #bit    ADD3 = SSP1ADD.3 
+.................... #bit    ADD4 = SSP1ADD.4 
+.................... #bit    ADD5 = SSP1ADD.5 
+.................... #bit    ADD6 = SSP1ADD.6 
+.................... #bit    ADD7 = SSP1ADD.7 
+.................... #byte SSP1MSK = 0x213 
+.................... #bit    SSP1MSK0 = SSP1MSK.0 
+.................... #bit    SSP1MSK1 = SSP1MSK.1 
+.................... #bit    SSP1MSK2 = SSP1MSK.2 
+.................... #bit    SSP1MSK3 = SSP1MSK.3 
+.................... #bit    SSP1MSK4 = SSP1MSK.4 
+.................... #bit    SSP1MSK5 = SSP1MSK.5 
+.................... #bit    SSP1MSK6 = SSP1MSK.6 
+.................... #bit    SSP1MSK7 = SSP1MSK.7 
+.................... #byte SSP1MSK = 0x213 
+.................... #bit    MSK0 = SSP1MSK.0 
+.................... #bit    MSK1 = SSP1MSK.1 
+.................... #bit    MSK2 = SSP1MSK.2 
+.................... #bit    MSK3 = SSP1MSK.3 
+.................... #bit    MSK4 = SSP1MSK.4 
+.................... #bit    MSK5 = SSP1MSK.5 
+.................... #bit    MSK6 = SSP1MSK.6 
+.................... #bit    MSK7 = SSP1MSK.7 
+.................... #byte SSP1STAT = 0x214 
+.................... #bit    BF = SSP1STAT.0 
+.................... #bit    UA = SSP1STAT.1 
+.................... #bit    R = SSP1STAT.2 
+.................... #bit    S = SSP1STAT.3 
+.................... #bit    P = SSP1STAT.4 
+.................... #bit    D = SSP1STAT.5 
+.................... #bit    CKE = SSP1STAT.6 
+.................... #bit    SMP = SSP1STAT.7 
+.................... #byte SSP1CON1 = 0x215 
+.................... #bit    SSPM0 = SSP1CON1.0 
+.................... #bit    SSPM1 = SSP1CON1.1 
+.................... #bit    SSPM2 = SSP1CON1.2 
+.................... #bit    SSPM3 = SSP1CON1.3 
+.................... #bit    CKP = SSP1CON1.4 
+.................... #bit    SSPEN = SSP1CON1.5 
+.................... #bit    SSPOV = SSP1CON1.6 
+.................... #bit    WCOL = SSP1CON1.7 
+.................... #byte SSP1CON2 = 0x216 
+.................... #bit    SEN = SSP1CON2.0 
+.................... #bit    RSEN = SSP1CON2.1 
+.................... #bit    PEN = SSP1CON2.2 
+.................... #bit    RCEN = SSP1CON2.3 
+.................... #bit    ACKEN = SSP1CON2.4 
+.................... #bit    ACKDT = SSP1CON2.5 
+.................... #bit    ACKSTAT = SSP1CON2.6 
+.................... #bit    GCEN = SSP1CON2.7 
+.................... #byte SSP1CON3 = 0x217 
+.................... #bit    DHEN = SSP1CON3.0 
+.................... #bit    AHEN = SSP1CON3.1 
+.................... #bit    SBCDE = SSP1CON3.2 
+.................... #bit    SDAHT = SSP1CON3.3 
+.................... #bit    BOEN = SSP1CON3.4 
+.................... #bit    SCIE = SSP1CON3.5 
+.................... #bit    PCIE = SSP1CON3.6 
+.................... #bit    ACKTIM = SSP1CON3.7 
+.................... #byte ODCONA = 0x28C 
+.................... #bit    ODCONA0 = ODCONA.0 
+.................... #bit    ODCONA1 = ODCONA.1 
+.................... #bit    ODCONA2 = ODCONA.2 
+.................... #bit    ODCONA3 = ODCONA.3 
+.................... #bit    ODCONA4 = ODCONA.4 
+.................... #bit    ODCONA5 = ODCONA.5 
+.................... #bit    ODCONA6 = ODCONA.6 
+.................... #bit    ODCONA7 = ODCONA.7 
+.................... #byte ODCONB = 0x28D 
+.................... #bit    ODCONB0 = ODCONB.0 
+.................... #bit    ODCONB1 = ODCONB.1 
+.................... #bit    ODCONB2 = ODCONB.2 
+.................... #bit    ODCONB3 = ODCONB.3 
+.................... #bit    ODCONB4 = ODCONB.4 
+.................... #bit    ODCONB5 = ODCONB.5 
+.................... #bit    ODCONB6 = ODCONB.6 
+.................... #bit    ODCONB7 = ODCONB.7 
+.................... #byte ODCONC = 0x28E 
+.................... #bit    ODCONC0 = ODCONC.0 
+.................... #bit    ODCONC1 = ODCONC.1 
+.................... #bit    ODCONC2 = ODCONC.2 
+.................... #bit    ODCONC3 = ODCONC.3 
+.................... #bit    ODCONC4 = ODCONC.4 
+.................... #bit    ODCONC5 = ODCONC.5 
+.................... #bit    ODCONC6 = ODCONC.6 
+.................... #bit    ODCONC7 = ODCONC.7 
+.................... #byte ODCOND = 0x28F 
+.................... #bit    ODCOND0 = ODCOND.0 
+.................... #bit    ODCOND1 = ODCOND.1 
+.................... #bit    ODCOND2 = ODCOND.2 
+.................... #bit    ODCOND3 = ODCOND.3 
+.................... #bit    ODCOND4 = ODCOND.4 
+.................... #bit    ODCOND5 = ODCOND.5 
+.................... #bit    ODCOND6 = ODCOND.6 
+.................... #bit    ODCOND7 = ODCOND.7 
+.................... #byte ODCONE = 0x290 
+.................... #byte SLRCONA = 0x30C 
+.................... #bit    SLRCONA0 = SLRCONA.0 
+.................... #bit    SLRCONA1 = SLRCONA.1 
+.................... #bit    SLRCONA2 = SLRCONA.2 
+.................... #bit    SLRCONA3 = SLRCONA.3 
+.................... #bit    SLRCONA4 = SLRCONA.4 
+.................... #bit    SLRCONA5 = SLRCONA.5 
+.................... #bit    SLRCONA6 = SLRCONA.6 
+.................... #bit    SLRCONA7 = SLRCONA.7 
+.................... #byte SLRCONB = 0x30D 
+.................... #bit    SLRCONB0 = SLRCONB.0 
+.................... #bit    SLRCONB1 = SLRCONB.1 
+.................... #bit    SLRCONB2 = SLRCONB.2 
+.................... #bit    SLRCONB3 = SLRCONB.3 
+.................... #bit    SLRCONB4 = SLRCONB.4 
+.................... #bit    SLRCONB5 = SLRCONB.5 
+.................... #bit    SLRCONB6 = SLRCONB.6 
+.................... #bit    SLRCONB7 = SLRCONB.7 
+.................... #byte SLRCONC = 0x30E 
+.................... #bit    SLRCONC0 = SLRCONC.0 
+.................... #bit    SLRCONC1 = SLRCONC.1 
+.................... #bit    SLRCONC2 = SLRCONC.2 
+.................... #bit    SLRCONC3 = SLRCONC.3 
+.................... #bit    SLRCONC4 = SLRCONC.4 
+.................... #bit    SLRCONC5 = SLRCONC.5 
+.................... #bit    SLRCONC6 = SLRCONC.6 
+.................... #bit    SLRCONC7 = SLRCONC.7 
+.................... #byte SLRCOND = 0x30F 
+.................... #bit    SLRCOND0 = SLRCOND.0 
+.................... #bit    SLRCOND1 = SLRCOND.1 
+.................... #bit    SLRCOND2 = SLRCOND.2 
+.................... #bit    SLRCOND3 = SLRCOND.3 
+.................... #bit    SLRCOND4 = SLRCOND.4 
+.................... #bit    SLRCOND5 = SLRCOND.5 
+.................... #bit    SLRCOND6 = SLRCOND.6 
+.................... #bit    SLRCOND7 = SLRCOND.7 
+.................... #byte SLRCONE = 0x310 
+.................... #byte INLVLA = 0x38C 
+.................... #bit    INLVLA0 = INLVLA.0 
+.................... #bit    INLVLA1 = INLVLA.1 
+.................... #bit    INLVLA2 = INLVLA.2 
+.................... #bit    INLVLA3 = INLVLA.3 
+.................... #bit    INLVLA4 = INLVLA.4 
+.................... #bit    INLVLA5 = INLVLA.5 
+.................... #bit    INLVLA6 = INLVLA.6 
+.................... #bit    INLVLA7 = INLVLA.7 
+.................... #byte INLVLB = 0x38D 
+.................... #bit    INLVLB0 = INLVLB.0 
+.................... #bit    INLVLB1 = INLVLB.1 
+.................... #bit    INLVLB2 = INLVLB.2 
+.................... #bit    INLVLB3 = INLVLB.3 
+.................... #bit    INLVLB4 = INLVLB.4 
+.................... #bit    INLVLB5 = INLVLB.5 
+.................... #bit    INLVLB6 = INLVLB.6 
+.................... #bit    INLVLB7 = INLVLB.7 
+.................... #byte INLVLC = 0x38E 
+.................... #bit    INLVLC0 = INLVLC.0 
+.................... #bit    INLVLC1 = INLVLC.1 
+.................... #bit    INLVLC2 = INLVLC.2 
+.................... #bit    INLVLC3 = INLVLC.3 
+.................... #bit    INLVLC4 = INLVLC.4 
+.................... #bit    INLVLC5 = INLVLC.5 
+.................... #bit    INLVLC6 = INLVLC.6 
+.................... #bit    INLVLC7 = INLVLC.7 
+.................... #byte INLVLD = 0x38F 
+.................... #bit    INLVLD0 = INLVLD.0 
+.................... #bit    INLVLD1 = INLVLD.1 
+.................... #bit    INLVLD2 = INLVLD.2 
+.................... #bit    INLVLD3 = INLVLD.3 
+.................... #bit    INLVLD4 = INLVLD.4 
+.................... #bit    INLVLD5 = INLVLD.5 
+.................... #bit    INLVLD6 = INLVLD.6 
+.................... #bit    INLVLD7 = INLVLD.7 
+.................... #byte INLVLE = 0x390 
+.................... #byte STATUS_SHAD = 0xFE4 
+.................... #bit    C_SHAD = STATUS_SHAD.0 
+.................... #bit    DC_SHAD = STATUS_SHAD.1 
+.................... #bit    Z_SHAD = STATUS_SHAD.2 
+.................... #byte WREG_SHAD = 0xFE5 
+.................... #byte PCLATH_SHAD = 0xFE7 
+.................... #byte FSR0L_SHAD = 0xFE8 
+.................... #byte FSR0H_SHAD = 0xFE9 
+.................... #byte FSR1L_SHAD = 0xFEA 
+.................... #byte FSR1H_SHAD = 0xFEB 
+.................... #byte STKPTR = 0xFED 
+.................... #byte TOSL = 0xFEE 
+.................... #byte TOSH = 0xFEF 
+....................  
+....................  
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_B6,rcv=PIN_B7,bits=8,stream=PORT1) 
+....................  
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_D4,rcv=PIN_D5,bits=8,stream=MPIC) 
+*
+0456:  MOVLB  01
+0457:  BSF    0F.5
+0458:  MOVLB  00
+0459:  BTFSC  0F.5
+045A:  GOTO   459
+045B:  MOVLW  08
+045C:  MOVWF  77
+045D:  CLRF   54
+045E:  BSF    77.7
+045F:  GOTO   46E
+0460:  BCF    77.7
+0461:  GOTO   46E
+0462:  BCF    03.0
+0463:  BTFSC  0F.5
+0464:  BSF    03.0
+0465:  RRF    54,F
+0466:  BSF    77.6
+0467:  GOTO   46E
+0468:  BCF    77.6
+0469:  DECFSZ 77,F
+046A:  GOTO   462
+046B:  MOVF   54,W
+046C:  MOVWF  78
+046D:  GOTO   47A
+046E:  MOVLW  84
+046F:  BTFSC  77.7
+0470:  MOVLW  24
+0471:  MOVWF  78
+0472:  DECFSZ 78,F
+0473:  GOTO   472
+0474:  GOTO   475
+0475:  BTFSC  77.7
+0476:  GOTO   460
+0477:  BTFSC  77.6
+0478:  GOTO   468
+0479:  GOTO   462
+047A:  MOVLP  00
+047B:  GOTO   615 (RETURN)
+*
+04FB:  MOVLB  01
+04FC:  BCF    0F.4
+04FD:  MOVLB  02
+04FE:  BCF    0F.4
+04FF:  MOVLW  08
+0500:  MOVWF  78
+0501:  GOTO   502
+0502:  NOP
+0503:  BSF    78.7
+0504:  GOTO   515
+0505:  BCF    78.7
+0506:  MOVLB  00
+0507:  RRF    55,F
+0508:  MOVLB  02
+0509:  BTFSC  03.0
+050A:  BSF    0F.4
+050B:  BTFSS  03.0
+050C:  BCF    0F.4
+050D:  BSF    78.6
+050E:  GOTO   515
+050F:  BCF    78.6
+0510:  DECFSZ 78,F
+0511:  GOTO   506
+0512:  GOTO   513
+0513:  NOP
+0514:  BSF    0F.4
+0515:  MOVLW  84
+0516:  MOVWF  04
+0517:  DECFSZ 04,F
+0518:  GOTO   517
+0519:  NOP
+051A:  BTFSC  78.7
+051B:  GOTO   505
+051C:  BTFSC  78.6
+051D:  GOTO   50F
+051E:  MOVLP  00
+051F:  MOVLB  00
+0520:  GOTO   65E (RETURN)
+....................  
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_c6,rcv=PIN_c7,bits=8,stream=COMPIC) 
+....................  
+....................  
+.................... int8 sec = 0; 
+.................... int8 min = 0; 
+.................... int8 hou = 0; 
+.................... int16 day = 0; 
+.................... int8 res_flag; 
+.................... //int8 unreg_flag; 
+.................... //int8 check=0; 
+.................... int resetData[11]; 
+.................... BYTE rx_chars[8] = {0}; 
+.................... BYTE rxcom_chars[8] = {0}; 
+.................... int8 CHECK_MAIN_RESPONSE = 0; 
+.................... int8 CHECK_COM_RESPONSE = 0; 
+.................... int8 MAIN_ACK = 0; 
+.................... #define memory 10 
+.................... #define check_memory 5 
+....................  
+....................  
+.................... #include<power_enable.c> 
+.................... void delayloop(int32 seconds)      
+*
+0383:  CLRF   5B
+0384:  CLRF   5A
+0385:  CLRF   59
+0386:  MOVLW  01
+0387:  MOVWF  58
+.................... {  
+....................  int32 count = 1;  
+....................    
+....................    while(count <= seconds)  
+0388:  MOVF   5B,W
+0389:  SUBWF  57,W
+038A:  BTFSS  03.0
+038B:  GOTO   3B4
+038C:  BTFSS  03.2
+038D:  GOTO   39E
+038E:  MOVF   5A,W
+038F:  SUBWF  56,W
+0390:  BTFSS  03.0
+0391:  GOTO   3B4
+0392:  BTFSS  03.2
+0393:  GOTO   39E
+0394:  MOVF   59,W
+0395:  SUBWF  55,W
+0396:  BTFSS  03.0
+0397:  GOTO   3B4
+0398:  BTFSS  03.2
+0399:  GOTO   39E
+039A:  MOVF   58,W
+039B:  SUBWF  54,W
+039C:  BTFSS  03.0
+039D:  GOTO   3B4
+....................    {  
+....................     delay_ms(1000);  
+039E:  MOVLW  04
+039F:  MOVWF  5C
+03A0:  CLRF   28
+03A1:  BTFSC  0B.7
+03A2:  BSF    28.7
+03A3:  BCF    0B.7
+03A4:  MOVLW  FA
+03A5:  MOVWF  5F
+03A6:  CALL   1B7
+03A7:  BTFSC  28.7
+03A8:  BSF    0B.7
+03A9:  DECFSZ 5C,F
+03AA:  GOTO   3A0
+....................     count++;  
+03AB:  MOVLW  01
+03AC:  ADDWF  58,F
+03AD:  BTFSC  03.0
+03AE:  INCF   59,F
+03AF:  BTFSC  03.2
+03B0:  INCF   5A,F
+03B1:  BTFSC  03.2
+03B2:  INCF   5B,F
+03B3:  GOTO   388
+....................    }  
+....................      
+....................  return;  
+03B4:  RETURN
+.................... } 
+....................  
+....................  
+....................  
+.................... void unreg_first_run(void) 
+.................... { 
+....................  
+....................  //delayloop(30); 
+....................  
+....................  fprintf(PORT1,"******Initializing antenna deployment first trial *********\n\r"); 
+03B5:  MOVLW  47
+03B6:  MOVLB  03
+03B7:  MOVWF  11
+03B8:  MOVLW  00
+03B9:  MOVWF  12
+03BA:  MOVLB  00
+03BB:  CLRF   28
+03BC:  BTFSC  0B.7
+03BD:  BSF    28.7
+03BE:  BCF    0B.7
+03BF:  CALL   167
+03C0:  BTFSC  28.7
+03C1:  BSF    0B.7
+....................  
+....................  RD6 = 1; // Switch enale for COM PIC 
+03C2:  BSF    0F.6
+....................  fprintf(PORT1,"******COM PIC ON *********\n\r"); 
+03C3:  MOVLW  66
+03C4:  MOVLB  03
+03C5:  MOVWF  11
+03C6:  MOVLW  00
+03C7:  MOVWF  12
+03C8:  MOVLB  00
+03C9:  CLRF   28
+03CA:  BTFSC  0B.7
+03CB:  BSF    28.7
+03CC:  BCF    0B.7
+03CD:  CALL   167
+03CE:  BTFSC  28.7
+03CF:  BSF    0B.7
+....................  RD7 = 1; // Switch enale for Main PIC 
+03D0:  BSF    0F.7
+....................  fprintf(PORT1,"******Main PIC ON *********\n\r"); 
+03D1:  MOVLW  75
+03D2:  MOVLB  03
+03D3:  MOVWF  11
+03D4:  MOVLW  00
+03D5:  MOVWF  12
+03D6:  MOVLB  00
+03D7:  CLRF   28
+03D8:  BTFSC  0B.7
+03D9:  BSF    28.7
+03DA:  BCF    0B.7
+03DB:  CALL   167
+03DC:  BTFSC  28.7
+03DD:  BSF    0B.7
+....................  
+....................  
+....................  RC4 = 1; // Buckboost enable for 3V3 #1  
+03DE:  BSF    0E.4
+....................  RD1 = 0; // Switch enale for 3V3#1 
+03DF:  BCF    0F.1
+....................   
+....................  RD3 = 1; // Buckboost enable for 3V3 #2 
+03E0:  BSF    0F.3
+....................  RD0 = 0; // Switch enable for 3V3 #2 
+03E1:  BCF    0F.0
+....................    
+....................  RC2 = 1; //Buckboost enable for Unreg #1 
+03E2:  BSF    0E.2
+....................  fprintf(PORT1,"******Unreg #2 ON *********\n\r"); 
+03E3:  MOVLW  84
+03E4:  MOVLB  03
+03E5:  MOVWF  11
+03E6:  MOVLW  00
+03E7:  MOVWF  12
+03E8:  MOVLB  00
+03E9:  CLRF   28
+03EA:  BTFSC  0B.7
+03EB:  BSF    28.7
+03EC:  BCF    0B.7
+03ED:  CALL   167
+03EE:  BTFSC  28.7
+03EF:  BSF    0B.7
+....................  RC5 = 1; //Buckboost enable for Unreg #2 
+03F0:  BSF    0E.5
+....................  delayloop(10); 
+03F1:  CLRF   57
+03F2:  CLRF   56
+03F3:  CLRF   55
+03F4:  MOVLW  0A
+03F5:  MOVWF  54
+03F6:  CALL   383
+....................  RC5 = 0; //Buckboost enable for Unreg #2   
+03F7:  BCF    0E.5
+....................  fprintf(PORT1,"******Unreg #2 OFF *********\n\r"); 
+03F8:  MOVLW  93
+03F9:  MOVLB  03
+03FA:  MOVWF  11
+03FB:  MOVLW  00
+03FC:  MOVWF  12
+03FD:  MOVLB  00
+03FE:  CLRF   28
+03FF:  BTFSC  0B.7
+0400:  BSF    28.7
+0401:  BCF    0B.7
+0402:  CALL   167
+0403:  BTFSC  28.7
+0404:  BSF    0B.7
+0405:  MOVLP  00
+0406:  GOTO   5DF (RETURN)
+....................   
+.................... //! write_eeprom(check_memory,8); 
+.................... //! check=8; 
+.................... //! write_eeprom(memory,5); 
+.................... //! unreg_flag=5;  
+....................        
+....................  
+.................... } 
+....................  
+.................... void unreg_off_forever(void){ 
+....................  
+....................  RC5 = 0; //Buckboost enable for Unreg #2   
+....................  fprintf(PORT1,"******Unreg #2 OFF FOREVER *********\n\r"); 
+....................  
+.................... } 
+....................  
+.................... void normal_mode(void) 
+.................... { 
+....................  
+....................  RD6 = 1; // Switch enable for COM PIC 
+0407:  BSF    0F.6
+....................  RD7 = 1; // Switch enable for Main PIC 
+0408:  BSF    0F.7
+....................   
+....................  RC4 = 1; // Buckboost enable for 3V3 #1  
+0409:  BSF    0E.4
+....................  RD1 = 1; // Switch enale for 3V3#1 
+040A:  BSF    0F.1
+....................   
+....................  RD3 = 1; // Buckboost enable for 3V3 #2 
+040B:  BSF    0F.3
+....................  RD0 = 1; // Switch enable for 3V3 #2 
+040C:  BSF    0F.0
+....................    
+....................  RC2 = 1; //Buckboost enable for Unreg #1 
+040D:  BSF    0E.2
+....................   
+....................  RC5 = 1; //Buckboost enable for Unreg #2 
+040E:  BSF    0E.5
+040F:  MOVLP  00
+0410:  GOTO   5ED (RETURN)
+....................   
+.................... } 
+....................  
+.................... void reset_mode(void) 
+.................... { 
+....................  fprintf(PORT1,"******Reset mode ON *********\n\r");  
+*
+029A:  MOVLW  B7
+029B:  MOVLB  03
+029C:  MOVWF  11
+029D:  MOVLW  00
+029E:  MOVWF  12
+029F:  MOVLB  00
+02A0:  CALL   167
+....................  RD6 = 0; // Switch disable for COM PIC 
+02A1:  BCF    0F.6
+....................  RD7 = 0; // Switch disable for Main PIC 
+02A2:  BCF    0F.7
+....................  RD1 = 0; // Switch disable  for 3V3#1 
+02A3:  BCF    0F.1
+....................  RD0 = 0; // Switch disable for 3V3 #2 
+02A4:  BCF    0F.0
+....................  RC2 = 0; //Buckboost disable for Unreg #1 
+02A5:  BCF    0E.2
+....................  fprintf(PORT1,"******OFF *********\n\r");  
+02A6:  MOVLW  C7
+02A7:  MOVLB  03
+02A8:  MOVWF  11
+02A9:  MOVLW  00
+02AA:  MOVWF  12
+02AB:  MOVLB  00
+02AC:  CALL   167
+....................  delay_ms(1000); 
+02AD:  MOVLW  04
+02AE:  MOVWF  5E
+02AF:  MOVLW  FA
+02B0:  MOVWF  5F
+02B1:  CALL   1B7
+02B2:  DECFSZ 5E,F
+02B3:  GOTO   2AF
+....................  fprintf(PORT1,"******ON *********\n\r");  
+02B4:  MOVLW  D2
+02B5:  MOVLB  03
+02B6:  MOVWF  11
+02B7:  MOVLW  00
+02B8:  MOVWF  12
+02B9:  MOVLB  00
+02BA:  CALL   167
+....................  RD6 = 1; // Switch enable for COM PIC 
+02BB:  BSF    0F.6
+....................  RD7 = 1; // Switch enable for Main PIC 
+02BC:  BSF    0F.7
+....................   
+....................  RC4 = 1; // Buckboost enable for 3V3 #1  
+02BD:  BSF    0E.4
+....................  RD1 = 1; // Switch enale for 3V3#1 
+02BE:  BSF    0F.1
+....................   
+....................  RD3 = 1; // Buckboost enable for 3V3 #2 
+02BF:  BSF    0F.3
+....................  RD0 = 1; // Switch enable for 3V3 #2 
+02C0:  BSF    0F.0
+....................    
+....................  RC2 = 1; //Buckboost enable for Unreg #1 
+02C1:  BSF    0E.2
+....................   
+....................  RC5 = 0; //Buckboost enable for Unreg #2 
+02C2:  BCF    0E.5
+....................   
+.................... } 
+....................  
+....................  
+....................  
+.................... #include<read_current.c> 
+.................... int8 READ_PIC_ADC(int8 port_name) 
+.................... { 
+....................    SET_ADC_CHANNEL(port_name);  
+*
+0411:  RLF    54,W
+0412:  MOVWF  77
+0413:  RLF    77,F
+0414:  MOVLW  FC
+0415:  ANDWF  77,F
+0416:  MOVLB  01
+0417:  MOVF   1D,W
+0418:  ANDLW  83
+0419:  IORWF  77,W
+041A:  MOVWF  1D
+041B:  MOVLW  0F
+041C:  MOVWF  78
+041D:  MOVF   1F,W
+041E:  ANDLW  F0
+041F:  IORWF  78,W
+0420:  MOVWF  1F
+....................    delay_us(20); 
+0421:  MOVLW  1A
+0422:  MOVWF  77
+0423:  DECFSZ 77,F
+0424:  GOTO   423
+0425:  NOP
+....................    int8 ADC_VALUE = READ_ADC(); 
+0426:  BSF    1D.1
+0427:  BTFSC  1D.1
+0428:  GOTO   427
+0429:  MOVF   1C,W
+042A:  MOVLB  00
+042B:  MOVWF  55
+....................    return ADC_VALUE; 
+042C:  MOVF   55,W
+042D:  MOVWF  78
+042E:  RETURN
+.................... } 
+....................  
+.................... void adcreading_reset(void) 
+.................... { 
+....................  
+....................         fprintf(PORT1,"******ADC reading start *********\n\r"); 
+042F:  MOVLW  DD
+0430:  MOVLB  03
+0431:  MOVWF  11
+0432:  MOVLW  00
+0433:  MOVWF  12
+0434:  MOVLB  00
+0435:  CLRF   28
+0436:  BTFSC  0B.7
+0437:  BSF    28.7
+0438:  BCF    0B.7
+0439:  CALL   167
+043A:  BTFSC  28.7
+043B:  BSF    0B.7
+....................          
+....................         resetData[6] = READ_PIC_ADC(0);        //I out raw 
+043C:  CLRF   54
+043D:  CALL   411
+043E:  MOVF   78,W
+043F:  MOVWF  35
+....................             
+....................         resetData[7] = READ_PIC_ADC(1);         //I out 3V3 #1  
+0440:  MOVLW  01
+0441:  MOVWF  54
+0442:  CALL   411
+0443:  MOVF   78,W
+0444:  MOVWF  36
+....................  
+....................         resetData[8] = READ_PIC_ADC(2);         //I out 3V3 #2 
+0445:  MOVLW  02
+0446:  MOVWF  54
+0447:  CALL   411
+0448:  MOVF   78,W
+0449:  MOVWF  37
+....................          
+....................         //current[4] = READ_PIC_ADC(3);        //I out 5V  
+....................          
+....................         resetData[9] = READ_PIC_ADC(4);         //I out unreg #1  
+044A:  MOVLW  04
+044B:  MOVWF  54
+044C:  CALL   411
+044D:  MOVF   78,W
+044E:  MOVWF  38
+....................  
+....................         resetData[10] = READ_PIC_ADC(5);         //I out unreg #2       
+044F:  MOVLW  05
+0450:  MOVWF  54
+0451:  CALL   411
+0452:  MOVF   78,W
+0453:  MOVWF  39
+0454:  MOVLP  00
+0455:  GOTO   5FB (RETURN)
+....................          
+.................... } 
+....................  
+....................  
+....................  
+.................... //#include<reset_func.c> 
+....................  
+.................... //INTERRUPT  
+.................... #INT_TIMER1 
+.................... void TIMER1_isr() {    
+....................       set_timer1(0x8000); 
+*
+01CD:  CLRF   16
+01CE:  MOVLW  80
+01CF:  MOVWF  17
+01D0:  CLRF   16
+....................       if (sec < 59){ 
+01D1:  MOVF   29,W
+01D2:  SUBLW  3A
+01D3:  BTFSS  03.0
+01D4:  GOTO   1D7
+....................       sec++; 
+01D5:  INCF   29,F
+....................       }else{ 
+01D6:  GOTO   1D9
+....................          sec = 0; 
+01D7:  CLRF   29
+....................          min++; 
+01D8:  INCF   2A,F
+....................       } 
+....................       if (min == 60){ 
+01D9:  MOVF   2A,W
+01DA:  SUBLW  3C
+01DB:  BTFSS  03.2
+01DC:  GOTO   1DF
+....................          min = 0; 
+01DD:  CLRF   2A
+....................          hou++; 
+01DE:  INCF   2B,F
+....................           
+....................       } 
+....................       if (hou == 24){ 
+01DF:  MOVF   2B,W
+01E0:  SUBLW  18
+01E1:  BTFSS  03.2
+01E2:  GOTO   1E9
+....................          hou = 0; 
+01E3:  CLRF   2B
+....................          day++; 
+01E4:  INCF   2C,F
+01E5:  BTFSC  03.2
+01E6:  INCF   2D,F
+....................          res_flag = 1; 
+01E7:  MOVLW  01
+01E8:  MOVWF  2E
+....................       } 
+....................        
+....................       fprintf(PORT1,"%02ld", day); 
+01E9:  MOVLW  0C
+01EA:  MOVWF  04
+01EB:  MOVF   2D,W
+01EC:  MOVWF  5F
+01ED:  MOVF   2C,W
+01EE:  MOVWF  5E
+....................       fprintf(PORT1,":%02d", hou); 
+*
+026B:  MOVLW  3A
+026C:  BTFSS  11.4
+026D:  GOTO   26C
+026E:  MOVLB  03
+026F:  MOVWF  1A
+0270:  MOVLB  00
+0271:  MOVF   2B,W
+0272:  MOVWF  5E
+0273:  MOVLW  01
+0274:  MOVWF  5F
+0275:  CALL   104
+....................       fprintf(PORT1,":%02d", min); 
+0276:  MOVLW  3A
+0277:  BTFSS  11.4
+0278:  GOTO   277
+0279:  MOVLB  03
+027A:  MOVWF  1A
+027B:  MOVLB  00
+027C:  MOVF   2A,W
+027D:  MOVWF  5E
+027E:  MOVLW  01
+027F:  MOVWF  5F
+0280:  CALL   104
+....................       fprintf(PORT1,":%02d\r\n", sec); 
+0281:  MOVLW  3A
+0282:  BTFSS  11.4
+0283:  GOTO   282
+0284:  MOVLB  03
+0285:  MOVWF  1A
+0286:  MOVLB  00
+0287:  MOVF   29,W
+0288:  MOVWF  5E
+0289:  MOVLW  01
+028A:  MOVWF  5F
+028B:  CALL   104
+028C:  MOVLW  0D
+028D:  BTFSS  11.4
+028E:  GOTO   28D
+028F:  MOVLB  03
+0290:  MOVWF  1A
+0291:  MOVLW  0A
+0292:  MOVLB  00
+0293:  BTFSS  11.4
+0294:  GOTO   293
+0295:  MOVLB  03
+0296:  MOVWF  1A
+....................        
+....................       if (res_flag == 1){ 
+0297:  MOVLB  00
+0298:  DECFSZ 2E,W
+0299:  GOTO   2C4
+....................          
+....................         reset_mode(); 
+....................          
+....................         res_flag = 0; 
+*
+02C3:  CLRF   2E
+....................         } 
+02C4:  BCF    11.0
+02C5:  MOVLP  00
+02C6:  GOTO   02A
+.................... } 
+....................  
+.................... //!#int_rda 
+.................... //!void reset_main(){ 
+.................... //!  
+.................... //!  rx_chars[0] = fgetc(MPIC); 
+.................... //!   
+.................... //! } 
+.................... //!  
+....................  
+.................... //!#int_rda2 
+.................... //!void reset_com(){ 
+.................... //!  
+.................... //!  rxcom_chars[0] = fgetc(COMPIC); 
+.................... //!   
+.................... //! } 
+....................  
+.................... void Initialize_RTC(void) 
+.................... { 
+....................    setup_timer_1(T1_EXTERNAL | T1_DIV_BY_1); 
+*
+037A:  MOVLW  87
+037B:  MOVWF  18
+037C:  CLRF   19
+....................     
+....................    T1OSCEN = 1; //enabling timer1 
+037D:  BSF    18.3
+....................       
+....................    enable_interrupts(INT_TIMER1); 
+037E:  MOVLB  01
+037F:  BSF    11.0
+0380:  MOVLP  00
+0381:  MOVLB  00
+0382:  GOTO   5CD (RETURN)
+....................     
+....................    //set_timer1(0x8000); //32768 in hex 
+.................... } 
+....................  
+....................  
+.................... #INT_TIMER0 
+.................... void watchdog_timer(void){ 
+....................  
+....................       if(!get_timer0()){ 
+*
+02C7:  MOVF   15,W
+02C8:  BTFSS  03.2
+02C9:  GOTO   2D1
+....................       RB2 = 1; 
+02CA:  BSF    0D.2
+....................       delay_us(5); 
+02CB:  MOVLW  06
+02CC:  MOVWF  77
+02CD:  DECFSZ 77,F
+02CE:  GOTO   2CD
+02CF:  NOP
+....................       RB2 = 0;        
+02D0:  BCF    0D.2
+....................       } 
+....................  
+02D1:  BCF    0B.2
+02D2:  MOVLP  00
+02D3:  GOTO   02A
+.................... } 
+....................  
+.................... //MAIN 
+.................... void main() { 
+*
+0521:  MOVLB  02
+0522:  BSF    1D.2
+0523:  BSF    1D.1
+0524:  MOVLB  03
+0525:  BSF    1F.3
+0526:  MOVLW  A0
+0527:  MOVWF  1B
+0528:  MOVLW  01
+0529:  MOVWF  1C
+052A:  MOVLW  A6
+052B:  MOVWF  1E
+052C:  MOVLW  90
+052D:  MOVWF  1D
+052E:  MOVLB  01
+052F:  BCF    0F.4
+0530:  MOVLB  02
+0531:  BSF    0F.4
+0532:  MOVLB  03
+0533:  BSF    1F.3
+0534:  MOVLW  A0
+0535:  MOVWF  1B
+0536:  MOVLW  01
+0537:  MOVWF  1C
+0538:  MOVLW  A6
+0539:  MOVWF  1E
+053A:  MOVLW  90
+053B:  MOVWF  1D
+053C:  MOVLB  00
+053D:  CLRF   29
+053E:  CLRF   2A
+053F:  CLRF   2B
+0540:  CLRF   2D
+0541:  CLRF   2C
+0542:  CLRF   4A
+0543:  CLRF   4B
+0544:  CLRF   4C
+0545:  CLRF   4E
+0546:  CLRF   4D
+0547:  MOVLB  03
+0548:  CLRF   0C
+0549:  CLRF   0D
+054A:  CLRF   0E
+054B:  CLRF   0F
+054C:  CLRF   10
+054D:  MOVLB  02
+054E:  CLRF   12
+054F:  CLRF   11
+0550:  MOVLB  00
+0551:  CLRF   3A
+0552:  CLRF   3B
+0553:  CLRF   3C
+0554:  CLRF   3D
+0555:  CLRF   3E
+0556:  CLRF   3F
+0557:  CLRF   40
+0558:  CLRF   41
+0559:  CLRF   42
+055A:  CLRF   43
+055B:  CLRF   44
+055C:  CLRF   45
+055D:  CLRF   46
+055E:  CLRF   47
+055F:  CLRF   48
+0560:  CLRF   49
+....................   
+....................    fprintf(PORT1,"*********************************************************\n\r"); 
+0561:  MOVLW  D4
+0562:  MOVLB  03
+0563:  MOVWF  11
+0564:  MOVLW  02
+0565:  MOVWF  12
+0566:  MOVLB  00
+0567:  CLRF   28
+0568:  BTFSC  0B.7
+0569:  BSF    28.7
+056A:  BCF    0B.7
+056B:  CALL   167
+056C:  BTFSC  28.7
+056D:  BSF    0B.7
+....................    fprintf(PORT1,"******     THIS IS RESET PIC EM VERSION         *********\n\r"); 
+056E:  MOVLW  F2
+056F:  MOVLB  03
+0570:  MOVWF  11
+0571:  MOVLW  02
+0572:  MOVWF  12
+0573:  MOVLB  00
+0574:  CLRF   28
+0575:  BTFSC  0B.7
+0576:  BSF    28.7
+0577:  BCF    0B.7
+0578:  CALL   167
+0579:  BTFSC  28.7
+057A:  BSF    0B.7
+....................    fprintf(PORT1,"*********************************************************\n\r"); 
+057B:  MOVLW  10
+057C:  MOVLB  03
+057D:  MOVWF  11
+057E:  MOVLW  03
+057F:  MOVWF  12
+0580:  MOVLB  00
+0581:  CLRF   28
+0582:  BTFSC  0B.7
+0583:  BSF    28.7
+0584:  BCF    0B.7
+0585:  CALL   167
+0586:  BTFSC  28.7
+0587:  BSF    0B.7
+0588:  CLRF   28
+0589:  BTFSC  0B.7
+058A:  BSF    28.7
+058B:  BCF    0B.7
+....................     
+....................    delay_ms(100);  
+058C:  MOVLW  64
+058D:  MOVWF  5F
+058E:  CALL   1B7
+058F:  BTFSC  28.7
+0590:  BSF    0B.7
+....................                  
+....................    TRISC2 = 0; RC2 = 0; 
+0591:  MOVLB  01
+0592:  BCF    0E.2
+0593:  MOVLB  00
+0594:  BCF    0E.2
+....................    TRISC3 = 0; RC3 = 0; 
+0595:  MOVLB  01
+0596:  BCF    0E.3
+0597:  MOVLB  00
+0598:  BCF    0E.3
+....................    TRISC4 = 0; RC4 = 0; 
+0599:  MOVLB  01
+059A:  BCF    0E.4
+059B:  MOVLB  00
+059C:  BCF    0E.4
+....................    TRISC5 = 0; RC5 = 0; 
+059D:  MOVLB  01
+059E:  BCF    0E.5
+059F:  MOVLB  00
+05A0:  BCF    0E.5
+....................     
+....................    TRISD0 = 0; RD0 = 0; 
+05A1:  MOVLB  01
+05A2:  BCF    0F.0
+05A3:  MOVLB  00
+05A4:  BCF    0F.0
+....................    TRISD1 = 0; RD1 = 0; 
+05A5:  MOVLB  01
+05A6:  BCF    0F.1
+05A7:  MOVLB  00
+05A8:  BCF    0F.1
+....................    TRISD2 = 0; RD2 = 0; 
+05A9:  MOVLB  01
+05AA:  BCF    0F.2
+05AB:  MOVLB  00
+05AC:  BCF    0F.2
+....................    TRISD3 = 0; RD3 = 0; 
+05AD:  MOVLB  01
+05AE:  BCF    0F.3
+05AF:  MOVLB  00
+05B0:  BCF    0F.3
+....................    TRISD6 = 0; RD6 = 0; 
+05B1:  MOVLB  01
+05B2:  BCF    0F.6
+05B3:  MOVLB  00
+05B4:  BCF    0F.6
+....................    TRISD7 = 0; RD7 = 0; 
+05B5:  MOVLB  01
+05B6:  BCF    0F.7
+05B7:  MOVLB  00
+05B8:  BCF    0F.7
+....................   
+....................    TRISB2 = 0; 
+05B9:  MOVLB  01
+05BA:  BCF    0D.2
+....................     
+....................    SETUP_ADC(ADC_CLOCK_INTERNAL); 
+05BB:  BSF    1E.4
+05BC:  BSF    1E.5
+05BD:  BCF    1E.6
+05BE:  BCF    1E.7
+05BF:  BSF    1D.0
+....................    SETUP_ADC_PORTS(sAN0|sAN1|sAN2|sAN3|sAN4|sAN5|sAN6);  //setting all analog ports 
+05C0:  BCF    1E.0
+05C1:  BCF    1E.1
+05C2:  BCF    1E.2
+05C3:  MOVLW  2F
+05C4:  MOVLB  03
+05C5:  MOVWF  0C
+05C6:  MOVLW  03
+05C7:  MOVWF  10
+05C8:  MOVLW  00
+05C9:  MOVWF  0D
+05CA:  MOVWF  0F
+....................     
+....................     
+....................    //clear_interrupt(int_timer1); 
+....................    Initialize_RTC();  
+05CB:  MOVLB  00
+05CC:  GOTO   37A
+....................     
+....................    enable_interrupts(GLOBAL); 
+05CD:  MOVLW  C0
+05CE:  IORWF  0B,F
+....................    enable_interrupts(INT_TIMER0); //interrupts for WDT 
+05CF:  BSF    0B.5
+....................    setup_timer_0(RTCC_DIV_256 | RTCC_INTERNAL);    
+05D0:  MOVLB  01
+05D1:  MOVF   15,W
+05D2:  ANDLW  C0
+05D3:  IORLW  07
+05D4:  MOVWF  15
+....................    set_timer0(0xFF); 
+05D5:  MOVLW  FF
+05D6:  MOVLB  00
+05D7:  MOVWF  15
+....................     
+....................     delayloop(5); 
+05D8:  CLRF   57
+05D9:  CLRF   56
+05DA:  CLRF   55
+05DB:  MOVLW  05
+05DC:  MOVWF  54
+05DD:  CALL   383
+....................     unreg_first_run(); 
+05DE:  GOTO   3B5
+....................  
+....................     fprintf(PORT1,"******Normal Mode Start *********\n\r"); 
+05DF:  MOVLW  2E
+05E0:  MOVLB  03
+05E1:  MOVWF  11
+05E2:  MOVLW  03
+05E3:  MOVWF  12
+05E4:  MOVLB  00
+05E5:  CLRF   28
+05E6:  BTFSC  0B.7
+05E7:  BSF    28.7
+05E8:  BCF    0B.7
+05E9:  CALL   167
+05EA:  BTFSC  28.7
+05EB:  BSF    0B.7
+....................      
+....................     normal_mode(); 
+05EC:  GOTO   407
+....................      
+....................     while (TRUE){       
+....................          
+....................         resetData[0] = 0x8E; 
+05ED:  MOVLW  8E
+05EE:  MOVWF  2F
+....................         resetData[1] = sec; 
+05EF:  MOVF   29,W
+05F0:  MOVWF  30
+....................         resetData[2] = min; 
+05F1:  MOVF   2A,W
+05F2:  MOVWF  31
+....................         resetData[3] = hou; 
+05F3:  MOVF   2B,W
+05F4:  MOVWF  32
+....................          
+....................         resetData[4] = (day >> 8) & 0xFF; 
+05F5:  CLRF   55
+05F6:  MOVF   2D,W
+05F7:  MOVWF  33
+....................         resetData[5] = day & 0x00FF;    
+05F8:  MOVF   2C,W
+05F9:  MOVWF  34
+....................          
+....................         adcreading_reset(); 
+05FA:  GOTO   42F
+....................           
+....................          for(int32 num = 0; num < 100000; num++) 
+05FB:  CLRF   52
+05FC:  CLRF   51
+05FD:  CLRF   50
+05FE:  CLRF   4F
+05FF:  MOVF   52,F
+0600:  BTFSS  03.2
+0601:  GOTO   63C
+0602:  MOVF   51,W
+0603:  SUBLW  01
+0604:  BTFSS  03.0
+0605:  GOTO   63C
+0606:  BTFSS  03.2
+0607:  GOTO   612
+0608:  MOVF   50,W
+0609:  SUBLW  86
+060A:  BTFSS  03.0
+060B:  GOTO   63C
+060C:  BTFSS  03.2
+060D:  GOTO   612
+060E:  MOVF   4F,W
+060F:  SUBLW  9F
+0610:  BTFSS  03.0
+0611:  GOTO   63C
+....................          { 
+....................             if(kbhit(MPIC)) 
+0612:  BTFSC  0F.5
+0613:  GOTO   633
+....................             { 
+....................                MAIN_ACK = fgetc(MPIC);   //UART receive from main pic 
+0614:  GOTO   456
+0615:  MOVF   78,W
+0616:  MOVWF  4C
+....................                fprintf(PORT1,"Got command from MAIN:%x\r\n",MAIN_ACK); 
+0617:  MOVLW  40
+0618:  MOVLB  03
+0619:  MOVWF  11
+061A:  MOVLW  03
+061B:  MOVWF  12
+061C:  BCF    03.0
+061D:  MOVLW  16
+061E:  MOVLB  00
+061F:  MOVWF  54
+0620:  GOTO   47C
+0621:  MOVF   4C,W
+0622:  MOVWF  54
+0623:  MOVLW  57
+0624:  MOVWF  55
+0625:  GOTO   4D3
+0626:  MOVLW  0D
+0627:  BTFSS  11.4
+0628:  GOTO   627
+0629:  MOVLB  03
+062A:  MOVWF  1A
+062B:  MOVLW  0A
+062C:  MOVLB  00
+062D:  BTFSS  11.4
+062E:  GOTO   62D
+062F:  MOVLB  03
+0630:  MOVWF  1A
+....................                break; 
+0631:  MOVLB  00
+0632:  GOTO   63C
+....................             } 
+0633:  MOVLW  01
+0634:  ADDWF  4F,F
+0635:  BTFSC  03.0
+0636:  INCF   50,F
+0637:  BTFSC  03.2
+0638:  INCF   51,F
+0639:  BTFSC  03.2
+063A:  INCF   52,F
+063B:  GOTO   5FF
+....................             //delay_ms(1); 
+....................          } 
+....................           
+....................              if(MAIN_ACK == 0x28){     //receiving command from main pic 
+063C:  MOVF   4C,W
+063D:  SUBLW  28
+063E:  BTFSS  03.2
+063F:  GOTO   661
+....................                  
+....................                   fprintf(PORT1,"******Sendind data to main *********\n\r"); 
+0640:  MOVLW  4E
+0641:  MOVLB  03
+0642:  MOVWF  11
+0643:  MOVLW  03
+0644:  MOVWF  12
+0645:  MOVLB  00
+0646:  CLRF   28
+0647:  BTFSC  0B.7
+0648:  BSF    28.7
+0649:  BCF    0B.7
+064A:  CALL   167
+064B:  BTFSC  28.7
+064C:  BSF    0B.7
+....................                    
+....................                   MAIN_ACK=0; 
+064D:  CLRF   4C
+....................                    
+....................                   //delay_ms(1); 
+....................                    
+....................                   for (int i=0;i<10;i++){                        
+064E:  CLRF   53
+064F:  MOVF   53,W
+0650:  SUBLW  09
+0651:  BTFSS  03.0
+0652:  GOTO   660
+....................                    
+....................                         fputc(resetData[i],MPIC);                         
+0653:  MOVLW  0F
+0654:  ADDWF  53,W
+0655:  MOVWF  04
+0656:  MOVLW  20
+0657:  MOVWF  05
+0658:  BTFSC  03.0
+0659:  INCF   05,F
+065A:  MOVF   00,W
+065B:  MOVWF  54
+065C:  MOVWF  55
+065D:  GOTO   4FB
+065E:  INCF   53,F
+065F:  GOTO   64F
+....................                    }   
+....................                    
+....................                   //fprintf(PORT1,"******Sendind data to main *********\n\r"); 
+....................                } 
+0660:  GOTO   66E
+....................                 
+....................             else{fprintf(PORT1,"******Correct Command not received *********\n\r");} 
+0661:  MOVLW  62
+0662:  MOVLB  03
+0663:  MOVWF  11
+0664:  MOVLW  03
+0665:  MOVWF  12
+0666:  MOVLB  00
+0667:  CLRF   28
+0668:  BTFSC  0B.7
+0669:  BSF    28.7
+066A:  BCF    0B.7
+066B:  CALL   167
+066C:  BTFSC  28.7
+066D:  BSF    0B.7
+066E:  GOTO   5ED
+....................  
+....................       //RESET_MAIN_OPERATION(); 
+....................       //RESET_COM_OPERATION(); 
+....................    } 
+....................  
+....................  
+....................  } 
+....................  
+066F:  SLEEP
+
+Configuration Fuses:
+   Word  1: 39C2   HS NOWDT PUT MCLR NOPROTECT NOCPD NOBROWNOUT NOCLKOUT IESO FCMEN
+   Word  2: 1E23   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP

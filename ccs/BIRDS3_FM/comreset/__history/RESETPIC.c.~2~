@@ -1,0 +1,51 @@
+#include <16F1787.h>
+#include <compicreg.h>
+#fuses NOMCLR,NOPUT
+#use delay(crystal=8Mhz, clock=8mhz)
+#use rs232(baud=9600,parity=N,UART1,xmit=pin_D4,rcv=pin_D5, bits=8,stream=mpic) 
+#use rs232(baud=9600,parity=N,xmit=pin_b6,rcv=pin_b7, bits=8,stream=PC) 
+
+#INT_rda
+void UART_RXD(void)
+{
+   if(fgetc(mpic)==0x70)
+   {
+      fputc(0x70,PC);
+   }
+}
+
+void settings()
+{
+  enable_interrupts(global);  
+  enable_interrupts(INT_rda);
+  return;
+}
+
+void main()
+{
+   OUTPUT_HIGH(PIN_D1);
+   OUTPUT_HIGH(PIN_C4);
+   
+   OUTPUT_HIGH(PIN_D0);
+   OUTPUT_HIGH(PIN_D3);
+   
+   OUTPUT_HIGH(PIN_D2);
+   OUTPUT_HIGH(PIN_C3);
+   
+   OUTPUT_HIGH(PIN_C2);
+   OUTPUT_HIGH(PIN_C5);
+   
+   OUTPUT_HIGH(PIN_D6);
+   OUTPUT_HIGH(PIN_D7);
+   
+   int8 message;
+   
+   settings();
+   
+   while(TRUE)
+   {
+   fputc(0x70,mpic);
+   delay_ms(5000);
+   }
+
+}

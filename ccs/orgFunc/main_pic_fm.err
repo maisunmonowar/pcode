@@ -1,0 +1,5 @@
+>>> Warning 229 "C:\Users\maisun\Documents\PhD\offline\code\ccs\orgFunc\mainpic_function.c" Line 422(1,1): Subscript out of range
+>>> Warning 216 "MAIN_PIC_FM.c" Line 258(1,2): Interrupts disabled during call to prevent re-entrancy:  (@DIV88)
+      Memory usage:   ROM=47%      RAM=23% - 27%
+      0 Errors,  2 Warnings.
+Build Successful.

@@ -1,0 +1,4 @@
+>>> Warning 202 "RESETPIC.c" Line 41(9,16): Variable never used:   message
+      Memory usage:   ROM=1%      RAM=0% - 1%
+      0 Errors,  1 Warnings.
+Build Successful.

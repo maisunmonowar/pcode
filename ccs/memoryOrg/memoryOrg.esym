@@ -1,11 +1,11 @@
-F N "main" 0 10 ""
-D G "__PCM__" 0 25 ""5.056""
-D G "__DEVICE__" 0 25 "1787"
-D G "__DATE__" 0 25 ""17-Sep-19""
-D G "__TIME__" 0 25 ""19:14:40""
-D G "_UNICODE" 0 25 ""?""
-D G "__EVAL" 0 25 ""?"" "Standard Header file for the PIC16F1787 device ////////////////"
-c L "set_tris_a" 2 3 6 "FUNCTION"
+D G "__PCM__" 0 29 ""5.056""
+D G "__DEVICE__" 0 29 "1787"
+D G "__DATE__" 0 29 ""03-Feb-20""
+D G "__TIME__" 0 29 ""16:20:29""
+D G "_UNICODE" 0 29 ""?""
+D G "__EVAL" 0 29 ""?""
+D G "MEMORYORG_H" 1 2 ""
+c L "set_tris_a" 2 1 6 "FUNCTION"
 f N "set_tris_a" 2 40 ""
 v L "value" 2 40 "int8" `54 
 f B "set_tris_a" 2 40 "void(int8 value)" `53 
@@ -183,7 +183,7 @@ d G "putc" 2 142 "putchar"
 d G "fputc" 2 143 "putchar"
 d G "fgets" 2 144 "gets"
 d G "fputs" 2 145 "puts"
-c L "output_drive" 2 3 3 "FUNCTION"
+c L "output_drive" 2 1 3 "FUNCTION"
 f N "restart_cause" 2 150 ""
 f B "restart_cause" 2 150 "int8()" `135 
 f N "reset_cpu" 2 151 ""
@@ -201,7 +201,7 @@ d G "MCLR_FROM_RUN" 2 161 "0x37"
 d G "RESET_INSTRUCTION" 2 162 "0x3B"
 d G "STACK_OVERFLOW" 2 163 "0xBF"
 d G "STACK_UNDERFLOW" 2 164 "0x7F"
-c L "sleep" 2 3 5 "FUNCTION"
+c L "sleep" 2 1 5 "FUNCTION"
 f N "setup_timer_0" 2 171 ""
 v L "mode" 2 171 "int8" `139 
 f B "setup_timer_0" 2 171 "void(int8 mode)" `138 
@@ -245,7 +245,7 @@ d G "RTCC_DIV_64" 2 206 "5"
 d G "RTCC_DIV_128" 2 207 "6"
 d G "RTCC_DIV_256" 2 208 "7"
 d G "RTCC_8_BIT" 2 209 "0"
-c L "get_rtcc" 2 3 7 "FUNCTION"
+c L "get_rtcc" 2 1 7 "FUNCTION"
 f N "setup_wdt" 2 219 ""
 v L "mode" 2 219 "int16" `150 
 f B "setup_wdt" 2 219 "void(int16 mode)" `149 
@@ -272,7 +272,7 @@ d G "WDT_32S" 2 240 "0x10F"
 d G "WDT_64S" 2 241 "0x110"
 d G "WDT_128S" 2 242 "0x111"
 d G "WDT_256S" 2 243 "0x112"
-c L "restart_wdt" 2 3 3 "FUNCTION"
+c L "restart_wdt" 2 1 3 "FUNCTION"
 f N "setup_timer_1" 2 248 ""
 v L "mode" 2 248 "int16" `153 
 f B "setup_timer_1" 2 248 "void(int16 mode)" `152 
@@ -298,7 +298,7 @@ d G "T1_GATE_SINGLE" 2 269 "0x9000"
 d G "T1_GATE_TIMER2" 2 270 "0x8100"
 d G "T1_GATE_COMP1" 2 271 "0x8200"
 d G "T1_GATE_COMP2" 2 272 "0x8300"
-c L "set_timer1" 2 3 3 "FUNCTION"
+c L "set_timer1" 2 1 3 "FUNCTION"
 f N "setup_timer_2" 2 277 ""
 v L "mode" 2 277 "int8" `158 
 v L "period" 2 277 "int8" `159 
@@ -314,7 +314,7 @@ d G "T2_DIV_BY_1" 2 282 "4"
 d G "T2_DIV_BY_4" 2 283 "5"
 d G "T2_DIV_BY_16" 2 284 "6"
 d G "T2_DIV_BY_64" 2 285 "7"
-c L "set_timer2" 2 3 4 "FUNCTION"
+c L "set_timer2" 2 1 4 "FUNCTION"
 f N "setup_ccp1" 2 291 ""
 v L "mode" 2 291 "int32" `165 
 f B "setup_ccp1" 2 291 "void(int32 mode)" `164 
@@ -344,7 +344,7 @@ d G "CCP2_C1" 2 314 "0x000"
 d G "CCP2_B3" 2 315 "0x100"
 d G "CCP3_E0" 2 316 "0x000"
 d G "CCP3_B5" 2 317 "0x100"
-c L "set_pwm1_duty" 2 3 1 "FUNCTION"
+c L "set_pwm1_duty" 2 1 1 "FUNCTION"
 f N "setup_ccp2" 2 321 ""
 v L "mode" 2 321 "int32" `175 
 f B "setup_ccp2" 2 321 "void(int32 mode)" `174 
@@ -355,7 +355,7 @@ f B "setup_ccp2" 2 322 "void(int32 mode,int8 pwm)" `176
 f N "set_pwm2_duty" 2 323 ""
 v L "value" 2 323 "int16" `180 
 f B "set_pwm2_duty" 2 323 "void(int16 value)" `179 
-c L "set_pwm2_duty" 2 3 1 "FUNCTION"
+c L "set_pwm2_duty" 2 1 1 "FUNCTION"
 f N "setup_ccp3" 2 329 ""
 v L "mode" 2 329 "int32" `185 
 f B "setup_ccp3" 2 329 "void(int32 mode)" `184 
@@ -366,7 +366,7 @@ f B "setup_ccp3" 2 330 "void(int32 mode,int8 pwm)" `186
 f N "set_pwm3_duty" 2 331 ""
 v L "value" 2 331 "int16" `190 
 f B "set_pwm3_duty" 2 331 "void(int16 value)" `189 
-c L "set_pwm3_duty" 2 3 3 "FUNCTION"
+c L "set_pwm3_duty" 2 1 3 "FUNCTION"
 f N "setup_spi" 2 338 ""
 v L "mode" 2 338 "int32" `195 
 f B "setup_spi" 2 338 "void(int32 mode)" `194 
@@ -402,7 +402,7 @@ d G "SPI_SAMPLE_AT_MIDDLE" 2 365 "0x0000"
 d G "SPI_SAMPLE_AT_END" 2 366 "0x8000"
 d G "SPI_L_TO_H" 2 369 "SPI_SCK_IDLE_LOW"
 d G "SPI_H_TO_L" 2 370 "SPI_SCK_IDLE_HIGH"
-c L "spi_data_is_in" 2 3 2 "FUNCTION"
+c L "spi_data_is_in" 2 1 2 "FUNCTION"
 f N "setup_uart" 2 374 ""
 v L "baud" 2 374 "int32" `203 
 f B "setup_uart" 2 374 "void(int32 baud)" `202 
@@ -433,7 +433,7 @@ d G "UART_AUTODETECT" 2 385 "8"
 d G "UART_AUTODETECT_NOWAIT" 2 386 "9"
 d G "UART_WAKEUP_ON_RDA" 2 387 "10"
 d G "UART_SEND_BREAK" 2 388 "13"
-c L "set_uart_speed" 2 3 3 "FUNCTION"
+c L "set_uart_speed" 2 1 3 "FUNCTION"
 f N "setup_comparator_1" 2 392 ""
 v L "mode" 2 392 "int16" `221 
 f B "setup_comparator_1" 2 392 "void(int16 mode)" `220 
@@ -576,7 +576,7 @@ d G "CP4_INVERT" 2 540 "0x1000"
 d G "CP4_FAST" 2 541 "0x0400"
 d G "CP4_HYST" 2 542 "0x0200"
 d G "CP4_SYNC" 2 543 "0x0100"
-c L "setup_comparator_4" 2 3 2 "FUNCTION"
+c L "setup_comparator_4" 2 1 2 "FUNCTION"
 f N "setup_vref" 2 552 ""
 v L "mode" 2 552 "int8" `233 
 f B "setup_vref" 2 552 "void(int8 mode)" `232  "Constants used in setup_vref() are:"
@@ -594,7 +594,7 @@ d G "TEMPERATURE_INDICATOR_DISABLED" 2 567 "0"
 d G "TEMPERATURE_INDICATOR_ENABLED" 2 568 "0x20"
 d G "TEMPERATURE_RANGE_LOW" 2 569 "0"
 d G "TEMPERATURE_RANGE_HIGH" 2 570 "0x10"
-c L "setup_vref" 2 3 3 "FUNCTION"
+c L "setup_vref" 2 1 3 "FUNCTION"
 f N "setup_dac" 2 575 ""
 v L "mode" 2 575 "int8" `235 
 f B "setup_dac" 2 575 "void(int8 mode)" `234 
@@ -610,7 +610,7 @@ d G "DAC_VSS_FVR" 2 583 "0x88"
 d G "DAC_VREF_FVR" 2 584 "0x89"
 d G "DAC_OUTPUT1" 2 586 "0x20" "DAC voltage level outputted on DACOUT1 pin"
 d G "DAC_OUTPUT2" 2 587 "0x10" "DAC voltage level outputted on DACOUT2 pin"
-c L "dac_write" 2 3 3 "FUNCTION"
+c L "dac_write" 2 1 3 "FUNCTION"
 f N "setup_opamp1" 2 592 ""
 v L "mode" 2 592 "int8" `239 
 f B "setup_opamp1" 2 592 "void(int8 mode)" `238 
@@ -627,7 +627,7 @@ d G "OPAMP_LOW_GBWP_MODE" 2 599 "0x00"
 d G "OPAMP_I_TO_OUTPUT" 2 600 "0x10" "Inverting input connects to OPAxOUT"
 d G "OPAMP_NI_TO_FVR" 2 601 "0x03" "Non-inverting input connects to FVR Buffer 2 output"
 d G "OPAMP_NI_TO_DAC" 2 602 "0x02" "Non-inverting input connects to DAC output"
-c L "setup_opamp3" 2 3 4 "FUNCTION"
+c L "setup_opamp3" 2 1 4 "FUNCTION"
 f N "setup_psmc" 2 608 ""
 v L "unit" 2 608 "int8" `245 
 v L "mode" 2 608 "int8" `246 
@@ -674,7 +674,7 @@ d G "PSMC_DIV_1" 2 635 "0x00"
 d G "PSMC_DIV_2" 2 636 "0x10"
 d G "PSMC_DIV_4" 2 637 "0x20"
 d G "PSMC_DIV_8" 2 638 "0x30"
-c L "setup_psmc" 2 3 2 "FUNCTION"
+c L "setup_psmc" 2 1 2 "FUNCTION"
 f N "psmc_deadband" 2 641 ""
 v L "unit" 2 641 "int8" `265 
 v L "rising_edge" 2 641 "int8" `266 
@@ -687,7 +687,7 @@ v L "rise_time" 2 642 "int8" `271
 v L "falling_edge" 2 642 "int8" `272 
 v L "fall_time" 2 642 "int8" `273 
 f B "psmc_blanking" 2 642 "void(int8 unit,int8 rising_edge,int8 rise_time,int8 falling_edge,int8 fall_time)" `268  "Constants for the second and third param are one of the PSMC_EVENT_... defines"
-c L "psmc_blanking" 2 3 1 "FUNCTION"
+c L "psmc_blanking" 2 1 1 "FUNCTION"
 f N "psmc_sync" 2 645 ""
 v L "slave_unit" 2 645 "int8" `275 
 v L "master_unit" 2 645 "int8" `276 
@@ -741,7 +741,7 @@ d G "PSMC_SHUTDOWN_C2OUT" 2 685 "0x04"
 d G "PSMC_SHUTDOWN_C3OUT" 2 686 "0x08"
 d G "PSMC_SHUTDOWN_C4OUT" 2 687 "0x10"
 d G "PSMC_SHUTDOWN_IN_PIN" 2 688 "0x80"
-c L "psmc_shutdown" 2 3 3 "FUNCTION"
+c L "psmc_shutdown" 2 1 3 "FUNCTION"
 f N "setup_oscillator" 2 694 ""
 v L "mode" 2 694 "int8" `291 
 f B "setup_oscillator" 2 694 "void(int8 mode)" `290  "Constants used in setup_oscillator() are:"
@@ -761,7 +761,7 @@ d G "OSC_INTRC" 2 710 "2"
 d G "OSC_NORMAL" 2 711 "0"
 d G "OSC_PLL_ON" 2 713 "0x80"
 d G "OSC_PLL_OFF" 2 714 "0"
-c L "setup_oscillator" 2 3 4 "FUNCTION"
+c L "setup_oscillator" 2 1 4 "FUNCTION"
 f N "setup_adc" 2 721 ""
 v L "mode" 2 721 "int16" `293 
 f B "setup_adc" 2 721 "void(int16 mode)" `292 
@@ -785,7 +785,7 @@ d G "ADC_CLOCK_DIV_32" 2 732 "0x20"
 d G "ADC_CLOCK_DIV_16" 2 733 "0x50"
 d G "ADC_CLOCK_DIV_64" 2 734 "0x60"
 d G "ADC_CLOCK_INTERNAL" 2 735 "0x30" "Internal 2-6us"
-c L "adc_done" 2 3 1 "FUNCTION"
+c L "adc_done" 2 1 1 "FUNCTION"
 f N "setup_adc_ports" 2 738 ""
 v L "pins" 2 738 "int32" `299 
 f B "setup_adc_ports" 2 738 "void(int32 pins)" `298 
@@ -832,7 +832,7 @@ d G "ADC_NEG_REFERENCE" 2 779 "0x0F" "Analog Negative Channel connected to ADC N
 d G "ADC_START_AND_READ" 2 782 "7" "This is the default if nothing is specified"
 d G "ADC_START_ONLY" 2 783 "1"
 d G "ADC_READ_ONLY" 2 784 "6"
-c L "set_adc_channel" 2 3 3 "FUNCTION"
+c L "set_adc_channel" 2 1 3 "FUNCTION"
 f N "abs" 2 790 ""
 v L "x" 2 790 "sint8" `311 
 f B "abs" 2 790 "sint8(sint8 x)" `310 
@@ -1356,7 +1356,7 @@ f B "get_capture_event" 2 967 "int8()" `656
 f N "get_capture_event" 2 968 ""
 v L "stream" 2 968 "int8" `658 
 f B "get_capture_event" 2 968 "int8(int8 stream)" `657  "Enviroment Prototypes:"
-c L "get_capture_event" 2 3 2 "FUNCTION"
+c L "get_capture_event" 2 1 2 "FUNCTION"
 f N "goto_address" 2 981 ""
 v L "address" 2 981 "int16" `660 
 f B "goto_address" 2 981 "void(int16 address)" `659 
@@ -1406,7 +1406,7 @@ f N "write_eeprom" 2 1003 ""
 v L "address" 2 1003 "int16" `693 
 v L "value" 2 1003 "int8" `694 
 f B "write_eeprom" 2 1003 "void(int16 address,int8 value)" `692  "INT"
-c L "write_eeprom" 2 3 4 "FUNCTION"
+c L "write_eeprom" 2 1 4 "FUNCTION"
 f N "enable_interrupts" 2 1010 ""
 v L "interrupt" 2 1010 "int32" `696 
 f B "enable_interrupts" 2 1010 "void(int32 interrupt)" `695 
@@ -1535,13 +1535,37 @@ d G "INT_PSMC2T" 2 1121 "0x309420"
 d G "INT_COMP4" 2 1122 "0x309204"
 d G "INT_PSMC3S" 2 1123 "0x309404"
 d G "INT_PSMC3T" 2 1124 "0x309440"
-D G "LED" 1 5 "PIN_D0"
-D G "DELAY" 1 6 "1000"
-C L "jump_to_isr" 0 2 2 "FUNCTION"
-C L "jump_to_isr" 0 2 1 "FUNCTION"
-F N "main" 0 10 ""
-F G "main" 0 11 "void()" `714 
-C L "main" 0 2 1 "FUNCTION"
+D G "ADDITIONALFUNCTION_H" 3 2 ""
+C L "jump_to_isr" 4 1 1 "FUNCTION"
+F N "test1" 4 4 ""
+V L "num1" 4 4 "int8" `711 
+V L "num2" 4 4 "int8" `712 
+F G "test1" 4 5 "int8(int8 num1,int8 num2)" `710 
+F N "sub" 4 10 ""
+V L "num1" 4 10 "int8" `714 
+V L "num2" 4 10 "int8" `715 
+F G "sub" 4 11 "int8(int8 num1,int8 num2)" `713 
+F N "sub_caller" 4 15 ""
+V L "num1" 4 15 "int8" `717 
+V L "num2" 4 15 "int8" `718 
+F G "sub_caller" 4 16 "int8(int8 num1,int8 num2)" `716 
+C L "sub" 3 6 1 "FUNCTION"
+F N "sub" 3 7 ""
+V L "num1" 3 7 "int8" `714 
+V L "num2" 3 7 "int8" `721 
+f G "sub" 3 7 "int8(int8 num1,int8 num2)" `713  "#include "additionalFunction.c""
+D G "LED" 1 10 "PIN_D0"
+D G "DELAY" 1 11 "1000"
+C L "sub" 1 7 1 "FUNCTION"
+F N "sub" 1 14 ""
+V L "num1" 1 14 "int8" `714 
+V L "num2" 1 14 "int8" `725 
+f G "sub" 1 14 "int8(int8 num1,int8 num2)" `713  "!#include <bootloader.h>"
+C L "sub" 0 3 6 "FUNCTION"
+F N "MAIN" 0 12 ""
+F G "MAIN" 0 13 "void(int8 num1,int8 num2)" `723 
+C L "MAIN" 0 3 1 "FUNCTION"
+C L "MAIN" 0 3 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

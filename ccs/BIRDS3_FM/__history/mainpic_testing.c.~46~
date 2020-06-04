@@ -1,0 +1,13 @@
+#include <main pic1.h>
+
+void main()
+{
+   while(true)
+   {
+      if(fgetc(PC))
+      {
+         
+      }
+   }
+   
+}

@@ -1,21 +1,20 @@
-CCS PCM C Compiler, Version 5.056, 29513               26-Jul-19 15:16
+CCS PCH C Compiler, Version 5.056, 29513               01-Jun-20 16:28
 
                Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\blink\blink.lst
 
-               ROM used:   59 words (1%)
-                           Largest free fragment is 2048
-               RAM used:   6 (1%) at main() level
-                           18 (2%) worst case
+               ROM used:   162 bytes (0%)
+                           Largest free fragment is 65520
+               RAM used:   5 (0%) at main() level
+                           6 (0%) worst case
                Stack used: 0 locations
-               Stack size: 16
+               Stack size: 31
 
 *
-0000:  MOVLP  00
-0001:  GOTO   018
-0002:  NOP
+00000:  NOP   
+00002:  GOTO   002E
 .................... #include <blink.h> 
-.................... #include <16F1787.h> 
-.................... //////////// Standard Header file for the PIC16F1787 device //////////////// 
+.................... #include <18F67J94.h> 
+.................... //////////// Standard Header file for the PIC18F67J94 device //////////////// 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
 .................... //// This source code may only be used by licensed users of the CCS C  //// 
@@ -25,49 +24,71 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Jul-19 15:16
 .................... //// Derivative programs created using this software in object code    //// 
 .................... //// form are not restricted in any way.                               //// 
 .................... /////////////////////////////////////////////////////////////////////////// 
-.................... #device PIC16F1787 
+.................... #device PIC18F67J94 
 ....................  
 .................... #list 
 ....................  
-.................... #device ADC=16 
-.................... #use delay(clock=8000000,crystal=8000000) 
-0003:  MOVLW  20
-0004:  MOVWF  05
-0005:  MOVLW  02
-0006:  MOVWF  04
-0007:  MOVF   00,W
-0008:  BTFSC  03.2
-0009:  GOTO   017
-000A:  MOVLW  02
-000B:  MOVWF  78
-000C:  CLRF   77
-000D:  DECFSZ 77,F
-000E:  GOTO   00D
-000F:  DECFSZ 78,F
-0010:  GOTO   00C
-0011:  MOVLW  97
-0012:  MOVWF  77
-0013:  DECFSZ 77,F
-0014:  GOTO   013
-0015:  DECFSZ 00,F
-0016:  GOTO   00A
-0017:  RETURN
-....................  
-.................... #define LED PIN_D2 
+.................... #use delay(clock=16000000,crystal=16000000) 
+00006:  CLRF   FEA
+00008:  MOVLW  06
+0000A:  MOVWF  FE9
+0000C:  MOVF   FEF,W
+0000E:  BZ    002C
+00010:  MOVLW  05
+00012:  MOVWF  01
+00014:  CLRF   00
+00016:  DECFSZ 00,F
+00018:  BRA    0016
+0001A:  DECFSZ 01,F
+0001C:  BRA    0014
+0001E:  MOVLW  2E
+00020:  MOVWF  00
+00022:  DECFSZ 00,F
+00024:  BRA    0022
+00026:  BRA    0028
+00028:  DECFSZ FEF,F
+0002A:  BRA    0010
+0002C:  RETURN 0
+.................... #define LED PIN_E5 
 .................... #define DELAY 2000 
 ....................  
 ....................  
 ....................  
 ....................  
 .................... void main() 
-0018:  MOVLB  03
-0019:  CLRF   0C
-001A:  CLRF   0D
-001B:  CLRF   0F
-001C:  CLRF   10
-001D:  MOVLB  02
-001E:  CLRF   12
-001F:  CLRF   11
+0002E:  CLRF   FF8
+00030:  BCF    FD0.7
+00032:  MOVLB  E
+00034:  MOVLW  55
+00036:  MOVWF  F7E
+00038:  MOVLW  AA
+0003A:  MOVWF  F7E
+0003C:  BCF    F66.6
+0003E:  MOVLW  55
+00040:  MOVWF  F7E
+00042:  MOVLW  AA
+00044:  MOVWF  F7E
+00046:  BSF    F66.6
+00048:  CLRF   F9B
+0004A:  CLRF   F64
+0004C:  CLRF   F65
+0004E:  CLRF   F66
+00050:  MOVLW  02
+00052:  MOVWF  FD3
+00054:  CLRF   xD9
+00056:  CLRF   xDA
+00058:  CLRF   x45
+0005A:  CLRF   x46
+0005C:  CLRF   x47
+0005E:  BCF    x8D.7
+00060:  BCF    x8D.6
+00062:  BCF    x8D.5
+00064:  MOVLB  1
+00066:  CLRF   x88
+00068:  MOVLB  F
+0006A:  CLRF   x53
+0006C:  CLRF   x38
+0006E:  CLRF   x37
 .................... { 
 ....................  
 .................... 	while(TRUE) 
@@ -75,42 +96,46 @@ CCS PCM C Compiler, Version 5.056, 29513               26-Jul-19 15:16
 ....................  
 .................... 		//Example blinking LED program 
 .................... 		output_low(LED); 
-0020:  MOVLB  01
-0021:  BCF    0F.2
-0022:  MOVLB  02
-0023:  BCF    0F.2
+00070:  BCF    F96.5
+00072:  BCF    F8D.5
 .................... 		delay_ms(DELAY); 
-0024:  MOVLW  08
-0025:  MOVLB  00
-0026:  MOVWF  21
-0027:  MOVLW  FA
-0028:  MOVWF  22
-0029:  CALL   003
-002A:  DECFSZ 21,F
-002B:  GOTO   027
+00074:  MOVLW  08
+00076:  MOVWF  05
+00078:  MOVLW  FA
+0007A:  MOVWF  06
+0007C:  MOVLB  0
+0007E:  RCALL  0006
+00080:  DECFSZ 05,F
+00082:  BRA    0086
+00084:  BRA    008A
+00086:  MOVLB  F
+00088:  BRA    0078
 .................... 		output_high(LED); 
-002C:  MOVLB  01
-002D:  BCF    0F.2
-002E:  MOVLB  02
-002F:  BSF    0F.2
+0008A:  BCF    F96.5
+0008C:  BSF    F8D.5
 .................... 		delay_ms(DELAY); 
-0030:  MOVLW  08
-0031:  MOVLB  00
-0032:  MOVWF  21
-0033:  MOVLW  FA
-0034:  MOVWF  22
-0035:  CALL   003
-0036:  DECFSZ 21,F
-0037:  GOTO   033
-0038:  MOVLB  02
-0039:  GOTO   020
+0008E:  MOVLW  08
+00090:  MOVWF  05
+00092:  MOVLW  FA
+00094:  MOVWF  06
+00096:  RCALL  0006
+00098:  DECFSZ 05,F
+0009A:  BRA    0092
+0009C:  MOVLB  F
+0009E:  BRA    0070
 ....................  
 .................... 		//TODO: User Code 
 .................... 	} 
 ....................  
 .................... } 
-003A:  SLEEP
+000A0:  SLEEP 
 
 Configuration Fuses:
-   Word  1: 3FC2   HS NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT NOCLKOUT IESO FCMEN
-   Word  2: 1EFF   NOWRT NOVCAP PLL_SW STVREN BORV19 NOLPBOR NODEBUG NOLVP
+   Word  1: F7A0   STVREN NOXINST NODEBUG BROWNOUT_SW BORV18 NOPROTECT
+   Word  2: FFA2   PR SOSC_DIG CLOCKOUT IESO NOPLL
+   Word  3: F032   HS
+   Word  4: F7FF   WPFP WPDIS WPEND NOWPCFG
+   Word  5: FF03   T5G_IS_T5G CINA_DEFAULT IOL1WAY LS48MHZ MSSP2MSK7 MSSPMSK7
+   Word  6: FCFF   WDTWIN_25% WDTCLK_FRC WDT32768 NOWDT WINDIS WPRES128
+   Word  7: F01D   NOVREGSLEEP VBATBOR DSBOR DS_SW
+   Word  8: F3F8   DSWDT_25DAYS DSWDT DSWDTOSC_INT

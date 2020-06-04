@@ -1,0 +1,21 @@
+      if(buffer_from_com)
+      {
+         fprintf(PC,"COM COMMAND\r\n");
+         switch(in_bffr_main[4])
+         {
+            case 0x73:
+               CAM_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0x67:
+               ADCS_TEST_OPERATION();
+               delay_ms(10);
+               break;
+            case 0x55:
+               DATACOLLECTION_TEST_OPERATION();
+               delay_ms(10);
+               break;
+         }
+         Delete_Buffer();
+         COM_DATA = 0;
+      }

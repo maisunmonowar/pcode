@@ -1,0 +1,7 @@
+
+
+#org 0x1000, 0x17FF
+int test1(int num1, int num2)
+{
+   return num1 + num2;
+}

@@ -1,0 +1,23 @@
+#ifndef ADCS_H
+#define ADCS_H
+
+#define ADCS_SENSOR_SIZE 78                                                      //for testing additional 6byte for checking duty
+#define TLE_size 77                                                              //TLE FORMAT ARRAY SIZE
+
+unsigned int8 TLE[TLE_size] = {0xAA,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, //TLE data array
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+                               0X00,0X00,0X00,0X00,0X00,0X00,0xBB};
+                                 
+unsigned int8 ACK_for_COM[24] = {0xAA,0,0,0,0,0,0,0,0,0,
+                                 0,0,0,0,0,0,0,0,0,0,
+                                 0,0,0,0xBB};
+                                 
+int8 ADCS_SENSOR_DATA[ADCS_SENSOR_SIZE] = {};
+static int16 currenttime = 0;
+
+#endif

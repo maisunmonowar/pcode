@@ -1,0 +1,11 @@
+//@@@@@@@@@@@for satellite log@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+int8 satellitelog[10] = {};
+
+void SAVE_SAT_LOG(int8 data1, int8 data2)
+{
+   
+   return;
+}
+
+
+

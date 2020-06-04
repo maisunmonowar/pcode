@@ -1,0 +1,133 @@
+#ifndef ADCS_C
+#define ADCS_C
+
+#include "adcs.h"
+#include "MEMORY_OPERATION.c"
+
+void Turn_On_ADCS()
+{
+   output_high(PIN_D6);                                                          //ADCS switch ON, RD6=1
+   return;
+}
+
+void Turn_Off_ADCS()
+{
+   output_low(PIN_D6);                                                           //ADCS switch OFF, RD6=0
+   return;
+}
+
+/*
+void Send_Command_to_ADCS(int8 data)                                             //testing for EM integration
+{
+   fputc(data,ADCS);
+   return;
+}
+*/
+
+void DELETE_ADCS_SENSOR()
+{
+   for(int a = 0; a < ADCS_SENSOR_SIZE; a++)
+   {
+      ADCS_SENSOR_DATA[a] = 0;
+   }
+   return;
+}
+
+void Delete_Buffer()                                                             //delete com command buffer
+{
+   int num = 0;
+   for(num = 0;num < 16; num++)
+   {
+    in_bffr_main[num] = 0x00;
+   }
+   COM_DATA = 0;
+   return;
+}
+
+void ADCS_SETTINGS()                                                             //initiallize
+{
+   output_high(PIN_C4);                                                          //flash COM side
+   Delete_Buffer();                                                              //delete in_bffr_main[] (com command buffer)
+   DELETE_ADCS_SENSOR();                                                         //delet ADCS_SENSOR_DATA[] array
+   return;
+}
+
+void CHECK_ACK_FROM_ADCS_10k()                                                     //Wait ACK from DC for 10s
+{
+   for(int32 num = 0; num < 1000000; num++) 
+   {
+      if(kbhit(ADCS))                                                             
+      {
+         ADCS_ACK = fgetc(ADCS);                                                    //PC   
+         break;
+      }
+      //delay_ms(1);
+   }
+   return;
+}
+
+void ADCS_TLE_TRANSFER()                                                         //send TLE data to ADCS
+{
+
+   fprintf(PC,"Turn On ADCS \r\n");
+   Turn_On_ADCS();                                                               //Turn on ADCS
+   /*delay_ms(8000);*/
+   for(int c = 0; c < TLE_size; c++)                                           // Read TLE data from flash and put in TLE[] array
+      {
+         TLE[c]=READ_DATA_BYTE_OF(ADCS_TLE_ADDRESS+c);
+      }
+   
+   fputc(0x21,ADCS);                                                             //ADCS hand shake
+
+   CHECK_ACK_FROM_ADCS_10k();
+   if(ADCS_ACK == 0x55)                                                            //Success ACK
+   {
+      fprintf(PC,"Received ACK From ADCS\r\n");
+      //delay_ms(1000);
+      ADCS_ACK = 0;      
+      for(int t = 0; t < TLE_size; t++)                                           // Read TLE data from flash and put in TLE[] array
+      {
+         fputc(TLE[t],ADCS);
+      }
+      fprintf(PC,"Sent TLE data to ADCS\r\n");
+   }else{
+      ADCS_ACK = 0;
+      fprintf(PC,"FAILURED GETTING ACK From ADCS\r\n");
+   }
+   CMD_FROM_PC[0] = 0;                                                           //prepare to get MAIN command
+   PC_DATA = 0;                                                                  //prepare to get MAIN command
+   return;
+}
+
+void CW_RESPOND()                                                                //carga el array ACK_for_COM[] con el dato del array CW_FORMAT[] y envia a COM PIC
+{
+   REFLESH_CW_ACK_for_COM();                                                     //carga con 0x00 el array ACK_for_COM[] desde la pos 1 a la 6
+   delay_ms(100);
+   ACK_for_COM[0] = 0xAA;
+   ACK_for_COM[1] = 0x50;
+   ACK_for_COM[2] = CW_FORMAT[0];
+   ACK_for_COM[3] = CW_FORMAT[1];
+   ACK_for_COM[4] = CW_FORMAT[2];
+   ACK_for_COM[5] = CW_FORMAT[3];
+   ACK_for_COM[6] = CW_FORMAT[4];
+   ACK_for_COM[23] = 0xBB;
+   for(int a = 0; a < 24; a++)                                                   //send the latest CW data to COM PIC
+   {
+      fputc(ACK_for_COM[a],COM);
+   }
+   MBP_SYNC();                                                                   //Send time data to MBP for syncronization
+   fprintf(PC,"\r\nCW ANS:");
+   for(a = 0; a < 23; a++)                                                       //send the latest CW data to PC
+   {
+      fprintf(PC,"%x,",ACK_for_COM[a]);
+   }
+   fprintf(PC,"%x\r\n",ACK_for_COM[23]);
+   
+   for(int k = 14; k < 23; k++)                                                   //clear RSV part
+   {
+      ACK_for_COM[k] = 0x00;
+   }
+   return;
+}
+
+#endif

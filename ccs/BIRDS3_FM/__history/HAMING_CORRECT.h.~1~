@@ -1,0 +1,171 @@
+/*
+ * @file HAMMING.h
+ * @author Shunsuke Onishi
+ * @date 2015-12-20
+ * 
+ * Hamming code
+ *
+ * Edited by Kakimoto
+ * 2018-09-14
+ *
+ */
+
+#ifndef HAMING_H
+#define HAMING_H
+
+#define GENERIC 0x13            //For 8 and 11 digits
+#define GENERIC_DIGIT 4            //Number of generating polynomial
+#define GENERIC_CALC 11            //Number of calculation
+#define number_of_digits 4         
+#define GENERIC_number_of_times 11
+
+
+//CRC
+unsigned char get_crc_data(unsigned char data[], unsigned char data_number)
+{
+   unsigned char CRC_data;
+   unsigned char j;
+  
+    CRC_data = data[0];
+ 
+    for(j = 1; j < data_number; j++)
+    {      
+      CRC_data = CRC_data ^ data[j];     
+    }
+  
+    return CRC_data;
+}
+
+
+//Factorial of 2
+unsigned short pow_obc(unsigned char data) 
+{
+   unsigned short ans = 1;   
+   ans = ans << data;   
+   return ans;   
+}
+
+
+//Decoding Hamming code
+unsigned char haming_reseside(unsigned int16 Haming_data)
+{
+   signed int i;
+   unsigned int16 Data_Cheack;
+   unsigned int16 haming;
+   unsigned int8 syndrom[12] = {0x01,0x02,0x04,0x08,0x03,0x06,0x0c,0x0b,0x05,0x0a,0x07,0x0e};
+   
+    Data_Cheack = Haming_data;
+
+   for(i = GENERIC_CALC; i >= 0; i--)
+   {
+      if(((Data_Cheack >> (GENERIC_DIGIT + i)) & 0x01) == 1)
+      {
+         Data_Cheack = Data_Cheack ^ (GENERIC << i);
+      }
+   }
+   
+         
+   if(Data_Cheack == 0)
+   {
+      return (unsigned char)(Haming_data >> 4);
+   }
+
+
+   if(Data_Cheack > 0)
+   {
+      for(i = 0; i <= GENERIC_number_of_times; i++)
+      {
+         if(Data_Cheack == syndrom[i])
+         {                                          
+            haming = (Haming_data ^ pow_obc(i));
+            //FLAG = 1;                     
+             return (unsigned char)(haming >> 4);                        
+         }                                          
+      }
+      
+      //FLAG = 1;
+      return (unsigned char)(Haming_data >> 4);         
+   }      
+}
+
+
+//Encoding Hamming code
+unsigned char haming_sentside(unsigned char data) 
+{      
+   signed int i;
+   unsigned int16 siftdata;
+   //bitシフトを行い、冗長ビットが入る枠を作る。   
+   //
+   siftdata = data << number_of_digits;
+   
+   //割り算を行い、表示するプログラム
+   //
+   for(i = GENERIC_CALC; i >= GENERIC_DIGIT; i--)         
+   {
+      if(((siftdata >> i) & 0x01) == 1)
+      {
+         siftdata = siftdata ^ (GENERIC << i - GENERIC_DIGIT);                      
+      }
+   }
+
+   return (unsigned char)siftdata;
+}
+
+
+
+//ハミング訂正符号の解読    Haming_cipher_2byte() で符号化されたデータの復元  この関数を使う前にグローバル変数のFLAGを=0にしておくとループ回した際に一回でも修正したら表示できるようにできる
+void Haming_decipher_3byte(unsigned int16 decipher_data_1, unsigned int16 decipher_data_2, unsigned int16 decipher_data_3, unsigned char return_data[])
+{
+   unsigned int16 Haming_data_1;   //ハミング訂正符号が4bit付け足された1byteのデータ
+      unsigned int16 Haming_data_2;   //ハミング訂正符号が4bit付け足された1byteのデータ
+
+      Haming_data_1 = ((decipher_data_1 << 4) & 0x0ff0) + ((decipher_data_3 >> 4) & 0x000f);
+      Haming_data_2 = ((decipher_data_2 << 4) & 0x0ff0) + (decipher_data_3 & 0x000f);
+
+      return_data[0] = haming_reseside(Haming_data_1);
+      return_data[1] = haming_reseside(Haming_data_2);
+}
+
+
+//ハミング訂正符号の解読    Haming_cipher_1byte() で符号化されたデータの復元
+void Haming_decipher_2byte(unsigned char decipher_data_1, unsigned char decipher_data_2, unsigned char return_data[])
+{
+   //この関数内では元データ:decipher_data_1　符号化部分:decipher_data_2　になる
+      unsigned short Haming_data_1 = ((unsigned short)decipher_data_1 << 4)  + decipher_data_2;   //ハミング訂正符号が4bit付け足された1byteのデータ
+   
+      return_data[0] = haming_reseside(Haming_data_1);
+}
+
+
+//ハミング訂正符号をかける　2byte→3byte  , unsigned char return_data[]
+void Haming_cipher(unsigned char cipher_data_1, unsigned char cipher_data_2, unsigned char return_data[])
+{
+    unsigned char Get_cipher_data_1;   //一時的に符号化データを保存する関数
+    unsigned char Get_cipher_data_2;   //一時的に符号化データを保存する関数
+   
+      //訂正符号の取得
+      Get_cipher_data_1 = haming_sentside(cipher_data_1);               //訂正符号の取得を行う
+      Get_cipher_data_2 = haming_sentside(cipher_data_2);               //訂正符号の取得を行う
+   
+      //書き込み用データに並べ換え
+      return_data[0] = cipher_data_1;
+      return_data[1] = cipher_data_2;
+      return_data[2] = (Get_cipher_data_1<< 4) + Get_cipher_data_2;
+}
+
+
+//ハミング訂正符号をかける　1byte→2byte
+void Haming_cipher_1byte(unsigned char cipher_data_1, unsigned char return_data[])
+{
+    unsigned char Get_cipher_data_1;   //一時的に符号化データを保存する関数
+  
+      //訂正符号の取得
+      Get_cipher_data_1 = haming_sentside(cipher_data_1);               //訂正符号の取得を行う
+     
+      //書き込み用データに並べ換え
+      return_data[0] = cipher_data_1;
+      return_data[1] = Get_cipher_data_1;
+}
+
+
+#endif

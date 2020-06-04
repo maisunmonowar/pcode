@@ -1,0 +1,104 @@
+#define loop_day 60
+int16 AD = 0;
+
+void AUTOMATICAL_MSN_EXE()
+{
+   //PASSED_DAYS = make16(reset_bffr[4],reset_bffr[5]);
+   if((PASSED_DAYS%loop_day) >= 0 && FIRST_HSSC_DONE == 0)
+   {
+      SAVE_SAT_LOG(0xFA,0x11,0x11);//01,01: automatical mission
+      FIRST_HSSC_DONE = 1;
+      STORE_FLAG_INFO();//save passed days
+      WRITE_FLAG_to_EEPROM();
+      HIGHSAMP_SENSOR_COLLECTION(1440);
+      UPDATE_ACK_for_COM(0x66,0x77,SECT*1639,405);//118byte*3600*2/5 (about 2.59sector) 65536*1639
+   }else if(PASSED_DAYS < make16(reset_bffr[4],reset_bffr[5]))//if the date changed(next day)
+   {
+      PASSED_DAYS = make16(reset_bffr[4],reset_bffr[5]);//update passed days
+      STORE_FLAG_INFO();//save passed days
+      WRITE_FLAG_to_EEPROM();
+      
+      if((PASSED_DAYS%loop_day) >= 1 && (PASSED_DAYS%loop_day) <= 4){//from 1st day to 4th day
+         AD = PASSED_DAYS;//1,2,3,4
+         int8 ADH = AD << 8;
+         int8 ADL = AD;
+         SAVE_SAT_LOG(0xC0,ADH,ADL);//11,11: automatical mission
+      }
+      else if((PASSED_DAYS%loop_day) >= 5 && AUTO_CAM_DONE == 0){//5th day (CAM MSN)
+         SAVE_SAT_LOG(0xC0,0x11,0x11);//11,11: automatical mission
+         AUTO_CAM_DONE = 1;
+         STORE_FLAG_INFO();//save flag
+         WRITE_FLAG_to_EEPROM();
+         CAM_TEST_OPERATION(0xA0);
+         UPDATE_ACK_for_COM(0x66,0x77,SECT*8,405);//65536*8
+      }else if((PASSED_DAYS%loop_day) >= 10 && AUTO_LDM_DONE == 0){
+         SAVE_SAT_LOG(0xD0,0x11,0x11);//01,01: automatical mission
+         AUTO_LDM_DONE = 1;
+         STORE_FLAG_INFO();//save flag
+         WRITE_FLAG_to_EEPROM();
+         DATACOLLECTION_TEST_OPERATION();
+         UPDATE_ACK_for_COM(0x66,0x77,SECT*1638,168);//65536*162
+      }else if((PASSED_DAYS%loop_day) >= 15 && AUTO_ADCS_DONE == 0){
+         SAVE_SAT_LOG(0xA0,0x11,0x11);//01,01: automatical mission
+         AUTO_ADCS_DONE = 1;
+         STORE_FLAG_INFO();//save flag
+         WRITE_FLAG_to_EEPROM();
+         ADCS_TEST_OPERATION(1800);
+         if(compare_before_after(beginning_of_operation, ADCS_SENSOR_ADDRESS))
+         {
+            fprintf(PC,"continue\r\n");
+            SAVE_SAT_LOG(0xA0,0x99,0x99);//additional operation
+            ADCS_TEST_OPERATION(3600);//1 hour
+         }else{
+            fprintf(PC,"stop\r\n");
+         }
+         UPDATE_ACK_for_COM(0x66,0x77,ADCS_SENSOR_ADDRESS - 171, 171);//(9byte) + (initial 81byte) + (end 81byte)
+      }
+   }
+   if(BC_ATTEMPT_FLAG == 0)//at this moment, this flag should be over 1
+   {
+      BC_ON_30min();
+   }
+   
+   FAB_FLAG = 0;
+   return;
+}
+
+
+void FROM_1to4()
+{
+   
+   return;
+}
+
+
+void AUTOMATICAL_MISSION_CHECK()
+{
+   int c;
+   for(c = 0; c < 10; c++)
+   {
+      COLLECT_RESET_DATA();
+      if(reset_bffr[0] == 0x8e)
+      {
+         break;
+      }
+   }
+   
+   for(c = 0; c < 10; c++)
+   {
+      fprintf(PC,"%x,",reset_bffr[c]);
+   }
+   fprintf(PC,"%x\r\n",reset_bffr[10]);
+   
+   if((PASSED_DAYS%loop_day==0)&&(PASSED_DAYS>59))//after 60 day, auto mission again
+   {
+      FIRST_HSSC_DONE = 0;
+      AUTO_CAM_DONE = 0;
+      AUTO_LDM_DONE = 0;
+      AUTO_ADCS_DONE = 0;
+      STORE_FLAG_INFO();
+      WRITE_FLAG_to_EEPROM();
+   }
+   Antenna_Deploy();
+   AUTOMATICAL_MSN_EXE();
+}

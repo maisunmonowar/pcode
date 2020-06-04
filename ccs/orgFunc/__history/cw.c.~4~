@@ -1,0 +1,46 @@
+#ifndef CW_C
+#define CW_C
+
+#include "fab.h"
+
+void REFLESH_CW_ACK_for_COM()                                                    //carga con 0x00 el array ACK_for_COM[7]
+{
+   for(int i = 1; i < 7; i++)
+   {
+      ACK_for_COM[i] = 0x00;
+   }
+   return;
+}
+
+void CW_RESPOND()                                                                //carga el array ACK_for_COM[] con el dato del array CW_FORMAT[] y envia a COM PIC
+{
+   REFLESH_CW_ACK_for_COM();                                                     //carga con 0x00 el array ACK_for_COM[] desde la pos 1 a la 6
+   delay_ms(100);
+   ACK_for_COM[0] = 0xAA;
+   ACK_for_COM[1] = 0x50;
+   ACK_for_COM[2] = CW_FORMAT[0];
+   ACK_for_COM[3] = CW_FORMAT[1];
+   ACK_for_COM[4] = CW_FORMAT[2];
+   ACK_for_COM[5] = CW_FORMAT[3];
+   ACK_for_COM[6] = CW_FORMAT[4];
+   ACK_for_COM[23] = 0xBB;
+   for(int a = 0; a < 24; a++)                                                   //send the latest CW data to COM PIC
+   {
+      fputc(ACK_for_COM[a],COM);
+   }
+   MBP_SYNC();                                                                   //Send time data to MBP for syncronization
+   fprintf(PC,"\r\nCW ANS:");
+   for(a = 0; a < 23; a++)                                                       //send the latest CW data to PC
+   {
+      fprintf(PC,"%x,",ACK_for_COM[a]);
+   }
+   fprintf(PC,"%x\r\n",ACK_for_COM[23]);
+   
+   for(int k = 14; k < 23; k++)                                                   //clear RSV part
+   {
+      ACK_for_COM[k] = 0x00;
+   }
+   return;
+}
+
+#endif

@@ -1,0 +1,5 @@
+void ERASE_OF(int32 address)
+{
+   
+   return;
+}

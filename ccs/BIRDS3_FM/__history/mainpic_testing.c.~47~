@@ -1,0 +1,25 @@
+#include <main pic1.h>
+
+#INT_rda//PC Interrupt
+void UART1_RXD(void)
+{
+   CMD_FROM_PC[PC_DATA] = fgetc(PC);
+   PC_DATA = ((PC_DATA + 1) % 4);
+   //fputc(fgetc(PC),PC);
+}
+
+void main()
+{
+   int32 address = 0;
+   while(true)
+   {
+      if(fgetc(PC)==0x25)
+      {
+         fprintf(PC,"Download satellite data manually.\r\n");
+         fprintf(PC,"Please input address number\r\naddress:");
+         while(){}
+         fprintf(PC,"Is address collect %lx ?\r\n",address);
+      }
+   }
+   
+}

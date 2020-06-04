@@ -1,5 +1,8 @@
 ÀÄmemoryOrg
-   ÀÄmain  0/35  Ram=1
+   ÀÄMAIN  0/49  Ram=1
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄ@delay_ms1  0/21  Ram=1
-      ÀÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@delay_ms1  0/21  Ram=1
+      ÃÄtest1  2/4  Ram=2
+      ÀÄsub_caller  2/9  Ram=2
+         ÀÄsub  (Inline)  Ram=2

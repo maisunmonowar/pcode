@@ -1,0 +1,114 @@
+#include <main pic1.h>
+
+int8 ynflag1 = 0;//for checking address info
+int8 ynflag2 = 0;//for checking data size info
+int32 address = 0;
+int32 data_size = 0;
+
+void delete_pc_buffer();
+void certification();
+void put_address_number();
+
+#INT_rda//PC Interrupt
+void UART1_RXD(void)
+{
+   CMD_FROM_PC[PC_DATA] = fgetc(PC);
+   PC_DATA = ((PC_DATA + 1) % 4);
+   //fputc(fgetc(PC),PC);
+}
+
+void main()
+{
+   while(true)
+   {
+      if(fgetc(PC)==0x25)
+      {
+         delete_pc_buffer();
+         put_address_number();
+         
+         if(ynflag1 == 1)
+         {
+            break;
+         }
+         
+         delete_pc_buffer();
+         
+         while(true)
+         {
+            if(PC_data == 3)
+            {
+               break;
+            }
+         }
+         make32(data_size,CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2],CMD_FROM_PC[3]);
+         TRANSFER_DATA_NBYTE_TOPC_OF(address, 65536); //for testing
+         
+      }
+   }
+   
+}
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+void delete_pc_buffer()//delete everything
+{
+   ynflag1 = 0;
+   ynflag2 = 0;
+   PC_DATA = 0;
+   for(int i = 0; i < 3; i++)
+   {
+      CMD_FROM_PC[i] = 0;
+   }
+return;
+}
+
+void certification()
+{
+   while(true){
+      if(CMD_FROM_PC[0] == 0x02)
+      {
+       CMD_FROM_PC[0] = 0x25;
+       ynflag1 = 1;
+       break;
+      }else if(CMD_FROM_PC[0] == 0x01){
+         ynflag1 = 0;
+         break;
+      }
+   }
+}
+
+void put_address_number()
+{
+   fprintf(PC,"Download satellite data manually.\r\n");
+   fprintf(PC,"Please input address number\r\naddress:");
+   while(true)
+   {
+      if(PC_data == 3)
+      {
+         break;
+      }
+   }
+   make32(address,CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2],CMD_FROM_PC[3]);
+   fprintf(PC,"%lx\r\n",address);
+   fprintf(PC,"Is the address correct?(yes:01, no:02)\r\n");
+   certification();
+   return;
+}
+
+void put_data_size()
+{
+   fprintf(PC,"Please input data size information \r\ndata size:");
+   while(true)
+   {
+      if(PC_data == 3)
+      {
+         break;
+      }
+   }
+   make32(address,CMD_FROM_PC[0],CMD_FROM_PC[1],CMD_FROM_PC[2],CMD_FROM_PC[3]);
+   fprintf(PC,"%lx\r\n",address);
+   fprintf(PC,"Is the address correct?(yes:01, no:02)\r\n");
+   certification();
+   return;
+}

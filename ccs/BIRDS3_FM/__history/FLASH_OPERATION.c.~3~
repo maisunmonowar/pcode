@@ -1,0 +1,11 @@
+void TRANSFER_SECTOR_OF2SCF(int32 address)
+{
+   address = address - (address%65536);
+   output_low(PIN_C4);
+   sector_erase_SCF(address);
+   for(int32 i = 0; i < 65536, i++)
+   {
+      
+   }
+   return;
+}

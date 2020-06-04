@@ -1,0 +1,56 @@
+#ifndef ADCS_C
+#define ADCS_C
+
+#include "adcs.h"
+
+
+
+void Turn_On_ADCS()
+{
+   output_high(PIN_D6);                                                          //ADCS switch ON, RD6=1
+   return;
+}
+
+void Turn_Off_ADCS()
+{
+   output_low(PIN_D6);                                                           //ADCS switch OFF, RD6=0
+   return;
+}
+
+/*
+void Send_Command_to_ADCS(int8 data)                                             //testing for EM integration
+{
+   fputc(data,ADCS);
+   return;
+}
+*/
+
+void DELETE_ADCS_SENSOR()
+{
+   for(int a = 0; a < ADCS_SENSOR_SIZE; a++)
+   {
+      ADCS_SENSOR_DATA[a] = 0;
+   }
+   return;
+}
+
+void Delete_Buffer()                                                             //delete com command buffer
+{
+   int num = 0;
+   for(num = 0;num < 16; num++)
+   {
+    in_bffr_main[num] = 0x00;
+   }
+   COM_DATA = 0;
+   return;
+}
+
+void ADCS_SETTINGS()                                                             //initiallize
+{
+   output_high(PIN_C4);                                                          //flash COM side
+   Delete_Buffer();                                                              //delete in_bffr_main[] (com command buffer)
+   DELETE_ADCS_SENSOR();                                                         //delet ADCS_SENSOR_DATA[] array
+   return;
+}
+
+#endif

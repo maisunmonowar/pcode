@@ -1,0 +1,46 @@
+#include<mainpic_function.c>
+#include<flash_ memory_ MT25QL01GBBB_OF.c> // OBC MAIN FLASH
+//#include<flash_ memory_ MT25QL01GBBB_CF.c> // FLASH shared with COM PIC
+//#include<flash_ memory_ MT25QL01GBBB_MF.c> // FLASH shared with MISSION BOARD
+
+//----------Flash memory functions---------------------------------------------
+void WRITE_ENABLE_OF();
+void WRITE_ENABLE_CF();
+void WRITE_ENABLE_MF();
+void sector_erase_OF(unsigned int32 sector_address);
+void sector_erase_CF(unsigned int32 sector_address);
+void sector_erase_MF(unsigned int32 sector_address);
+void WRITE_DATA_BYTE_OF(unsigned int32 page_address, int8 data);
+void WRITE_DATA_BYTE_CF(unsigned int32 page_address, int8 data);
+void WRITE_DATA_BYTE_MF(unsigned int32 page_address, int8 data);
+int8 READ_CHIP_ID_OF();
+int8 READ_CHIP_ID_CF();
+int8 READ_CHIP_ID_MF();
+int8 READ_STATUS_REGISTER_OF();
+int8 READ_STATUS_REGISTER_CF();
+int8 READ_STATUS_REGISTER_MF();
+int8 READ_DATA_BYTE_OF(unsigned INT32 ADDRESS);
+int8 READ_DATA_BYTE_CF(unsigned INT32 ADDRESS);
+int8 READ_DATA_BYTE_MF(unsigned INT32 ADDRESS);
+void TRANSFER_DATA_256byte_OF(unsigned INT32 ADRESS, int PORT_NUM);
+void TRANSFER_DATA_256byte_CF(unsigned INT32 ADRESS, int PORT_NUM);
+void TRANSFER_DATA_256byte_MF(unsigned INT32 ADRESS, int PORT_NUM);
+void WRITE_DATA_NBYTE_OF(unsigned INT32 ADDRES,int32 data_byte);
+void WRITE_DATA_NBYTE_CF(unsigned INT32 ADDRES,int32 data_byte);
+void WRITE_DATA_NBYTE_MF(unsigned INT32 ADDRES,int32 data_byte);
+void TRANSFER_DATA_NBYTE_TOPC_OF(unsigned INT32 ADRESS,int32 data_byte); //read and send the specified data
+void TRANSFER_DATA_NBYTE_TOPC_CF(unsigned INT32 ADRESS,int32 data_byte); //read and send the specified data
+void TRANSFER_DATA_NBYTE_TOPC_MF(unsigned INT32 ADRESS,int32 data_byte); //read and send the specified data
+void TRANSFER_DATA_NBYTE_OF(unsigned INT32 FROM_ADRESS,unsigned INT32 TO_ADRESS,int32 data_byte); //read and send the specified data
+
+//void sector_erase(unsigned int32 sector_address);  //this is for sector erase
+
+
+//-----------------------------------------------------------------------------
+
+
+//----------main pic functions-------------------------------------------------
+//void Check_UART();
+
+
+//-----------------------------------------------------------------------------

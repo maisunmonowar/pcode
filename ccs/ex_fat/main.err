@@ -1,0 +1,33 @@
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 615(84,85): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 616(60,73): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 630(88,89): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 631(64,77): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2099(41,48): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2100(59,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2106(41,45): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2164(41,48): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2165(59,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2171(41,45): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2431(56,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2605(34,50): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2607(34,50): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2612(34,47): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2614(34,49): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2618(34,48): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2619(34,47): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2623(37,52): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2669(58,68): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 2705(62,76): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3047(35,36): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3100(35,36): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3255(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3260(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3265(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3270(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3275(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3279(71,72): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3280(57,60): Pointer types do not match
+>>> Warning 240 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_fat\fat.c" Line 3288(57,60): Pointer types do not match
+      Memory usage:   ROM=21%      RAM=37% - 49%
+      0 Errors,  30 Warnings.
+Build Successful.

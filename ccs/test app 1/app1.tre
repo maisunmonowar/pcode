@@ -1,9 +1,14 @@
 ÀÄapp1
-   ÀÄmain  0/50  Ram=1
+   ÀÄmain  0/132  Ram=1
       ÃÄ@cinit1  (Inline)  Ram=0
-      ÃÄ@delay_ms1  0/21  Ram=1
-      ÃÄ@PSTRINGCN7_9600_118_119  0/87  Ram=4
-      ÃÄ@PRINTF_U_9600_118_119  0/63  Ram=2
-      ³  ÃÄ@DIV88  0/21  Ram=3
-      ³  ÀÄ@DIV88  0/21  Ram=3
-      ÀÄ@delay_ms1  0/21  Ram=1
+      ÃÄ@delay_ms1  0/40  Ram=1
+      ÃÄ@PSTRINGCN_824  0/40  Ram=4
+      ³  ÀÄ@PUTCHAR_1_  0/66  Ram=1
+      ÃÄ@PRINTF_U_824  0/104  Ram=2
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÃÄ@PUTCHAR_1_  0/66  Ram=1
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÃÄ@PUTCHAR_1_  0/66  Ram=1
+      ³  ÀÄ@PUTCHAR_1_  0/66  Ram=1
+      ÃÄ@PUTCHAR_1_  0/66  Ram=1
+      ÀÄ@delay_ms1  0/40  Ram=1

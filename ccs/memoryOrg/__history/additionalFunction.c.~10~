@@ -1,0 +1,13 @@
+#include "additionalFunction.h"
+
+//#org 0x1000//, 0x11FF
+int test1(int num1, int num2)
+{
+   return num1 + num2;
+}
+
+//#org 0x1000//, 0x13FF
+int sub(int num1, int num2)
+{
+   return num1 - num2;
+}
