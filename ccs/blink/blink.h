@@ -1,8 +1,6 @@
-#include <16F1787.h>
-#device ADC=16
-#use delay(clock=8000000,crystal=8000000)
-
-#define LED PIN_D2
+#include <18F67J94.h>
+#use delay(clock=16000000,crystal=16000000)
+#define LED PIN_E5
 #define DELAY 2000
 
 

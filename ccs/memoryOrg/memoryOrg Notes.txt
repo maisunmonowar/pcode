@@ -1,0 +1,1 @@
+Memory ORG works as I imagined it.

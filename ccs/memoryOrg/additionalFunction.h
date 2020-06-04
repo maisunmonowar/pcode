@@ -1,0 +1,8 @@
+#ifndef ADDITIONALFUNCTION_H
+#define ADDITIONALFUNCTION_H
+
+#include "additionalFunction.c"
+
+//int test1(int num1, int num2);
+int sub(int num1, int num2);
+#endif

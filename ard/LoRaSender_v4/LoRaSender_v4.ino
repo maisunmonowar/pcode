@@ -11,7 +11,7 @@ char i;
 unsigned long lastSendTime, receiveTime, feedbackTimeout;
 
 void setup() {
-  LoRa.setPins(8, 12, 3);
+  //LoRa.setPins(8, 12, 3);
   Serial.begin(9600);
   Serial.println("LoRa Sender");
   if (!LoRa.begin(433E6)) {

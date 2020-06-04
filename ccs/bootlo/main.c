@@ -1,29 +1,25 @@
-#include <main.h>
+#include "main.h"
  
 #define _bootloader
 
 // NOTE - User must include bootloader.h in application program
-#include <bootloader.h>
-#include <loader.c>
-
-#define PUSH_BUTTON PIN_D0
+#include "bootloader.h"
+#include "loader.c"
 
 #INT_GLOBAL
 void isr(void){
-   jump_to_isr(LOADER_END+5);
+   jump_to_isr(LOADER_END+5*(getenv("BITS_PER_INSTRUCTION")/8));
 }
 
-#org LOADER_END+1, LOADER_END+2
+#org LOADER_END+2, LOADER_END+4
 void application(void) 
-{ 
-   
-  while(1);
+{    
+  while(TRUE);
 }
 
 void main()
 {
- 
-   // Enter Bootloader if Pin D0 is low after a RESET
+    // Enter Bootloader if Pin D0 is low after a RESET
    if(!input(PUSH_BUTTON))
    {
       printf("\r\nBootloader V 1\r\n");
@@ -34,5 +30,6 @@ void main()
    }
    
    application();
-
 }
+
+

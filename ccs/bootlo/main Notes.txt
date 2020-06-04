@@ -1,0 +1,1 @@
+It appears I coded the bootloader for COM pic. Now that I have the EM, I'm gonna do the main pic.

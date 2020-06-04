@@ -1,0 +1,370 @@
+CCS PCH C Compiler, Version 5.056, 29513               03-Feb-20 15:18
+
+               Filename:   C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_bootload\ex_bootload.lst
+
+               ROM used:   350 bytes (1%)
+                           Largest free fragment is 31134
+               RAM used:   7 (0%) at main() level
+                           12 (1%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+0500:  GOTO   0608
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                      EX_BOOTLOAD.C                                //// 
+.................... ////                                                                   //// 
+.................... ////  This program is an example application program that can be       //// 
+.................... ////  be loaded, recompiled and reloaded by a stand alone bootloader.  //// 
+.................... ////                                                                   //// 
+.................... ////  Before loading this program the bootloader (ex_bootloader.c)     //// 
+.................... ////  must be compiled and loaded into the target chip.                //// 
+.................... ////                                                                   //// 
+.................... ////  Use an RS232 link and the SIOW.EXE program to load this HEX file //// 
+.................... ////  into the target chip.  See ex_bootloader.c for more information. //// 
+.................... ////                                                                   //// 
+.................... ////  Uncomment the define BOOTLOADER_MODE2X to use an alternate       //// 
+.................... ////  bootloader that receives each line in the hex file twice and     //// 
+.................... ////  compares them before acknowledging the line and writing it to    //// 
+.................... ////  the target chip's memory.  This mode only works with the         //// 
+.................... ////  CCS_BOOTLOADER.exe program, add MODE2X to the command line to    //// 
+.................... ////  use this mode.                                                   //// 
+.................... ////                                                                   //// 
+.................... ////  This example will work with the PCM and PCH compilers.  The      //// 
+.................... ////  following conditional compilation lines are used to include a    //// 
+.................... ////  valid device for each compiler.  Change the device, clock and    //// 
+.................... ////  RS232 pins for your hardware if needed.                          //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2014 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+....................  
+.................... #if defined(__PCM__) 
+.................... #include <16F887.h> 
+.................... #fuses NOWDT 
+.................... #use delay(crystal=20MHz) 
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
+....................  
+.................... #elif defined(__PCH__) 
+.................... #include <18F45K22.h> 
+.................... //////////// Standard Header file for the PIC18F45K22 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC18F45K22 
+*
+0508:  DATA 0D,0A
+050A:  DATA 41,70
+050C:  DATA 70,6C
+050E:  DATA 69,63
+0510:  DATA 61,74
+0512:  DATA 69,6F
+0514:  DATA 6E,20
+0516:  DATA 56,65
+0518:  DATA 72,73
+051A:  DATA 69,6F
+051C:  DATA 6E,20
+051E:  DATA 31,2E
+0520:  DATA 30,0D
+0522:  DATA 0A,00
+*
+054E:  TBLRD*+
+0550:  MOVF   FF5,F
+0552:  BZ    056E
+0554:  MOVFF  FF6,07
+0558:  MOVFF  FF7,08
+055C:  MOVF   FF5,W
+055E:  BTFSS  F9E.4
+0560:  BRA    055E
+0562:  MOVWF  FAD
+0564:  MOVFF  07,FF6
+0568:  MOVFF  08,FF7
+056C:  BRA    054E
+056E:  GOTO   064A (RETURN)
+0572:  MOVF   0A,W
+0574:  CLRF   01
+0576:  SUBWF  09,W
+0578:  BC    0580
+057A:  MOVFF  09,00
+057E:  BRA    0598
+0580:  CLRF   00
+0582:  MOVLW  08
+0584:  MOVWF  0B
+0586:  RLCF   09,F
+0588:  RLCF   00,F
+058A:  MOVF   0A,W
+058C:  SUBWF  00,W
+058E:  BTFSC  FD8.0
+0590:  MOVWF  00
+0592:  RLCF   01,F
+0594:  DECFSZ 0B,F
+0596:  BRA    0586
+0598:  RETURN 0
+059A:  MOVF   01,W
+059C:  MOVFF  07,09
+05A0:  MOVLW  64
+05A2:  MOVWF  0A
+05A4:  RCALL  0572
+05A6:  MOVFF  00,07
+05AA:  MOVF   01,W
+05AC:  MOVLW  30
+05AE:  BNZ   05BE
+05B0:  BTFSS  08.1
+05B2:  BRA    05CE
+05B4:  BTFSC  08.3
+05B6:  BRA    05CE
+05B8:  BTFSC  08.4
+05BA:  MOVLW  20
+05BC:  BRA    05C4
+05BE:  BCF    08.3
+05C0:  BCF    08.4
+05C2:  BSF    08.0
+05C4:  ADDWF  01,F
+05C6:  MOVF   01,W
+05C8:  BTFSS  F9E.4
+05CA:  BRA    05C8
+05CC:  MOVWF  FAD
+05CE:  MOVFF  07,09
+05D2:  MOVLW  0A
+05D4:  MOVWF  0A
+05D6:  RCALL  0572
+05D8:  MOVFF  00,07
+05DC:  MOVF   01,W
+05DE:  MOVLW  30
+05E0:  BNZ   05EE
+05E2:  BTFSC  08.3
+05E4:  BRA    05F8
+05E6:  BTFSS  08.0
+05E8:  BRA    05F8
+05EA:  BTFSC  08.4
+05EC:  MOVLW  20
+05EE:  ADDWF  01,F
+05F0:  MOVF   01,W
+05F2:  BTFSS  F9E.4
+05F4:  BRA    05F2
+05F6:  MOVWF  FAD
+05F8:  MOVLW  30
+05FA:  ADDWF  07,F
+05FC:  MOVF   07,W
+05FE:  BTFSS  F9E.4
+0600:  BRA    05FE
+0602:  MOVWF  FAD
+0604:  GOTO   0656 (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #fuses NOWDT 
+.................... #use delay(crystal=16MHz) 
+*
+0524:  CLRF   FEA
+0526:  MOVLW  07
+0528:  MOVWF  FE9
+052A:  MOVF   FEF,W
+052C:  BZ    054A
+052E:  MOVLW  05
+0530:  MOVWF  01
+0532:  CLRF   00
+0534:  DECFSZ 00,F
+0536:  BRA    0534
+0538:  DECFSZ 01,F
+053A:  BRA    0532
+053C:  MOVLW  2E
+053E:  MOVWF  00
+0540:  DECFSZ 00,F
+0542:  BRA    0540
+0544:  BRA    0546
+0546:  DECFSZ FEF,F
+0548:  BRA    052E
+054A:  GOTO   0640 (RETURN)
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7) 
+.................... #endif 
+....................  
+.................... //#define BOOTLOADER_MODE2X 
+....................  
+.................... #include "bootloader.h" 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                       BOOTLOADER.H                                //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example bootloader (ex_bootloader.c).                     //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  LOADER_END may need to be adjusted for a specific chip and       //// 
+.................... ////  bootloader.  LOADER_END must be 1 minus a multiple of            //// 
+.................... ////  FLASH_ERASE_SIZE.                                                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2014 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #ifndef __BOOTLOADER_H__ 
+.................... #define __BOOTLOADER_H__ 
+....................  
+.................... #ifndef LOADER_END 
+....................  #if defined(__PCM__) 
+....................   #ifdef BOOTLOADER_MODE2X 
+....................    #define LOADER_END 0x4BF 
+....................   #else 
+....................    #define LOADER_END 0x33F 
+....................   #endif 
+....................  #elif defined(__PCH__) 
+....................   #define FLASH_SIZE getenv("FLASH_ERASE_SIZE") 
+....................   #if ((0x500 % FLASH_SIZE) == 0)         //IF 0x500 is even flash boundary 
+....................    #define LOADER_END   0x4FF 
+....................   #else                                  //ELSE, goto next even boundary 
+....................    #define LOADER_END   ((0x500+FLASH_SIZE-(0x500 % FLASH_SIZE))-1) 
+....................   #endif 
+....................  #else 
+....................   #error Bootloader only works with PCM or PCH compiler 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #define LOADER_SIZE   LOADER_END 
+....................  
+.................... #ifndef BOOTLOADER_AT_START 
+....................  #define BOOTLOADER_AT_START 
+.................... #endif 
+....................  
+.................... #ifndef _bootloader 
+....................  #if defined(__PCM__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+5) 
+....................  #elif defined(__PCH__) 
+....................   #build(reset=LOADER_END+1, interrupt=LOADER_END+9) 
+....................  #endif 
+....................  
+....................  #org 0, LOADER_END {} 
+.................... #else 
+....................  #ifdef __PCM__ 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x800 
+....................    #org LOADER_END+3, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+3, 0x7FF {} 
+....................    #if getenv("PROGRAM_MEMORY") <= 0x1000 
+....................     #org 0x800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................    #else 
+....................     #org 0x800, 0xFFF{} 
+....................     #if getenv("PROGRAM_MEMORY") <= 0x1800 
+....................      #org 0x1000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................     #else 
+....................      #org 0x1000, 0x17FF {} 
+....................      #if getenv("PROGRAM_MEMORY") <= 0x2000 
+....................       #org 0x1800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................      #else 
+....................       #org 0x1800, 0x1FFF {} 
+....................       #if getenv("PROGRAM_MEMORY") <= 0x2800 
+....................        #org 0x2000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................       #else 
+....................        #org 0x2000, 0x27FF {} 
+....................        #if getenv("PROGRAM_MEMORY") <= 0x3000 
+....................         #org 0x2800, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................        #else 
+....................         #org 0x2800, 0x2FFF {} 
+....................         #if getenv("PROGRAM_MEMORY") <= 0x3800 
+....................          #org 0x3000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................         #else 
+....................          #org 0x3000, 0x37FF {} 
+....................          #org 0x3800, 0x3FFF {} 
+....................         #endif 
+....................        #endif 
+....................       #endif 
+....................      #endif 
+....................     #endif 
+....................    #endif 
+....................   #endif 
+....................  #else 
+....................   #if getenv("PROGRAM_MEMORY") <= 0x10000 
+....................    #org LOADER_END+5, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #else 
+....................    #org LOADER_END+5, 0xFFFE {} 
+....................    #org 0x10000, (getenv("PROGRAM_MEMORY") - 1) {} 
+....................   #endif 
+....................  #endif 
+.................... #endif 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... void main(void)  
+*
+0608:  CLRF   FF8
+060A:  BCF    FD0.7
+060C:  BSF    FB8.3
+060E:  MOVLW  A0
+0610:  MOVWF  FAF
+0612:  MOVLW  01
+0614:  MOVWF  FB0
+0616:  MOVLW  A6
+0618:  MOVWF  FAC
+061A:  MOVLW  90
+061C:  MOVWF  FAB
+061E:  CLRF   05
+0620:  CLRF   04
+0622:  MOVLB  F
+0624:  CLRF   x38
+0626:  CLRF   x39
+0628:  CLRF   x3A
+062A:  CLRF   x3B
+062C:  CLRF   x3C
+062E:  MOVLB  1
+0630:  CLRF   x88
+0632:  CLRF   F77
+0634:  CLRF   F78
+0636:  CLRF   F79
+.................... { 
+....................    int8 i; 
+....................     
+....................    delay_ms(100); 
+0638:  MOVLW  64
+063A:  MOVWF  07
+063C:  MOVLB  0
+063E:  BRA    0524
+....................     
+....................    printf("\r\nApplication Version 1.0\r\n"); 
+0640:  MOVLW  08
+0642:  MOVWF  FF6
+0644:  MOVLW  05
+0646:  MOVWF  FF7
+0648:  BRA    054E
+....................  
+....................    while(TRUE) 
+....................       printf("%3u ",++i); 
+064A:  INCF   06,F
+064C:  MOVFF  06,07
+0650:  MOVLW  13
+0652:  MOVWF  08
+0654:  BRA    059A
+0656:  MOVLW  20
+0658:  BTFSS  F9E.4
+065A:  BRA    0658
+065C:  MOVWF  FAD
+065E:  BRA    064A
+.................... } 
+....................  
+0660:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E200   HSH NOPLLEN PRIMARY_ON FCMEN IESO
+   Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
+   Word  3: BF00   CCP2C1 PBADEN CCP3B5 HFOFST TIMER3C0 CCP2D2 MCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

@@ -14,13 +14,13 @@ Type=4
 1=memoryOrg.c
 
 [ProjectLog]
-Days=2
+Days=6
 D1=17-09-2019
 D1_L=10
 D1_L1=[67632]Project Opened.
 D1_L2=[67723]Started Editing.
 D1_L3=[68674]Stopped Editing.
-TotalEdit=19
+TotalEdit=60
 TotalDebug=0
 D1_E=19
 D1_D=0
@@ -35,20 +35,75 @@ D2=26-09-2019
 D2_L=2
 D2_L1=[57453]Project Opened.
 D2_L2=[57786]Project Closed.
+D3=25-12-2019
+D3_L=8
+D3_L1=[46156]Project Opened.
+D3_L2=[46330]Project Closed.
+D3_L3=[47975]Project Opened.
+D3_L4=[48202]Started Editing.
+D3_L5=[49012]Stopped Editing.
+D3_L6=[49066]Started Editing.
+D3_L7=[49422]Stopped Editing.
+D3_E=15
+D3_D=0
+D3_L8=[49422]Project Closed.
+D4=23-01-2020
+D4_L=6
+D4_L1=[83630]Project Opened.
+D4_L2=[83850]Started Editing.
+D4_L3=[84040]Stopped Editing.
+D4_E=4
+D4_D=0
+D4_L4=[84040]Project Closed.
+D4_L5=[84130]Project Opened.
+D4_L6=[84158]Project Closed.
+D5=28-01-2020
+D5_L=6
+D5_L1=[69243]Project Opened.
+D5_L2=[69474]Started Editing.
+D5_L3=[70185]Stopped Editing.
+D5_L4=[70353]Started Editing.
+D5_L5=[70626]Stopped Editing.
+D5_E=12
+D5_D=0
+D5_L6=[70626]Project Closed.
+D6=03-02-2020
+D6_L=6
+D6_L1=[56949]Project Opened.
+D6_L2=[57030]Started Editing.
+D6_L3=[57778]Stopped Editing.
+D6_L4=[58825]Started Editing.
+D6_L5=[58933]Stopped Editing.
+D6_E=10
+D6_D=0
+D6_L6=[58933]Project Closed.
 
 [Opened Files]
 1=memoryOrg.c
 t1=1
 2=memoryOrg.h
 t2=1
-Count=3
-3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\loader.c
+Count=4
+3=additionalFunction.h
 t3=1
+4=additionalFunction.c
+t4=1
+5=memoryOrg.sta
+t5=-1
+6=additionalFunction.c
+t6=1
 [memoryOrg.c]
 Type=4
 
 [defines]
-buildcount=4
+buildcount=20
+
+[Documentation]
+1=C:\Users\maisun\Documents\PhD\offline\code\ccs\memoryOrg\memoryOrg Notes.txt
+1T=memoryOrg Notes.txt
+1E=
+1W=0
+Count=1
 [Units]
 Count=1
 1=memoryOrg (main)

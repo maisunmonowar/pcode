@@ -1,8 +1,8 @@
 [PROJECT]
 Target=app1.hex
-Processor_Text=PIC16F1787
+Processor_Text=PIC18F67J94
 CCSVerions=5.056
-Compiler=PCM
+Compiler=PCH
 CCSVersion=5.056
 [Target Data]
 FileList=app1.c
@@ -14,7 +14,7 @@ Type=4
 1=app1.c
 
 [ProjectLog]
-Days=6
+Days=7
 D1=16-08-2019
 D1_L=10
 D1_L1=[50855]Project Opened.
@@ -86,13 +86,20 @@ D6_L8=[61217]Project Closed.
 D6_L9=[65195]Project Opened.
 D6_L10=[65233]Started Editing.
 D6_L11=[65582]Stopped Editing.
+D7=04-06-2020
+D7_L=5
+D7_L1=[62551]Project Opened.
+D7_L2=[62573]Started Editing.
+D7_L3=[63096]Stopped Editing.
+D7_L4=[63879]Started Editing.
+D7_L5=[64204]Stopped Editing.
 
 [Opened Files]
 1=app1.c
-t1=4
+t1=1
 2=app1.h
 t2=1
-Count=3
+Count=2
 3=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\bootloader.h
 t3=106
 4=..\bootlo\readback.hex
@@ -103,7 +110,7 @@ t5=1
 Type=4
 
 [defines]
-buildcount=11
+buildcount=14
 [Units]
 Count=1
 1=app1 (main)

@@ -14,7 +14,7 @@ void setup() {
   feedbackSent = false;
 
   Serial.begin(9600);
-  LoRa.setPins(8, 12, 3);
+  //LoRa.setPins(8, 12, 3);
 
   //LoRa.setPins(4,7,2);
   while (!Serial);

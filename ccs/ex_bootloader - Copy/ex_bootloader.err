@@ -1,0 +1,4 @@
+>>> Warning 205 "C:\Users\maisun\Documents\PhD\offline\code\ccs\ex_bootloader - Copy\loader.c" Line 185(1,1): Unsigned variable is never less than zero
+      Memory usage:   ROM=1%      RAM=2% - 4%
+      0 Errors,  1 Warnings.
+Build Successful.

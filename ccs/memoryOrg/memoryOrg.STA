@@ -1,50 +1,54 @@
 
-ROM used:   59/8192 (1%)
-            1315/8192 (16%) including unused fragments
+ROM used:   86/8192 (1%)
+            2569/8192 (31%) including unused fragments
 
             0.1 Average locations per line
-            9.8 Average locations per statement
+            7.8 Average locations per statement
 
 RAM used:   6/1024 (1%) at main() level
-            18/1024 (2%) worst case
+            20/1024 (2%) worst case
 
 Stack used: 0 worst case (0 in main + 0 for interrupts)
 Stack size: 16
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   24     6 100  memoryOrg.c
-    7     0   0  memoryOrg.h
+   28     8  73  memoryOrg.c
+   16     0   0  memoryOrg.h
  1127     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F1787.h
+    9     0   0  additionalFunction.h
+   19     3  27  additionalFunction.c
 ----- -----
- 1158     6 Total
+ 1199    11 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
-0     21  36    1             @delay_ms1
-0     35  59    1     86  1.6  main
+2      4   5    2     43  3.0  test1
+ Inline         2     43  3.0  sub
+2      9  10    2     50  2.5  sub_caller
+0     21  24    1             @delay_ms1
+0     49  57    1    152  2.2  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               1
-    Statements              6
-    Comments                183
-    Volume (V)              90
-    Difficulty (D)          1.4
-    Effort to implement (E) 125
-    Time to implement (T)   0 minutes
+    Functions               4
+    Statements              11
+    Comments                194
+    Volume (V)              425
+    Difficulty (D)          9.8
+    Effort to implement (E) 4186
+    Time to implement (T)   4 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   1
-    Maintainability (MI)    161
+    Maintainability (MI)    81
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     3  1  
-00004-004FF    21  1255  
-00500-00628    35  262  
-00629-007FF     0  471  
+00004-007FF    70  1974  
 00800-00FFF     0  2048  
-01000-017FF     0  2048  
+01000-011FF     4  508  
+01200-017FF     9  1527  
 01800-01FFF     0  2048  
 
 
